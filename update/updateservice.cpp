@@ -95,6 +95,7 @@ void UpdateService::originGetFinished()
                     && node.attribute("arch") == APP_ARCH_STR)
             {
                 packageElement = node;
+                qDebug() << "node:" << node;
                 break;
             }
         }
@@ -108,6 +109,13 @@ void UpdateService::originGetFinished()
                 minor = packageElement.attribute("minor").toInt();
                 packageFilename = packageElement.attribute("fname","ndr-setup");
                 this->packageUrl = packageElement.text();
+                if ( true == this->isConnectUpdateServerFail )
+                {
+                    this->packageUrl = "http://172.24.5.13/" + this->packageUrl;
+                }else
+                {
+                    this->packageUrl = "http://172.24.10.13/" + this->packageUrl;
+                }
                 qDebug() << "Package url" << this->packageUrl;
                 emit checkFinished(false,major,minor,"");
             }else{
