@@ -15,7 +15,7 @@ void UpdateService::checkUpdate()
 {
     if(running)
         return;
-    QString url="http://" + ipAddress + "/update/origin.xml";
+    QString url="http://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
     reply = nam.get(QNetworkRequest( QUrl(url)));
     connect(reply,SIGNAL(finished()),this,SLOT(checkOriginGet()));
@@ -28,13 +28,14 @@ void UpdateService::checkOriginGet()
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << "url_1 failed";
-        QString url="http://" + ipAddress_2_back + "/update/origin.xml";
+        QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
         reply = nam.get(QNetworkRequest( QUrl(url)));
-        connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished_back()));
+        connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
         this->isConnectUpdateServerFail = false;
     }
     else{
+        qDebug() << "url is OK! the update server 172.24.10.13 is very very OK!";
         connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
         this->isConnectUpdateServerFail = true;
     }
@@ -110,10 +111,12 @@ void UpdateService::originGetFinished()
                 this->packageUrl = packageElement.text();
                 if ( true == this->isConnectUpdateServerFail )
                 {
-                    this->packageUrl = "http://172.24.5.13/" + this->packageUrl;
+                    this->packageUrl = "http://172.24.10.13/" + this->packageUrl;
+                    qDebug () << "the packageUrl is:" << packageUrl;
                 }else
                 {
-                    this->packageUrl = "http://172.24.10.13/" + this->packageUrl;
+                    this->packageUrl = "http://172.24.5.13/" + this->packageUrl;
+                    qDebug () << "the packageUrl is:" << packageUrl;
                 }
                 qDebug() << "Package url" << this->packageUrl;
                 emit checkFinished(false,major,minor,"");
@@ -121,13 +124,18 @@ void UpdateService::originGetFinished()
                 running = false;
                 emit checkFinished(false,0,0,"");
             }
-        }else
+        }
+        else {
+            qDebug () << "can not found the package config! ";
+        }
+/*  Didn't need to stop working when a update node not found
+        else
         {
             qDebug() << "Update package config not found";
             running = false;
             emit checkFinished(true,0,0,"找不到远程更新推送配置文件");
         }
-            
+*/
     }else{
         qDebug() << "XML format error!";
         running = false;

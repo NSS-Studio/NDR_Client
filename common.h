@@ -28,7 +28,7 @@
  * x86/amd64/arm
  */
 #if   defined(__i386__)
-#   define APP_ARCH_STR "x86"
+#   define APP_ARCH_STR "i386"
 #elif defined(__x86_64__)
 #   define APP_ARCH_STR "amd64"
 #elif defined(__arm__)
@@ -60,7 +60,7 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 63
+#define VERSION_MINOR 64
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
