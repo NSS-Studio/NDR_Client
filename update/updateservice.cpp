@@ -95,7 +95,6 @@ void UpdateService::originGetFinished()
                     && node.attribute("arch") == APP_ARCH_STR)
             {
                 packageElement = node;
-                qDebug() << "node:" << node;
                 break;
             }
         }
