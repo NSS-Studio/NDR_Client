@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/about.png</file>
+        <file>icons/app.ico</file>
+        <file>icons/logout.png</file>
+        <file>icons/quiet1.png</file>
+        <file>icons/quiet2.png</file>
+        <file>icons/setting.png</file>
+        <file>icons/showloginwindow.png</file>
+        <file>icons/showmainpanels.png</file>
+        <file>icons/tray.png</file>
+        <file>icons/trayLogin.png</file>
+        <file>icons/trayWorking.png</file>
+        <file>icons/tray_login.png</file>
+        <file>icons/tray_working.png</file>
+        <file>icons/logo.png</file>
+        <file>icons/bang.png</file>
+    </qresource>
+    <qresource prefix="/images/panel_face/top">
+        <file>face/face.png</file>
+    </qresource>
+    <qresource prefix="/translate">
+        <file>lang/ndr.en_US.qm</file>
+        <file>lang/ndr.ja_JP.qm</file>
+        <file>lang/ndr.ko_KR.qm</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>font/ztgj.ttf</file>
+        <file>style/default.qss</file>
+    </qresource>
+</RCC>
