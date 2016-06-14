@@ -16,7 +16,7 @@ void __initAppHome() {
 	QDir home = QDir::home();
 	appHome = home.path() + "/.nssdr";
 	if(!QFile::exists(appHome)) {
-		//qDebug() << "mkdir" << home.mkdir(".nssdr");
+        qDebug() << "mkdir" << home.mkdir(".nssdr");
 		/** 第一个Bug出现的位置，把代码竟然TMD写到了调试信息里.....**/
 		home.mkdir(".nssdr");
 	}

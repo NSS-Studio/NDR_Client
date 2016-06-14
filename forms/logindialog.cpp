@@ -12,6 +12,10 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent) :
 	flags |= Qt::WindowMinimizeButtonHint|Qt::WindowCloseButtonHint;
 	setWindowFlags(flags);
 	ui->setupUi(this);
+
+    //Set the order of the tab key
+    QWidget::setTabOrder(ui->cmbAccount, ui->editPassword);
+
 #ifndef Q_OS_MAC
 	int edit_height = ui->cmbAccount->height();
 	qDebug("edit_height = %d", edit_height);
