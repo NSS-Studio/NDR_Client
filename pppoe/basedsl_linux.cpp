@@ -9,7 +9,7 @@ BaseDsl::BaseDsl(const QString &name, QObject *parent) :
 	networkmanager = new QDBusInterface(NM_DBUS_SERVICE, NM_DBUS_PATH, NM_DBUS_INTERFACE, QDBusConnection::systemBus());
 }
 
-bool BaseDsl::dial(const QString &username, const QString &password, const QString &device_name, QString &errorMessage)
+bool BaseDsl::dial(const QString &username, const QString &password, const QString, QString &errorMessage)
 {
 	QString last_conn_path;
 

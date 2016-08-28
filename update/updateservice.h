@@ -47,7 +47,7 @@ private:
     QNetworkAccessManager nam;
 	QNetworkRequest request;
 	QNetworkReply *reply;
-    bool isConnectUpdateServerFail = false;
+    bool isConnectUpdateServerFail;
 	QDataStream *out;
 	bool downloadToFile(QString urlStr, QString filename, QString &errorMsg);
 #ifdef Q_OS_MAC

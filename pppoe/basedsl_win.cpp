@@ -13,7 +13,7 @@ BaseDsl::~BaseDsl()
 
 }
 
-bool BaseDsl::dial(const QString &username, const QString &password, const QString &device_name, QString &errorMessage)
+bool BaseDsl::dial(const QString &username, const QString &password, const QString , QString &errorMessage)
 {
 	DWORD ret;
 	RASDIALPARAMSW params;
@@ -33,7 +33,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	username.toWCharArray(params.szUserName);
 	password.toWCharArray(params.szPassword);
 	lstrcpyW(params.szDomain,L"");
-	ret=RasDialW(NULL, NULL, &params, NULL, NULL, &hRasConn);
+    ret=RasDialW(NULL, NULL, &params, (DWORD)NULL, NULL, &hRasConn);
 	if(ret!=0)
 	{
 		 /*****************/
@@ -132,7 +132,8 @@ bool BaseDsl::preparePhoneBookEntry(QString entryName,QString errorMessage)
     DWORD dwBufferSize  =   sizeof(RASENTRYW) ;
     DWORD dwRet  =   0 ;
     WCHAR szEntryName[1024];
-    RASENTRYW rasEntry  =  {0};
+    RASENTRYW rasEntry;
+    memset( &rasEntry, 0, sizeof(RASENTRYW));
     szEntryName[0]=L'\0';
     rasEntry.dwSize = sizeof(RASENTRYW);
     entryName.toWCharArray(szEntryName);
@@ -145,13 +146,13 @@ bool BaseDsl::preparePhoneBookEntry(QString entryName,QString errorMessage)
         DWORD cb = sizeof (RASENTRYW);
         rasEntry.dwSize = cb;
         rasEntry.dwfOptions = RASEO_RemoteDefaultGateway|
-                //RASEO_PreviewPhoneNumber|
-                //RASEO_PreviewUserPw|
-                RASEO_ModemLights;
+            //RASEO_PreviewPhoneNumber|
+            //RASEO_PreviewUserPw|
+            RASEO_ModemLights;
 
         lstrcpy(rasEntry.szDeviceType,RASDT_Modem);
         //TODO fill rasEntry.szDeviceName by RasEnumDevices ;
-	;{
+        {
             DWORD ret,dwSize,dwDevices;
             RASDEVINFOW arrDevInfo[64];
             dwSize = sizeof(arrDevInfo);
@@ -178,9 +179,9 @@ bool BaseDsl::preparePhoneBookEntry(QString entryName,QString errorMessage)
             }else
             {
                 qDebug() << "RasEnumDevicesW() succeed" <<  ret;
-                int i;
                 BOOL bFound=FALSE;
-                for(i=0;i<dwDevices;i++)
+                DWORD i=0;
+                for(;i<dwDevices;i++)
                 {
                     qDebug() << QString::fromUtf16((const ushort*)arrDevInfo[i].szDeviceName)
                                 <<QString::fromUtf16((const ushort*)arrDevInfo[i].szDeviceType);

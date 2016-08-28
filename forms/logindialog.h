@@ -5,7 +5,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "localstorage.h"
-#include <QMessageBox>
+
 namespace Ui {
 class LoginDialog;
 }
@@ -27,9 +27,9 @@ protected:
     
 private slots:
 	void on_btnLogin_clicked();
-	void on_cmbAccount_currentIndexChanged(const QString &arg1);
+    //void on_cmbAccount_currentIndexChanged(const QString &arg1);
 	void on_btnDelUserInfo_clicked();
-	void on_cmbAccount_currentIndexChanged(int index);
+    //void on_cmbAccount_currentIndexChanged(int index);
 	void on_cmbAccount_editTextChanged(const QString &arg1);
 	void on_chkAutoLogin_clicked(bool checked);
 	void on_chkSavePasswd_clicked(bool checked);

@@ -149,16 +149,8 @@ void MainWindow::tryLogin()
 
 QString MainWindow::parseSec(int sec)
 {
-    int year,month,day,hour,minute,second;
+    int day,hour,minute,second;
     int t;
-    /*
-    t = 365*24*3600;
-    year = sec / t;
-    sec -= t*year;
-    t = 30*24*3600;
-    month = sec / t;
-    sec -= t*month;
-    */
     t = 24*3600;
     day = sec / t;
     sec -= t*day;
@@ -169,7 +161,7 @@ QString MainWindow::parseSec(int sec)
     minute = sec / t;
     sec -= t*minute;
     second = sec;
-    //return QString(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
+
     return tr("%1 天 %2:%3:%4")
             .arg(day,-3,10,QChar(' '))
             .arg(hour,2,10,QChar('0'))
@@ -400,7 +392,7 @@ void MainWindow::verifyStoped()
     
 }
 
-void MainWindow::timerEvent( QTimerEvent *event )
+void MainWindow::timerEvent( QTimerEvent * )
 {
     static int i=0;
     if(++i>=10)
@@ -471,7 +463,7 @@ void MainWindow::hangedUp(bool natural)
             noticeDialog->showMessage(tr("网络异常断开，正在重新拨号"));
 
             QEventLoop eventloop;
-            QTimer::singleShot(3000, &eventloop, SLOT(quit()));
+            QTimer::singleShot(10000, &eventloop, SLOT(quit()));
             eventloop.exec();
 
             if(!pppoe->redialRAS())
@@ -603,17 +595,24 @@ void MainWindow::checkFinished(bool error,int major,int minor,QString errMsg)
         
     }
 
-    if(major*100 + minor >VERSION_MAJOR*100 + VERSION_MINOR)
+
+
+
+    /*  20160828 by cxh : use "!=" to easyly rollback
+     *  Warning!!!:
+     *      It Only Used at Non-developers Can Develop the New_NDR and Need to Rollback
+     * ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓This↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+     */
+    if( major != VERSION_MAJOR || minor != VERSION_MINOR)
     {
         qDebug() << "需要更新！！！！！！！！！！！！";
         updateServer->downloadLatestPackage();
-    }else
+    }
+    else
     {
         qDebug() << "不需要更新";
     }
-
 }
-
 void MainWindow::downloadFinished(bool error,QString errMsg)
 {
     qDebug() << "downloadFinished() enter";

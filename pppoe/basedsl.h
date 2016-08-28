@@ -4,7 +4,7 @@
 #include "common.h"
 #include <QObject>
 #if defined(Q_OS_WIN32)
-#define _WIN32_WINNT 0x0500
+
 #define RASNP_Ipv6  0x00000008
 #include <windows.h>
 #include <ras.h>
@@ -52,7 +52,11 @@ public:
      * @param errorMessage 拨号失败错误消息
      * @return true返回成功
      */
-	bool dial(const QString &username, const QString &password, const QString &device_name, QString &errorMessage);
+#ifdef Q_OS_WIN
+    bool dial(const QString &username, const QString &password, const QString , QString &errorMessage);
+#elif defined Q_OS_LINUX || defined Q_OS_SOLARIS || defined Q_OS_MAC
+    bool dial(const QString &username, const QString &password, const QString &device_name, QString &errorMessage);
+#endif
 
     /**
      * @brief hangUp 挂断

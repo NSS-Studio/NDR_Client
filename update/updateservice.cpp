@@ -9,6 +9,7 @@ UpdateService::UpdateService(const QString &serverAddr, const QString &serverAdd
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;
     qDebug() << "ipAddress" << serverAddr;
+    isConnectUpdateServerFail = false;
 }
 
 void UpdateService::checkUpdate()
@@ -30,15 +31,18 @@ void UpdateService::checkOriginGet()
         qDebug() << "url_1 failed";
         QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
+        delete reply;
         reply = nam.get(QNetworkRequest( QUrl(url)));
-        connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
         this->isConnectUpdateServerFail = false;
     }
     else{
         qDebug() << "url is OK! the update server 172.24.10.13 is very very OK!";
-        connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
         this->isConnectUpdateServerFail = true;
+        originGetFinished();
     }
+    reply->disconnect(SIGNAL(finished()));
+    connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
+
 }
 
 /*
@@ -107,6 +111,7 @@ void UpdateService::originGetFinished()
                 int major,minor;
                 major = packageElement.attribute("major").toInt();
                 minor = packageElement.attribute("minor").toInt();
+                qDebug() << "minor is " << minor ;
                 packageFilename = packageElement.attribute("fname","ndr-setup");
                 this->packageUrl = packageElement.text();
                 if ( true == this->isConnectUpdateServerFail )
@@ -213,7 +218,7 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename, QString &er
         delete out;
         file.close();
 	QString http_status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
-	if(http_status_code != "200")
+    if(http_status_code != "200")
         {
 		errorMsg = tr("HTTP 服务器返回了意外的状态码 %1").arg(http_status_code);
 		qDebug() << "StatusCode" << http_status_code;
@@ -282,7 +287,6 @@ bool UpdateService::getCurrentInstallDirectory(char *buffer) {
 bool UpdateService::openPackage(QString &errMsg)
 {
 #if defined(Q_OS_WIN)
-#define _WIN32_WINNT 0x0500
     QString program = packagePath();
     WCHAR szProgram[MAX_PATH];
     HINSTANCE hInstance;

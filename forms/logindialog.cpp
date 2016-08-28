@@ -116,11 +116,6 @@ void LoginDialog::on_LoginDialog_rejected()
 }
 */
 
-void LoginDialog::on_cmbAccount_currentIndexChanged(const QString &arg1)
-{
-
-
-}
 
 void LoginDialog::on_btnDelUserInfo_clicked()
 {
@@ -157,10 +152,7 @@ void LoginDialog::on_btnDelUserInfo_clicked()
     }
 }
 
-void LoginDialog::on_cmbAccount_currentIndexChanged(int index)
-{
-    //qDebug() << "index" << index;
-}
+
 
 void LoginDialog::show()
 {
@@ -170,7 +162,7 @@ void LoginDialog::show()
     if(profile->open())
     {
         QString preUsername,prePassword;
-	QString saved_device_name;
+        QString saved_device_name;
         bool needSave;
         qDebug() << "db opened";
         

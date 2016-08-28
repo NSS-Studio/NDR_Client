@@ -60,7 +60,7 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 65
+#define VERSION_MINOR 67
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"

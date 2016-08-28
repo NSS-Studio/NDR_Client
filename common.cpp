@@ -45,6 +45,7 @@ void __initSettingsSet() {
 #define DR_MODEL_ID_EDU              "@edu"
 #define DR_MODEL_ID_UNICOM           "@cnc"
 #define DR_MODEL_ID_UNICOM_CONTRACT  "@cnc30a"
+#define DR_MODEL_ID_UNICOM_CONTRACT_50  "@cnc50a"
 #define DR_MODEL_ID_TELECOM          "@ct10"
 #define DR_MODEL_ID_TELECOM_CONTRACT "@ct10a"
 
@@ -54,6 +55,7 @@ QStringList __getDrModelPostfixTable()
 	table.append(DR_MODEL_ID_EDU);
 	table.append(DR_MODEL_ID_UNICOM);
 	table.append(DR_MODEL_ID_UNICOM_CONTRACT);
+    table.append(DR_MODEL_ID_UNICOM_CONTRACT_50);
 	table.append(DR_MODEL_ID_TELECOM);
 	table.append(DR_MODEL_ID_TELECOM_CONTRACT);
 	table.append(DR_MODEL_ID_CAMPAS);//顺序很重要
@@ -71,6 +73,8 @@ bool __getDrModelCaption(QString postfix,QString &caption)
 		caption=QObject::tr("联通20M");
 	else if(postfix== DR_MODEL_ID_UNICOM_CONTRACT)
 		caption=QObject::tr("联通合约30M");
+    else if(postfix== DR_MODEL_ID_UNICOM_CONTRACT_50)
+        caption=QObject::tr("联通合约50M");
 	else if(postfix== DR_MODEL_ID_TELECOM)
 		caption=QObject::tr("电信10M");
 	else if(postfix== DR_MODEL_ID_TELECOM_CONTRACT)
