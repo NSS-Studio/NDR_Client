@@ -5,7 +5,7 @@
 #include <QtNetwork>
 #include <string.h>
 #include <stdio.h>
-#include "log.h"
+//#include "log.h"
 #include <stdint.h>
 
 class CheckFileThread : public QThread

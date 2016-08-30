@@ -1,1 +1,7 @@
 client.pro.user*
+*.o
+moc_*.cpp
+ui_*.h
+Makefile
+*.a
+*~

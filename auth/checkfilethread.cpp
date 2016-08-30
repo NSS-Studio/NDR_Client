@@ -1,4 +1,5 @@
 #include "checkfilethread.h"
+#include "log.h"
 CheckFileThread::CheckFileThread(QString ip,ushort port,QObject *parent) :
     QThread(parent)
 {
