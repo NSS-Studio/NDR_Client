@@ -13,7 +13,8 @@ win32{
 }
 unix:!macx {
     SOURCES += $$PWD/basedsl_linux.cpp
-    LIBS    += -lX11
+	LIBS    += -lX11
+	QT		+= dbus
 }
 macx{
     SOURCES += $$PWD/basedsl_mac.cpp

@@ -342,7 +342,7 @@ bool UpdateService::openPackage(QString &errMsg)
 			int e = errno;
 			const char *err_msg = strerror(e);
 			errMsg = QString::fromUtf8(err_msg);
-			qWarning(err_msg);
+            qWarning("%s", err_msg);
             return false;
 		}
 		errMsg = tr("命令 %1 以状态 %2 退出").arg(QString::fromUtf8(command_ba)).arg(WEXITSTATUS(status));

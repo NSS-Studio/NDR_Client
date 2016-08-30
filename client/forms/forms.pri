@@ -1,7 +1,6 @@
+QT +=			gui xml
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
-
-
 HEADERS +=      $$PWD/aboutdialog.h \
                 $$PWD/mainwindow.h \
                 $$PWD/logindialog.h \
@@ -28,3 +27,6 @@ FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/messageviewerdialog.ui \
                 $$PWD/feedbackdialog.ui \
                 $$PWD/hangupdialog.ui
+
+INCLUDEPATH +=  $$PWD/../../auth/
+LIBS +=			$$PWD/../../auth/libauth.a

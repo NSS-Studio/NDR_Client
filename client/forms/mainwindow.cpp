@@ -89,6 +89,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
             this,SLOT(downloadFinished(bool,QString)));
     
+    this->ui->lblAllTime->setText("NULL");
+    this->ui->lblFlow->setText("NULL");
+
     aboutDialog = NULL;
     settingsDialog = NULL;
     feedbackDialog = NULL;
@@ -147,10 +150,18 @@ void MainWindow::tryLogin()
     
 }
 
-QString MainWindow::parseSec(int sec)
+QString MainWindow::time_humanable(int sec)
 {
-    int day,hour,minute,second;
+    int year,month,day,hour,minute,second;
     int t;
+    /*
+    t = 365*24*3600;
+    year = sec / t;
+    sec -= t*year;
+    t = 30*24*3600;
+    month = sec / t;
+    sec -= t*month;
+    */
     t = 24*3600;
     day = sec / t;
     sec -= t*day;
@@ -161,7 +172,7 @@ QString MainWindow::parseSec(int sec)
     minute = sec / t;
     sec -= t*minute;
     second = sec;
-
+    //return QString(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
     return tr("%1 天 %2:%3:%4")
             .arg(day,-3,10,QChar(' '))
             .arg(hour,2,10,QChar('0'))
@@ -213,7 +224,7 @@ void MainWindow::dialFinished(bool ok)
                 this->allTime = 0;
             }
             
-            this->ui->lblAllTime->setText(parseSec(this->allTime));
+            this->ui->lblAllTime->setText(time_humanable(this->allTime));
             
             if(autoLogin)
                 profile->setAutoLoginUser(username);
@@ -232,7 +243,7 @@ void MainWindow::dialFinished(bool ok)
         this->ui->lblAddress->setText(pppoe->getIpAddress());
 
         this->connTime = 0;
-        this->ui->lblTime->setText(parseSec(connTime));
+        this->ui->lblTime->setText(time_humanable(connTime));
         
         
         onStartWorking();
@@ -392,8 +403,51 @@ void MainWindow::verifyStoped()
     
 }
 
-void MainWindow::timerEvent( QTimerEvent * )
+
+
+static bool _get_account_state(int *time,int *flow)
 {
+    Q_ASSERT(time);
+    Q_ASSERT(flow);
+    QNetworkAccessManager nam;
+    QNetworkReply *reply;
+    QEventLoop eventloop;
+
+    reply = nam.get(QNetworkRequest( QUrl("http://172.24.253.35/")));
+    QObject::connect(reply,SIGNAL(finished()),&eventloop,SLOT(quit()));
+    QTimer::singleShot(10*1000,&eventloop,SLOT(quit()));
+    eventloop.exec();
+    //this->ui->textBrowser->setText(reply->readAll());
+    if(!reply->isFinished()) {
+        reply->abort();
+        qDebug() << "_get_account_state" << "http request timeout";
+        return false;
+    }
+    QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
+
+    if(stateValue != "200") {
+        qDebug() << "_get_account_state" << "stauts code not 200.";
+        return false;
+
+    }
+    QString html = reply->readAll();
+    QRegExp regexp("time='(\\d+)[ ]*';flow='(\\d+)[ ]*';");
+    int pos=html.indexOf(regexp);
+    if(pos >= 0) {
+        qDebug() << "matched string ->" << regexp.capturedTexts();
+        *time = regexp.cap(1).toInt();
+        *flow = regexp.cap(2).toInt();
+        qDebug() << "time:" << *time;
+        qDebug() << "time:" << *flow;
+        return true;
+    } else {
+        qDebug() << "_get_account_state" << "unmatched.";
+        return false;
+    }
+}
+void MainWindow::timerEvent( QTimerEvent *event )
+{
+    /*
     static int i=0;
     if(++i>=10)
     {
@@ -408,11 +462,25 @@ void MainWindow::timerEvent( QTimerEvent * )
     allTime +=1;
     this->ui->lblTime->setText(parseSec(connTime));
     this->ui->lblAllTime->setText(parseSec(allTime));
+    */
+    static int timepassed = 0;
+
+    int time,flow;
+    if(_get_account_state(&time,&flow)) {
+        this->ui->lblTime->setText(time_humanable(timepassed*60));
+        this->ui->lblAllTime->setText(time_humanable(time*60));
+        this->ui->lblFlow->setText(QString("%1 KB")
+                                   .arg(flow,-3,10,QChar(' ')));
+    }
+
+    timepassed += 1;
+
     
 }
 
 void MainWindow::on_actionSettings_triggered()
 {
+
     if(settingsDialog==NULL)
         settingsDialog = new SettingsDialog();
     if(settingsDialog->getFormData(settings))
@@ -543,7 +611,8 @@ void MainWindow::onStartWorking()
 
 	trayIcon->setContextMenu(this->ui->menuTrayWorking);
 	trayIcon->show();
-	timerId = this->startTimer(1000);
+    timerId = this->startTimer(1000*60);
+    this->timerEvent(NULL);
 
 	this->logoffShortcut->setEnabled();
 
@@ -595,9 +664,6 @@ void MainWindow::checkFinished(bool error,int major,int minor,QString errMsg)
         
     }
 
-
-
-
     /*  20160828 by cxh : use "!=" to easyly rollback
      *  Warning!!!:
      *      It Only Used at Non-developers Can Develop the New_NDR and Need to Rollback
@@ -607,12 +673,13 @@ void MainWindow::checkFinished(bool error,int major,int minor,QString errMsg)
     {
         qDebug() << "需要更新！！！！！！！！！！！！";
         updateServer->downloadLatestPackage();
-    }
-    else
+    }else
     {
         qDebug() << "不需要更新";
     }
+
 }
+
 void MainWindow::downloadFinished(bool error,QString errMsg)
 {
     qDebug() << "downloadFinished() enter";

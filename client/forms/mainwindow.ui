@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
+    <width>269</width>
     <height>350</height>
    </rect>
   </property>
@@ -29,7 +29,7 @@
    <string>NDR 客户端</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="client.qrc">
+   <iconset resource="../client.qrc">
     <normaloff>:/icons/icons/logo.png</normaloff>:/icons/icons/logo.png</iconset>
   </property>
   <property name="styleSheet">
@@ -37,13 +37,57 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
+    <item row="2" column="0">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(57, 115, 172);</string>
+         </property>
+         <property name="text">
+          <string>欢迎加入用户反馈QQ群协助改善我们的产品 397060683</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox">
       <property name="title">
        <string>连接信息</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" rowspan="2" colspan="2">
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QLabel" name="label_5">
@@ -110,9 +154,22 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Traffic：</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
-       <item row="0" column="1">
+       <item row="0" column="2" rowspan="2">
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
           <widget class="QLabel" name="lblAccount">
@@ -179,22 +236,22 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="lblFlow">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
-       <item row="0" column="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="1">
+       <item row="2" column="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -206,37 +263,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(57, 115, 172);</string>
-         </property>
-         <property name="text">
-          <string>欢迎加入用户反馈QQ群协助改善我们的产品 397060683</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -285,8 +311,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>261</width>
-     <height>17</height>
+     <width>269</width>
+     <height>27</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -320,7 +346,7 @@
   </widget>
   <action name="actionLogoff">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/logout.png</normaloff>:/icons/icons/logout.png</iconset>
    </property>
    <property name="text">
@@ -329,7 +355,7 @@
   </action>
   <action name="actionShowWindow">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showmainpanels.png</normaloff>:/icons/icons/showmainpanels.png</iconset>
    </property>
    <property name="text">
@@ -338,7 +364,7 @@
   </action>
   <action name="actionQuit">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/quiet1.png</normaloff>:/icons/icons/quiet1.png</iconset>
    </property>
    <property name="text">
@@ -350,7 +376,7 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/setting.png</normaloff>:/icons/icons/setting.png</iconset>
    </property>
    <property name="text">
@@ -359,7 +385,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/about.png</normaloff>:/icons/icons/about.png</iconset>
    </property>
    <property name="text">
@@ -368,7 +394,7 @@
   </action>
   <action name="actionShowLoginDialog">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
@@ -377,7 +403,7 @@
   </action>
   <action name="actionActionFeedback">
    <property name="icon">
-    <iconset resource="client.qrc">
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
@@ -387,7 +413,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="client.qrc"/>
+  <include location="../client.qrc"/>
  </resources>
  <connections/>
 </ui>

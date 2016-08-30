@@ -80,10 +80,10 @@ private:
     //SettingsSet *settings;
     UpdateService *updateServer;
     
-    void timerEvent(QTimerEvent *);
+    void timerEvent( QTimerEvent *event );
     void changeEvent(QEvent* event);
     
-    QString parseSec(int sec);
+    QString time_humanable(int sec);
     
 
 public slots:  
