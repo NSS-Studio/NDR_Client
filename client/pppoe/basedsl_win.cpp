@@ -22,7 +22,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	{
         errorMessage += "\n" + tr("请尝试手动创建名为NDR的适配器");
         errorMessage = tr("拨号连接适配器初始化失败，%1").arg(errorMessage);
-		
+
 		return false;
 	}
 	memset(&params, 0, sizeof(params));
@@ -126,7 +126,7 @@ QString BaseDsl::getIpAddress()
 	return ipAddress;
 }
 
-bool BaseDsl::preparePhoneBookEntry(QString entryName,QString errorMessage)
+bool BaseDsl::preparePhoneBookEntry(QString entryName,QString &errorMessage)
 {
     
     DWORD dwBufferSize  =   sizeof(RASENTRYW) ;

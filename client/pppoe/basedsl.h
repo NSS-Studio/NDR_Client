@@ -85,7 +85,7 @@ private:
 	QString name;
 #ifdef Q_OS_WIN
 	HRASCONN hRasConn;
-	bool preparePhoneBookEntry(QString entryName,QString errorMessage);
+    bool preparePhoneBookEntry(QString entryName,QString & errorMessage);
 #elif defined Q_OS_LINUX || defined Q_OS_SOLARIS
 	QDBusInterface *networkmanager;
 	QDBusObjectPath objectPath;
