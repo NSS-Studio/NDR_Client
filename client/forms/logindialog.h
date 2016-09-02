@@ -5,6 +5,12 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "localstorage.h"
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <shellapi.h>
+#else
+#endif
+
 
 namespace Ui {
 class LoginDialog;
@@ -36,6 +42,12 @@ private slots:
 	void handle_model_change(int);
 
     void on_btnShowPassword_clicked(bool checked);
+
+#ifdef Q_OS_WIN
+    void on_btnWinsockReset_clicked();
+#else
+#endif
+
 
 private:
 	Ui::LoginDialog *ui;

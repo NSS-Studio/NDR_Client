@@ -93,7 +93,7 @@
         <x>10</x>
         <y>132</y>
         <width>171</width>
-        <height>26</height>
+        <height>33</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -127,7 +127,7 @@
         <x>9</x>
         <y>9</y>
         <width>281</width>
-        <height>91</height>
+        <height>95</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -265,6 +265,13 @@
          </property>
         </widget>
        </item>
+       <item row="6" column="2">
+        <widget class="QPushButton" name="btnWinsockReset">
+         <property name="text">
+          <string>重置winsock</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="Line" name="line">
@@ -280,13 +287,13 @@
        <enum>Qt::Horizontal</enum>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>9</x>
         <y>113</y>
-        <width>171</width>
-        <height>20</height>
+        <width>186</width>
+        <height>28</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">

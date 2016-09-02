@@ -46,6 +46,11 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent) :
     int desktop_height = QApplication::desktop()->height();
     this->move((desktop_width-this->width())/2,(desktop_height-this->height())/2-200);
     */
+#ifdef Q_OS_WIN
+
+#else
+        ui->btnWinsockReset->hide();
+#endif
 }
 
 LoginDialog::~LoginDialog()
@@ -311,3 +316,33 @@ void LoginDialog::on_btnShowPassword_clicked(bool checked)
         ui->editPassword->setEchoMode(QLineEdit::Password);
     }
 }
+
+#ifdef Q_OS_WIN
+void LoginDialog::on_btnWinsockReset_clicked()
+{
+    QString winsockResetDir = appHome + "/winsockReset.bat";
+    QFile winsockResetFile(winsockResetDir);
+    if (!winsockResetFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    QTextStream out(&winsockResetFile);
+    out << "netsh winsock reset";
+    SHELLEXECUTEINFO winsockExecInfo;
+    winsockExecInfo.hwnd = NULL;
+    winsockExecInfo.lpVerb = _T("runas");
+    winsockExecInfo.lpFile = winsockResetDir;
+    winsockExecInfo.nShow = SW_SHOWNORMAL;
+    winsockExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+    winsockExecInfo.cbSize = sizeof(ShellInfo);
+    BOOL resetResult = ShellExecuteEx(&ShellInfo);
+    if (resetResult)
+    {
+
+    }else
+    {
+
+    }
+}
+#else
+
+#endif
+
