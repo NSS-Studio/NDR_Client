@@ -76,7 +76,7 @@
     <string notr="true">注销网络并更新(&amp;U)</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="layoutWidget222">
    <property name="geometry">
     <rect>
      <x>9</x>
@@ -164,7 +164,7 @@ p, li { white-space: pre-wrap; }
      <height>31</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="layoutWidget111">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
@@ -194,7 +194,7 @@ p, li { white-space: pre-wrap; }
         <property name="smallDecimalPoint">
          <bool>false</bool>
         </property>
-        <property name="numDigits">
+        <property name="digitCount">
          <number>3</number>
         </property>
         <property name="segmentStyle">
