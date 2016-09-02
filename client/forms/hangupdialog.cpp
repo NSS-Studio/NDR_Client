@@ -50,7 +50,7 @@ void HangupDialog::waitForUserAccept()
     
 }
 
-void HangupDialog::timerEvent(QTimerEvent *t)
+void HangupDialog::timerEvent(QTimerEvent *)
 {
     qDebug() << "Rest time" << restTime;
     restTime --;

@@ -16,7 +16,7 @@ AboutDialog::~AboutDialog()
     delete ui;
 }
 
-void AboutDialog::on_AboutDialog_finished(int result)
+void AboutDialog::on_AboutDialog_finished(int /*result*/)
 {
     
 }

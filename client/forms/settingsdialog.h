@@ -21,7 +21,7 @@ public:
 private slots:
     void on_buttonBox_accepted();
     
-    void on_SettingsDialog_finished(int result);
+    void on_SettingsDialog_finished(int /*result*/);
     
 private:
 	Ui::SettingsDialog *ui;

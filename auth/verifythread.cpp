@@ -36,7 +36,7 @@ void VerifyThread::run()
     {
         QAbstractSocket::SocketError err;
         err = client->error();
-        qDebug() << "Port bind failed";
+        qDebug() << "Port bind failed," << err;
         goto exit_thread;
     }
     for(int i=0;i<6;i++)

@@ -42,7 +42,6 @@ void UpdateService::checkOriginGet()
     }
     reply->disconnect(SIGNAL(finished()));
     connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
-
 }
 
 /*

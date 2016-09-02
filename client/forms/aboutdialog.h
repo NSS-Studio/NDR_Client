@@ -17,7 +17,7 @@ public:
     ~AboutDialog();
     
 private slots:
-    void on_AboutDialog_finished(int result);
+    void on_AboutDialog_finished(int /*result*/);
     
     void on_pushButton_clicked();
     

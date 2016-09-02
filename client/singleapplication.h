@@ -14,7 +14,7 @@ class SingleApplication : public QApplication
 public:
 	explicit SingleApplication(int &argc, char* argv[], const QString &uniqueKey);
 	bool isRunning();
-	bool sendMessage(const QString & message);
+    bool sendMessage(const QString &);
 	bool releaseSharedMemory();
 
 public slots:

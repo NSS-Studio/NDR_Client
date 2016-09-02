@@ -12,7 +12,7 @@ void Log::setLogFilename(QString filename)
     Log::mutex.unlock();
 }
 
-void Log::write(QString msg,char *byteArray, int size)
+void Log::write(QString /*msg*/,char * /*byteArray */, int /*size*/)
 {
     /*
     QString buf=QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss:zzz") + " " ;

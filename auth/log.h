@@ -8,7 +8,7 @@ class Log
 {
 public:
 
-    static void write(QString msg,char *byteArray=0,int size=0);
+    static void write(QString msg,char * /*byteArray */=0,int /*size=0*/=0);
     static void setLogFilename(QString filename);
 private:
     static QString filename;

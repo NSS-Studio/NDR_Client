@@ -33,7 +33,7 @@ void SettingsDialog::on_buttonBox_accepted()
 	this->accept();
 }
 
-void SettingsDialog::on_SettingsDialog_finished(int result)
+void SettingsDialog::on_SettingsDialog_finished(int /*result*/)
 {
     this->reject();
 }

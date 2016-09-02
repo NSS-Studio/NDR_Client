@@ -152,16 +152,8 @@ void MainWindow::tryLogin()
 
 QString MainWindow::time_humanable(int sec)
 {
-    int year,month,day,hour,minute,second;
+    int day,hour,minute,second;
     int t;
-    /*
-    t = 365*24*3600;
-    year = sec / t;
-    sec -= t*year;
-    t = 30*24*3600;
-    month = sec / t;
-    sec -= t*month;
-    */
     t = 24*3600;
     day = sec / t;
     sec -= t*day;
@@ -445,7 +437,7 @@ static bool _get_account_state(int *time,int *flow)
         return false;
     }
 }
-void MainWindow::timerEvent( QTimerEvent *event )
+void MainWindow::timerEvent( QTimerEvent * )
 {
     /*
     static int i=0;

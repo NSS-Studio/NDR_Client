@@ -61,7 +61,7 @@ bool SingleApplication::isRunning(){
  * SENDER: if there is already a instance running, create a Socket to communicate with It's Server.
  *
  */
-bool SingleApplication::sendMessage(const QString &message){
+bool SingleApplication::sendMessage(const QString &/*message*/){
     qDebug()<<"sendMessage";
     if(!_isRunning){
         return false;

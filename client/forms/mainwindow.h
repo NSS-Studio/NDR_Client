@@ -80,7 +80,7 @@ private:
     //SettingsSet *settings;
     UpdateService *updateServer;
     
-    void timerEvent( QTimerEvent *event );
+    void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);
     
     QString time_humanable(int sec);

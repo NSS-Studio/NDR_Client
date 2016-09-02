@@ -51,32 +51,43 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		{
 			errorMessage = tr("未知错误");
 		}
-		errorMessage = QString::number(ret,10) + " " + errorMessage;
+
+        /* 将Error Code下移，强迫用户看常用错误帮助文档*/
+        errorMessage = QString::number(ret,10) + " " + errorMessage;
 		switch(ret)
 		{
-		case 651:
-			errorMessage += tr(
-				"\n1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）"
+        case 651:
+            errorMessage = tr(
+                "1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）"
 				"\n2.请确保交换机及其连线完好."
-				"\n3.请确保网线已插好.");
+                "\n3.请确保网线已插好."
+                "\n若如上做问题仍未解决，请上报修网报修"
+                "\n网址为: http://bx.neusoft.edu.cn/"
+                "\n ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
 			break;
-		case 691:
-			errorMessage += tr(
-				"\n1.请检查账号或密码以及套餐设置是否正确."
+        case 691:
+            errorMessage = tr(
+                "1.请检查账号或密码以及套餐设置是否正确."
 				"\n2.请检查套餐是否还未生效或已经过期."
-				"\n3.请确保当前没有连接到其他Wifi网络.");
+                "\n3.请确保当前没有连接到其他Wifi网络."
+                "\n请登录 http://e.neusoft.edu.cn/ 查询账号密码"
+                "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
 			break;
 		case 756:
-			errorMessage += tr(
-				"\n请尝试重新启动计算机.");
+            errorMessage = tr(
+                "请尝试重新启动计算机.\n"
+                "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
 			break;
 		case 668:
-			errorMessage += tr(
-				"\n请重新尝试拨号.");
+            errorMessage = tr(
+                "请重新尝试拨号.\n"
+                "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
 			break;
 		case 1062:
-				errorMessage += tr("可能是一些拨号所依赖的服务无法启动所致");
-				break;
+            errorMessage = tr(
+                "可能是一些拨号所依赖的服务无法启动所致\n"
+                "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
+            break;
 		}
 		hRasConn=NULL;
 		return false;

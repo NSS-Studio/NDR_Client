@@ -41,6 +41,7 @@ unix:!macx{
 }
 
 win32 {
+    QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x500
     RC_FILE +=  $$PWD/appicon_win/appicon.rc
 }
 
