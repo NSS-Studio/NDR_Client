@@ -38,18 +38,16 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent) :
 	completer->setCompletionMode(QCompleter::PopupCompletion);
 	ui->cmbAccount->setCompleter(completer);
 	this->setWindowTitle("[" + __getVersionString() +"] " + this->windowTitle() );
-#ifdef Q_OS_WIN
-	ui->comboIface->setEnabled(false);
-#endif
     /*
     int desktop_width = QApplication::desktop()->width();
     int desktop_height = QApplication::desktop()->height();
     this->move((desktop_width-this->width())/2,(desktop_height-this->height())/2-200);
     */
 #ifdef Q_OS_WIN
-
+    ui->btnWinsockReset->setEnabled(true);
+    ui->comboIface->setEnabled(false);
 #else
-        ui->btnWinsockReset->hide();
+    ui->btnWinsockReset->setEnabled(false);
 #endif
 }
 
@@ -299,7 +297,7 @@ void LoginDialog::keyPressEvent(QKeyEvent *e)
 {
     if(e->key() == Qt::Key_Escape)
     {
-	qApp->quit();
+        qApp->quit();
     }
 }
 
@@ -320,29 +318,31 @@ void LoginDialog::on_btnShowPassword_clicked(bool checked)
 #ifdef Q_OS_WIN
 void LoginDialog::on_btnWinsockReset_clicked()
 {
-    QString winsockResetDir = appHome + "/winsockReset.bat";
-    QFile winsockResetFile(winsockResetDir);
-    if (!winsockResetFile.open(QIODevice::WriteOnly | QIODevice::Text))
-        return;
-    QTextStream out(&winsockResetFile);
-    out << "netsh winsock reset";
+    QString winsockResetDir = tempDir + "/winsockReset.bat";
+    std::ofstream winsockResetFileTmp ;
+    winsockResetFileTmp.open(winsockResetDir.toStdString().c_str(),std::ofstream::out);
+    if(!winsockResetFileTmp.is_open())
+    {
+        qDebug() << "File Not Open";
+        return ;
+    }
+    winsockResetFileTmp << "netsh winsock reset" << std::endl;
+    winsockResetFileTmp.close();
     SHELLEXECUTEINFO winsockExecInfo;
-    winsockExecInfo.hwnd = NULL;
-    winsockExecInfo.lpVerb = _T("runas");
-    winsockExecInfo.lpFile = winsockResetDir;
-    winsockExecInfo.nShow = SW_SHOWNORMAL;
-    winsockExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
-    winsockExecInfo.cbSize = sizeof(ShellInfo);
-    BOOL resetResult = ShellExecuteEx(&ShellInfo);
-    if (resetResult)
+    memset(&winsockExecInfo, 0, sizeof(winsockExecInfo));
+    winsockExecInfo.fMask = SEE_MASK_DEFAULT;
+    winsockExecInfo.nShow = SW_HIDE;
+    winsockExecInfo.lpVerb = TEXT("runas");
+    winsockExecInfo.lpFile = winsockResetDir.toStdWString().c_str();
+    winsockExecInfo.cbSize = sizeof(winsockExecInfo);
+    if(!ShellExecuteEx(&winsockExecInfo))
     {
-
-    }else
-    {
-
+        DWORD errorNumber = GetLastError();
+        qDebug() << "error" << errorNumber;
+    }else{
+        qDebug() << "winsock reset succeed" ;
+        QMessageBox::information(this,tr("成功"),tr("Winsock重置成功，谢谢使用"));
     }
 }
-#else
-
 #endif
 

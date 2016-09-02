@@ -8,6 +8,8 @@
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <shellapi.h>
+#include <cstring>
+#include <fstream>
 #else
 #endif
 
@@ -43,9 +45,9 @@ private slots:
 
     void on_btnShowPassword_clicked(bool checked);
 
+
 #ifdef Q_OS_WIN
     void on_btnWinsockReset_clicked();
-#else
 #endif
 
 

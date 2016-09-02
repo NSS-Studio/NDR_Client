@@ -268,7 +268,7 @@
        <item row="6" column="2">
         <widget class="QPushButton" name="btnWinsockReset">
          <property name="text">
-          <string>重置winsock</string>
+          <string>故障修复</string>
          </property>
         </widget>
        </item>
@@ -325,9 +325,9 @@
      <widget class="QPushButton" name="btnLogin">
       <property name="geometry">
        <rect>
-        <x>186</x>
-        <y>112</y>
-        <width>111</width>
+        <x>190</x>
+        <y>110</y>
+        <width>101</width>
         <height>51</height>
        </rect>
       </property>
@@ -355,8 +355,16 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>cmbAccount</tabstop>
   <tabstop>editPassword</tabstop>
+  <tabstop>cmbModel</tabstop>
   <tabstop>btnLogin</tabstop>
+  <tabstop>btnDelUserInfo</tabstop>
+  <tabstop>btnShowPassword</tabstop>
+  <tabstop>btnWinsockReset</tabstop>
+  <tabstop>chkAutoLogin</tabstop>
+  <tabstop>chkSavePasswd</tabstop>
+  <tabstop>comboIface</tabstop>
  </tabstops>
  <resources>
   <include location="../client.qrc"/>
@@ -369,8 +377,8 @@
    <slot>handle_model_change(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>245</x>
-     <y>116</y>
+     <x>202</x>
+     <y>174</y>
     </hint>
     <hint type="destinationlabel">
      <x>149</x>

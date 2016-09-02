@@ -70,7 +70,6 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
                 "1.请检查账号或密码以及套餐设置是否正确."
 				"\n2.请检查套餐是否还未生效或已经过期."
                 "\n3.请确保当前没有连接到其他Wifi网络."
-                "\n请登录 http://e.neusoft.edu.cn/ 查询账号密码"
                 "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
 			break;
 		case 756:
