@@ -168,7 +168,7 @@ void LoginDialog::show()
         QString saved_device_name;
         bool needSave;
         qDebug() << "db opened";
-        
+
         list = QStringList::fromVector(profile->getUserNameList());
         preUsername = this->ui->cmbAccount->currentText();
         prePassword = this->ui->editPassword->text();
@@ -227,7 +227,6 @@ void LoginDialog::show()
             this->ui->editPassword->setText(prePassword);
             this->ui->chkSavePasswd->setChecked(needSave);
 	    this->ui->editPassword->setFocus();
-	    //this->ui->editPassword->setFocus();
         }
 
         profile->close();
