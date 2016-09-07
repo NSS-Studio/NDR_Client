@@ -126,7 +126,7 @@
        <rect>
         <x>9</x>
         <y>9</y>
-        <width>281</width>
+        <width>290</width>
         <height>95</height>
        </rect>
       </property>
@@ -224,6 +224,22 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="btnShowPassword">
+         <property name="maximumSize">
+          <size>
+           <width>80</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>可见</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="2">
         <widget class="QPushButton" name="btnDelUserInfo">
          <property name="sizePolicy">
@@ -249,24 +265,14 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QPushButton" name="btnShowPassword">
+       <item row="6" column="2">
+        <widget class="QPushButton" name="btnWinsockReset">
          <property name="maximumSize">
           <size>
            <width>80</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="text">
-          <string>可见</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="2">
-        <widget class="QPushButton" name="btnWinsockReset">
          <property name="text">
           <string>故障修复</string>
          </property>
