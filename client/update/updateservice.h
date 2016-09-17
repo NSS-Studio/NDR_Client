@@ -7,6 +7,8 @@
 #include <QDomDocument>
 #include <QDebug>
 #include <QMessageBox>
+#include <QSslSocket>
+#include <QSslConfiguration>
 //#include <QNetworkAccessManager>
 //#define UPDATE_PACKAGE_FILENAME "ndr-setup"
 
@@ -45,7 +47,11 @@ private:
 	bool running;
 //    QNetwikAccessManager nam;
     QNetworkAccessManager nam;
-	QNetworkRequest request;
+
+    //add ssl config
+    QSslConfiguration sslConf;
+
+    QNetworkRequest request;
 	QNetworkReply *reply;
     bool isConnectUpdateServerFail;
 	QDataStream *out;
