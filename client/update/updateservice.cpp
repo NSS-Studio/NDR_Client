@@ -387,8 +387,9 @@ bool UpdateService::openPackage(QString &errMsg)
 	}
 	if(pid == 0) {
 		chdir(install_dir_path);
+		//now we donot unpacking
 		//qDebug("Unpacking \"%s\"", package_path_ptr);
-		execlp("tar", "tar", "-xf", package_path_ptr, NULL);
+		execlp("open", "open", package_path_ptr, NULL);
 	}
 	int status;
 	while(waitpid(pid, &status, 0) < 0) {
@@ -399,11 +400,11 @@ bool UpdateService::openPackage(QString &errMsg)
 		return false;
 	}
 	if(WIFSIGNALED(status)) {
-		errMsg = tr("解包程序因收到信号 %1 而中止").arg(WTERMSIG(status));
+		errMsg = tr("打开文件夹因收到信号 %1 而中止").arg(WTERMSIG(status));
 		return false;
 	}
 	if(status) {
-		errMsg = tr("解包程序以状态 %1 退出").arg(WEXITSTATUS(status));
+		errMsg = tr("打开文件夹以状态 %1 退出").arg(WEXITSTATUS(status));
 		return false;
 	}
 	return true;
@@ -417,6 +418,13 @@ bool UpdateService::isFinished()
     return !running;
 }
 
+
+#if defined(Q_OS_MAC)
+QString UpdateService::packagePath() {
+	return tempDir + "/" ;//+ packageFilename;
+}
+#else
 QString UpdateService::packagePath() {
 	return tempDir + "/" + packageFilename;
 }
+#endif
