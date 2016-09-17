@@ -1,11 +1,15 @@
 #include "updateservice.h"
 
-UpdateService::UpdateService(const QString &serverAddr, const QString &serverAddrBack, const QString &tempDirectory, QObject *parent) :
+UpdateService::UpdateService(const QString &serverAddr, const QString &serverAddrBak, const QString &tempDirectory, QObject *parent) :
     QObject(parent)
 {
+    //set ssl config
+    this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    this->sslConf.setProtocol(QSsl::TlsV1);
+
     this->tempDir = tempDirectory;
     this->ipAddress = serverAddr;
-    this->ipAddress_2_back = serverAddrBack;
+    this->ipAddress_2_back = serverAddrBak;
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;
     qDebug() << "ipAddress" << serverAddr;
@@ -18,7 +22,9 @@ void UpdateService::checkUpdate()
         return;
     QString url="http://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
-    reply = nam.get(QNetworkRequest( QUrl(url)));
+    QNetworkRequest tmp=QNetworkRequest( QUrl(url));
+    tmp.setSslConfiguration(this->sslConf);
+    reply = nam.get(tmp);
     connect(reply,SIGNAL(finished()),this,SLOT(checkOriginGet()));
     this->running=true;
 }
@@ -32,7 +38,9 @@ void UpdateService::checkOriginGet()
         QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
         delete reply;
-        reply = nam.get(QNetworkRequest( QUrl(url)));
+        QNetworkRequest tmp=QNetworkRequest( QUrl(url));
+        tmp.setSslConfiguration(this->sslConf);
+        reply = nam.get(tmp);
         this->isConnectUpdateServerFail = false;
     }
     else{
@@ -60,16 +68,18 @@ void UpdateService::originGetFinished()
     {
         qDebug() << "reply->errorString()" << reply->errorString();
         running = false;
-        emit checkFinished(true,0,0,tr("连接远程更新服务器失败，%1").arg(reply->errorString()));
+        qDebug() << "连接远程更新服务器失败" << reply->errorString();
+        emit checkFinished(true,0,0,tr("服务器正在维护中，状态码 %1").arg(reply->errorString()));
         return ;
     }
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     
     qDebug() << "Http state value" << stateValue;
-    if(stateValue!="200")
+    if(stateValue!="200" || stateValue!="301")
     {
         running = false;
-        emit checkFinished(true,0,0,tr("远程更新服务器返回错误状态值 %1").arg(stateValue));
+        qDebug() << "远程更新服务器返回错误状态值" << stateValue;
+        emit checkFinished(true,0,0,tr("服务器正在维护中，状态码 %1").arg(stateValue));
         return;
     }
 	QByteArray xml;
@@ -86,7 +96,8 @@ void UpdateService::originGetFinished()
         nodes = root.elementsByTagName("package");
         //nodes = root.elementsByTagName()
 		if(nodes.isEmpty()){
-			errorMessage = tr("在推送的更新配置文件中找不到包");
+            qDebug() << "在推送的更新配置文件中找不到包";
+            errorMessage = tr("服务器正在维护中,请稍后");
             //errorMessage = tr(ERROR_UNKNOW_FORMAT);
         	}
         QDomElement packageElement;
@@ -143,7 +154,8 @@ void UpdateService::originGetFinished()
     }else{
         qDebug() << "XML format error!";
         running = false;
-        emit checkFinished(true,0,0,"返回的配置数据格不是标准格式，客户端无法解析.");
+        emit checkFinished(true,0,0,"服务器正在维护中,请稍后");
+        //emit checkFinished(true,0,0,"返回的配置数据格不是标准格式，客户端无法解析.");
     }
 }
 
@@ -207,9 +219,11 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename, QString &er
     if(file.open(QIODevice::WriteOnly|QIODevice::Truncate))
     {
         out = new QDataStream(&file);
-        out->setVersion(QDataStream::Qt_4_7); 
+        out->setVersion(QDataStream::Qt_4_7);
 
-        reply = nam.get(QNetworkRequest(QUrl(urlStr)));
+        QNetworkRequest tmp=QNetworkRequest( QUrl(urlStr));
+        tmp.setSslConfiguration(this->sslConf);
+        reply = nam.get(tmp);
 
         QObject::connect(reply,SIGNAL(readyRead()), this, SLOT(readyRead()), Qt::DirectConnection);
         QObject::connect(reply,SIGNAL(finished()), &loop, SLOT(quit()), Qt::DirectConnection);
