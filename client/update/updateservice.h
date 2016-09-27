@@ -1,7 +1,7 @@
 #ifndef UPDATESERVICE_H
 #define UPDATESERVICE_H
 #include "common.h"
-#include "httpgeteventloop.h"
+//#include "httpgeteventloop.h"
 #include <QObject>
 #include <QtNetwork>
 #include <QDomDocument>

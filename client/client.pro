@@ -16,6 +16,7 @@ include(forms/forms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
+include(bigdata/bigdata.pri)
 
 SOURCES +=  main.cpp \
             common.cpp \

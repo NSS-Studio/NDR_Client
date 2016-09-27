@@ -211,7 +211,7 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename, QString &er
 	qDebug() << "filename" << filename;
 #endif
 
-    HttpGetEventLoop hgeloop;
+//    HttpGetEventLoop hgeloop;
     QEventLoop loop;
 
     QFile file(filename);
