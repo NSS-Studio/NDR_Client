@@ -15,7 +15,8 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
-
+#include <bigdata/userinformation.h>
+#include <bigdata/usrinfohttppost.h>
 
 namespace Ui {
 class MainWindow;
@@ -79,6 +80,7 @@ private:
     
     //SettingsSet *settings;
     UpdateService *updateServer;
+    userInformation *usrInfo;
     
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);

@@ -3,6 +3,7 @@
 #include "logindialog.h"
 #include "singleapplication.h"
 #include <QMessageBox>
+
 /*
 #ifdef Q_OS_MAC
 #include <QtGui/QMacStyle>
@@ -82,13 +83,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,SIGNAL(minimumWindow()),this,SLOT(hide()),Qt::QueuedConnection);//绑定最小化到隐藏
     
 	isMainWindowMinimized=false;
-    
+
+    //更新模块初始化
     updateServer = new UpdateService(NDR_UPDATE_SERVER,NDR_UPDATE_SERVER_2_BACK,tempDir);
     connect(updateServer,SIGNAL(checkFinished(bool,int,int,QString)),
             this,SLOT(checkFinished(bool,int,int,QString)));
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
             this,SLOT(downloadFinished(bool,QString)));
-    
+
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
@@ -105,6 +107,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    if (usrInfo)
+        delete usrInfo;
+
     if(updateServer)
         delete updateServer;
 
