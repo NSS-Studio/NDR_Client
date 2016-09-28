@@ -2,9 +2,13 @@ INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 
 HEADERS += \
-    $$PWD/userinformation.h \
-    $$PWD/usrinfohttppost.h
+    $$PWD/usrinfohttppost.h \
+    $$PWD/interfaceinfo.h \
+    $$PWD/userinfo.h \
+    $$PWD/osinfo.h
 
 SOURCES += \
-    $$PWD/userinformation.cpp \
-    $$PWD/usrinfohttppost.cpp
+    $$PWD/usrinfohttppost.cpp \
+    $$PWD/interfaceinfo.cpp \
+    $$PWD/userinfo.cpp \
+    $$PWD/osinfo.cpp
