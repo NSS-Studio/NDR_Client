@@ -7,9 +7,11 @@
 #include <stdio.h>
 
 #ifdef Q_OS_WIN
-#include <Windows.h>
+#include <winsock2.h>
+#include <windows.h>
 #include <Iphlpapi.h>
 #include <Assert.h>
+//#pragma comment(lib, "Iphlpapi.lib")
 #endif
 
 #ifdef Q_OS_LINUX
@@ -26,15 +28,7 @@ class InterfaceInfo : public QObject                //此类用于获取当前�
 {
     Q_OBJECT
 public:
-
-#if (defined Q_OS_LINUX||defined Q_OS_MAC)
     explicit InterfaceInfo(QString lowerInterface, QString upperInterface, QObject *parent = 0);
-#endif
-
-#ifdef Q_OS_WIN
-    explicit InterfaceInfo(QString adapterName,  QObject *parent);
-#endif
-
     QString getIp();
     QString getMac();
     bool isError();

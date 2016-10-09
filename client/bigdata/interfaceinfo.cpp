@@ -1,6 +1,5 @@
 #include "interfaceinfo.h"
 
-#if (defined Q_OS_LINUX||defined Q_OS_MAC)
 InterfaceInfo::InterfaceInfo(QString lowerInterface, QString upperInterface, QObject *parent) :
     QObject(parent)
 {
@@ -18,27 +17,7 @@ InterfaceInfo::InterfaceInfo(QString lowerInterface, QString upperInterface, QOb
     }
 
 }
-#endif
 
-#ifdef Q_OS_WIN
-InterfaceInfo::InterfaceInfo(QString adapterName,  QObject *parent) :
-    QObject(parent)
-{
-    this->ipAddress = "";
-    this->macAddress = "";
-    this->interfaceName = "";
-
-    this->error = true;
-    if (0 == getInterfaceInfo(adapter))
-    {
-        this->error = false;
-    }else
-    {
-        this->error = true;
-    }
-
-}
-#endif
 
 bool InterfaceInfo::isError()                       //处理构造函数错误
 {
@@ -55,16 +34,16 @@ QString InterfaceInfo::getIp()
 }
 
 #ifdef Q_OS_WIN
-void userInformation::getInterfaceInfo(QString adapterName))
+int InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterface)
 {
-    _IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(sizeof(IP_ADAPTER_ADDRESSES));
+    IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(sizeof(IP_ADAPTER_ADDRESSES));
     PULONG sizePointer = new ULONG;
     *sizePointer = 0;
     int isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER, NULL, adapterAddresses, sizePointer);
     if (ERROR_BUFFER_OVERFLOW== isError)
     {
         free(adapterAddresses);
-        _IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(*sizPointer);
+        IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(*sizePointer);
         int isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER, NULL, adapterAddresses, sizePointer);
     }
     if (NO_ERROR== isError)
@@ -72,7 +51,6 @@ void userInformation::getInterfaceInfo(QString adapterName))
     }
     free(adapterAddresses);
 }
-
 #endif
 
 
