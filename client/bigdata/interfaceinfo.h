@@ -11,7 +11,6 @@
 #include <windows.h>
 #include <Iphlpapi.h>
 #include <Assert.h>
-//#pragma comment(lib, "Iphlpapi.lib")
 #endif
 
 #ifdef Q_OS_LINUX

@@ -80,7 +80,7 @@ private:
     
     //SettingsSet *settings;
     UpdateService *updateServer;
-    UserInfo *usrInfo;
+    //UserInfo *usrInfo;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);
     

@@ -107,8 +107,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    if (usrInfo)
-        delete usrInfo;
+//    if (usrInfo)
+//        delete usrInfo;
 
     if(updateServer)
         delete updateServer;
