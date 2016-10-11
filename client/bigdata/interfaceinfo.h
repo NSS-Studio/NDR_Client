@@ -23,23 +23,24 @@
 #define USRINFO_NO_ERROR 0
 #endif
 
+#define WORKING_BUFFER_SIZE 15000
+#define MAX_TRIES 3
+
 class InterfaceInfo : public QObject                //此类用于获取当前网卡信息
 {
     Q_OBJECT
 public:
     explicit InterfaceInfo(QString lowerInterface, QString upperInterface, QObject *parent = 0);
     QString getIp();
-    QString getMac();
-    bool isError();
-
+    QString getMac111();
+    int getInterfaceInfo(QString lowerInterface, QString upperInterface);
 signals:
 
 public slots:
 
 private:
-    int getInterfaceInfo(QString lowerInterface, QString upperInterface);
-    QString ipAddress, macAddress, interfaceName;
-    bool error;
+
+    QString ipAddress, macAddress, lowerInterface, upperInterface;
 };
 
 #endif // USERINFORMATION_H

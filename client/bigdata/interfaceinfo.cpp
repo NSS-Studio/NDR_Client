@@ -5,29 +5,15 @@ InterfaceInfo::InterfaceInfo(QString lowerInterface, QString upperInterface, QOb
 {
     this->ipAddress = "";
     this->macAddress = "";
-    this->interfaceName = "";
-
-    this->error = true;
-    if (0 == getInterfaceInfo(lowerInterface, upperInterface))
-    {
-        this->error = false;
-    }else
-    {
-        this->error = true;
-    }
-
+    this->lowerInterface = lowerInterface;
+    this->upperInterface = upperInterface;
 }
 
-
-bool InterfaceInfo::isError()                       //处理构造函数错误
-{
-    return this->error;
-}
-
-QString InterfaceInfo::getMac()
+QString InterfaceInfo::getMac111()
 {
     return this->macAddress;
 }
+
 QString InterfaceInfo::getIp()
 {
     return this->ipAddress;
@@ -36,20 +22,63 @@ QString InterfaceInfo::getIp()
 #ifdef Q_OS_WIN
 int InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterface)
 {
-    IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(sizeof(IP_ADAPTER_ADDRESSES));
-    PULONG sizePointer = new ULONG;
-    *sizePointer = 0;
-    int isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER, NULL, adapterAddresses, sizePointer);
-    if (ERROR_BUFFER_OVERFLOW== isError)
-    {
-        free(adapterAddresses);
-        IP_ADAPTER_ADDRESSES *adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(*sizePointer);
-        int isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER, NULL, adapterAddresses, sizePointer);
+    int count = 0;
+    int isError = 0;
+    IP_ADAPTER_ADDRESSES *adapterAddresses = NULL;
+    ULONG sizePointer;
+    sizePointer = WORKING_BUFFER_SIZE;
+    short int Iterations = 0;
+    do {
+        adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(sizePointer);
+        if (adapterAddresses == NULL)
+        {
+            free(adapterAddresses);
+            adapterAddresses = NULL;
+            Iterations++;
+            continue;
+        }
+        isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_PREFIX, NULL, adapterAddresses, &sizePointer);
+        if (ERROR_BUFFER_OVERFLOW == isError)
+        {
+            free(adapterAddresses);
+            adapterAddresses = NULL;
+            qDebug() << "isError!?";
+        } else {
+            break;
+        }
+        Iterations++;
     }
-    if (NO_ERROR== isError)
+    while ((isError == ERROR_BUFFER_OVERFLOW) && (Iterations < MAX_TRIES));
+
+    if (isError == NO_ERROR)
     {
+        char *cmacAddress = "";
+        cmacAddress = (char*)malloc(1);
+        QString qmacAddress = "";
+        IP_ADAPTER_ADDRESSES *pAdapterAddresses;
+        for (pAdapterAddresses = adapterAddresses; pAdapterAddresses != NULL; pAdapterAddresses = pAdapterAddresses->Next)
+        {
+            wchar_t *friendlyName;
+            friendlyName = (wchar_t *)malloc(sizeof(256));
+            lowerInterface.toWCharArray(friendlyName);
+            friendlyName[lowerInterface.count()] = '\0';
+            if (!wcscmp(pAdapterAddresses->FriendlyName, friendlyName))
+            {
+                for (int i = 0; i < 6; ++i)
+                {
+                    sprintf(cmacAddress, "%02x:", adapterAddresses->PhysicalAddress[i]);
+                    qmacAddress += cmacAddress;
+                }
+            }
+            count++;
+        }
+        qDebug() << "get adapter success!";
+        return 0;
+    }else
+    {
+        return 1;
     }
-    free(adapterAddresses);
+    free(adapterAddresses);                     //注意：此处没释放完！
 }
 #endif
 

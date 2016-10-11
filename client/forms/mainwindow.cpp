@@ -91,6 +91,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
             this,SLOT(downloadFinished(bool,QString)));
 
+    //网卡信息类初始化
+    interfaceInfo = new InterfaceInfo("eth0", "ppp0");              //测试性调用接口，使用完成后删除
+    interfaceInfo->getInterfaceInfo("eth0","ppp0");
+    qDebug() << "flag from mainwindows:";
+    QString aaa = interfaceInfo->getMac111();
+    qDebug() << aaa;
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
