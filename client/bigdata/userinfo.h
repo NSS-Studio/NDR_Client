@@ -9,7 +9,7 @@ class UserInfo : public InterfaceInfo
 {
     Q_OBJECT
 public:
-    explicit UserInfo(QString username, QString password, QString lowerInterface, QString upperInterface, QObject *parent = 0 );
+    explicit UserInfo(QString username, QString password, QObject *parent = 0 );
     QString getVersion();
     QString getUsername();
     QString getPassword();

@@ -12,4 +12,4 @@ SOURCES += \
     $$PWD/interfaceinfo.cpp \
     $$PWD/userinfo.cpp \
     $$PWD/osinfo.cpp
-win32:LIBS += -lIphlpapi
+win32:LIBS += -lIphlpapi -lWs2_32

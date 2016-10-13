@@ -92,11 +92,19 @@ MainWindow::MainWindow(QWidget *parent) :
             this,SLOT(downloadFinished(bool,QString)));
 
     //网卡信息类初始化
-    interfaceInfo = new InterfaceInfo("eth0", "ppp0");              //测试性调用接口，使用完成后删除
-    interfaceInfo->getInterfaceInfo("eth0","ppp0");
+    interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
+    interfaceInfo->getInterfaceInfo("以太网","ppp0");
     qDebug() << "flag from mainwindows:";
-    QString aaa = interfaceInfo->getMac111();
-    qDebug() << aaa;
+    QString *aaa = interfaceInfo->getHwAddress();
+    if (aaa != NULL)
+        qDebug() << "interface information getHwAddress:" << *aaa;
+    else
+        qDebug() << "interface hardware address not found!";
+    QString *bbb = interfaceInfo->getIpAddress();
+    if (bbb != NULL)
+        qDebug() << "interface information getIpAddress:" << *bbb;
+    else
+        qDebug() << "interface ip address not found!";
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 

@@ -20,7 +20,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 
 	if(!preparePhoneBookEntry(name,errorMessage))
 	{
-        errorMessage += "\n" + tr("请尝试手动创建名为NDR的适配器");
+        errorMessage += "\n" + tr("请尝试手动创建名为%1的适配器").arg(name);
         errorMessage = tr("拨号连接适配器初始化失败，%1").arg(errorMessage);
 
 		return false;
