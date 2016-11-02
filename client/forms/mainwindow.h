@@ -15,9 +15,9 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
-#include <bigdata/userinfo.h>
-#include <bigdata/usrinfohttppost.h>
-#include <bigdata/interfaceinfo.h>
+#include <information/userinfo.h>
+#include <information/usrinfohttppost.h>
+#include <information/interfaceinfo.h>
 
 namespace Ui {
 class MainWindow;

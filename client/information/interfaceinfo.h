@@ -26,8 +26,7 @@
 #define WORKING_BUFFER_SIZE 15000
 #define MAX_TRIES 3
 #define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x))
-#define FREE_PIPADDRTABLE(x) HeapFree(GetProcessHeap(), 0, (x))
-
+#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
 
 class InterfaceInfo : public QObject                //此类用于获取当前网卡信息
 {
@@ -44,7 +43,7 @@ public slots:
 private:
 
     QString ipAddress, macAddress, lowerInterface, upperInterface;
-    bool IpAddressAvailable, macAddressAvailable;
+    bool ipAddressAvailable, macAddressAvailable;
 };
 
 #endif // USERINFORMATION_H

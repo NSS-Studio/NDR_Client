@@ -3,7 +3,7 @@
 InterfaceInfo::InterfaceInfo( QObject *parent) :
     QObject(parent)
 {
-    this->IpAddressAvailable = false;
+    this->ipAddressAvailable = false;
     this->macAddressAvailable = false;
 
     this->ipAddress = "";
@@ -36,7 +36,7 @@ QString *InterfaceInfo::getHwAddress()                               //获取硬
 QString *InterfaceInfo::getIpAddress()                              //获取ip地址
 {
     QString *pIpAddr = new QString(this->ipAddress);
-    if (this->IpAddressAvailable)
+    if (this->ipAddressAvailable)
         return pIpAddr;
     else
         return NULL;
@@ -58,7 +58,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
         adapterAddresses = (IP_ADAPTER_ADDRESSES*) malloc(sizePointer);
         if (adapterAddresses == NULL)                                   //空间分配失败
         {
-            free(adapterAddresses);
+            FREE(adapterAddresses);
             adapterAddresses = NULL;
             Iterations++;
             continue;
@@ -66,7 +66,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
         isError = GetAdaptersAddresses(AF_INET, GAA_FLAG_INCLUDE_PREFIX, NULL, adapterAddresses, &sizePointer);
         if (ERROR_BUFFER_OVERFLOW == isError)
         {
-            free(adapterAddresses);
+            FREE(adapterAddresses);
             adapterAddresses = NULL;
             qDebug() << "isError!?";
         } else {
@@ -122,7 +122,6 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
             return;
         }
 
-
         //ip地址获取
         IN_ADDR IPAddr;
         PMIB_IPADDRTABLE pIPAddrTable = NULL;
@@ -135,7 +134,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
             // necessary size into the dwSize variable
             if (GetIpAddrTable(pIPAddrTable, &dwSize, 0) == ERROR_INSUFFICIENT_BUFFER)
             {
-                FREE_PIPADDRTABLE(pIPAddrTable);
+                FREE(pIPAddrTable);
                 pIPAddrTable = (MIB_IPADDRTABLE *) MALLOC(dwSize);
                 qDebug () << "ERROR_INSUFFICIENT_BUFFER";
             }
@@ -143,18 +142,13 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
                 qDebug() << "Memory allocation failed for GetIpAddrTable\n";
                 return;
             }
-            qDebug () << "the pIPAddrTable address is:" << pIPAddrTable;
         }else if (pIPAddrTable == NULL)                             //空间分配失败
         {
-            FREE_PIPADDRTABLE(pIPAddrTable);
-
-            return;
+            goto failed;
         }
         if ( (dwRetVal = GetIpAddrTable( pIPAddrTable, &dwSize, 0 )) != NO_ERROR )
         {
-            qDebug() << "error!!??";
-            FREE_PIPADDRTABLE(pIPAddrTable);
-            return;
+            goto failed;
         }
         qDebug() << "pipaddrtable->dwnumentries" << pIPAddrTable->dwNumEntries;
         for (int i=0; i < (int) pIPAddrTable->dwNumEntries; i++)
@@ -167,15 +161,15 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
                 qDebug() << "the ip address with adapter is:" << this->ipAddress;
             }
         }
-        FREE_PIPADDRTABLE(pIPAddrTable);
 
+        success:this->ipAddressAvailable = true;
         qDebug() << "get adapter success!";
-        this->IpAddressAvailable = true;
+        failed:FREE(pIPAddrTable);
         return;
+
     } else {
         return;
     }
-    free(adapterAddresses);                     //注意：此处没释放完！
 }
 #endif
 
@@ -192,8 +186,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
     if (-1 == fd)
     {
         free(cmacAddress);                                      //释放内存
-
-        return -1;
+        return ;
     }
     strcpy(s.ifr_name, upperInterface.toAscii());
     //通过网卡名称获取IP地址
