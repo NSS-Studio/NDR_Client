@@ -45,7 +45,6 @@ private:
 	QString packageUrl;
 	QString packageFilename;
 	bool running;
-//    QNetwikAccessManager nam;
     QNetworkAccessManager nam;
 
     //add ssl config

@@ -16,7 +16,8 @@
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
 #include <information/userinfo.h>
-#include <information/usrinfohttppost.h>
+#include <information/interfaceinfo.h>
+#include <httpsoperation/httpsjsonpost.h>
 #include <information/interfaceinfo.h>
 
 namespace Ui {

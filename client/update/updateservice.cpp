@@ -20,7 +20,7 @@ void UpdateService::checkUpdate()
 {
     if(running)
         return;
-    QString url="http://" + ipAddress + "/update/aorigin.xml";
+    QString url="https://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
     QNetworkRequest tmp=QNetworkRequest( QUrl(url));
     tmp.setSslConfiguration(this->sslConf);
@@ -75,7 +75,7 @@ void UpdateService::originGetFinished()
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     
     qDebug() << "Http state value" << stateValue;
-    if(stateValue!="200" || stateValue!="301")
+    if(stateValue!="200" && stateValue!="301")
     {
         running = false;
         qDebug() << "远程更新服务器返回错误状态值" << stateValue;
