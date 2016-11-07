@@ -35,7 +35,7 @@ void UpdateService::checkOriginGet()
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << "url_1 failed";
-        QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
+        QString url="https://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
         delete reply;
         QNetworkRequest tmp=QNetworkRequest( QUrl(url));
@@ -126,11 +126,11 @@ void UpdateService::originGetFinished()
                 this->packageUrl = packageElement.text();
                 if ( true == this->isConnectUpdateServerFail )
                 {
-                    this->packageUrl = "http://172.24.10.13/" + this->packageUrl;
+                    this->packageUrl = "https://172.24.10.13/" + this->packageUrl;
                     qDebug () << "the packageUrl is:" << packageUrl;
                 }else
                 {
-                    this->packageUrl = "http://172.24.5.13/" + this->packageUrl;
+                    this->packageUrl = "https://172.24.5.13/" + this->packageUrl;
                     qDebug () << "the packageUrl is:" << packageUrl;
                 }
                 qDebug() << "Package url" << this->packageUrl;

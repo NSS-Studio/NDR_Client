@@ -614,7 +614,6 @@ void MainWindow::on_actionActionFeedback_triggered()
 
 void MainWindow::onStartWorking()
 {
-	//QMessageBox::information(this,"","onStartWorking");
 	this->show();
 	loginDialog->hide();
 	trayIcon->setIcon(QIcon(":/icons/icons/tray_working.png"));
