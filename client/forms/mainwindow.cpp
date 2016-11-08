@@ -791,7 +791,7 @@ void MainWindow::sendData()
     QString username, password, domain, ntInterface;
     loginDialog->getFormData(username, password, domain, ntInterface);
     domain = domain.mid(1);
-    interfaceInfo->getInterfaceInfo(ntInterface, "pppoe0́");
+    interfaceInfo->getInterfaceInfo(ntInterface, "ppp0́");
     qDebug() << "flag from mainwindows:";
     QString *hwAddr = interfaceInfo->getHwAddress();
     if (hwAddr != NULL)
