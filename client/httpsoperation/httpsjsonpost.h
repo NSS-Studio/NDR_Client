@@ -15,7 +15,7 @@ class HttpsJsonPost : public QObject
     Q_OBJECT
 public:
     explicit HttpsJsonPost(QObject *parent = 0);
-
+    ~HttpsJsonPost();
     void postJsonData(QVariantMap data);
 
 private:

@@ -348,4 +348,3 @@ void LoginDialog::on_btnWinsockReset_clicked()
     }
 }
 #endif
-

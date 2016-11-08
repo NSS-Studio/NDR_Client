@@ -3,6 +3,9 @@
 HttpsJsonPost::HttpsJsonPost(QObject *parent) :
     QObject(parent)
 {
+    //init
+    this->reply = NULL;
+
     //set ssl config
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
     this->sslConf.setProtocol(QSsl::TlsV1);
@@ -44,14 +47,24 @@ void HttpsJsonPost::checkError()
         qDebug() << "远程服务器返回错误状态值" << stateValue;
         return;
     }
+
     QByteArray retCode;
-
-    retCode=reply->readAll();
+    retCode = reply->readAll();
     qDebug() << "retCode:\n" << retCode;
+    if (retCode == "true")
+    {
 
+    }
 
 //    (false)|(true)
 }
 
+HttpsJsonPost::~HttpsJsonPost()
+{
+    if (this->reply != NULL)
+    {
+        delete this->reply;
+    }
+}
 
 

@@ -8,8 +8,6 @@ InterfaceInfo::InterfaceInfo( QObject *parent) :
 
     this->ipAddress = "";
     this->macAddress = "";
-//    this->lowerInterface = lowerInterface;
-//    this->upperInterface = upperInterface;
     this->lowerInterface = "";
     this->upperInterface = "";
 }
@@ -93,12 +91,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
                 //mac地址获取
                 for (int i = 0; i < 6; ++i)
                 {
-                    if (i != 5)
-                    {
-                        sprintf(cmacAddress, "%02x-", pAdapterAddresses->PhysicalAddress[i]);
-                    } else {
-                        sprintf(cmacAddress, "%02x", pAdapterAddresses->PhysicalAddress[i]);
-                    }
+                    sprintf(cmacAddress, "%02x", pAdapterAddresses->PhysicalAddress[i]);
                     qmacAddress += cmacAddress;
                 }
                 qDebug() << "mac address is:" << qmacAddress;
@@ -175,7 +168,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
 
 
 #if (defined Q_OS_LINUX||defined Q_OS_MAC)
-void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterface)
+void InterfaceInfo:: getInterfaceInfo(QString lowerInterface, QString upperInterface)
 {
     this->macAddressAvailable = false;
     this->ipAddressAvailable = false;
@@ -200,13 +193,11 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
     if (0 == ioctl(fd, SIOCGIFHWADDR, &s))
     {
         QString qmacAddress = "";
-        for (i = 0; i < 5; ++i)
+        for (i = 0; i < 6; ++i)
         {
-            sprintf(cmacAddress, "%02x:", (unsigned char)s.ifr_addr.sa_data[i]);
+            sprintf(cmacAddress, "%02x", (unsigned char)s.ifr_addr.sa_data[i]);
             qmacAddress += cmacAddress;
         }
-        sprintf(cmacAddress, "%02x", (unsigned char)s.ifr_addr.sa_data[i]);
-        qmacAddress += cmacAddress;
         this->macAddress = qmacAddress;
         this->macAddressAvailable = true;
     }

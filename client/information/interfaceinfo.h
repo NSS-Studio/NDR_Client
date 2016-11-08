@@ -13,7 +13,7 @@
 #include <Assert.h>
 #endif
 
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_UNIX
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
