@@ -75,7 +75,7 @@ void UpdateService::originGetFinished()
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     
     qDebug() << "Http state value" << stateValue;
-    if(stateValue!="200" || stateValue!="301")
+    if(!(stateValue=="200" || stateValue=="301"))
     {
         running = false;
         qDebug() << "远程更新服务器返回错误状态值" << stateValue;

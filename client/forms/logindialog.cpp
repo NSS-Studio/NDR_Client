@@ -333,6 +333,9 @@ void LoginDialog::on_btnWinsockReset_clicked()
     winsockResetFileTmp.close();
     SHELLEXECUTEINFO winsockExecInfo;
     memset(&winsockExecInfo, 0, sizeof(winsockExecInfo));
+#ifndef SEE_MASK_DEFAULT
+#define SEE_MASK_DEFAULT 0
+#endif
     winsockExecInfo.fMask = SEE_MASK_DEFAULT;
     winsockExecInfo.nShow = SW_HIDE;
     winsockExecInfo.lpVerb = TEXT("runas");
