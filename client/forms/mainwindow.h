@@ -15,8 +15,10 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
-#include <bigdata/userinfo.h>
-#include <bigdata/usrinfohttppost.h>
+#include <information/userinfo.h>
+#include <information/interfaceinfo.h>
+#include <httpsoperation/httpsjsonpost.h>
+#include <information/interfaceinfo.h>
 
 namespace Ui {
 class MainWindow;
@@ -80,12 +82,14 @@ private:
     
     //SettingsSet *settings;
     UpdateService *updateServer;
-    //UserInfo *usrInfo;
+    InterfaceInfo *interfaceInfo;
+    HttpsJsonPost *httpsJsonPost;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);
     
     QString time_humanable(int sec);
     
+    void sendData();
 
 public slots:  
     void iconActivated(QSystemTrayIcon::ActivationReason reason);  

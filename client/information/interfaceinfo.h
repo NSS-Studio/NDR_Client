@@ -13,7 +13,7 @@
 #include <Assert.h>
 #endif
 
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_UNIX
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -23,23 +23,27 @@
 #define USRINFO_NO_ERROR 0
 #endif
 
+#define WORKING_BUFFER_SIZE 15000
+#define MAX_TRIES 3
+#define MALLOC(x) HeapAlloc(GetProcessHeap(), 0, (x))
+#define FREE(x) HeapFree(GetProcessHeap(), 0, (x))
+
 class InterfaceInfo : public QObject                //此类用于获取当前网卡信息
 {
     Q_OBJECT
 public:
-    explicit InterfaceInfo(QString lowerInterface, QString upperInterface, QObject *parent = 0);
-    QString getIp();
-    QString getMac();
-    bool isError();
-
+    explicit InterfaceInfo(QObject *parent = 0);
+    QString *getIpAddress();
+    QString *getHwAddress();
+    void getInterfaceInfo(QString lowerInterface, QString upperInterface);
 signals:
 
 public slots:
 
 private:
-    int getInterfaceInfo(QString lowerInterface, QString upperInterface);
-    QString ipAddress, macAddress, interfaceName;
-    bool error;
+
+    QString ipAddress, macAddress, lowerInterface, upperInterface;
+    bool ipAddressAvailable, macAddressAvailable;
 };
 
 #endif // USERINFORMATION_H

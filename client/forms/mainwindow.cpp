@@ -91,6 +91,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
             this,SLOT(downloadFinished(bool,QString)));
 
+    //类初始化
+    interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
+    httpsJsonPost = new HttpsJsonPost;
+
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
@@ -109,6 +113,8 @@ MainWindow::~MainWindow()
 {
 //    if (usrInfo)
 //        delete usrInfo;
+    delete interfaceInfo;
+    delete httpsJsonPost;
 
     if(updateServer)
         delete updateServer;
@@ -342,7 +348,7 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionShowWindow_triggered()
 {
 	//奇怪
-	if(state == Working) {
+    if(state == Working) {
 		this->show();
 		this->activateWindow();
 		isMainWindowMinimized = false;
@@ -600,7 +606,7 @@ void MainWindow::on_actionActionFeedback_triggered()
 
 void MainWindow::onStartWorking()
 {
-	//QMessageBox::information(this,"","onStartWorking");
+    sendData();
 	this->show();
 	loginDialog->hide();
 	trayIcon->setIcon(QIcon(":/icons/icons/tray_working.png"));
@@ -735,3 +741,93 @@ void MainWindow::loginWindowClosed()
 {
     app_exiting=true;
 }
+
+
+#ifdef Q_OS_WIN
+void MainWindow::sendData()
+{
+    interfaceInfo->getInterfaceInfo("NDR", "");
+    qDebug() << "flag from mainwindows:";
+    QString *hwAddr = interfaceInfo->getHwAddress();
+    if (hwAddr != NULL)
+        qDebug() << "interface information getHwAddress:" << *hwAddr;
+    else
+    {
+        hwAddr = new QString("");
+        qDebug() << "interface hardware address not found!";
+    }
+    QString *ipAddr = interfaceInfo->getIpAddress();
+    if (ipAddr != NULL)
+        qDebug() << "interface information getIpAddress:" << *ipAddr;
+    else
+    {
+        ipAddr = new QString("");
+        qDebug() << "interface ip address not found!";
+    }
+    QString username, password, domain, ntInterface;
+    loginDialog->getFormData(username, password, domain, ntInterface);
+    domain = domain.mid(1);
+    QVariantMap container;
+    container.insert("username", username);
+    container.insert("password", password);
+    container.insert("domain", domain);
+    container.insert("loginarch", "windows");
+    container.insert("macaddress", *hwAddr);
+    container.insert("ipaddress", *ipAddr);
+    container.insert("loginversion", QString(VERSION_MAJOR) + "." +QString(VERSION_MINOR));
+    container.insert("check", "1781d2a2b9e7348006b3f4d995d13920");
+    httpsJsonPost->postJsonData(container);
+    delete hwAddr;
+    delete ipAddr;
+}
+#endif
+
+
+
+
+#ifdef Q_OS_UNIX
+void MainWindow::sendData()
+{
+    QString username, password, domain, ntInterface;
+    loginDialog->getFormData(username, password, domain, ntInterface);
+    domain = domain.mid(1);
+    interfaceInfo->getInterfaceInfo(ntInterface, "ppp0́");
+    qDebug() << "flag from mainwindows:";
+    QString *hwAddr = interfaceInfo->getHwAddress();
+    if (hwAddr != NULL)
+        qDebug() << "interface information getHwAddress:" << *hwAddr;
+    else
+    {
+        hwAddr = new QString("");
+        qDebug() << "interface hardware address not found!";
+    }
+    QString *ipAddr = interfaceInfo->getIpAddress();
+    if (ipAddr != NULL)
+        qDebug() << "interface information getIpAddress:" << *ipAddr;
+    else
+    {
+        ipAddr = new QString("");
+        qDebug() << "interface ip address not found!";
+    }
+    QVariantMap container;
+    container.insert("username", username);
+    container.insert("password", password);
+    container.insert("domain", domain);
+    container.insert("loginarch", "linux");
+    container.insert("macaddress", *hwAddr);
+    container.insert("ipaddress", *ipAddr);
+
+    QString versionMajor;
+    versionMajor = QString::number(VERSION_MAJOR);
+    QString versionMinor;
+    versionMinor = QString::number(VERSION_MINOR);
+    QString version = versionMajor + "." + versionMinor;
+
+    container.insert("loginversion", version);
+    container.insert("check", "1781d2a2b9e7348006b3f4d995d13920");
+    qDebug () << " 皆大欢喜！";
+    httpsJsonPost->postJsonData(container);
+    delete hwAddr;
+    delete ipAddr;
+}
+#endif
