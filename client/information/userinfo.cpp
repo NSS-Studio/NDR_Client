@@ -1,6 +1,6 @@
 #include "userinfo.h"
 
-UserInfo::UserInfo(QString username, QString password, QObject *parent) :
+UserInfo::UserInfo(QString username, QString password, QObject *) :
     InterfaceInfo()
 {
     this->username = username;

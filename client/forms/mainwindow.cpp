@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //类初始化
     interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
-    httpsJsonPost = new HttpsJsonPost;
+    httpsJsonPost = new HttpsJsonPost();
 
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
@@ -766,6 +766,22 @@ void MainWindow::sendData()
     }
     QString username, password, domain, ntInterface;
     loginDialog->getFormData(username, password, domain, ntInterface);
+
+    //by cxhwd if the user was keng! only use 'kaoshizhuanyong' there will be gg
+    //by cxhwd if domain is 'kaoshizhuanyong' and 'username' has '@' there will be gg
+    if(domain.isEmpty())
+    {
+        if(username.indexOf('@') != -1)   //notfound
+        {
+            domain = username.mid(username.indexOf('@'));
+            username = username.left(username.indexOf('@'));
+        }
+        else
+        {
+            domain =  "@test";
+        }
+    }
+
     domain = domain.mid(1);
     QVariantMap container;
     container.insert("username", username);
@@ -774,7 +790,7 @@ void MainWindow::sendData()
     container.insert("loginarch", "windows");
     container.insert("macaddress", *hwAddr);
     container.insert("ipaddress", *ipAddr);
-    container.insert("loginversion", QString(VERSION_MAJOR) + "." +QString(VERSION_MINOR));
+    container.insert("loginversion", QString::number(VERSION_MAJOR) + "." + QString::number(VERSION_MINOR));
     container.insert("check", "1781d2a2b9e7348006b3f4d995d13920");
     httpsJsonPost->postJsonData(container);
     delete hwAddr;
@@ -790,6 +806,22 @@ void MainWindow::sendData()
 {
     QString username, password, domain, ntInterface;
     loginDialog->getFormData(username, password, domain, ntInterface);
+
+    //by cxhwd if the user was keng! only use 'kaoshizhuanyong' there will be gg
+    //by cxhwd if domain is 'kaoshizhuanyong' and 'username' has '@' there will be gg
+    if(domain.isEmpty())
+    {
+        if(username.indexOf('@') != -1)   //notfound
+        {
+            domain = username.mid(username.indexOf('@'));
+            username = username.left(username.indexOf('@'));
+        }
+        else
+        {
+            domain =  "@test";
+        }
+    }
+
     domain = domain.mid(1);
     interfaceInfo->getInterfaceInfo(ntInterface, "ppp0́");
     qDebug() << "flag from mainwindows:";
@@ -817,13 +849,15 @@ void MainWindow::sendData()
     container.insert("macaddress", *hwAddr);
     container.insert("ipaddress", *ipAddr);
 
-    QString versionMajor;
-    versionMajor = QString::number(VERSION_MAJOR);
-    QString versionMinor;
-    versionMinor = QString::number(VERSION_MINOR);
-    QString version = versionMajor + "." + versionMinor;
+//    QString versionMajor;
+//    versionMajor = QString::number(VERSION_MAJOR);
+//    QString versionMinor;
+//    versionMinor = QString::number(VERSION_MINOR);
+//    QString version = versionMajor + "." + versionMinor;
 
-    container.insert("loginversion", version);
+//    container.insert("loginversion", version);
+
+    container.insert("loginversion", QString::number(VERSION_MAJOR) + "." + QString::number(VERSION_MINOR));
     container.insert("check", "1781d2a2b9e7348006b3f4d995d13920");
     qDebug () << " 皆大欢喜！";
     httpsJsonPost->postJsonData(container);

@@ -35,10 +35,7 @@ public:
     explicit InterfaceInfo(QObject *parent = 0);
     QString *getIpAddress();
     QString *getHwAddress();
-    void getInterfaceInfo(QString lowerInterface, QString upperInterface);
-signals:
-
-public slots:
+    void getInterfaceInfo(const QString & lowerInterface, QString upperInterface);
 
 private:
 

@@ -42,7 +42,7 @@ void HttpsJsonPost::checkError()
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
 
     qDebug() << "Http state value" << stateValue;
-    if(stateValue != "200" && stateValue != "301")
+    if((stateValue != "200") && (stateValue != "301"))
     {
         qDebug() << "远程服务器返回错误状态值" << stateValue;
         return;

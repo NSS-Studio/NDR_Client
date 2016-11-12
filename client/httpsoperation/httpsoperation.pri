@@ -1,5 +1,5 @@
 INCLUDEPATH +=  $$PWD
-DEPENDPATH +=   $$PWD
+DEPENDPATH  +=   $$PWD
 
 HEADERS += \
     $$PWD/httpsjsonpost.h
@@ -7,4 +7,4 @@ HEADERS += \
 SOURCES += \
     $$PWD/httpsjsonpost.cpp
 
-LIBS         += -lqjson
+LIBS        += -lQJson

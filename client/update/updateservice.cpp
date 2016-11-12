@@ -75,11 +75,8 @@ void UpdateService::originGetFinished()
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     
     qDebug() << "Http state value" << stateValue;
-<<<<<<< HEAD
+
     if(!(stateValue=="200" || stateValue=="301"))
-=======
-    if(stateValue!="200" && stateValue!="301")
->>>>>>> 86a50c76f18229dfe21e583640e936e57449e499
     {
         running = false;
         qDebug() << "远程更新服务器返回错误状态值" << stateValue;
@@ -237,7 +234,8 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename, QString &er
 	QString http_status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     if(http_status_code != "200")
         {
-		errorMsg = tr("HTTP 服务器返回了意外的状态码 %1").arg(http_status_code);
+        //errorMsg = tr("HTTP 服务器返回了意外的状态码 %1").arg(http_status_code);
+        errorMsg = tr("服务器正在维护中");//.arg(http_status_code);
 		qDebug() << "StatusCode" << http_status_code;
 		return false;
         }

@@ -29,4 +29,4 @@ FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/hangupdialog.ui
 
 INCLUDEPATH +=  $$PWD/../../auth/
-LIBS +=			$$PWD/../../auth/libauth.a
+LIBS +=		$$PWD/../../auth/libauth.a

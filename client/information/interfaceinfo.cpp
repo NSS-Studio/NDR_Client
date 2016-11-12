@@ -41,10 +41,10 @@ QString *InterfaceInfo::getIpAddress()                              //获取ip�
 }
 
 #ifdef Q_OS_WIN
-void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterface)
+void InterfaceInfo::getInterfaceInfo(const QString & lowerInterface, QString)
 {
     this->macAddressAvailable = false;
-    this->IpAddressAvailable = false;
+    this->ipAddressAvailable = false;
     DWORD ipIfIndex = 0;
     int count = 0;
     int isError = 0;
@@ -155,9 +155,11 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
             }
         }
 
-        success:this->ipAddressAvailable = true;
+//success:
+        this->ipAddressAvailable = true;
         qDebug() << "get adapter success!";
-        failed:FREE(pIPAddrTable);
+failed:
+        FREE(pIPAddrTable);
         return;
 
     } else {
@@ -168,7 +170,7 @@ void InterfaceInfo::getInterfaceInfo(QString lowerInterface, QString upperInterf
 
 
 #if (defined Q_OS_LINUX||defined Q_OS_MAC)
-void InterfaceInfo:: getInterfaceInfo(QString lowerInterface, QString upperInterface)
+void InterfaceInfo:: getInterfaceInfo(const QString & lowerInterface, QString upperInterface)
 {
     this->macAddressAvailable = false;
     this->ipAddressAvailable = false;
