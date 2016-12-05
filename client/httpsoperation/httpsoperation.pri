@@ -7,4 +7,4 @@ HEADERS += \
 SOURCES += \
     $$PWD/httpsjsonpost.cpp
 
-LIBS        += -lQJson
+LIBS        += -lqjson

@@ -1,6 +1,6 @@
 #ifndef HTTPSJSONPOST_H
 #define HTTPSJSONPOST_H
-#include <QJson/Serializer.h>
+#include <qjson/serializer.h>
 #include <QVariant>
 #include <qdebug.h>
 #include <QSslSocket>

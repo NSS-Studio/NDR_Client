@@ -91,6 +91,8 @@ private:
     
     void sendData();
 
+    void verifyEncrypt();
+
 public slots:  
     void iconActivated(QSystemTrayIcon::ActivationReason reason);  
     void logoffShortcutActivated();

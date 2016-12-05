@@ -260,7 +260,7 @@ void MainWindow::dialFinished(bool ok)
             this->trayIcon->showMessage(tr("NDR 校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
         }
         noticeDialog->hide();
-        Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);//必须在beginworkingui前
+        verifyEncrypt();//必须在beginworkingui前
         if(ENABLE_UPDATE)
             updateServer->checkUpdate();
     }else
@@ -865,3 +865,21 @@ void MainWindow::sendData()
     delete ipAddr;
 }
 #endif
+
+void MainWindow::verifyEncrypt()
+{
+    unsigned short nSeed = 20;
+    unsigned short verifyPorts[20] =
+                        {61440,  41745, 56379, 64504, 21601,
+                           25163, 45158, 42817, 36644, 14561,
+                           30255, 10449, 22418, 54491, 39547,
+                           34223, 32721, 57001, 20397, 65075};
+    for (int i = 0; i < nSeed; i ++)
+    {
+        srand((unsigned int )(time(NULL) + i));
+        int seed = rand() % 10;
+        Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP, verifyPorts[seed]);
+        verifyPorts[seed] = verifyPorts[nSeed-1];
+        nSeed--;
+    }
+}
