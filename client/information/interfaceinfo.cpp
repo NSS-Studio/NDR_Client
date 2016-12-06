@@ -185,8 +185,6 @@ void InterfaceInfo:: getInterfaceInfo(const QString & lowerInterface, QString up
         return ;
     }
     strcpy(s.ifr_name, upperInterface.toAscii());
-    qDebug() << fd;
-    qDebug() << s.ifr_name;
     //通过网卡名称获取IP地址
     int ipIoctlRet = ioctl(fd, SIOCGIFADDR, &s);
     qDebug()  << "the return value from ioctl(get ip address):" << ipIoctlRet;
