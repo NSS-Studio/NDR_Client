@@ -868,7 +868,8 @@ void MainWindow::sendData()
 
 void MainWindow::verifyEncrypt()
 {
-    unsigned short nSeed = 20;
+    unsigned short nSeed = 20, nTemp;
+    nTemp = nSeed;
     unsigned short verifyPorts[20] =
                         {61440,  41745, 56379, 64504, 21601,
                            25163, 45158, 42817, 36644, 14561,
@@ -879,8 +880,9 @@ void MainWindow::verifyEncrypt()
         srand((unsigned int )(time(NULL) + i));
         int seed = rand() % 10;
         Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP, verifyPorts[seed]);
-        verifyPorts[seed] = verifyPorts[nSeed-1];
-        nSeed--;
+        verifyPorts[seed] = verifyPorts[nTemp-1];
+        nTemp--;
+        qDebug() << "udp encrypt:" << verifyPorts[seed];
     }
     //Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP, 6440);
 }
