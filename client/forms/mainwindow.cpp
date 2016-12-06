@@ -823,7 +823,7 @@ void MainWindow::sendData()
     }
 
     domain = domain.mid(1);
-    interfaceInfo->getInterfaceInfo(ntInterface, "ppp0́");
+    interfaceInfo->getInterfaceInfo(ntInterface, "ppp0");
     qDebug() << "flag from mainwindows:";
     QString *hwAddr = interfaceInfo->getHwAddress();
     if (hwAddr != NULL)
@@ -882,4 +882,5 @@ void MainWindow::verifyEncrypt()
         verifyPorts[seed] = verifyPorts[nSeed-1];
         nSeed--;
     }
+    //Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP, 6440);
 }

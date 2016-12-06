@@ -177,6 +177,7 @@ void InterfaceInfo:: getInterfaceInfo(const QString & lowerInterface, QString up
     int i;
     char *cmacAddress = (char*)malloc(sizeof(char) * 2);
     struct ifreq s;
+    bzero( &s,sizeof(s));
     int fd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
     if (-1 == fd)
     {
@@ -184,8 +185,12 @@ void InterfaceInfo:: getInterfaceInfo(const QString & lowerInterface, QString up
         return ;
     }
     strcpy(s.ifr_name, upperInterface.toAscii());
+    qDebug() << fd;
+    qDebug() << s.ifr_name;
     //通过网卡名称获取IP地址
-    if (0 == ioctl(fd, SIOCGIFADDR, &s))
+    int ipIoctlRet = ioctl(fd, SIOCGIFADDR, &s);
+    qDebug()  << "the return value from ioctl(get ip address):" << ipIoctlRet;
+    if (0 == ipIoctlRet)
     {
         this->ipAddress = inet_ntoa(((struct sockaddr_in *)&s.ifr_addr)->sin_addr);
         this->ipAddressAvailable = true;
