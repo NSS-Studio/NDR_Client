@@ -51,7 +51,7 @@ extern void __initTempDir();
 #define NDR_PHONEBOOK_NAME "NDR"
 
 /** DRCOM服务器地址*/
-#define DRCOM_SERVER_IP "172.24.253.35"
+#define DRCOM_SERVER_IP "172.23.244.3"
 
 /** DRCOM服务器端口号*/
 #define DRCOM_SERVER_PORT 61440

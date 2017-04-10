@@ -54,6 +54,9 @@ private slots:
     void checkFinished(bool error,int major,int minor,QString errMsg);
     void downloadFinished(bool error,QString errMsg);
     void loginWindowClosed();
+
+    void on_goDnuiBrowser_clicked();
+
 private:
     Ui::MainWindow *ui;
     PPPoE *pppoe;

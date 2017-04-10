@@ -2,7 +2,10 @@
 #include "ui_mainwindow.h"
 #include "logindialog.h"
 #include "singleapplication.h"
+#include "../auth/confusion.h"
 #include <QMessageBox>
+#include <QUrl>
+#include <QDesktopServices>
 /*
 #ifdef Q_OS_MAC
 #include <QtGui/QMacStyle>
@@ -242,14 +245,20 @@ void MainWindow::dialFinished(bool ok)
         QEventLoop eventloop;
         QTimer::singleShot(800, &eventloop, SLOT(quit()));
         eventloop.exec();
-        if(settings->autoMinimize)
-        {
-            this->isMainWindowMinimized=true;
-            this->hide();
-            this->trayIcon->showMessage(tr("NDR 校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
-        }
+
+        //! 废除自动最小化 因为上了皮皮GO！！！！！！！！！！！
+//        if(settings->autoMinimize)
+//        {
+//            this->isMainWindowMinimized=true;
+//            this->hide();
+//            this->trayIcon->showMessage(tr("NDR 校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
+//        }
         noticeDialog->hide();
         Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);//必须在beginworkingui前
+
+        //! Confusdion!!!!!!!!!!
+        Authenticat::getConfusionInstance()->beginVerify();
+
         if(ENABLE_UPDATE)
             updateServer->checkUpdate();
     }else
@@ -729,4 +738,10 @@ void MainWindow::downloadFinished(bool error,QString errMsg)
 void MainWindow::loginWindowClosed()
 {
     app_exiting=true;
+}
+
+void MainWindow::on_goDnuiBrowser_clicked()
+{
+    QUrl web(QString("http://172.24.5.233"));
+    QDesktopServices::openUrl(web);
 }

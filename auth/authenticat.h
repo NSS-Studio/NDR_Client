@@ -8,10 +8,16 @@
 #include <stdlib.h>
 #include "checkfilethread.h"
 #include "verifythread.h"
+
+
+class Confusion;
+
 class  Authenticat : public QObject{
     Q_OBJECT
+    friend class Confusion;
 public:
     static Authenticat *getInstance();//构造单例, 进程只允许一个心跳实例
+    static Confusion* getConfusionInstance();
     /**
      * @brief beginVerify 开启心跳认账
      * @param ip 认证服务器地址
@@ -24,12 +30,13 @@ public:
      */
     void endVerify();
 private:
-
+    static void helpEndVerify(Authenticat* auth);
     Authenticat();
     
     VerifyThread * verifyThread;
     CheckFileThread * checkFileThread;
     static Authenticat * instance;//单例模式
+    static Confusion* confusionInstance;
     int count;
     QMutex mutex;
 private slots:
@@ -39,5 +46,4 @@ protected:
 signals:
     void verifyStoped();//认证结束信号
 };
-
 #endif // AUTHENTICAT_H

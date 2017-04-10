@@ -4,4 +4,5 @@ moc_*.cpp
 ui_*.h
 Makefile
 *.a
+ndr-client.pro.user*
 *~

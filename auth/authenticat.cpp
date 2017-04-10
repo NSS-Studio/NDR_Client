@@ -1,5 +1,7 @@
 #include "authenticat.h"
+#include "confusion.h"
 Authenticat * Authenticat::instance;
+Confusion * Authenticat::confusionInstance;
 
 Authenticat::Authenticat() :
     QObject(0)
@@ -13,17 +15,23 @@ Authenticat::Authenticat() :
 Authenticat * Authenticat::getInstance()
 {
     
-    if(instance==NULL)
-    {
+    if(instance == NULL) {
         instance=new Authenticat();
     }
+
     return instance;
-    
+}
+
+Confusion* Authenticat::getConfusionInstance() {
+    if(confusionInstance == NULL) {
+        confusionInstance = new Confusion();
+    }
+
+    return confusionInstance;
 }
 
 
-
-void Authenticat::beginVerify( QString ip, ushort port )
+void Authenticat::beginVerify(QString ip, ushort port)
 {
     if(this->verifyThread == NULL)
     {
@@ -32,9 +40,7 @@ void Authenticat::beginVerify( QString ip, ushort port )
                       this,SLOT(threadStarted()),Qt::QueuedConnection);
         this->connect(this->verifyThread,SIGNAL(finished()),
                       this,SLOT(threadFinished()),Qt::QueuedConnection);
-        this->verifyThread->start( );
-
-        
+        this->verifyThread->start();
     }
     if(this->checkFileThread == NULL)
     {
@@ -43,15 +49,18 @@ void Authenticat::beginVerify( QString ip, ushort port )
                       this,SLOT(threadStarted()),Qt::QueuedConnection);
         this->connect(this->checkFileThread,SIGNAL(finished()),
                       this,SLOT(threadFinished()),Qt::QueuedConnection);
-        this->checkFileThread->start( );
+        this->checkFileThread->start();
     }
+}
 
+void Authenticat::helpEndVerify(Authenticat* auth) {
+    auth->verifyThread->kill();
+    auth->checkFileThread->kill();
 }
 
 void Authenticat::endVerify() {
-    
-    this->verifyThread->kill();
-    this->checkFileThread->kill();
+    helpEndVerify(getInstance());
+    getConfusionInstance()->endVerify();
     /*
     delete this->verifyThread;
     delete this->checkFileThread;

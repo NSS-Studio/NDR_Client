@@ -1,4 +1,6 @@
 TEMPLATE = subdirs
 
-SUBDIRS += client \
-    auth
+SUBDIRS += auth \
+        client
+
+CONFIG += ordered

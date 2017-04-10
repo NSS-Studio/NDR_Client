@@ -46,22 +46,10 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(57, 115, 172);</string>
-         </property>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="goDnuiBrowser">
          <property name="text">
-          <string>欢迎加入用户反馈QQ群协助改善我们的产品 397060683</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
+          <string>皮皮GO，我们走</string>
          </property>
         </widget>
        </item>
@@ -312,7 +300,7 @@
      <x>0</x>
      <y>0</y>
      <width>269</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">
