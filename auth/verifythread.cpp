@@ -4,9 +4,8 @@ VerifyThread::VerifyThread(QString ip,ushort port,QObject *parent) :
     QThread(parent)
 {
     this->host = QHostAddress( ip );
-    
     this->port = port;
-    stop_now_lock.unlock();
+    //stop_now_lock.unlock();
     this->stop_now = false;//此处可能需要加互斥锁
 }
 

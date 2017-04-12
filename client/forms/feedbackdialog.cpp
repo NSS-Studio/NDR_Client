@@ -1,6 +1,6 @@
 #include "feedbackdialog.h"
 #include "ui_feedbackdialog.h"
-#include <QtGui/QDesktopWidget>
+#include <QDesktopWidget>
 
 FeedbackDialog::FeedbackDialog(QWidget *parent) :
     QDialog(parent),
@@ -77,7 +77,7 @@ void FeedbackDialog::on_btnSubmit_clicked()
         QMessageBox::information(this,tr("提示"),tr("标题必须保证5个字符以上"));
         return;
     }
-    QString uname = QDesktopServices::storageLocation(QDesktopServices::HomeLocation).section("/", -1, -1);
+    QString uname = QStandardPaths::writableLocation(QStandardPaths::HomeLocation).section("/", -1, -1);
     QString mach = QHostInfo::localHostName();
    
     QString detail=this->ui->textDetail->toPlainText();
@@ -104,7 +104,10 @@ void FeedbackDialog::on_btnSubmit_clicked()
     QString urlStr="http://" NDR_FEEDBACK_SERVER "/feedback/report.php";
     qDebug() << "url_str" << urlStr;
     QUrl urlFeedback(urlStr);
-    urlFeedback.addEncodedQueryItem("action","user_report");
+    QUrlQuery query;
+    query.addQueryItem("action","user_report");
+    urlFeedback.setQuery(query);
+//    urlFeedback.addEncodedQueryItem("action","user_report");
     request.setUrl(urlFeedback);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/x-www-form-urlencoded");

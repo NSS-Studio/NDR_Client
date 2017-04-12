@@ -7,7 +7,7 @@
 infoModule::infoModule(QObject *parent)
     :QObject(parent)
 {
-    QString desktop = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+    QString desktop = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
     desktop += QString("/info.txt");
     infoText = desktop;
     info.setFileName(infoText);

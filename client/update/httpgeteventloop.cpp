@@ -12,12 +12,12 @@ void HttpGetEventLoop::getFinished(bool error)
     this->quit();
 }
 
-bool HttpGetEventLoop::waitForGetting(QHttp &http)
-{
-    connect(&http,SIGNAL(done(bool)),this,SLOT(getFinished(bool)));
-    this->exec();
-    return isError;
-}
+//bool HttpGetEventLoop::waitForGetting(QHttp &http)
+//{
+//    connect(&http,SIGNAL(done(bool)),this,SLOT(getFinished(bool)));
+//    this->exec();
+//    return isError;
+//}
 
 bool HttpGetEventLoop::waitForGettingFinished(QNetworkAccessManager *manager)
 {

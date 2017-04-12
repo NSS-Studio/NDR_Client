@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QScreen>
 /*
 #ifdef Q_OS_MAC
 #include <QtGui/QMacStyle>
@@ -193,8 +194,13 @@ void MainWindow::dialFinished(bool ok)
 		conn_cfg.setValue("Interface/Etherface", device_name);
 		this->username = username;
 		int left,top,width,height;
-		int desktop_width = QApplication::desktop()->width();
-		int desktop_height = QApplication::desktop()->height();
+//		int desktop_width = QApplication::desktop()->width();
+//		int desktop_height = QApplication::desktop()->height();
+
+        QScreen *screen= QGuiApplication::primaryScreen ();
+        QRect mm = screen->availableGeometry() ;
+        int desktop_width = mm.width();
+        int desktop_height = mm.height();
 		if(profile->getMainWindowRect(username,left,top,width,height))
 		{
 

@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include <QVector>
 #include <assert.h>
+#include <QCompleter>
 
 LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent) :
     QDialog(parent),

@@ -7,13 +7,13 @@
 #include "singleapplication.h"
 #include "feedbackdialog.h"
 #include "hangupdialog.h"
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QSharedMemory>
 #include <QObject>
 #include <QtCore/QTextCodec>
 
 
-#include "infomodule.h"
+//#include "infomodule.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,8 +22,10 @@ int main(int argc, char *argv[])
 #endif
 	SingleApplication a(argc, argv,"NSS-DR-CLIENT");
 
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));//设置源码文件字符串编码
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));//设置源码中待翻译字符串编码
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
+
+//    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));//设置源码文件字符串编码
+//    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));//设置源码中待翻译字符串编码
 
     //a.setStyle("cde");
 
@@ -59,8 +61,8 @@ int main(int argc, char *argv[])
 	MainWindow w;
     w.hide();
 
-    infoModule sss;
-    sss.getInfo();
+//    infoModule sss;
+//    sss.getInfo();
 
 	return a.exec();
 }

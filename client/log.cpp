@@ -9,7 +9,7 @@ QMutex Log::mutex;
 void Log::setLogFilename(QString filename)
 {
     Log::filename = filename;
-    Log::mutex.unlock();
+    //Log::mutex.unlock();
 }
 
 void Log::write(QString /*msg*/,char */*byteArray*/, int /*size*/)

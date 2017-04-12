@@ -2,7 +2,7 @@
 #define HTTPGETEVENTLOOP_H
 
 #include <QEventLoop>
-#include <QHttp>
+//#include <QHttp>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 class HttpGetEventLoop : public QEventLoop
@@ -10,7 +10,7 @@ class HttpGetEventLoop : public QEventLoop
     Q_OBJECT
 public:
     explicit HttpGetEventLoop(QObject *parent = 0);
-    bool waitForGetting(QHttp &http);
+//    bool waitForGetting(QHttp &http);
     bool waitForGettingFinished(QNetworkAccessManager *manager);
 private:
     bool isError;

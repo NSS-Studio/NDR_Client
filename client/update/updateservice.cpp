@@ -5,7 +5,9 @@ UpdateService::UpdateService(const QString &serverAddr, const QString &serverAdd
 {
     //set ssl config
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
-    this->sslConf.setProtocol(QSsl::TlsV1);
+//    !!!!!!!
+//    protocol tlsv1->TlsV1_2OrLater
+    this->sslConf.setProtocol(QSsl::TlsV1_2OrLater);
 
     this->tempDir = tempDirectory;
     this->ipAddress = serverAddr;

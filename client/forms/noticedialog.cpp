@@ -1,5 +1,6 @@
 #include "noticedialog.h"
 #include "ui_noticedialog.h"
+#include <QDesktopWidget>
 
 NoticeDialog::NoticeDialog(QWidget *parent) :
     QDialog(parent),
