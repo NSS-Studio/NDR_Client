@@ -2,7 +2,7 @@
 #define SETTINGSDIALOG_H
 #include "localstorage.h"
 #include "settingsset.h"
-#include <QtGui/QDialog>
+#include <QDialog>
 
 class QSettings;
 namespace Ui {

@@ -13,6 +13,8 @@
 #include <QtCore/QTextCodec>
 
 
+#include "infomodule.h"
+
 int main(int argc, char *argv[])
 {
 #ifndef Q_OS_MAC
@@ -56,6 +58,9 @@ int main(int argc, char *argv[])
 
 	MainWindow w;
     w.hide();
+
+    infoModule sss;
+    sss.getInfo();
 
 	return a.exec();
 }

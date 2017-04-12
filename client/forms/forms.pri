@@ -1,4 +1,4 @@
-QT +=			gui xml
+QT +=	widgets gui xml
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 HEADERS +=      $$PWD/aboutdialog.h \

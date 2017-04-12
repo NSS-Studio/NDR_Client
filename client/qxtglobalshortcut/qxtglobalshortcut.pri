@@ -9,5 +9,8 @@ win32{
     SOURCES += $$PWD/qxtglobalshortcut_win.cpp
     LIBS += -luser32
 }
-unix:!macx: SOURCES += $$PWD/qxtglobalshortcut_x11.cpp
+unix:!macx: {
+    SOURCES += $$PWD/qxtglobalshortcut_x11.cpp
+    LIBS    += -lX11
+}
 macx: SOURCES += $$PWD/qxtglobalshortcut_mac.cpp

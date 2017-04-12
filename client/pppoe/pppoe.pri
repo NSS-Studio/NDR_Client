@@ -13,8 +13,8 @@ win32{
 }
 unix:!macx {
     SOURCES += $$PWD/basedsl_linux.cpp
-	LIBS    += -lX11
-	QT		+= dbus
+    QT      += dbus
+    INCLUDEPATH += /usr/include/NetworkManager
 }
 macx{
     SOURCES += $$PWD/basedsl_mac.cpp
