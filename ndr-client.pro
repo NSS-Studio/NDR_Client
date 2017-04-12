@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
-SUBDIRS += auth \
-        client
+SUBDIRS += $$PWD/auth/auth.pro \
+           $$PWD/client/client.pro
 
 CONFIG += ordered
 
