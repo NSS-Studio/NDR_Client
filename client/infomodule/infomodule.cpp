@@ -62,10 +62,10 @@ bool infoModule::getSystemInfo() {
 
 #ifdef Q_OS_MAC
     program = "system_profiler";
-#elif Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
     program = "cat"; // /proc/* >> text
     arguments << "/proc/*";
-#elif Q_OS_WIN
+#elif defined(Q_OS_WIN)
     program = "systeminfo";
 #endif
     return getOneInfo(program, arguments);
