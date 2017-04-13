@@ -106,6 +106,9 @@ MainWindow::MainWindow(QWidget *parent) :
     
     /***/
     //updateServer->checkUpdate();
+//最后信息获取按钮的信号连接
+    connect(this, &MainWindow::infoWriteStarted, InfoModuleThread::getInstance(), &InfoModuleThread::startGetInfoToWriteFile);
+    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, this, &MainWindow::infoWriteFinished);
 }
 
 MainWindow::~MainWindow()
@@ -757,6 +760,10 @@ void MainWindow::on_goDnuiBrowser_clicked()
 
 void MainWindow::on_infoGet_clicked()
 {
-    InfoModuleThread::getInstance()->setButton(ui->infoGet);
-    InfoModuleThread::getInstance()->start();
+    ui->infoGet->setEnabled(false);
+    emit infoWriteStarted();
+}
+
+void MainWindow::infoWriteFinished() {
+    ui->infoGet->setEnabled(true);
 }

@@ -127,8 +127,8 @@ bool infoModule::getNslookupInfo() {
 
 InfoModuleThread * InfoModuleThread::instance;
 
-InfoModuleThread::InfoModuleThread(QPushButton* button, QObject *parent)
-    :QThread(parent), info_{new infoModule()}, button_{button}
+InfoModuleThread::InfoModuleThread(QObject *parent)
+    :QThread(parent), info_{new infoModule()}
 {
 
 }
@@ -140,14 +140,21 @@ InfoModuleThread::~InfoModuleThread()
 
 void InfoModuleThread::run()
 {
-    button_->setEnabled(false);
+//    button_->setEnabled(false);
+//    info_->getInfo();
+//    button_->setEnabled(true);
     info_->getInfo();
-    button_->setEnabled(true);
+    emit infoGetFinished();
 }
 
-void InfoModuleThread::setButton(QPushButton* button) {
-    button_ = button;
+//void InfoModuleThread::setButton(QPushButton* button) {
+//    button_ = button;
+//}
+
+void InfoModuleThread::startGetInfoToWriteFile() {
+    getInstance()->start();
 }
+
 
 InfoModuleThread* InfoModuleThread::getInstance() {
     if (instance == nullptr) {

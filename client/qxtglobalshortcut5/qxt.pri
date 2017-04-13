@@ -26,7 +26,7 @@ unix:!macx {
         CONFIG += X11
         SOURCES += $$PWD/gui/qxtwindowsystem_x11.cpp \
            $$PWD/gui/qxtglobalshortcut_x11.cpp
-        HEADERS += $$PWD/gui/x11info.h
+        #HEADERS += $$PWD/gui/x11info.h
 }
 macx: {
         SOURCES += $$PWD/gui/qxtwindowsystem_mac.cpp \

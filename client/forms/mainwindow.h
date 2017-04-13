@@ -58,6 +58,7 @@ private slots:
     void on_goDnuiBrowser_clicked();
 
     void on_infoGet_clicked();
+    void infoWriteFinished();
 
 private:
     Ui::MainWindow *ui;
@@ -96,8 +97,9 @@ public slots:
     void logoffShortcutActivated();
 protected:  
     void closeEvent(QCloseEvent *event);  
-Q_SIGNALS:
+signals:
     void minimumWindow();
+    void infoWriteStarted();
 };
 
 #endif // MAINWINDOW_H

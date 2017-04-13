@@ -39,15 +39,21 @@ class InfoModuleThread: public QThread {
 public:
 
     ~InfoModuleThread();
-    void setButton(QPushButton* button);
+//    void setButton(QPushButton* button);
     void run();
     static InfoModuleThread* getInstance();
 
+signals:
+    void infoGetFinished();
+
+public slots:
+    void startGetInfoToWriteFile();
+
 
 private:
-    explicit InfoModuleThread(QPushButton* button_, QObject* parent = nullptr);
+    explicit InfoModuleThread(/*QPushButton* button_, */QObject* parent = nullptr);
     infoModule* info_;
-    QPushButton* button_;
+    //QPushButton* button_;
     static InfoModuleThread* instance;
 
 };
