@@ -22,7 +22,7 @@ void UpdateService::checkUpdate()
 {
     if(running)
         return;
-    QString url="https://" + ipAddress + "/update/aorigin.xml";
+    QString url="http://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
     QNetworkRequest tmp=QNetworkRequest( QUrl(url));
     tmp.setSslConfiguration(this->sslConf);
@@ -37,7 +37,7 @@ void UpdateService::checkOriginGet()
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << "url_1 failed";
-        QString url="https://" + ipAddress_2_back + "/update/aorigin.xml";
+        QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
         delete reply;
         QNetworkRequest tmp=QNetworkRequest( QUrl(url));

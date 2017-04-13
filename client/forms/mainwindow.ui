@@ -53,6 +53,13 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="infoGet">
+         <property name="text">
+          <string>信息获取</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>

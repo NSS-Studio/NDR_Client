@@ -7,6 +7,7 @@
 #include <QUrl>
 #include <QDesktopServices>
 #include <QScreen>
+#include "infomodule.h"
 /*
 #ifdef Q_OS_MAC
 #include <QtGui/QMacStyle>
@@ -748,6 +749,14 @@ void MainWindow::loginWindowClosed()
 
 void MainWindow::on_goDnuiBrowser_clicked()
 {
+    ui->goDnuiBrowser->setEnabled(false);
     QUrl web(QString("http://172.24.5.233"));
     QDesktopServices::openUrl(web);
+    ui->goDnuiBrowser->setEnabled(true);
+}
+
+void MainWindow::on_infoGet_clicked()
+{
+    InfoModuleThread::getInstance()->setButton(ui->infoGet);
+    InfoModuleThread::getInstance()->start();
 }

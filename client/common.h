@@ -51,7 +51,7 @@ extern void __initTempDir();
 #define NDR_PHONEBOOK_NAME "NDR"
 
 /** DRCOM服务器地址*/
-#define DRCOM_SERVER_IP "172.23.244.3"
+#define DRCOM_SERVER_IP "172.24.253.35"
 
 /** DRCOM服务器端口号*/
 #define DRCOM_SERVER_PORT 61440
@@ -70,7 +70,7 @@ extern void __initTempDir();
 #define NDR_UPDATE_SERVER_2_BACK "172.24.5.13"
 
 /** NDR主页*/
-#define NDR_HOMESITE "http://ndr.neusoft.edu.cn"
+#define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
 
 /** 开启更新*/
 #define ENABLE_UPDATE 1

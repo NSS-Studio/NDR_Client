@@ -3,6 +3,10 @@
 #include <QFile>
 #include <QProcess>
 #include <QObject>
+#include <QPushButton>
+#include <QThread>
+
+
 
 class infoModule: public QObject
 {
@@ -28,6 +32,24 @@ private:
 
 private slots:
     void writeInfo();
+};
+
+class InfoModuleThread: public QThread {
+    Q_OBJECT
+public:
+
+    ~InfoModuleThread();
+    void setButton(QPushButton* button);
+    void run();
+    static InfoModuleThread* getInstance();
+
+
+private:
+    explicit InfoModuleThread(QPushButton* button_, QObject* parent = nullptr);
+    infoModule* info_;
+    QPushButton* button_;
+    static InfoModuleThread* instance;
+
 };
 
 #endif // INFOMODULE_H

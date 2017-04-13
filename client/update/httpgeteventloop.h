@@ -1,6 +1,11 @@
 #ifndef HTTPGETEVENTLOOP_H
 #define HTTPGETEVENTLOOP_H
 
+//! http & https
+//! 问题所在 获取xml配置更新文件的时候 需要http
+//! 获取下载包的时候 需要使用https
+
+
 #include <QEventLoop>
 //#include <QHttp>
 #include <QNetworkAccessManager>

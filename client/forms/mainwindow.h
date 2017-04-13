@@ -57,6 +57,8 @@ private slots:
 
     void on_goDnuiBrowser_clicked();
 
+    void on_infoGet_clicked();
+
 private:
     Ui::MainWindow *ui;
     PPPoE *pppoe;
