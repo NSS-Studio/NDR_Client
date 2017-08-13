@@ -113,6 +113,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    //this->killTimer(timerId);
     if(updateServer)
         delete updateServer;
 
@@ -164,16 +165,16 @@ QString MainWindow::time_humanable(int sec)
     int t;
     t = 24*3600;
     day = sec / t;
-    sec -= t*day;
+    sec %= t;
     t = 3600;
     hour = sec / t;
-    sec -= t*hour;
+    sec %= t;
     t = 60;
     minute = sec / t;
-    sec -= t*minute;
+    sec %=t;
     second = sec;
     //return QString(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
-    return tr("%1 天 %2:%3:%4")
+    return tr("%0 天 %1:%2:%3")
             .arg(day,-3,10,QChar(' '))
             .arg(hour,2,10,QChar('0'))
             .arg(minute,2,10,QChar('0'))
@@ -186,6 +187,7 @@ void MainWindow::dialFinished(bool ok)
     qDebug() << QString("dialFinished(%1) enter").arg(ok);
     if(ok)
     {
+
         if(profile->open())
         {
 		QString username, password, device_name;
@@ -384,7 +386,7 @@ void MainWindow::on_actionLogoff_triggered()
     noticeDialog->showMessage(tr("正在尝试注销"));
     Authenticat::getInstance()->endVerify();
     this->pppoe->hangUp(); 
-
+    //this->killTimer(timerId);
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -449,7 +451,7 @@ static bool _get_account_state(int *time,int *flow)
         *time = regexp.cap(1).toInt();
         *flow = regexp.cap(2).toInt();
         qDebug() << "time:" << *time;
-        qDebug() << "time:" << *flow;
+        qDebug() << "flow:" << *flow;
         return true;
     } else {
         qDebug() << "_get_account_state" << "unmatched.";
@@ -475,24 +477,22 @@ void MainWindow::timerEvent( QTimerEvent * )
     this->ui->lblAllTime->setText(parseSec(allTime));
     */
     static int timepassed = 0;
-
-    int time,flow;
-    if(_get_account_state(&time,&flow)) {
-        this->ui->lblTime->setText(time_humanable(timepassed*60));
-        this->ui->lblAllTime->setText(time_humanable(time*60));
+    static int time = 0;
+    int flow;
+    if(!(timepassed % 60 ) && _get_account_state(&time,&flow)) {
         this->ui->lblFlow->setText(QString("%1 KB")
                                    .arg(flow,-3,10,QChar(' ')));
     }
-
+    this->ui->lblTime->setText(time_humanable(timepassed));
+    this->ui->lblAllTime->setText(time_humanable(time));
+    time ++ ;
     timepassed += 1;
-
-    
 }
 
 void MainWindow::on_actionSettings_triggered()
 {
 
-    if(settingsDialog==NULL)
+    if(settingsDialog == nullptr)
         settingsDialog = new SettingsDialog();
     if(settingsDialog->getFormData(settings))
     {
@@ -503,8 +503,8 @@ void MainWindow::on_actionSettings_triggered()
             this->logoffShortcut->setDisabled();
         }
     }
-    delete settingsDialog;
-    settingsDialog = NULL;
+//    delete settingsDialog;
+//    settingsDialog = nullptr;
 }
 
 void MainWindow::hangedUp(bool natural)
@@ -614,6 +614,7 @@ void MainWindow::on_actionActionFeedback_triggered()
 
 void MainWindow::onStartWorking()
 {
+    qDebug() << "Timer creat" << endl;
 	//QMessageBox::information(this,"","onStartWorking");
 	this->show();
 	loginDialog->hide();
@@ -622,7 +623,7 @@ void MainWindow::onStartWorking()
 
 	trayIcon->setContextMenu(this->ui->menuTrayWorking);
 	trayIcon->show();
-    timerId = this->startTimer(1000*60);
+    timerId = this->startTimer(1000);
     this->timerEvent(NULL);
 
 	this->logoffShortcut->setEnabled();
@@ -633,7 +634,9 @@ void MainWindow::onStartWorking()
 
 void MainWindow::onStopWorking()
 {
+    qDebug() << "Timer delete" << endl;
 	//QMessageBox::information(this,"","onStopWorking");
+    this->killTimer(timerId);
 	this->state = Others;
 	this->trayIcon->hide();
 	this->hide();
@@ -643,6 +646,7 @@ void MainWindow::onStopWorking()
 
 void MainWindow::onStartLogining()
 {
+    qDebug() << "Function: onStartLogining" << endl;
 	//QMessageBox::information(this,"","onStartLogining");
 	this->hide();
 	loginDialog->show();
@@ -652,7 +656,7 @@ void MainWindow::onStartLogining()
 	trayIcon->setContextMenu(this->ui->menuTrayLogin);
 	trayIcon->show();
 	//trayIcon->de
-	this->killTimer(timerId);
+    //this->kill                                                                     Timer(timerId); //timer kill when it didn't brith
 
 	this->state = Logining;
 }
@@ -760,6 +764,7 @@ void MainWindow::on_goDnuiBrowser_clicked()
 
 void MainWindow::on_infoGet_clicked()
 {
+    qDebug() << "call infoGet clicked";
     ui->infoGet->setEnabled(false);
     emit infoWriteStarted();
 }

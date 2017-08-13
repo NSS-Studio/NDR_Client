@@ -29,7 +29,7 @@
    <string>NDR 客户端</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../client.qrc">
+   <iconset>
     <normaloff>:/icons/icons/logo.png</normaloff>:/icons/icons/logo.png</iconset>
   </property>
   <property name="styleSheet">
@@ -307,7 +307,7 @@
      <x>0</x>
      <y>0</y>
      <width>269</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -341,7 +341,7 @@
   </widget>
   <action name="actionLogoff">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/logout.png</normaloff>:/icons/icons/logout.png</iconset>
    </property>
    <property name="text">
@@ -350,7 +350,7 @@
   </action>
   <action name="actionShowWindow">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/showmainpanels.png</normaloff>:/icons/icons/showmainpanels.png</iconset>
    </property>
    <property name="text">
@@ -359,7 +359,7 @@
   </action>
   <action name="actionQuit">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/quiet1.png</normaloff>:/icons/icons/quiet1.png</iconset>
    </property>
    <property name="text">
@@ -371,7 +371,7 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/setting.png</normaloff>:/icons/icons/setting.png</iconset>
    </property>
    <property name="text">
@@ -380,7 +380,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/about.png</normaloff>:/icons/icons/about.png</iconset>
    </property>
    <property name="text">
@@ -389,7 +389,7 @@
   </action>
   <action name="actionShowLoginDialog">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
@@ -398,7 +398,7 @@
   </action>
   <action name="actionActionFeedback">
    <property name="icon">
-    <iconset resource="../client.qrc">
+    <iconset>
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
@@ -407,8 +407,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="../client.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

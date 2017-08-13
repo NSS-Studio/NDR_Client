@@ -1,14 +1,17 @@
 #include "settingsset.h"
+#include <QDebug>
 #include <QtCore/QLocale>
 
 SettingsSet::SettingsSet(QString filename)
 {
+    //qDebug() << "Call SettingsSet\n" << filename << endl;
     this->filename = filename;
     this->readAll();
 }
 
 bool SettingsSet::readAll()
 {
+    //qDebug() << "Call readAll" << endl;
     QSettings profile(filename,QSettings::IniFormat);
     this->quitWhileCloseWindow = profile.value(KEY_QUIT_WHEN_CLOSE,false).toBool();
     this->hotkey = profile.value(KEY_HOTKEY,"").toString();
@@ -21,6 +24,7 @@ bool SettingsSet::readAll()
 
 void SettingsSet::writeAll()
 {
+    qDebug() << "Call writeAll: " << filename << endl;
     QSettings profile(filename,QSettings::IniFormat);
     profile.setValue(KEY_HOTKEY,this->hotkey);
     profile.setValue(KEY_QUIT_WHEN_CLOSE,this->quitWhileCloseWindow);

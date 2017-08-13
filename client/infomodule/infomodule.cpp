@@ -24,12 +24,27 @@ void infoModule::getInfo() {
 }
 
 void infoModule::writeInfo() {
-    QString result = myProcess->readAllStandardOutput();
+    //QString result = myProcess->readAllStandardOutput();
 
-            //QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-    QTextStream infoTextStream(&info);
-    //QString result = utfCodec->toUnicode(myProcess.readAll());
-    infoTextStream << result;
+#ifdef Q_OS_WIN
+    #define localCode "gbk"
+#endif
+#ifdef Q_OS_LINUX
+    #define localCode "utf8"
+#endif
+#ifdef Q_OS_MAC
+    #define localCode "utf8"
+#endif
+    qDebug() << "call writeInfo: ";
+    QTextCodec* utfCodec = QTextCodec::codecForName(localCode);
+    QString result = utfCodec -> toUnicode(myProcess->readAllStandardOutput());
+    if (!result.isEmpty()) {
+        QTextStream infoTextStream(&info);
+        //QString result = utfCodec->toUnicode(myProcess.readAll());
+        infoTextStream.setCodec(localCode);
+        infoTextStream << result;
+    } else
+        qDebug() <<"call writeInfo, result is empty!!";
 }
 
 infoModule::~infoModule() {
@@ -38,6 +53,7 @@ infoModule::~infoModule() {
 }
 
 bool infoModule::getOneInfo(QString const& program, QStringList const& arguments) {
+    qDebug() << "call getOneInfo";
     myProcess = new QProcess();
     connect(myProcess, SIGNAL(readyReadStandardOutput()),
                      this, SLOT(writeInfo()));
@@ -51,8 +67,9 @@ bool infoModule::getOneInfo(QString const& program, QStringList const& arguments
         return false;
 
     myProcess->disconnect(this);
-    delete myProcess;
+    myProcess -> deleteLater();
     return true;
+
 }
 
 bool infoModule::getSystemInfo() {
@@ -143,6 +160,7 @@ void InfoModuleThread::run()
 //    button_->setEnabled(false);
 //    info_->getInfo();
 //    button_->setEnabled(true);
+    qDebug() << "call thread run";
     info_->getInfo();
     emit infoGetFinished();
 }
@@ -152,7 +170,9 @@ void InfoModuleThread::run()
 //}
 
 void InfoModuleThread::startGetInfoToWriteFile() {
-    getInstance()->start();
+    //getInstance()->start();
+    qDebug() << "call startGetInfoToWriteFile";
+    this->start();
 }
 
 

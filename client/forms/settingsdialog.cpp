@@ -23,6 +23,7 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
 
 SettingsDialog::~SettingsDialog()
 {
+    qDebug() << "settingDialog delete";
 	delete ui;
 //	delete config;
 }
@@ -35,7 +36,9 @@ void SettingsDialog::on_buttonBox_accepted()
 
 void SettingsDialog::on_SettingsDialog_finished(int /*result*/)
 {
-    this->reject();
+    qDebug() <<  "function: SD finished";
+//  死循环
+//  this->reject();
 }
 
 bool SettingsDialog::getFormData(SettingsSet *settings)
