@@ -7,14 +7,16 @@
 infoModule::infoModule(QObject *parent)
     :QObject(parent)
 {
+
+}
+
+void infoModule::getInfo() {
     QString desktop = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
     desktop += QString("/info.txt");
     infoText = desktop;
     info.setFileName(infoText);
     info.open(QIODevice::WriteOnly|QIODevice::Append|QIODevice::Text);
-}
 
-void infoModule::getInfo() {
     getSystemInfo();
     getArpInfo();
     getIfconfigInfo();
@@ -58,6 +60,7 @@ bool infoModule::getOneInfo(QString const& program, QStringList const& arguments
     connect(myProcess, SIGNAL(readyReadStandardOutput()),
                      this, SLOT(writeInfo()));
     myProcess->start(program, arguments);
+
     if (!myProcess->waitForStarted())
         return false;
 
@@ -91,7 +94,14 @@ bool infoModule::getSystemInfo() {
 bool infoModule::getArpInfo() {
     QString program = "arp";
     QStringList arguments;
+
+#ifdef Q_OS_WIN
+    arguments << "-av";
+#elif defind(Q_OS_LINUX)
+    arguments << "-en";
+#elif defind(Q_OS_MAC)
     arguments << "-an";
+#endif
     return getOneInfo(program, arguments);
 }
 
@@ -116,20 +126,31 @@ bool infoModule::getIfconfigInfo() {
 bool infoModule::getNetstatInfo() {
     QString program = "netstat";
     QStringList arguments;
+
+#ifdef Q_OS_WIN
+    arguments << "-ano";
+#elif defind(Q_OS_LINUX)
+    arguments << "-anp";
+#elif defind(Q_OS_MAC)
     arguments << "-an";
+#endif
     return getOneInfo(program, arguments);
 }
 
 bool infoModule::getPingInfo() {
     QString program = "ping";
     QStringList arguments;
+
 #ifdef Q_OS_WIN
-    arguments << "-n";
+    arguments << "www.baidu.com"; //aho
+    getOneInfo(program, arguments);
+    arguments[0] = "newjw.neusoft.edu.cn";
 #else
-    arguments << "-a";
-#endif
+    arguments << "-c 3";
     arguments << "www.baidu.com";
     arguments << "newjw.neusoft.edu.cn";
+#endif
+
     return getOneInfo(program, arguments);
 }
 
@@ -145,14 +166,14 @@ bool infoModule::getNslookupInfo() {
 InfoModuleThread * InfoModuleThread::instance;
 
 InfoModuleThread::InfoModuleThread(QObject *parent)
-    :QThread(parent), info_{new infoModule()}
+    :QThread(parent)
 {
 
 }
 
 InfoModuleThread::~InfoModuleThread()
 {
-
+    //delete info_;
 }
 
 void InfoModuleThread::run()
@@ -161,8 +182,10 @@ void InfoModuleThread::run()
 //    info_->getInfo();
 //    button_->setEnabled(true);
     qDebug() << "call thread run";
+    info_ = new infoModule();
     info_->getInfo();
     emit infoGetFinished();
+    info_->deleteLater();
 }
 
 //void InfoModuleThread::setButton(QPushButton* button) {
