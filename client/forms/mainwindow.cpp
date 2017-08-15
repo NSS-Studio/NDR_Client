@@ -764,9 +764,11 @@ void MainWindow::on_infoGet_clicked()
 {
     qDebug() << "call infoGet clicked";
     ui->infoGet->setEnabled(false);
+    ui->infoGet->setText(tr("请稍等"));
     emit infoWriteStarted();
 }
 
 void MainWindow::infoWriteFinished() {
+    ui->infoGet->setText(tr("信息获取"));
     ui->infoGet->setEnabled(true);
 }
