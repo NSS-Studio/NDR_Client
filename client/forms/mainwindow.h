@@ -15,6 +15,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
+#include <QHBoxLayout>
 
 
 namespace Ui {
@@ -54,6 +55,7 @@ private slots:
     void checkFinished(bool error,int major,int minor,QString errMsg);
     void downloadFinished(bool error,QString errMsg);
     void loginWindowClosed();
+    void getSystemInfo();
 
     void on_goDnuiBrowser_clicked();
 

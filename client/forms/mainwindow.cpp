@@ -107,8 +107,9 @@ MainWindow::MainWindow(QWidget *parent) :
     /***/
     //updateServer->checkUpdate();
 //最后信息获取按钮的信号连接
+    connect(ui->actionGetInfo, &QAction::triggered, this, &MainWindow::getSystemInfo);
     connect(this, &MainWindow::infoWriteStarted, InfoModuleThread::getInstance(), &InfoModuleThread::startGetInfoToWriteFile);
-    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, this, &MainWindow::infoWriteFinished);
+    //connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, this, &MainWindow::infoWriteFinished);
 }
 
 MainWindow::~MainWindow()
@@ -762,15 +763,32 @@ void MainWindow::on_goDnuiBrowser_clicked()
     ui->goDnuiBrowser->setEnabled(true);
 }
 
-void MainWindow::on_infoGet_clicked()
+void MainWindow::getSystemInfo()
 {
     qDebug() << "call infoGet clicked";
-    ui->infoGet->setEnabled(false);
-    ui->infoGet->setText(tr("请稍等"));
+    QDialog *message = new QDialog(this, Qt::WindowMinimizeButtonHint);
+    QLabel *label = new QLabel(message);
+    QHBoxLayout *lay = new QHBoxLayout();
+
+    lay->addWidget(label);
+    message->setLayout(lay);
+    message->setFixedSize(322, 80);
+
+    label->setFrameStyle(QFrame::StyledPanel);
+    label->setText("现在程序正在获取信息，请耐心等候.\n"
+                   "当信息获取完毕时本对话框会自动关闭.\n"
+                   "信息文件将会保存在您的桌面，文件名为：Info.txt");
+    message->setWindowTitle(tr("正在处理..."));
+    message->setWindowIcon(QIcon(tr("/icon/about.png")));
+
+    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, message, &QDialog::close);
+
     emit infoWriteStarted();
+
+    message->exec();
 }
 
-void MainWindow::infoWriteFinished() {
-    ui->infoGet->setText(tr("信息获取"));
-    ui->infoGet->setEnabled(true);
-}
+//void MainWindow::infoWriteFinished() {
+//    ui->infoGet->setText(tr("信息获取"));
+//    ui->infoGet->setEnabled(true);
+//}

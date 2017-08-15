@@ -29,7 +29,7 @@
    <string>NDR 客户端</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../client.qrc">
     <normaloff>:/icons/icons/logo.png</normaloff>:/icons/icons/logo.png</iconset>
   </property>
   <property name="styleSheet">
@@ -50,13 +50,6 @@
         <widget class="QPushButton" name="goDnuiBrowser">
          <property name="text">
           <string>皮皮GO，我们走</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="infoGet">
-         <property name="text">
-          <string>信息获取</string>
          </property>
         </widget>
        </item>
@@ -331,6 +324,7 @@
      <string notr="true">menuTrayLogin</string>
     </property>
     <addaction name="actionShowWindow"/>
+    <addaction name="actionGetInfo"/>
     <addaction name="actionSettings"/>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
@@ -341,7 +335,7 @@
   </widget>
   <action name="actionLogoff">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/logout.png</normaloff>:/icons/icons/logout.png</iconset>
    </property>
    <property name="text">
@@ -350,7 +344,7 @@
   </action>
   <action name="actionShowWindow">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showmainpanels.png</normaloff>:/icons/icons/showmainpanels.png</iconset>
    </property>
    <property name="text">
@@ -359,7 +353,7 @@
   </action>
   <action name="actionQuit">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/quiet1.png</normaloff>:/icons/icons/quiet1.png</iconset>
    </property>
    <property name="text">
@@ -371,7 +365,7 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/setting.png</normaloff>:/icons/icons/setting.png</iconset>
    </property>
    <property name="text">
@@ -380,7 +374,7 @@
   </action>
   <action name="actionAbout">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/about.png</normaloff>:/icons/icons/about.png</iconset>
    </property>
    <property name="text">
@@ -389,7 +383,7 @@
   </action>
   <action name="actionShowLoginDialog">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
@@ -398,15 +392,29 @@
   </action>
   <action name="actionActionFeedback">
    <property name="icon">
-    <iconset>
+    <iconset resource="../client.qrc">
      <normaloff>:/icons/icons/showloginwindow.png</normaloff>:/icons/icons/showloginwindow.png</iconset>
    </property>
    <property name="text">
     <string>反馈</string>
    </property>
   </action>
+  <action name="actionGetInfo">
+   <property name="icon">
+    <iconset resource="../client.qrc">
+     <normaloff>:/icons/icons/about.png</normaloff>:/icons/icons/about.png</iconset>
+   </property>
+   <property name="text">
+    <string>信息获取</string>
+   </property>
+   <property name="iconText">
+    <string>信息获取</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="../client.qrc"/>
+ </resources>
  <connections/>
 </ui>
