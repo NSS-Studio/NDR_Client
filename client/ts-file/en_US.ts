@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US" sourcelanguage="zh_CN">
-<defaultcodec>UTF-8</defaultcodec>
+<TS version="2.1" language="en_US" sourcelanguage="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -500,7 +499,7 @@ Please try to redial your account.</translation>
     <message>
         <location filename="../forms/logindialog.ui" line="261"/>
         <source>可见</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visable</translation>
     </message>
     <message>
         <location filename="../forms/logindialog.ui" line="337"/>
@@ -525,7 +524,7 @@ Please try to redial your account.</translation>
     <message>
         <location filename="../forms/logindialog.ui" line="156"/>
         <source>套餐：</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Expenses:</translation>
     </message>
     <message>
         <location filename="../forms/logindialog.ui" line="169"/>
