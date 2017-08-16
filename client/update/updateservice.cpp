@@ -22,7 +22,7 @@ void UpdateService::checkUpdate()
 {
     if(running)
         return;
-    QString url="http://" + ipAddress + "/update/aorigin.xml";
+    QString url="https://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
     QNetworkRequest tmp=QNetworkRequest( QUrl(url));
     tmp.setSslConfiguration(this->sslConf);
@@ -37,7 +37,7 @@ void UpdateService::checkOriginGet()
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << "url_1 failed";
-        QString url="http://" + ipAddress_2_back + "/update/aorigin.xml";
+        QString url="https://" + ipAddress_2_back + "/update/aorigin.xml";
         qDebug() << "url_2_back" << url;
         delete reply;
         QNetworkRequest tmp=QNetworkRequest( QUrl(url));
@@ -77,6 +77,7 @@ void UpdateService::originGetFinished()
     QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     
     qDebug() << "Http state value" << stateValue;
+
     if(stateValue!="200" && stateValue!="301")
     {
         running = false;
@@ -235,7 +236,8 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename, QString &er
 	QString http_status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
     if(http_status_code != "200")
         {
-		errorMsg = tr("HTTP 服务器返回了意外的状态码 %1").arg(http_status_code);
+        //errorMsg = tr("HTTP 服务器返回了意外的状态码 %1").arg(http_status_code);
+        errorMsg = tr("服务器正在维护中");//.arg(http_status_code);
 		qDebug() << "StatusCode" << http_status_code;
 		return false;
         }

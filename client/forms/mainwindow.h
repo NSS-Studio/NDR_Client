@@ -17,7 +17,6 @@
 #include <QSystemTrayIcon>
 #include <QHBoxLayout>
 
-
 namespace Ui {
 class MainWindow;
 }
@@ -87,12 +86,16 @@ private:
     
     //SettingsSet *settings;
     UpdateService *updateServer;
-    
+//    InterfaceInfo *interfaceInfo;
+//    HttpsJsonPost *httpsJsonPost;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);
     
     QString time_humanable(int sec);
     
+    void sendData();
+
+    void verifyEncrypt();
 
 public slots:  
     void iconActivated(QSystemTrayIcon::ActivationReason reason);  

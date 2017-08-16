@@ -87,13 +87,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this,SIGNAL(minimumWindow()),this,SLOT(hide()),Qt::QueuedConnection);//绑定最小化到隐藏
     
 	isMainWindowMinimized=false;
-    
+
+    //更新模块初始化
     updateServer = new UpdateService(NDR_UPDATE_SERVER,NDR_UPDATE_SERVER_2_BACK,tempDir);
     connect(updateServer,SIGNAL(checkFinished(bool,int,int,QString)),
             this,SLOT(checkFinished(bool,int,int,QString)));
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
             this,SLOT(downloadFinished(bool,QString)));
-    
+
+    //类初始化
+//    interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
+//    httpsJsonPost = new HttpsJsonPost();              //unuse??
+
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
@@ -114,7 +119,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    //this->killTimer(timerId);
+    this->killTimer(timerId);
+
     if(updateServer)
         delete updateServer;
 
@@ -272,17 +278,17 @@ void MainWindow::dialFinished(bool ok)
         //! Confusdion!!!!!!!!!!
         Authenticat::getConfusionInstance()->beginVerify();
 
+        //verifyEncrypt();//必须在beginworkingui前
         if(ENABLE_UPDATE)
             updateServer->checkUpdate();
-    }else
-    {
-        noticeDialog->hide();
-        onStartLogining();
+        } else {
+            noticeDialog->hide();
+            onStartLogining();
 #ifdef Q_OS_MAC
-        if(!pppoe->lastError().isEmpty())
+            if(!pppoe->lastError().isEmpty())
 #endif
-        QMessageBox::information(loginDialog,tr("提示"),tr("拨号失败") + "\n" + pppoe->lastError());
-    }
+            QMessageBox::information(loginDialog,tr("提示"),tr("拨号失败") + "\n" + pppoe->lastError());
+        }
     qDebug() <<"dialFinished() exit";
 }
 
@@ -359,7 +365,7 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_actionShowWindow_triggered()
 {
 	//奇怪
-	if(state == Working) {
+    if(state == Working) {
 		this->show();
 		this->activateWindow();
 		isMainWindowMinimized = false;
@@ -617,6 +623,7 @@ void MainWindow::onStartWorking()
 {
     qDebug() << "Timer creat" << endl;
 	//QMessageBox::information(this,"","onStartWorking");
+
 	this->show();
 	loginDialog->hide();
 	trayIcon->setIcon(QIcon(":/icons/icons/tray_working.png"));
