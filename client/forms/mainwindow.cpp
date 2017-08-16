@@ -15,22 +15,21 @@
 */
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent), ui(new Ui::MainWindow)
 {
     //this->setWindowFlags(Qt::Dialog);
-    this->setWindowFlags(this->windowFlags()|Qt::WindowMaximizeButtonHint);
+    this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
 
     //settings = new SettingsSet(appHome + "/config.ini");
 
     logoffShortcut = new QxtGlobalShortcut(this);
-    connect(logoffShortcut,SIGNAL(activated()),this,SLOT(logoffShortcutActivated()));
+    connect(logoffShortcut, &QxtGlobalShortcut::activated, this, &MainWindow::logoffShortcutActivated);
     if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
     {
         QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
-        
-    }else
+    }
+    else
     {
         logoffShortcut->setDisabled();
     }
@@ -41,14 +40,14 @@ MainWindow::MainWindow(QWidget *parent) :
     this->ui->menuTrayWorking->menuAction()->setVisible(false);
     if (!QSystemTrayIcon::isSystemTrayAvailable())
     {
-        trayIcon=NULL;
-        qDebug("System tray is not available, tray icon disabled");
+        trayIcon=nullptr;
+        qDebug() << "System tray is not available, tray icon disabled";
         return;
     }
+
     trayIcon = new QSystemTrayIcon();
     this->trayIcon->show();
-    this->connect(trayIcon,SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-                  this,SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    connect(trayIcon,&QSystemTrayIcon::activated, this, &MainWindow::iconActivated);
     
     this->pppoe = new PPPoE();
     connect(this->pppoe,SIGNAL(dialFinished(bool)),
@@ -90,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //更新模块初始化
     updateServer = new UpdateService(NDR_UPDATE_SERVER,NDR_UPDATE_SERVER_2_BACK,tempDir);
+<<<<<<< HEAD
     connect(updateServer,SIGNAL(checkFinished(bool,int,int,QString)),
             this,SLOT(checkFinished(bool,int,int,QString)));
     connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
@@ -99,12 +99,18 @@ MainWindow::MainWindow(QWidget *parent) :
 //    interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
 //    httpsJsonPost = new HttpsJsonPost();              //unuse??
 
+=======
+    connect(updateServer,&UpdateService::checkFinished, this, &MainWindow::checkFinished);
+    connect(updateServer,&UpdateService::downloadFinished, this, &MainWindow::downloadFinished);
+
+    
+>>>>>>> nssLab/Rabenda5
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
-    aboutDialog = NULL;
-    settingsDialog = NULL;
-    feedbackDialog = NULL;
+    aboutDialog = nullptr;
+    settingsDialog = nullptr;
+    feedbackDialog = nullptr;
     app_exiting = false;
 
 	onStartLogining();

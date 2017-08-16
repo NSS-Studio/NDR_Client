@@ -1,21 +1,16 @@
 #include "updateservice.h"
 
-UpdateService::UpdateService(const QString &serverAddr, const QString &serverAddrBak, const QString &tempDirectory, QObject *parent) :
-    QObject(parent)
+UpdateService::UpdateService(const QString &serverAddr, const QString &serverAddrBak, const QString &tempDirectory, QObject *parent)
+    :QObject(parent),tempDir{tempDirectory},ipAddress{serverAddr},ipAddress_2_back{serverAddrBak},isConnectUpdateServerFail{false}
 {
     //set ssl config
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
 //    !!!!!!!
 //    protocol tlsv1->TlsV1_2OrLater
     this->sslConf.setProtocol(QSsl::TlsV1_2OrLater);
-
-    this->tempDir = tempDirectory;
-    this->ipAddress = serverAddr;
-    this->ipAddress_2_back = serverAddrBak;
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;
     qDebug() << "ipAddress" << serverAddr;
-    isConnectUpdateServerFail = false;
 }
 
 void UpdateService::checkUpdate()
@@ -24,10 +19,10 @@ void UpdateService::checkUpdate()
         return;
     QString url="https://" + ipAddress + "/update/aorigin.xml";
     qDebug() << "url" << url;
-    QNetworkRequest tmp=QNetworkRequest( QUrl(url));
+    QNetworkRequest tmp{QUrl(url)};
     tmp.setSslConfiguration(this->sslConf);
     reply = nam.get(tmp);
-    connect(reply,SIGNAL(finished()),this,SLOT(checkOriginGet()));
+    connect(reply,&QNetworkReply::finished,this,&UpdateService::checkOriginGet);
     this->running=true;
 }
 
@@ -45,13 +40,14 @@ void UpdateService::checkOriginGet()
         reply = nam.get(tmp);
         this->isConnectUpdateServerFail = false;
     }
-    else{
+    else
+    {
         qDebug() << "url is OK! the update server 172.24.10.13 is very very OK!";
         this->isConnectUpdateServerFail = true;
         originGetFinished();
     }
-    reply->disconnect(SIGNAL(finished()));
-    connect(reply,SIGNAL(finished()),this,SLOT(originGetFinished()));
+    disconnect(reply,&QNetworkReply::finished);
+    connect(reply,&QNetworkReply::finished,this,&UpdateService::originGetFinished);
 }
 
 /*

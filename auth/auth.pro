@@ -13,19 +13,20 @@ CONFIG += staticlib
 #SOURCES += authenticat.cpp
 
 #HEADERS += authenticat.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
 
 HEADERS     +=  $$PWD/authenticat.h \
-				$$PWD/checkfilethread.h \
-				$$PWD/verifythread.h \
-				$$PWD/log.h \
-    confusion.h
+                $$PWD/checkfilethread.h \
+                $$PWD/verifythread.h \
+                $$PWD/log.h \
+                $$PWD/confusion.h
 
 SOURCES     +=  $$PWD/authenticat.cpp \
-				$$PWD/checkfilethread.cpp \
-				$$PWD/verifythread.cpp \
-				$$PWD/log.cpp \
-    confusion.cpp
+                $$PWD/checkfilethread.cpp \
+                $$PWD/verifythread.cpp \
+                $$PWD/log.cpp \
+                $$PWD/confusion.cpp
