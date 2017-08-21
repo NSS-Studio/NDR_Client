@@ -2,18 +2,12 @@ INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 
 HEADERS +=      $$PWD/updateservice.h \
-<<<<<<< HEAD
-#                $$PWD/httpgeteventloop.h \
-
-
-SOURCES +=      $$PWD/updateservice.cpp \
-#                $$PWD/httpgeteventloop.cpp \
-=======
+                $$PWD/getinfoaboutnss.h \
                 $$PWD/httpgeteventloop.h \
-    $$PWD/getinfoaboutnss.h
+                $$PWD/httpgeteventloop.h \
+                $$PWD/getinfoaboutnss.h
 
 
 SOURCES +=      $$PWD/updateservice.cpp \
                 $$PWD/httpgeteventloop.cpp \
-    $$PWD/getinfoaboutnss.cpp
->>>>>>> nssLab/Rabenda5
+                $$PWD/getinfoaboutnss.cpp

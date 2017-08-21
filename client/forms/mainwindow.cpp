@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //settings = new SettingsSet(appHome + "/config.ini");
 
+    popUp = new popUpDialog();
     logoffShortcut = new QxtGlobalShortcut(this);
     connect(logoffShortcut, &QxtGlobalShortcut::activated, this, &MainWindow::logoffShortcutActivated);
     if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
@@ -77,7 +78,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this,SLOT(tryLogin()));
     connect(this->loginDialog,SIGNAL(finished(int)),this,SLOT(loginWindowClosed()));
 
-    this->noticeDialog = new NoticeDialog();
+    //forget to delete this object, add to mainWindow's child to autoDelete
+    this->noticeDialog = new NoticeDialog(this);
     
     connect(Authenticat::getInstance(),SIGNAL(verifyStoped()),
                   this,SLOT(verifyStoped()),Qt::QueuedConnection);
@@ -89,22 +91,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //更新模块初始化
     updateServer = new UpdateService(NDR_UPDATE_SERVER,NDR_UPDATE_SERVER_2_BACK,tempDir);
-<<<<<<< HEAD
-    connect(updateServer,SIGNAL(checkFinished(bool,int,int,QString)),
-            this,SLOT(checkFinished(bool,int,int,QString)));
-    connect(updateServer,SIGNAL(downloadFinished(bool,QString)),
-            this,SLOT(downloadFinished(bool,QString)));
 
-    //类初始化
-//    interfaceInfo = new InterfaceInfo();              //测试性调用接口，使用完成后删除
-//    httpsJsonPost = new HttpsJsonPost();              //unuse??
-
-=======
     connect(updateServer,&UpdateService::checkFinished, this, &MainWindow::checkFinished);
     connect(updateServer,&UpdateService::downloadFinished, this, &MainWindow::downloadFinished);
 
     
->>>>>>> nssLab/Rabenda5
+
     this->ui->lblAllTime->setText("NULL");
     this->ui->lblFlow->setText("NULL");
 
@@ -125,7 +117,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    this->killTimer(timerId);
+    //can not kill timer at this function, the time counter will crash
+    //this->killTimer(timerId);
 
     if(updateServer)
         delete updateServer;
@@ -138,6 +131,7 @@ MainWindow::~MainWindow()
 
     if(feedbackDialog)
         delete feedbackDialog;
+
     delete pppoe;
     trayIcon->hide();
     delete trayIcon;
@@ -145,6 +139,7 @@ MainWindow::~MainWindow()
 
     delete profile;
     delete logoffShortcut;
+    delete popUp;
     //delete settings;
 }
 
@@ -163,7 +158,8 @@ void MainWindow::tryLogin()
         this->ui->lblType->setText(model_caption);
     else
         this->ui->lblType->setText(tr("未知"));
-    realUsername="\r\n" + username + postfix;//+ "@student";
+    //realUsername="\r\n" + username + postfix;//+ "@student";
+    realUsername=username;//+ "@student";
 
     noticeDialog->showMessage(tr("正在拨号. . ."));
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, device_name);
@@ -176,16 +172,31 @@ QString MainWindow::time_humanable(int sec)
 {
     int day,hour,minute,second;
     int t;
+
+//    t = 24 * 60;
+//    day = min / t;
+//    min %= t;
+//    t = 60;
+//    hour = min / t;
+//    min %= t;
+//    minute = min;
+//    second  = 0;
+
+    //qDebug() << sec/60 << endl;
     t = 24*3600;
     day = sec / t;
+
     sec %= t;
     t = 3600;
     hour = sec / t;
+
     sec %= t;
     t = 60;
     minute = sec / t;
-    sec %=t;
+
+    sec %= t;
     second = sec;
+    //qDebug() << " " << day << " " << hour << " " << minute << " " << second << endl;
     //return QString(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
     return tr("%0 天 %1:%2:%3")
             .arg(day,-3,10,QChar(' '))
@@ -278,7 +289,7 @@ void MainWindow::dialFinished(bool ok)
 //            this->hide();
 //            this->trayIcon->showMessage(tr("NDR 校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
 //        }
-        noticeDialog->hide();
+        noticeDialog->close();
         Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);//必须在beginworkingui前
 
         //! Confusdion!!!!!!!!!!
@@ -295,9 +306,19 @@ void MainWindow::dialFinished(bool ok)
 #endif
             QMessageBox::information(loginDialog,tr("提示"),tr("拨号失败") + "\n" + pppoe->lastError());
         }
+
+    //getInfoAboutNss
+    getMessageFromNSS();
+
     qDebug() <<"dialFinished() exit";
 }
 
+void MainWindow::getMessageFromNSS()
+{
+    GetInfoAboutNSS *info = new GetInfoAboutNSS(NDR_NSS);
+    connect(info, &GetInfoAboutNSS::endGetInfo, info, &GetInfoAboutNSS::deleteLater);
+    info->checkInfoGet();
+}
 
 void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason)
 {
@@ -497,8 +518,13 @@ void MainWindow::timerEvent( QTimerEvent * )
                                    .arg(flow,-3,10,QChar(' ')));
     }
     this->ui->lblTime->setText(time_humanable(timepassed));
-    this->ui->lblAllTime->setText(time_humanable(time));
-    time ++ ;
+
+    //server return minute
+    this->ui->lblAllTime->setText(time_humanable(time*60 + timepassed%60));
+    //time ++ ;
+
+    if (!(timepassed%300))
+        popUp -> getXmlFromNSS(NDR_POPUP_URL);
     timepassed += 1;
 }
 
@@ -771,7 +797,7 @@ void MainWindow::loginWindowClosed()
 void MainWindow::on_goDnuiBrowser_clicked()
 {
     ui->goDnuiBrowser->setEnabled(false);
-    QUrl web(QString("http://172.24.5.233"));
+    QUrl web(QString(NDR_GATE));
     QDesktopServices::openUrl(web);
     ui->goDnuiBrowser->setEnabled(true);
 }
@@ -779,26 +805,31 @@ void MainWindow::on_goDnuiBrowser_clicked()
 void MainWindow::getSystemInfo()
 {
     qDebug() << "call infoGet clicked";
-    QDialog *message = new QDialog(this, Qt::WindowMinimizeButtonHint);
-    QLabel *label = new QLabel(message);
-    QHBoxLayout *lay = new QHBoxLayout();
+    //too ugly ↓↓↓↓
+    //QDialog *message = new QDialog(this, Qt::WindowMinimizeButtonHint);
+    //QLabel *label = new QLabel(message);
+    //QHBoxLayout *lay = new QHBoxLayout();
+    //
+    //lay->addWidget(label);
+    //message->setLayout(lay);
+    //message->setFixedSize(322, 80);
+    //
+    //label->setFrameStyle(QFrame::StyledPanel);
+    //label->setText("现在程序正在获取信息，请耐心等候.\n"
+    //               "当信息获取完毕时本对话框会自动关闭.\n"
+    //               "信息文件将会保存在您的桌面，文件名为：Info.txt");
+    //message->setWindowTitle(tr("正在处理..."));
+    //message->setWindowIcon(QIcon(tr("/icon/about.png")));
 
-    lay->addWidget(label);
-    message->setLayout(lay);
-    message->setFixedSize(322, 80);
+    noticeDialog->showMessage("现在程序正在获取信息，请耐心等候.\n"
+                              "当信息获取完毕时本对话框会自动关闭.\n"
+                              "信息文件将会保存在您的桌面，文件名为：Info.txt");
 
-    label->setFrameStyle(QFrame::StyledPanel);
-    label->setText("现在程序正在获取信息，请耐心等候.\n"
-                   "当信息获取完毕时本对话框会自动关闭.\n"
-                   "信息文件将会保存在您的桌面，文件名为：Info.txt");
-    message->setWindowTitle(tr("正在处理..."));
-    message->setWindowIcon(QIcon(tr("/icon/about.png")));
-
-    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, message, &QDialog::close);
+    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, noticeDialog, &NoticeDialog::close);
 
     emit infoWriteStarted();
 
-    message->exec();
+    //message->exec();
 }
 
 //void MainWindow::infoWriteFinished() {

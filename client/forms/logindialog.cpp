@@ -14,6 +14,12 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent) :
 	setWindowFlags(flags);
 	ui->setupUi(this);
 
+    //not useful ↓↓↓↓
+    //QPalette pal = ui->btnWinsockReset->palette();
+    //pal.setColor(QPalette::Button,QColor(255,0,0));
+    //ui->btnWinsockReset->setPalette(pal);
+    //crash ↓↓↓↓↓
+    //ui->btnWinsockReset->setStyleSheet("background-color: rgb(255, 0, 0);");
     //Set the order of the tab key
     QWidget::setTabOrder(ui->cmbAccount, ui->editPassword);
 

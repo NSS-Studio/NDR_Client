@@ -8,7 +8,8 @@ HEADERS +=      $$PWD/aboutdialog.h \
                 $$PWD/settingsdialog.h \
                 $$PWD/messageviewerdialog.h \
                 $$PWD/hangupdialog.h \
-                $$PWD/feedbackdialog.h
+                $$PWD/feedbackdialog.h \
+    $$PWD/popupdialog.h
 
 SOURCES +=      $$PWD/aboutdialog.cpp \
                 $$PWD/mainwindow.cpp \
@@ -17,7 +18,8 @@ SOURCES +=      $$PWD/aboutdialog.cpp \
                 $$PWD/settingsdialog.cpp \
                 $$PWD/messageviewerdialog.cpp \
                 $$PWD/hangupdialog.cpp \
-                $$PWD/feedbackdialog.cpp
+                $$PWD/feedbackdialog.cpp \
+    $$PWD/popupdialog.cpp
 
 FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/mainwindow.ui \
@@ -27,6 +29,12 @@ FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/messageviewerdialog.ui \
                 $$PWD/feedbackdialog.ui \
                 $$PWD/hangupdialog.ui
+
+#INCLUDEPATH +=  $$PWD/../update
+#DEPENDPATH +=   $$PWD/../update
+
+#INCLUDEPATH +=  $$PWD/../update/updateservice.h
+#SOURCES     +=  $$PWD/../update/updateservice.cpp
 
 #千万不用$$PWD 要不然auth相对路径会错误
 #这样解决了一个编译依赖问题

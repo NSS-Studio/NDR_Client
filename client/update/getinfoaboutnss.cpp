@@ -8,16 +8,25 @@
 GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
     : QObject(parent), m_Address{address}
 {
-
+    qDebug() << "GetInfoAboutNSS()" << endl;
+    this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    this->sslConf.setProtocol(QSsl::TlsV1_2);
 }
 
 void GetInfoAboutNSS::checkInfoGet()
 {
-    QQString url="http://" + m_Address + "/update/aorigin.xml";
-    QNetworkRequest tmp{QUrl(url)};
-    tmp.setSslConfiguration(this->sslConf);
-    connect(m_Reply,&QNetworkReply::finished, this, &GetInfoAboutNSS::checkInfoGetFinish);
-    m_Reply = m_NetGet.get(tmp);
+    qDebug() << "checkInfoGet()" << endl;
+
+    QString url="https://" + m_Address + "/messages/webUp.xml";
+    tmp = new QNetworkRequest{QUrl(url)};
+    tmp->setSslConfiguration(this->sslConf);
+
+    m_Reply = m_NetGet.get(*tmp);
+
+    connect(m_Reply, &QNetworkReply::finished, this, &GetInfoAboutNSS::checkInfoGetFinish);
+
+
+    qDebug() << "message url: " << url << endl;
 }
 
 //!message format:
@@ -32,14 +41,18 @@ void GetInfoAboutNSS::checkInfoGet()
 
 void GetInfoAboutNSS::checkInfoGetFinish()
 {
+    qDebug() << "checkInfoGetFinish()" << endl;
     if(m_Reply->error() != QNetworkReply::NoError)
     {
         //! Because We Get Failed, But We don't need close this client
-        qDebug() << "Get MessageInfo Failed";
+        qDebug() << "Get MessageInfo Failed: " << m_Reply->errorString() << endl;
+
+        //if failed, retry, need to set retry count
+        m_Reply = m_NetGet.get(*tmp);
         return;
     }
 
-    QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
+    QString stateValue = m_Reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
 
     qDebug() << "Http state value" << stateValue;
     if(stateValue!="200" && stateValue!="301")
@@ -50,7 +63,7 @@ void GetInfoAboutNSS::checkInfoGetFinish()
     }
     QByteArray xml;
 
-    xml=reply->readAll();
+    xml=m_Reply->readAll();
     qDebug() << "xml string:\n" << xml;
 
     QDomDocument doc;
@@ -65,13 +78,20 @@ void GetInfoAboutNSS::checkInfoGetFinish()
             return;
         }
 
+        QDomElement node;
+        std::string temp;
         for(int i = 0;i < nodes.size(); ++i)
         {
-            QDomElement node = nodes.at(i).toElement();
-            QString startTime, endTime;
-            QString http = node.attribute("http").toStdString();
-            startTime = node.attribute("startTime").toStdString();
-            endTime = node.attribute("endTime").toStdString();
+            node = nodes.at(i).toElement();
+
+            temp = node.attribute("http").toStdString();
+            QString http{temp.c_str()};
+
+            temp = node.attribute("startTime").toStdString();
+            QString startTime{temp.c_str()};
+
+            temp = node.attribute("endTime").toStdString();
+            QString endTime{temp.c_str()};
             m_Message.push_back(Message{http, startTime, endTime});
         }
 
@@ -82,11 +102,15 @@ void GetInfoAboutNSS::checkInfoGetFinish()
             needShow = false;
             return;
         }
-        for(int i = 0;i < nodes.size(); ++i)
-        {
-            QDomElement node = nodes.at(i).toElement();
-            needShow = node.attribute("need").toInt();
-        }
+
+        needShow = needs.at(0).toElement().attribute("need").toInt();
+
+        //needShow just one!!!
+        //for(int i = 0;i < needs.size(); ++i)
+        //{
+        //    node = needs.at(i).toElement();
+        //    needShow = node.attribute("need").toInt();
+        //}
         readyOpen();
     } else {
         qDebug() << "Get MessageInfo XML format error!";
@@ -98,11 +122,14 @@ void GetInfoAboutNSS::readyOpen()
 {
     //! 弹网页逻辑
     //! needShow 决定是否显示打开网页logical
-    openWeb();
+    qDebug() << "readyOpen()" << endl;
+    if (needShow)
+        openWeb();
 }
 
 void GetInfoAboutNSS::openWeb()
 {
+    qDebug() << "openWeb()" << endl;
     QDateTime currentTime = QDateTime::currentDateTime();
     QVector<QUrl> openUrl;
     QString format{"yyyy-MM-dd hh:mm:ss:zzz"};
@@ -117,4 +144,16 @@ void GetInfoAboutNSS::openWeb()
     {
         QDesktopServices::openUrl(openUrl[i]);
     }
+
+    qDebug() << "emit endGetInfo" << endl;
+    emit endGetInfo();
+}
+
+GetInfoAboutNSS::~GetInfoAboutNSS()
+{
+    qDebug() << "delete GetInfoAboutNSS" << endl;
+    if (tmp != nullptr)
+        delete tmp;
+    if (m_Reply != nullptr)
+        delete m_Reply;
 }

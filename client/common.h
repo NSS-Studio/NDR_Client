@@ -66,8 +66,17 @@ extern void __initTempDir();
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
 
 /** NDR更新服务器地址和备用服务器地址*/
-#define NDR_UPDATE_SERVER "172.24.10.13"
+#define NDR_UPDATE_SERVER "172.24.5.131"
 #define NDR_UPDATE_SERVER_2_BACK "172.24.5.13"
+
+/** NDR导航页*/
+#define NDR_GATE "http://go.neusoft.edu.cn"
+
+/** NDR弹浏览器网页*/
+#define NDR_NSS "172.24.5.131"
+
+/** NDR通知弹窗地址*/
+#define NDR_POPUP_URL "https://172.24.5.131/messages/popUp.xml"
 
 /** NDR主页*/
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"

@@ -24,12 +24,14 @@ NoticeDialog::~NoticeDialog()
 }
 void NoticeDialog::showMessage(QString msg)
 {
+    //change to half model dialog
     if(this->isVisible()==false)
     {
         QSize desktop_size = qApp->desktop()->size();
         move((desktop_size.width() - this->width()) / 2,
              (desktop_size.height() - this->height()) / 2);
         this->show();
+        this->setModal(true);
     }
     this->ui->label->setText(msg);
 }

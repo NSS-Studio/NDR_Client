@@ -12,6 +12,8 @@
 #include "feedbackdialog.h"
 #include "updateservice.h"
 #include "hangupdialog.h"
+#include "getinfoaboutnss.h"
+#include "popupdialog.h"
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
@@ -55,6 +57,7 @@ private slots:
     void downloadFinished(bool error,QString errMsg);
     void loginWindowClosed();
     void getSystemInfo();
+    void getMessageFromNSS();
 
     void on_goDnuiBrowser_clicked();
 
@@ -71,6 +74,7 @@ private:
     FeedbackDialog *feedbackDialog;
     QSystemTrayIcon *trayIcon;
     QMenu *myMenu;  
+    popUpDialog *popUp;
     
     QxtGlobalShortcut * logoffShortcut;
     
@@ -93,7 +97,7 @@ private:
     
     QString time_humanable(int sec);
     
-    void sendData();
+    //void sendData();
 
     void verifyEncrypt();
 

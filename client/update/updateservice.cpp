@@ -7,7 +7,7 @@ UpdateService::UpdateService(const QString &serverAddr, const QString &serverAdd
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
 //    !!!!!!!
 //    protocol tlsv1->TlsV1_2OrLater
-    this->sslConf.setProtocol(QSsl::TlsV1_2OrLater);
+    this->sslConf.setProtocol(QSsl::TlsV1_2);
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;
     qDebug() << "ipAddress" << serverAddr;
@@ -46,7 +46,7 @@ void UpdateService::checkOriginGet()
         this->isConnectUpdateServerFail = true;
         originGetFinished();
     }
-    disconnect(reply,&QNetworkReply::finished);
+    disconnect(reply,&QNetworkReply::finished, this,&UpdateService::checkOriginGet);
     connect(reply,&QNetworkReply::finished,this,&UpdateService::originGetFinished);
 }
 
@@ -64,7 +64,7 @@ void UpdateService::originGetFinished()
     QString errorMessage;
     if(reply->error() != QNetworkReply::NoError)
     {
-        qDebug() << "reply->errorString()" << reply->errorString();
+        qDebug() << "reply->errorString()" << reply->errorString() << endl;
         running = false;
         qDebug() << "连接远程更新服务器失败" << reply->errorString();
         emit checkFinished(true,0,0,tr("服务器正在维护中，状态码 %1").arg(reply->errorString()));

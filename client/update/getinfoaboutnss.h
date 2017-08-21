@@ -4,20 +4,21 @@
 #include <QObject>
 #include <QString>
 #include <QUrl>
+#include <QSslConfiguration>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QDateTime>
-
 
 class GetInfoAboutNSS : public QObject
 {
     Q_OBJECT
 public:
     explicit GetInfoAboutNSS(QString address ,QObject *parent = nullptr);
+    ~GetInfoAboutNSS();
 
 
 signals:
-
+    void endGetInfo();
 public slots:
     void checkInfoGet();
     void checkInfoGetFinish();
@@ -27,7 +28,8 @@ private:
 
     QString m_Address;
     QNetworkAccessManager m_NetGet;
-    QNetworkReply* m_Reply;
+    QNetworkRequest *tmp;
+    QNetworkReply *m_Reply;
     struct Message
     {
         QString m_Url;
@@ -35,6 +37,8 @@ private:
         QString m_EndTime;
     };
     QVector<Message> m_Message;
+    QSslConfiguration sslConf;
+
     bool needShow;
 };
 

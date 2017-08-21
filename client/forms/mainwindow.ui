@@ -320,6 +320,9 @@
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuTrayLogin">
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="title">
      <string notr="true">menuTrayLogin</string>
     </property>
@@ -409,6 +412,9 @@
    </property>
    <property name="iconText">
     <string>信息获取</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>
