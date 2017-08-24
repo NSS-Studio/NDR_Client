@@ -523,7 +523,7 @@ void MainWindow::timerEvent( QTimerEvent * )
     this->ui->lblAllTime->setText(time_humanable(time*60 + timepassed%60));
     //time ++ ;
 
-    if (!(timepassed%300))
+    if (!(timepassed%10))
         popUp -> getXmlFromNSS(NDR_POPUP_URL);
     timepassed += 1;
 }

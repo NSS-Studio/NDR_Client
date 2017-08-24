@@ -1,6 +1,7 @@
 #ifndef POPUPDIALOG_H
 #define POPUPDIALOG_H
 
+#include "common.h"
 #include <QObject>
 #include <QDialog>
 #include <QVector>
@@ -19,8 +20,26 @@
 #include <QPushButton>
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QCryptographicHash>
-#include <QByteArray>
+#include <QSettings>
+
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <winuser.h>
+#include <psapi.h>
+#include <winbase.h>
+/*
+ * useful function:
+ * GetForegroundWindow
+ * GetWindowRect
+ * 
+ * need to use this struct ↓↓↓↓
+ * windowinfo
+ * 
+ * useful enum:
+ * WS_EX_TOPMOST, WS_CAPTION
+ * 
+*/
+#endif
 
 class popUpDialog : public QDialog
 {
@@ -58,6 +77,7 @@ private:
     QNetworkReply *reply;
     QNetworkRequest request;
     QDesktopWidget desktop;
+    QSettings *history;
 
     struct message{
         bool isShow;
@@ -66,12 +86,15 @@ private:
         QString text;
     };
     QVector<message> group;
-    QSet<QByteArray> md5;
-    QCryptographicHash getMd5{QCryptographicHash::Md5};
-    QByteArray tempA, tempB;
+    QSet<QString> text;
+    int historyNum;
     int pageNow;
 
     void showMessage();
+
+#ifdef Q_OS_WIN
+    bool checkWindow();
+#endif
 };
 
 #endif // POPUPDIALOG_H

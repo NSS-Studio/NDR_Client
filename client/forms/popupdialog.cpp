@@ -56,6 +56,18 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
     sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
     sslConf.setProtocol(QSsl::TlsV1_2);
 
+
+    history = new QSettings(appHome + "/history.ini", QSettings::IniFormat);
+    historyNum = 0;
+    QString message;
+    do{
+        message = history->value(QString::number(historyNum, 10), "none").toString();
+        text.insert(message);
+        historyNum++;
+        qDebug() << "meaasgeHistory: " << message << endl;
+    } while (message != "none");
+    --historyNum;
+
     //popUp -> exec();
 }
 
@@ -64,6 +76,7 @@ popUpDialog::~popUpDialog()
 {
     qDebug() << "delete popUpDialog" << endl;
     delete popUp;
+
 }
 
 //---------------------------function---------------------------//
@@ -71,12 +84,18 @@ popUpDialog::~popUpDialog()
 
 void popUpDialog::getXmlFromNSS(const QString &url)
 {
-    qDebug() << "getXmlFromNSS(const QString &url)" << endl;
-    request.setUrl(QUrl(url));
-    request.setSslConfiguration(this->sslConf);
+    bool flag = true;
+#ifdef Q_OS_WIN
+    flag = checkWindow();
+#endif
+    if (flag){
+        qDebug() << "getXmlFromNSS(const QString &url)" << endl;
+        request.setUrl(QUrl(url));
+        request.setSslConfiguration(this->sslConf);
 
-    reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, this, &popUpDialog::getXmlDone);
+        reply = manager.get(request);
+        connect(reply, &QNetworkReply::finished, this, &popUpDialog::getXmlDone);
+    }
 }
 
 void popUpDialog::getXmlDone()
@@ -133,14 +152,11 @@ void popUpDialog::getXmlDone()
                       //temp[k++] = j.nodeValue(); //can not use this function,unknow
                  }
                  qDebug() << temp[0] << " " << temp[1] << " " << temp[2] <<" " << temp[3] << endl;
-                 if (temp[0] == "1"){
-                     tempA.append(temp[3]);
-                     getMd5.addData(tempA);
-                     tempA = getMd5.result();
-
-                     if (md5.find(tempA) != md5.constEnd()){
-                         md5.insert(tempA);
+                 if (temp[0] == "1" && !temp[3].isEmpty()){
+                     if (text.find(temp[3]) == text.constEnd()){
+                         text.insert(temp[3]);
                          group.push_back(message{temp[0].toInt(), temp[1], temp[2], temp[3]});
+                         history->setValue(QString::number(historyNum++, 10), temp[3]);
                      } else {
                          qDebug() << "message already display" << endl;
                          return;
@@ -214,3 +230,53 @@ void popUpDialog::goPrePage()
     page -> setText(tr("%0/%1").arg(pageNow)
                                .arg(group.size()));
 }
+
+#ifdef Q_OS_WIN
+bool popUpDialog::checkWindow()
+{
+    qDebug() << "checkWindow()" << endl;
+
+    //enum process
+    //DWORD aProcesses[1024], cbNeeded, cProcesses;
+    //if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
+    //    qDebug() << "Enum process failed" << endl;
+    //    return false;
+    //}
+    //
+    //cProcesses = cbNeeded/sizeof(DWORD);
+    //
+    //for (unsigned i = 0; i < cProcesses; i++){
+    //    if (aProcess[i] != 0)
+    //        PrinterPocessNameAndID(aProcesses[i]);
+    //
+    //}
+
+    //checkScreen
+    HWND handle = GetForegroundWindow();
+    if (handle == nullptr){
+        qDebug() << "Get active handle failed" << endl;
+        //qDebug() << "Error code: " << GetLastError() << endl;
+        return false;
+    }
+
+    WINDOWINFO info;
+    GetWindowInfo(handle, &info);
+    if (info.dwWindowStatus == WS_ACTIVECAPTION)
+        qDebug() << "this window is active" << endl;
+    else
+        qDebug() << "this window is not active" << endl;
+    //bool isTop = (info.dwExStyle == WS_EX_TOPMOST);
+
+    bool isFull = false;
+    RECT winSize;
+    GetWindowRect(handle, &winSize);
+    isFull =  (winSize.right - winSize.left == GetSystemMetrics(SM_CXSCREEN)) &&
+              (winSize.bottom - winSize.top == GetSystemMetrics(SM_CYSCREEN));
+
+
+    qDebug() << winSize.right - winSize.left << " " << winSize.bottom - winSize.top << endl;
+    qDebug() << "window check: " << isFull << endl;
+    CloseHandle(handle);
+    return !isFull;
+}
+#endif

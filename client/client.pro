@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core network widgets
+QT       += core network widgets xml
 TARGET = ndr-client #目标文件
 TEMPLATE = app
 
