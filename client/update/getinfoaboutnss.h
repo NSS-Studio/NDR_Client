@@ -13,9 +13,8 @@ class GetInfoAboutNSS : public QObject
 {
     Q_OBJECT
 public:
-    explicit GetInfoAboutNSS(QString address ,QObject *parent = nullptr);
     ~GetInfoAboutNSS();
-
+    static GetInfoAboutNSS* getInstance();
 
 signals:
     void endGetInfo();
@@ -23,6 +22,7 @@ public slots:
     void checkInfoGet();
     void checkInfoGetFinish();
 private:
+    explicit GetInfoAboutNSS(QString address ,QObject *parent = nullptr);
     void readyOpen();
     void openWeb();
 

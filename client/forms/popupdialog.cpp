@@ -155,7 +155,7 @@ void popUpDialog::getXmlDone()
                  if (temp[0] == "1" && !temp[3].isEmpty()){
                      if (text.find(temp[3]) == text.constEnd()){
                          text.insert(temp[3]);
-                         group.push_back(message{temp[0].toInt(), temp[1], temp[2], temp[3]});
+                         group.push_back(message{bool(temp[0].toInt()), temp[1], temp[2], temp[3]});
                          history->setValue(QString::number(historyNum++, 10), temp[3]);
                      } else {
                          qDebug() << "message already display" << endl;

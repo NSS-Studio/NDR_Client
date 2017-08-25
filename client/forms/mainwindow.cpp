@@ -158,8 +158,8 @@ void MainWindow::tryLogin()
         this->ui->lblType->setText(model_caption);
     else
         this->ui->lblType->setText(tr("未知"));
-    //realUsername="\r\n" + username + postfix;//+ "@student";
-    realUsername=username;//+ "@student";
+    realUsername="\r\n" + username + postfix;//+ "@student";
+//    realUsername=username;//+ "@student";
 
     noticeDialog->showMessage(tr("正在拨号. . ."));
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, device_name);
@@ -315,8 +315,8 @@ void MainWindow::dialFinished(bool ok)
 
 void MainWindow::getMessageFromNSS()
 {
-    GetInfoAboutNSS *info = new GetInfoAboutNSS(NDR_NSS);
-    connect(info, &GetInfoAboutNSS::endGetInfo, info, &GetInfoAboutNSS::deleteLater);
+    GetInfoAboutNSS *info = GetInfoAboutNSS::getInstance();
+//    connect(info, &GetInfoAboutNSS::endGetInfo, info, &GetInfoAboutNSS::deleteLater);
     info->checkInfoGet();
 }
 

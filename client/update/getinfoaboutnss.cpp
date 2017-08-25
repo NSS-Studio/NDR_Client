@@ -4,6 +4,8 @@
 #include <QDomDocument>
 #include <QVector>
 #include <QDesktopServices>
+#include "common.h"
+
 
 GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
     : QObject(parent), m_Address{address}
@@ -11,6 +13,16 @@ GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
     qDebug() << "GetInfoAboutNSS()" << endl;
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
     this->sslConf.setProtocol(QSsl::TlsV1_2);
+}
+
+GetInfoAboutNSS* GetInfoAboutNSS::getInstance()
+{
+    static GetInfoAboutNSS* instance = nullptr;
+    if(instance == nullptr)
+    {
+        instance = new GetInfoAboutNSS(NDR_NSS);
+    }
+    return instance;
 }
 
 void GetInfoAboutNSS::checkInfoGet()

@@ -97,9 +97,9 @@ bool infoModule::getArpInfo() {
 
 #ifdef Q_OS_WIN
     arguments << "-av";
-#elif defind(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX)
     arguments << "-en";
-#elif defind(Q_OS_MAC)
+#elif defined(Q_OS_MAC)
     arguments << "-an";
 #endif
     return getOneInfo(program, arguments);
@@ -129,9 +129,9 @@ bool infoModule::getNetstatInfo() {
 
 #ifdef Q_OS_WIN
     arguments << "-ano";
-#elif defind(Q_OS_LINUX)
+#elif defined(Q_OS_LINUX)
     arguments << "-anp";
-#elif defind(Q_OS_MAC)
+#elif defined(Q_OS_MAC)
     arguments << "-an";
 #endif
     return getOneInfo(program, arguments);
