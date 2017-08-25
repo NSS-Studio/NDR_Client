@@ -211,28 +211,27 @@ void MainWindow::dialFinished(bool ok)
     qDebug() << QString("dialFinished(%1) enter").arg(ok);
     if(ok)
     {
-
         if(profile->open())
         {
-		QString username, password, device_name;
-		QString manner;
-		bool autoLogin,savePassword;
-		loginDialog->getFormData(username,password,manner,device_name,&autoLogin,&savePassword);
-		profile->setLoginInfo(username,savePassword?password:"",manner);
-		profile->setDeviceName(device_name);	// Deprecated
-		QSettings conn_cfg(appHome + "/connection.cfg", QSettings::IniFormat);
-		conn_cfg.setValue("Interface/Etherface", device_name);
-		this->username = username;
-		int left,top,width,height;
-//		int desktop_width = QApplication::desktop()->width();
-//		int desktop_height = QApplication::desktop()->height();
+            QString username, password, device_name;
+            QString manner;
+            bool autoLogin,savePassword;
+            loginDialog->getFormData(username,password,manner,device_name,&autoLogin,&savePassword);
+            profile->setLoginInfo(username,savePassword?password:"",manner);
+            profile->setDeviceName(device_name);	// Deprecated
+            QSettings conn_cfg(appHome + "/connection.cfg", QSettings::IniFormat);
+            conn_cfg.setValue("Interface/Etherface", device_name);
+            this->username = username;
+            int left,top,width,height;
+    //		int desktop_width = QApplication::desktop()->width();
+    //		int desktop_height = QApplication::desktop()->height();
 
-        QScreen *screen= QGuiApplication::primaryScreen ();
-        QRect mm = screen->availableGeometry() ;
-        int desktop_width = mm.width();
-        int desktop_height = mm.height();
-		if(profile->getMainWindowRect(username,left,top,width,height))
-		{
+            QScreen *screen= QGuiApplication::primaryScreen ();
+            QRect mm = screen->availableGeometry() ;
+            int desktop_width = mm.width();
+            int desktop_height = mm.height();
+            if(profile->getMainWindowRect(username,left,top,width,height))
+            {
 
                 if(left + this->width() > desktop_width - 100 || left + this->width() < 100
                         || top + this->height() > desktop_height - 100 || top + this->height() < 100)
@@ -243,30 +242,29 @@ void MainWindow::dialFinished(bool ok)
                 ///QMessageBox::information(this,"",QString::number(width)+ " " + QString::number(height));
                 this->move(left,top);
                 //this->resize(width,height);
-            }else
-            {
-                left = desktop_width - this->width() - 100;
-                top = (desktop_height - this->height())/2;
-                this->move(left,top);
-            }
+             } else {
+                    left = desktop_width - this->width() - 100;
+                    top = (desktop_height - this->height())/2;
+                    this->move(left,top);
+             }
 
-            if(!profile->getUserOnlineTime(username,allTime))
-            {
-                this->allTime = 0;
-            }
-            
-            this->ui->lblAllTime->setText(time_humanable(this->allTime));
-            
-            if(autoLogin)
-                profile->setAutoLoginUser(username);
-            else
-            {
-                QString autoLoginUserName;
-                if(profile->getAutoLoginUser(autoLoginUserName) 
-                        && autoLoginUserName ==username)
-                    profile->setAutoLoginUser("");
-            }
-            profile->close();
+                if(!profile->getUserOnlineTime(username,allTime))
+                {
+                    this->allTime = 0;
+                }
+
+                this->ui->lblAllTime->setText(time_humanable(this->allTime));
+
+                if(autoLogin)
+                    profile->setAutoLoginUser(username);
+                else
+                {
+                    QString autoLoginUserName;
+                    if(profile->getAutoLoginUser(autoLoginUserName)
+                            && autoLoginUserName ==username)
+                        profile->setAutoLoginUser("");
+                }
+                profile->close();
 
         }
 
@@ -298,6 +296,8 @@ void MainWindow::dialFinished(bool ok)
         //verifyEncrypt();//必须在beginworkingui前
         if(ENABLE_UPDATE)
             updateServer->checkUpdate();
+        //getInfoAboutNss
+        getMessageFromNSS();
         } else {
             noticeDialog->hide();
             onStartLogining();
@@ -307,8 +307,7 @@ void MainWindow::dialFinished(bool ok)
             QMessageBox::information(loginDialog,tr("提示"),tr("拨号失败") + "\n" + pppoe->lastError());
         }
 
-    //getInfoAboutNss
-    getMessageFromNSS();
+
 
     qDebug() <<"dialFinished() exit";
 }
@@ -416,10 +415,10 @@ void MainWindow::on_actionShowLoginDialog_triggered()
 void MainWindow::on_actionLogoff_triggered()
 {
     qDebug("slot: on_actionLogoff_triggered()");
-    onStopWorking();
     noticeDialog->showMessage(tr("正在尝试注销"));
     Authenticat::getInstance()->endVerify();
     this->pppoe->hangUp(); 
+    onStopWorking();
     //this->killTimer(timerId);
 }
 

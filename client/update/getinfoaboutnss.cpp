@@ -152,10 +152,17 @@ void GetInfoAboutNSS::openWeb()
         if(start <= currentTime && currentTime <= end)
             openUrl.push_back(QUrl{m_Message[i].m_Url});
     }
-    for(int i = 0; i < openUrl.size(); ++i)
-    {
-        QDesktopServices::openUrl(openUrl[i]);
-    }
+
+    for (auto i : openUrl)
+        QDesktopServices::openUrl(i);
+
+    openUrl.erase(openUrl.begin(), openUrl.end());
+    m_Message.erase(m_Message.begin(), m_Message.end());
+    //for(int i = 0; i < openUrl.size(); ++i)
+    //{
+    //    QDesktopServices::openUrl(openUrl[i]);
+    //}
+
 
     qDebug() << "emit endGetInfo" << endl;
     emit endGetInfo();

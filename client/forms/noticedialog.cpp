@@ -24,6 +24,8 @@ NoticeDialog::~NoticeDialog()
 }
 void NoticeDialog::showMessage(QString msg)
 {
+    //first set text, then show
+    this->ui->label->setText(msg);
     //change to half model dialog
     if(this->isVisible()==false)
     {
@@ -33,7 +35,6 @@ void NoticeDialog::showMessage(QString msg)
         this->show();
         this->setModal(true);
     }
-    this->ui->label->setText(msg);
 }
 
 void NoticeDialog::mouseMoveEvent ( QMouseEvent  * e )

@@ -39,7 +39,7 @@ FORMS +=        $$PWD/aboutdialog.ui \
 #千万不用$$PWD 要不然auth相对路径会错误
 #这样解决了一个编译依赖问题
 INCLUDEPATH +=  ../auth/
-LIBS +=         ../auth/libauth.a
+LIBS +=         ../auth/release/libauth.a
 
 win32 {
     LIBS += -lpsapi

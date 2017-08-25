@@ -276,7 +276,7 @@ bool popUpDialog::checkWindow()
 
     qDebug() << winSize.right - winSize.left << " " << winSize.bottom - winSize.top << endl;
     qDebug() << "window check: " << isFull << endl;
-    CloseHandle(handle);
+    //CloseHandle(handle);
     return !isFull;
 }
 #endif

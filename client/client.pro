@@ -41,6 +41,7 @@ macx {
 	TARGET = "NDR Client"
 	ICON = icons/logo.icns
 }
+
 unix:!macx{
 
 }

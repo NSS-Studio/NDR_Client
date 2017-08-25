@@ -2,12 +2,12 @@
 
 #include <QtCore/QDebug>
 
-PPPoE::PPPoE(QObject *parent) :
-    QThread(parent){
+PPPoE::PPPoE(QObject *parent) : QThread(parent)
+{
     basedsl = new BaseDsl(NDR_PHONEBOOK_NAME);
-    stop_now=false;
+    stop_now = false;
     isRedial = false;
-    connect(this,SIGNAL(finished()),this,SLOT(threadFinished()),Qt::QueuedConnection);
+    connect(this, SIGNAL(finished()), this, SLOT(threadFinished()), Qt::QueuedConnection);
 //#ifdef Q_OS_WIN
     //this->hRasConn = NULL;
 //#endif
@@ -28,25 +28,15 @@ PPPoE::~PPPoE()
 
 void PPPoE::run() {
 	//qDebug() << "PPPoE::run: device_name:" << device_name;
-    bool ret = basedsl->dial(username, password, device_name, errorMessage);
-    if(!ret)
-    {
-        dialSucceed = false;
-        if(isRedial)
-            emit redialFinished(false);
-        else
-            emit dialFinished(false);
-    }else
-    {
+    bool ret = basedsl -> dial(username, password, device_name, errorMessage);
+    if(ret){
         if(isRedial)
             emit redialFinished(true);
         else
             emit dialFinished(true);
         dialSucceed = true;
-        for(;;)
-        {
-            if(stop_now)
-            {
+        while (1){
+            if(stop_now){
                 //Log::write("disconnect naturally\n");
                 //Log::write(QString::number(ret)+ " " + QString::number(stop_now)+"\n");
                 basedsl->hangUp();
@@ -54,8 +44,7 @@ void PPPoE::run() {
                 isDisconnectNaturally=true;
                 break;
             }
-            if(basedsl->isDisconnected())
-            {
+            if(basedsl->isDisconnected()){
                 qDebug() << "Network Disconnected";
                 isDisconnectNaturally=false;
                 //emit hangedUp(false);
@@ -63,6 +52,13 @@ void PPPoE::run() {
             }
             this->sleep(1);
         }
+    } else {
+        dialSucceed = false;
+        if(isRedial)
+            emit redialFinished(false);
+        else
+            emit dialFinished(false);
+
     }
 }
 
