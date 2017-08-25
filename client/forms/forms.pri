@@ -42,6 +42,6 @@ INCLUDEPATH +=  ../auth/
 LIBS +=         ../auth/libauth.a
 
 win32 {
-    LIBS += ../auth/libpsapi.a
+    LIBS += -lpsapi
 }
 
