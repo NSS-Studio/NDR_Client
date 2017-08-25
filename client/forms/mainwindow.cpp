@@ -724,7 +724,7 @@ void MainWindow::checkFinished(bool error,int major,int minor,QString errMsg)
      *      It Only Used at Non-developers Can Develop the New_NDR and Need to Rollback
      * ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓This↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
      */
-    if( major != VERSION_MAJOR || minor != VERSION_MINOR)
+    if( major > VERSION_MAJOR || minor > VERSION_MINOR)
     {
         qDebug() << "需要更新！！！！！！！！！！！！";
         updateServer->downloadLatestPackage();
