@@ -19,8 +19,8 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
     page = new QLabel(tr("N/N"));
     nextPage = new QPushButton(tr(">"), popUp);
     prePage = new QPushButton(tr("<"), popUp);
-    laAuth = new QLabel(tr("Auth: "), popUp);
-    laTitle = new QLabel(tr("Title: "), popUp);
+    laAuth = new QLabel(tr("作者: "), popUp);
+    laTitle = new QLabel(tr("标题: "), popUp);
     liAuth = new QLineEdit(tr("Unknow"), popUp);
     liTitle = new QLineEdit(tr("Unknow"), popUp);
     teText = new QTextBrowser(popUp);
