@@ -8,7 +8,7 @@
 #include "settingsdialog.h"
 #include "aboutdialog.h"
 #include "localstorage.h"
-#include "qxtglobalshortcut.h"
+//#include "qxtglobalshortcut.h"
 #include "feedbackdialog.h"
 #include "updateservice.h"
 #include "hangupdialog.h"
@@ -73,7 +73,7 @@ private:
     QMenu *myMenu;  
     popUpDialog *popUp;
     
-    QxtGlobalShortcut * logoffShortcut;
+//    QxtGlobalShortcut * logoffShortcut;
     
     State state;
     bool app_exiting; //退出标记
@@ -100,7 +100,7 @@ private:
 
 public slots:  
     void iconActivated(QSystemTrayIcon::ActivationReason reason);  
-    void logoffShortcutActivated();
+//    void logoffShortcutActivated();
 protected:  
     void closeEvent(QCloseEvent *event);  
 signals:

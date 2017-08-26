@@ -10,14 +10,11 @@ TARGET = auth
 TEMPLATE = lib
 CONFIG += staticlib
 
-#SOURCES += authenticat.cpp
-
-#HEADERS += authenticat.h
-
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
 
 HEADERS     +=  $$PWD/authenticat.h \
                 $$PWD/checkfilethread.h \

@@ -11,7 +11,7 @@ TEMPLATE = app
 #CONFIG += console #终端可作为调试输出载体
 #DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
 include(pppoe/pppoe.pri)
-include(qxtglobalshortcut5/qxt.pri)
+#include(qxtglobalshortcut5/qxt.pri)
 include(forms/forms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
