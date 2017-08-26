@@ -14,10 +14,14 @@
 
 int main(int argc, char *argv[])
 {
+//  high dpi support!
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #ifndef Q_OS_MAC
 	QApplication::setStyle("cleanlooks");
 #endif
 	SingleApplication a(argc, argv,"NSS-DR-CLIENT");
+
+
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
