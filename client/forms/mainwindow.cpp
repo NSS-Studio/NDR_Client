@@ -24,16 +24,16 @@ MainWindow::MainWindow(QWidget *parent) :
     //settings = new SettingsSet(appHome + "/config.ini");
 
     popUp = new popUpDialog();
-    logoffShortcut = new QxtGlobalShortcut(this);
-    connect(logoffShortcut, &QxtGlobalShortcut::activated, this, &MainWindow::logoffShortcutActivated);
-    if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
-    {
-        QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
-    }
-    else
-    {
-        logoffShortcut->setDisabled();
-    }
+    //logoffShortcut = new QxtGlobalShortcut(this);
+    //connect(logoffShortcut, &QxtGlobalShortcut::activated, this, &MainWindow::logoffShortcutActivated);
+    //if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
+    //{
+    //    QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
+    //}
+    //else
+    //{
+    //    logoffShortcut->setDisabled();
+    //}
 
     profile = new LocalStorage(appHome + "/config.db");//如果数据库结构变化，修改文件名抛弃数据
 
@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this->loginDialog,SIGNAL(finished(int)),this,SLOT(loginWindowClosed()));
 
     //forget to delete this object, add to mainWindow's child to autoDelete
-    this->noticeDialog = new NoticeDialog(this);
+    this->noticeDialog = new NoticeDialog();
     
     connect(Authenticat::getInstance(),SIGNAL(verifyStoped()),
                   this,SLOT(verifyStoped()),Qt::QueuedConnection);
@@ -120,6 +120,9 @@ MainWindow::~MainWindow()
     //can not kill timer at this function, the time counter will crash
     //this->killTimer(timerId);
 
+    if (noticeDialog != nullptr)
+        delete noticeDialog;
+
     if(updateServer)
         delete updateServer;
 
@@ -138,7 +141,7 @@ MainWindow::~MainWindow()
     delete ui;
 
     delete profile;
-    delete logoffShortcut;
+    //delete logoffShortcut;
     delete popUp;
     //delete settings;
 }
@@ -416,6 +419,11 @@ void MainWindow::on_actionLogoff_triggered()
 {
     qDebug("slot: on_actionLogoff_triggered()");
     noticeDialog->showMessage(tr("正在尝试注销"));
+
+    QEventLoop loop;
+    QTimer::singleShot(100, &loop, SLOT(quit()));
+    loop.exec();
+
     Authenticat::getInstance()->endVerify();
     this->pppoe->hangUp(); 
     onStopWorking();
@@ -535,11 +543,11 @@ void MainWindow::on_actionSettings_triggered()
     if(settingsDialog->getFormData(settings))
     {
         settings->writeAll();
-        if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
-        {
-            QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
-            this->logoffShortcut->setDisabled();
-        }
+        //if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
+        //{
+        //    QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
+        //    this->logoffShortcut->setDisabled();
+        //}
     }
 //    delete settingsDialog;
 //    settingsDialog = nullptr;
@@ -633,11 +641,11 @@ void MainWindow::redialFinished(bool ok)
     qDebug() << "redialFinished() exit";
 }
 
-void MainWindow::logoffShortcutActivated()
-{
-    this->ui->actionLogoff->trigger();
-    qDebug() << "HOTKEY";
-}
+//void MainWindow::logoffShortcutActivated()
+//{
+//    this->ui->actionLogoff->trigger();
+//    qDebug() << "HOTKEY";
+//}
 
 void MainWindow::on_actionActionFeedback_triggered()
 {
@@ -665,7 +673,7 @@ void MainWindow::onStartWorking()
     timerId = this->startTimer(1000);
     this->timerEvent(NULL);
 
-	this->logoffShortcut->setEnabled();
+//	this->logoffShortcut->setEnabled();
 
 	this->state = Working;
 	ui->mainToolBar->show();
@@ -675,12 +683,12 @@ void MainWindow::onStopWorking()
 {
     qDebug() << "Timer delete" << endl;
 	//QMessageBox::information(this,"","onStopWorking");
-    this->killTimer(timerId);
 	this->state = Others;
 	this->trayIcon->hide();
 	this->hide();
-	this->logoffShortcut->setDisabled();
+//	this->logoffShortcut->setDisabled();
 	ui->mainToolBar->hide();
+    this->killTimer(timerId);
 }
 
 void MainWindow::onStartLogining()

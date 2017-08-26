@@ -182,7 +182,7 @@ void UpdateService::downloadLatestPackage()
     {
         qDebug() << "Download setup package failed" ;
         running = false;
-	emit downloadFinished(true, tr("文件下载失败") + "\n" + errorMessage);
+        emit downloadFinished(true, tr("文件下载失败") + "\n" + errorMessage);
     }
     //emit downloadFinished(true,"");
 }
