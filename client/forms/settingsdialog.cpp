@@ -45,8 +45,13 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 {
     //settings.autoRasdial = this->ui->chk;
     this->ui->chkAutoRedial->setChecked(settings->autoRasdial);
-    //this->ui->cmbHotKey->setEditText(settings->hotkey);
-    qDebug() << "hotkey" << settings->hotkey;
+//    this->ui->cmbHotKey->setEditText(settings->hotkey);
+//    qDebug() << "hotkey" << settings->hotkey;
+    this->ui->cmbHotKey->hide();
+    this->ui->label->hide();
+    this->ui->label_5->hide();
+    this->ui->comboBox->hide();
+
     this->ui->chkQuitWhileClose->setChecked(settings->quitWhileCloseWindow);
     this->ui->chkAutoMinimize->setChecked(settings->autoMinimize);
 
@@ -65,7 +70,7 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 
     if(this->exec()==QDialog::Accepted){
         settings->autoRasdial = this->ui->chkAutoRedial->isChecked();
-        //settings->hotkey = this->ui->cmbHotKey->currentText().trimmed();
+//        settings->hotkey = this->ui->cmbHotKey->currentText().trimmed();
         settings->quitWhileCloseWindow = this->ui->chkQuitWhileClose->isChecked();
         settings->autoMinimize = this->ui->chkAutoMinimize->isChecked();
 	settings->language = this->ui->cmbLanguage->itemData(ui->cmbLanguage->currentIndex()).toString();

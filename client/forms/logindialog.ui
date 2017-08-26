@@ -273,6 +273,9 @@
            <height>16777215</height>
           </size>
          </property>
+         <property name="whatsThis">
+          <string/>
+         </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>

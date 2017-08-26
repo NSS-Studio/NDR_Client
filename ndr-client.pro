@@ -5,4 +5,10 @@ SUBDIRS += $$PWD/auth/auth.pro \
 
 CONFIG += ordered
 
-QT += c++11
+QT += c++14
+
+
+CONFIG(debug, debug|release):{
+    CONFIG += exceptions
+}
+
