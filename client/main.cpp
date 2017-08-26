@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	MainWindow w;
+    MainWindow w;
 //    w.show();
     w.hide();
 
