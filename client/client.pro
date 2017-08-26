@@ -51,6 +51,8 @@ win32 {
     RC_FILE +=  $$PWD/appicon_win/appicon.rc
 }
 
+LIBS += -lDbgHelp
+
 CODEFORTR = UTF-8
 DEFAULTCODEC = UTF-8
 CODEC = UTF-8
