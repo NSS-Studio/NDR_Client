@@ -13,7 +13,7 @@
 #include <QtCore/QtGlobal>
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 9, 1))
-#error "!!! please use qt 5.9.1"
+#error "!!! please use qt 5.9.1 or later"
 #endif
 
 /** 确定操作系统类型
