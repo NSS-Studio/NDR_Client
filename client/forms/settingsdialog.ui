@@ -27,7 +27,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -79,6 +79,13 @@
         <widget class="QCheckBox" name="chkAutoRedial">
          <property name="text">
           <string>断线自动重连</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QCheckBox" name="chkAutoMinimize">
+         <property name="text">
+          <string>拨号完毕隐藏主面板</string>
          </property>
         </widget>
        </item>
@@ -139,17 +146,10 @@
           <string notr="true">color: rgb(30, 170, 30);</string>
          </property>
          <property name="text">
-          <string>若要关闭热键，请清空编辑框</string>
+          <string/>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QCheckBox" name="chkAutoMinimize">
-         <property name="text">
-          <string>拨号完毕隐藏主面板</string>
          </property>
         </widget>
        </item>
