@@ -2,6 +2,7 @@
 #define CONFUSION_H
 
 #include <QObject>
+#include <QSharedPointer>
 #include "authenticat.h"
 
 class Confusion : public QObject

@@ -113,18 +113,19 @@ void VerifyThread::run()
                 num1 = ( num1 + 1 ) % 0xFF;
                 writeSize = build_challenge( ( _challenge* )bufWrite);
                 break;
-            default:;
+            default:
                 Log::write(QString("VF:Format Error proto:%1, header.type:%2\n").arg(header->proto).arg(header->type));
                 goto exit_thread;
             }
             break;
-        default:;
+        default:
             Log::write(QString("VF:Format Error proto:%1, header.type:%2\n").arg(header->proto).arg(header->type));
             goto exit_thread;
             //unknow data
         }
     }
-exit_thread:;
+exit_thread:
+    qDebug() << "verify thread id: " << QThread::currentThread() << endl;
     this->client->close();
     delete this->client;
     qDebug() << "Verify thread over" ;

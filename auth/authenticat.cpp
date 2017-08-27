@@ -60,6 +60,7 @@ void Authenticat::helpEndVerify(Authenticat* auth) {
 
 void Authenticat::endVerify() {
     helpEndVerify(getInstance());
+    qDebug() << "Authenticat::endVerify()" << endl;
     getConfusionInstance()->endVerify();
     /*
     delete this->verifyThread;
@@ -72,14 +73,14 @@ void Authenticat::endVerify() {
 void Authenticat::threadStarted()
 {
     Log::write("thread started");
-    this->count ++;
+    this->count++;
 }
 
 void Authenticat::threadFinished()
 {
     qDebug() << "thread stoped";
     //mutex.lock();
-    this->count --;
+    this->count--;
     if(this->verifyThread && this->verifyThread->isFinished())
     {
         delete this->verifyThread;

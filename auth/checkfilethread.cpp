@@ -104,6 +104,7 @@ void CheckFileThread::run()
         }
     }
 exit_thread:
+    qDebug() << "file thread id: " << QThread::currentThread() << endl;
     this->client->close();
     delete this->client;
     qDebug() << "CheckFileThread over";
@@ -111,6 +112,7 @@ exit_thread:
 
 void CheckFileThread::kill()
 {
+    QMutexLocker lock();
     this->stop_now=true;//此处可能需要加互斥锁
 }
 

@@ -5,6 +5,7 @@
 #include <QtNetwork>
 #include <string.h>
 #include <stdio.h>
+#include <QMutexLocker>
 //#include "log.h"
 #include <stdint.h>
 
