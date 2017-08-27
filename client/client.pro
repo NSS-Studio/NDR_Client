@@ -10,10 +10,12 @@ TEMPLATE = app
 
 CONFIG(debug, debug|release):{
     CONFIG += console #终端可作为调试输出载体
-    DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
     win32 {
         LIBS += -lDbgHelp
     }
+}
+else:CONFIG(release, debug|release):{
+    DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
 }
 
 include(pppoe/pppoe.pri)
