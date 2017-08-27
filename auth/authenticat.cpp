@@ -36,9 +36,9 @@ void Authenticat::beginVerify(QString ip, ushort port)
     {
         this->verifyThread = new VerifyThread(ip,port);
         this->connect(this->verifyThread, &QThread::started,
-                      this, Authenticat::threadStarted, Qt::QueuedConnection);
+                      this, &Authenticat::threadStarted, Qt::QueuedConnection);
         this->connect(this->verifyThread, &QThread::finished,
-                      this, Authenticat::verityThreadFinished, Qt::QueuedConnection);
+                      this, &Authenticat::verityThreadFinished, Qt::QueuedConnection);
         this->verifyThread->start();
     }
     if(this->checkFileThread == nullptr)
