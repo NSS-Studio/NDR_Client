@@ -6,6 +6,7 @@
 #include <QDialog>
 #include <QVector>
 #include <QSet>
+#include <QTimer>
 #include <QLabel>
 #include <QString>
 #include <QTextBrowser>
@@ -54,17 +55,21 @@ private slots:
     void getXmlDone();
     void goNextPage();
     void goPrePage();
+    void timeCount();
 
 private:
     QDialog *popUp;
     QLabel *laTitle;
     QLabel *laAuth;
     QLabel *page;
+    QLabel *closeTime;
     QLineEdit *liAuth;
     QLineEdit *liTitle;
     QTextBrowser *teText;
     QPushButton *nextPage;
     QPushButton *prePage;
+    QTimer *time;
+    int timePass;
 
     QHBoxLayout *hbAuth;
     QHBoxLayout *hbTitle;
@@ -91,6 +96,7 @@ private:
     int pageNow;
 
     void showMessage();
+    void resetTime();
 
 #ifdef Q_OS_WIN
     bool checkWindow();

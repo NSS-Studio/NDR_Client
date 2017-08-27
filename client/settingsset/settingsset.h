@@ -8,6 +8,7 @@
 #define KEY_AUTO_MINIMAIE   "auto_minimize"
 #define KEY_LANGUAGE        "lang"
 #define KEY_WEBUP_ENABLE    "webUpEnable"
+#define KEY_AUTO_CLOSE      "autoClose"
 class SettingsSet
 {
 public:
@@ -18,6 +19,7 @@ public:
     bool quitWhileCloseWindow;
     bool autoMinimize;
     bool webUpEnable;
+    bool autoClose;
     
     bool readAll();
     void writeAll();

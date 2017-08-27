@@ -21,6 +21,7 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
     prePage = new QPushButton(tr("<"), popUp);
     laAuth = new QLabel(tr("作者: "), popUp);
     laTitle = new QLabel(tr("标题: "), popUp);
+    closeTime = new QLabel(tr(" "), popUp);
     liAuth = new QLineEdit(tr("Unknow"), popUp);
     liTitle = new QLineEdit(tr("Unknow"), popUp);
     teText = new QTextBrowser(popUp);
@@ -43,6 +44,7 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
     hbTitle -> addWidget(laTitle);
     hbTitle -> addWidget(liTitle);
     hbPage -> addWidget(page);
+    hbPage -> addWidget(closeTime);
     hbPage -> addWidget(prePage);
     hbPage -> addWidget(nextPage);
 
@@ -188,7 +190,31 @@ void popUpDialog::showMessage()
 
     connect(nextPage, &QPushButton::clicked, this, &popUpDialog::goNextPage);
     connect(prePage, &QPushButton::clicked, this, &popUpDialog::goPrePage);
+
+    if (settings->autoClose){
+        time = new QTimer(this);
+        connect(time, QTimer::timeout, this, popUpDialog::timeCount);
+        timePass = 0;
+        time->start(1000);
+    }
     popUp -> show();
+}
+
+void popUpDialog::timeCount()
+{
+    if (timePass != 10){
+        timePass++;
+        closeTime->setText(tr("%0秒后自动关闭").arg(10 - timePass));
+    } else {
+        disconnect(time);
+        delete time;
+        popUp->close();
+    }
+}
+
+void popUpDialog::resetTime()
+{
+    timePass = 0;
 }
 
 void popUpDialog::goNextPage()
@@ -209,6 +235,8 @@ void popUpDialog::goNextPage()
     teText -> setText(group[realPage].text);
     page -> setText(tr("%0/%1").arg(pageNow)
                                .arg(group.size()));
+
+    resetTime();
 }
 
 void popUpDialog::goPrePage()
@@ -229,6 +257,8 @@ void popUpDialog::goPrePage()
     teText -> setText(group[realPage].text);
     page -> setText(tr("%0/%1").arg(pageNow)
                                .arg(group.size()));
+
+    resetTime();
 }
 
 #ifdef Q_OS_WIN

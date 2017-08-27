@@ -12,6 +12,9 @@ FeedbackDialog::FeedbackDialog(QWidget *parent) :
     ui->chkToScore->setChecked(false);
     ui->sldScore->setEnabled(false);
     ui->lblWord->setText(tr("点评分前面的勾勾进行打分"));
+
+    sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    sslConf.setProtocol(QSsl::TlsV1_2);
 }
 
 FeedbackDialog::~FeedbackDialog()
@@ -101,13 +104,14 @@ void FeedbackDialog::on_btnSubmit_clicked()
     
     //http://172.24.10.118/ndr/report.php?action=user_report
    
-    QString urlStr="http://" NDR_FEEDBACK_SERVER "/feedback/report.php";
+    QString urlStr="https://" NDR_FEEDBACK_SERVER "/feedback/report.php";
     qDebug() << "url_str" << urlStr;
     QUrl urlFeedback(urlStr);
     QUrlQuery query;
     query.addQueryItem("action","user_report");
     urlFeedback.setQuery(query);
 //    urlFeedback.addEncodedQueryItem("action","user_report");
+    request.setSslConfiguration(sslConf);
     request.setUrl(urlFeedback);
     request.setHeader(QNetworkRequest::ContentTypeHeader,
                       "application/x-www-form-urlencoded");

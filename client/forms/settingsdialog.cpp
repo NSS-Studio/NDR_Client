@@ -55,6 +55,7 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
     this->ui->chkQuitWhileClose->setChecked(settings->quitWhileCloseWindow);
     this->ui->chkAutoMinimize->setChecked(settings->autoMinimize);
     this->ui->chkWebEnable->setChecked(settings->webUpEnable);
+    this->ui->chkAutoClose->setChecked(settings->autoClose);
 
 	QString saved_lang = settings->language;
 	if(saved_lang.isEmpty()) ui->cmbLanguage->setCurrentIndex(0);	// Auto
@@ -78,6 +79,7 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
         settings->quitWhileCloseWindow = this->ui->chkQuitWhileClose->isChecked();
         settings->autoMinimize = this->ui->chkAutoMinimize->isChecked();
         settings->webUpEnable = this->ui->chkWebEnable->isChecked();
+        settings->autoClose = this->ui->chkAutoClose->isChecked();
         settings->language = this->ui->cmbLanguage->itemData(ui->cmbLanguage->currentIndex()).toString();
         return true;
     }
@@ -87,4 +89,14 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 bool SettingsDialog::chkWeb()
 {
     return this->ui->chkWebEnable->isChecked();
+}
+
+void SettingsDialog::on_chkAutoClose_pressed()
+{
+    if (!this->ui->chkAutoClose->isChecked()){
+        QMessageBox::StandardButton re = QMessageBox::information(NULL, "警告", "勾选自动关闭通知有可能导致你无法看到来自学校的某些重要通知\n"
+                                             "请再次确认是否关闭", QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (re == QMessageBox::Yes)
+            this->ui->chkAutoClose->setChecked(true);
+    }
 }

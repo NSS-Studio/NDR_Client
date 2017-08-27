@@ -3,6 +3,7 @@
 #include "localstorage.h"
 #include "settingsset.h"
 #include <QDialog>
+#include <QMessageBox>
 
 class QSettings;
 namespace Ui {
@@ -23,6 +24,8 @@ private slots:
     void on_buttonBox_accepted();
     
     void on_SettingsDialog_finished(int /*result*/);
+
+    void on_chkAutoClose_pressed();
 
 private:
 	Ui::SettingsDialog *ui;
