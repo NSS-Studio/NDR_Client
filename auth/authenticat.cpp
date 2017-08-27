@@ -55,8 +55,10 @@ void Authenticat::beginVerify(QString ip, ushort port)
 
 void Authenticat::helpEndVerify(Authenticat* auth) {
     qDebug() << "Authenticat::helpEndVerify(Authenticat* auth)" << endl;
-    auth->verifyThread->kill();
-    auth->checkFileThread->kill();
+    if (verifyThread != nullptr)
+        auth->verifyThread->kill();
+    if (checkFileThread != nullptr)
+        auth->checkFileThread->kill();
 }
 
 void Authenticat::endVerify() {
@@ -82,7 +84,7 @@ void Authenticat::verityThreadFinished()
 {
     QMutexLocker lock();
     this->count--;
-    if (this->verifyThread->isFinished())
+    if (this->verifyThread != nullptr && this->verifyThread->isFinished())
     {
         delete this->verifyThread;
         this->verifyThread = nullptr;
@@ -95,7 +97,7 @@ void Authenticat::fileThreadFinished()
 {
     QMutexLocker lock();
     this->count--;
-    if (this->checkFileThread->isFinished())
+    if (this->checkFileThread != nullptr && this->checkFileThread->isFinished())
     {
         delete this->checkFileThread;
         this->checkFileThread = nullptr;
