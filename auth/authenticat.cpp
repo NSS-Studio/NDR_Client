@@ -55,9 +55,9 @@ void Authenticat::beginVerify(QString ip, ushort port)
 
 void Authenticat::helpEndVerify(Authenticat* auth) {
     qDebug() << "Authenticat::helpEndVerify(Authenticat* auth)" << endl;
-    if (verifyThread != nullptr)
+    if (auth->verifyThread != nullptr)
         auth->verifyThread->kill();
-    if (checkFileThread != nullptr)
+    if (auth->checkFileThread != nullptr)
         auth->checkFileThread->kill();
 }
 
