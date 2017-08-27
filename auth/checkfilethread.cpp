@@ -6,7 +6,6 @@ CheckFileThread::CheckFileThread(QString ip,ushort port,QObject *parent) :
     this->host = QHostAddress( ip );
     this->port = port;
     this->stop_now = false;//此处可能需要加互斥锁
-    
 }
 CheckFileThread::~CheckFileThread()
 {

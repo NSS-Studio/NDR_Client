@@ -1002,7 +1002,7 @@ Detected another instance was running.</translation>
     <message>
         <location filename="../common.cpp" line="76"/>
         <source>联通合约50M</source>
-        <translation type="unfinished">UNIC CON 30M {50M?}</translation>
+        <translation type="unfinished">UNIC CON 50M</translation>
     </message>
     <message>
         <location filename="../common.cpp" line="78"/>

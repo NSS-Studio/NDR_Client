@@ -1,16 +1,18 @@
 #include "verifythread.h"
+#include <QMutexLocker>
 
 VerifyThread::VerifyThread(QString ip,ushort port,QObject *parent) :
     QThread(parent)
 {
     this->host = QHostAddress( ip );
     this->port = port;
-    //stop_now_lock.unlock();
+    QMutexLocker tmpLock(&stop_now_lock);
     this->stop_now = false;//此处可能需要加互斥锁
 }
 
 VerifyThread::~VerifyThread()
 {
+
 }
 void VerifyThread::run()
 {
@@ -40,13 +42,11 @@ void VerifyThread::run()
     }
     for(int i=0;i<6;i++)
     {
-        stop_now_lock.lock();
-        if(stop_now==true)
         {
-            stop_now_lock.unlock();
-            goto exit_thread;
+            QMutexLocker tmpLock(&stop_now_lock);
+            if(stop_now==true)
+                goto exit_thread;
         }
-        stop_now_lock.unlock();
         this->sleep(1);
     }
     writeSize = build_challenge( ( _challenge* )bufWrite);
@@ -91,7 +91,7 @@ void VerifyThread::run()
                 _challenge_res * res = ( _challenge_res * )bufRead;
                 num1 = ( num1 + 1 ) % 0xFF;
                 
-		build_heartbeat( res->sip,res->seed,(_heartbeat*)bufWrite );
+                build_heartbeat( res->sip,res->seed,(_heartbeat*)bufWrite );
                 writeSize = 96;
                 
             }
@@ -100,13 +100,11 @@ void VerifyThread::run()
                 //this->sleep( 15 );
                 for(int i=0;i<15;i++)
                 {
-                    stop_now_lock.lock();
-                    if(stop_now==true)
                     {
-                        stop_now_lock.unlock();
-                        goto exit_thread;
+                        QMutexLocker tmpLock(&stop_now_lock);
+                        if(stop_now==true)
+                            goto exit_thread;
                     }
-                    stop_now_lock.unlock();
                     this->sleep(1);
                 }
                 
@@ -131,16 +129,13 @@ exit_thread:;
 }
 void VerifyThread::kill()
 {
-    stop_now_lock.lock();
+    QMutexLocker tmpLock(&stop_now_lock);
     this->stop_now=true;//此处可能需要加互斥锁
-    stop_now_lock.unlock();
-    
 }
 
 
 int VerifyThread::build_challenge(_challenge *pkg)
 {
-    
     pkg->header.proto = 7;
     pkg->header.id = num1;
     pkg->header.length = sizeof( _challenge );
