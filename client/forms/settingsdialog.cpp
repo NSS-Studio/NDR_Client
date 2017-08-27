@@ -54,6 +54,7 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 
     this->ui->chkQuitWhileClose->setChecked(settings->quitWhileCloseWindow);
     this->ui->chkAutoMinimize->setChecked(settings->autoMinimize);
+    this->ui->chkWebEnable->setChecked(settings->webUpEnable);
 
 	QString saved_lang = settings->language;
 	if(saved_lang.isEmpty()) ui->cmbLanguage->setCurrentIndex(0);	// Auto
@@ -76,8 +77,14 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 //        settings->hotkey = this->ui->cmbHotKey->currentText().trimmed();
         settings->quitWhileCloseWindow = this->ui->chkQuitWhileClose->isChecked();
         settings->autoMinimize = this->ui->chkAutoMinimize->isChecked();
-	settings->language = this->ui->cmbLanguage->itemData(ui->cmbLanguage->currentIndex()).toString();
+        settings->webUpEnable = this->ui->chkWebEnable->isChecked();
+        settings->language = this->ui->cmbLanguage->itemData(ui->cmbLanguage->currentIndex()).toString();
         return true;
     }
     return false;
+}
+
+bool SettingsDialog::chkWeb()
+{
+    return this->ui->chkWebEnable->isChecked();
 }

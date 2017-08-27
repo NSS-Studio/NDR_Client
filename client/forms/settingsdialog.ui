@@ -27,28 +27,28 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>基本设置</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBox_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="chkQuitWhileClose">
          <property name="text">
-          <string>随系统启动</string>
+          <string>点&quot;X&quot;直接退出而不最小化到托盘</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="4" column="0">
         <widget class="QCheckBox" name="checkBox_3">
          <property name="text">
           <string>禁用通知窗口</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="6" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -61,10 +61,17 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="chkQuitWhileClose">
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="chkWebEnable">
          <property name="text">
-          <string>点&quot;X&quot;直接退出而不最小化到托盘</string>
+          <string>禁止启动时唤起导航页面</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="checkBox_2">
+         <property name="text">
+          <string>随系统启动</string>
          </property>
         </widget>
        </item>
@@ -84,8 +91,14 @@
        </item>
        <item row="1" column="0" colspan="2">
         <widget class="QCheckBox" name="chkAutoMinimize">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>拨号完毕隐藏主面板</string>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
          </property>
         </widget>
        </item>

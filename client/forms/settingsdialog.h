@@ -17,6 +17,7 @@ public:
     explicit SettingsDialog(QWidget *parent=0);
     ~SettingsDialog();
     bool getFormData(SettingsSet *settings);
+    bool chkWeb();
 
 private slots:
     void on_buttonBox_accepted();

@@ -7,6 +7,7 @@
 #define KEY_AUTO_DIAL       "auto_redial"
 #define KEY_AUTO_MINIMAIE   "auto_minimize"
 #define KEY_LANGUAGE        "lang"
+#define KEY_WEBUP_ENABLE    "webUpEnable"
 class SettingsSet
 {
 public:
@@ -16,6 +17,7 @@ public:
     bool autoRasdial;
     bool quitWhileCloseWindow;
     bool autoMinimize;
+    bool webUpEnable;
     
     bool readAll();
     void writeAll();

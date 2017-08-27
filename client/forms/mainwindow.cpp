@@ -300,7 +300,9 @@ void MainWindow::dialFinished(bool ok)
         if(ENABLE_UPDATE)
             updateServer->checkUpdate();
         //getInfoAboutNss
-        getMessageFromNSS();
+        if (!settings->webUpEnable)
+            getMessageFromNSS();
+
         } else {
             noticeDialog->hide();
             onStartLogining();
