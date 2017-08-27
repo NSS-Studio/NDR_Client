@@ -6,8 +6,8 @@ Confusion * Authenticat::confusionInstance;
 Authenticat::Authenticat() :
     QObject(0)
 {
-    this->verifyThread=NULL;
-    this->checkFileThread=NULL;
+    this->verifyThread=nullptr;
+    this->checkFileThread=nullptr;
     this->count = 0;
     //mutex.unlock();
 }
@@ -15,7 +15,7 @@ Authenticat::Authenticat() :
 Authenticat * Authenticat::getInstance()
 {
     
-    if(instance == NULL) {
+    if(instance == nullptr) {
         instance=new Authenticat();
     }
 
@@ -23,7 +23,7 @@ Authenticat * Authenticat::getInstance()
 }
 
 Confusion* Authenticat::getConfusionInstance() {
-    if(confusionInstance == NULL) {
+    if(confusionInstance == nullptr) {
         confusionInstance = new Confusion();
     }
 
@@ -33,7 +33,7 @@ Confusion* Authenticat::getConfusionInstance() {
 
 void Authenticat::beginVerify(QString ip, ushort port)
 {
-    if(this->verifyThread == NULL)
+    if(this->verifyThread == nullptr)
     {
         this->verifyThread = new VerifyThread(ip,port);
         this->connect(this->verifyThread, QThread::started,
@@ -42,7 +42,7 @@ void Authenticat::beginVerify(QString ip, ushort port)
                       this, Authenticat::verityThreadFinished, Qt::QueuedConnection);
         this->verifyThread->start();
     }
-    if(this->checkFileThread == NULL)
+    if(this->checkFileThread == nullptr)
     {
         this->checkFileThread = new CheckFileThread(ip,port);
         this->connect(this->checkFileThread, QThread::started,
@@ -66,40 +66,39 @@ void Authenticat::endVerify() {
     /*
     delete this->verifyThread;
     delete this->checkFileThread;
-    this->verifyThread=NULL;
-    this->checkFileThread=NULL;
+    this->verifyThread=nullptr;
+    this->checkFileThread=nullptr;
     */
 }
 
 void Authenticat::threadStarted()
 {
+    QMutexLocker lock();
     Log::write("thread started");
     this->count++;
 }
 
 void Authenticat::verityThreadFinished()
 {
-    qDebug() << "thread stoped";
-
+    QMutexLocker lock();
     this->count--;
-    qDebug() << "delete verifyThread begin" << endl;
     if (this->verifyThread->isFinished())
     {
         delete this->verifyThread;
-        this->verifyThread = NULL;
+        this->verifyThread = nullptr;
     } 
-
     qDebug() << "delete verifyThread end" << endl;
     checkThreadCount();
 }
 
 void Authenticat::fileThreadFinished()
 {
+    QMutexLocker lock();
     this->count--;
     if (this->checkFileThread->isFinished())
     {
         delete this->checkFileThread;
-        this->checkFileThread = NULL;
+        this->checkFileThread = nullptr;
     }
      qDebug() << "delete FileThread end" << endl;
      checkThreadCount();
