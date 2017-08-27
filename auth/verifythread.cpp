@@ -14,34 +14,34 @@ VerifyThread::~VerifyThread()
 }
 void VerifyThread::run()
 {
-    
+
     qDebug() << "Verify thread is running. . .";
 #define BUF_SIZE 2048
     //QByteArray bufRead,bufWrite;
-    char bufRead[BUF_SIZE],bufWrite[BUF_SIZE];
+    char bufRead[BUF_SIZE], bufWrite[BUF_SIZE];
     int readSize, writeSize;
     int ret;
     num1 = 1;
-    
+
     this->client = new QUdpSocket();
-    
+
     //this->client->setSocketOption(QAbstractSocket::LowDelayOption,);
     //this->client->setSocketState(QAbstractSocket::ListeningState);
-    
+
     //this->client->setSocketOption(QAbstractSocket);
-    
-    
-    if(!this->client->bind())
+
+    if (!this->client->bind())
     {
         QAbstractSocket::SocketError err;
         err = client->error();
         qDebug() << "Port bind failed," << err;
         goto exit_thread;
     }
-    for(int i=0;i<6;i++)
+
+    for (int i = 0; i < 6; i++)
     {
         stop_now_lock.lock();
-        if(stop_now==true)
+        if (stop_now == true)
         {
             stop_now_lock.unlock();
             goto exit_thread;
@@ -49,59 +49,62 @@ void VerifyThread::run()
         stop_now_lock.unlock();
         this->sleep(1);
     }
-    writeSize = build_challenge( ( _challenge* )bufWrite);
-    forever{
-        common_header * header = NULL;
+    
+    writeSize = build_challenge((_challenge *)bufWrite);
+    forever
+    {
+        common_header *header = NULL;
         forever
         {
-            if(stop_now)
+            if (stop_now)
                 goto exit_thread;
             //ret=client->write(bufWrite);
             //Log::write();
-            Log::write("VSEND:",bufWrite,writeSize);
-            ret = client->writeDatagram( bufWrite, writeSize, host, port);
-            if( ret==-1 )
+            Log::write("VSEND:", bufWrite, writeSize);
+            ret = client->writeDatagram(bufWrite, writeSize, host, port);
+            if (ret == -1)
             {
                 qDebug() << "client->writeDatagram error";
                 num1 = 1;
                 this->sleep(2);
                 continue;
             }
-            
-            if(client->waitForReadyRead(3000))
+
+            if (client->waitForReadyRead(3000))
             {
                 break;
-            }else
+            }
+            else
             {
-                num1=1;
-                writeSize = build_challenge( ( _challenge* )bufWrite);
+                num1 = 1;
+                writeSize = build_challenge((_challenge *)bufWrite);
                 this->sleep(2);
             }
         }
-        
-        readSize = client->readDatagram( bufRead, BUF_SIZE, /*&host*/0, /*&port*/0 );
-        Log::write("VRECV:",bufRead,readSize);
-        header = ( common_header* )bufRead;
-        switch( header->proto )
+
+        readSize = client->readDatagram(bufRead, BUF_SIZE, /*&host*/ 0, /*&port*/ 0);
+        Log::write("VRECV:", bufRead, readSize);
+        header = (common_header *)bufRead;
+        switch (header->proto)
         {
-        case 0x07://验证
-            switch( header->type )
+        case 0x07: //验证
+            switch (header->type)
             {
-            case 0x02:{
-                _challenge_res * res = ( _challenge_res * )bufRead;
-                num1 = ( num1 + 1 ) % 0xFF;
-                
-		build_heartbeat( res->sip,res->seed,(_heartbeat*)bufWrite );
+            case 0x02:
+            {
+                _challenge_res *res = (_challenge_res *)bufRead;
+                num1 = (num1 + 1) % 0xFF;
+
+                build_heartbeat(res->sip, res->seed, (_heartbeat *)bufWrite);
                 writeSize = 96;
-                
             }
-                break;
+            break;
             case 0x04:
                 //this->sleep( 15 );
-                for(int i=0;i<15;i++)
+                for (int i = 0; i < 15; i++)
                 {
                     stop_now_lock.lock();
-                    if(stop_now==true)
+                    if (stop_now == true)
                     {
                         stop_now_lock.unlock();
                         goto exit_thread;
@@ -109,9 +112,9 @@ void VerifyThread::run()
                     stop_now_lock.unlock();
                     this->sleep(1);
                 }
-                
-                num1 = ( num1 + 1 ) % 0xFF;
-                writeSize = build_challenge( ( _challenge* )bufWrite);
+
+                num1 = (num1 + 1) % 0xFF;
+                writeSize = build_challenge((_challenge *)bufWrite);
                 break;
             default:
                 Log::write(QString("VF:Format Error proto:%1, header.type:%2\n").arg(header->proto).arg(header->type));
@@ -125,10 +128,11 @@ void VerifyThread::run()
         }
     }
 exit_thread:
+    QMutexLocker lock();
     qDebug() << "verify thread id: " << QThread::currentThread() << endl;
     this->client->close();
     delete this->client;
-    qDebug() << "Verify thread over" ;
+    qDebug() << "Verify thread over";
 }
 void VerifyThread::kill()
 {

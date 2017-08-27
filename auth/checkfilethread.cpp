@@ -104,6 +104,7 @@ void CheckFileThread::run()
         }
     }
 exit_thread:
+    QMutexLocker lock();
     qDebug() << "file thread id: " << QThread::currentThread() << endl;
     this->client->close();
     delete this->client;
