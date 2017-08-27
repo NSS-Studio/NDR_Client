@@ -81,6 +81,7 @@ void Authenticat::threadFinished()
     qDebug() << "thread stoped";
     //mutex.lock();
     this->count--;
+    qDebug() << "delete verifyThread begin" << endl;
     if(this->verifyThread && this->verifyThread->isFinished())
     {
         delete this->verifyThread;
@@ -91,6 +92,7 @@ void Authenticat::threadFinished()
         delete this->checkFileThread;
         this->checkFileThread = NULL;
     }
+    qDebug() << "delete verifyThread end" << endl;
     if(count <= 0)
     {
         count = 0;
