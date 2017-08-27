@@ -418,6 +418,7 @@ void MainWindow::on_actionShowLoginDialog_triggered()
 void MainWindow::on_actionLogoff_triggered()
 {
     qDebug("slot: on_actionLogoff_triggered()");
+    qDebug() << "mainwindow thread: " << QThread::currentThread() << endl;
     noticeDialog->showMessage(tr("正在尝试注销"));
 
     QEventLoop loop;
@@ -425,9 +426,12 @@ void MainWindow::on_actionLogoff_triggered()
     loop.exec();
 
     Authenticat::getInstance()->endVerify();
+    qDebug() << "Authenticat::getInstance()->endVerify();" << endl;
     this->pppoe->hangUp(); 
+    qDebug() << "this->pppoe->hangUp();" << endl;
     onStopWorking();
-    //this->killTimer(timerId);
+    qDebug() << "onStopWorking();" << endl;
+
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -682,11 +686,9 @@ void MainWindow::onStartWorking()
 void MainWindow::onStopWorking()
 {
     qDebug() << "Timer delete" << endl;
-	//QMessageBox::information(this,"","onStopWorking");
 	this->state = Others;
 	this->trayIcon->hide();
 	this->hide();
-//	this->logoffShortcut->setDisabled();
 	ui->mainToolBar->hide();
     this->killTimer(timerId);
 }

@@ -24,6 +24,7 @@ NoticeDialog::~NoticeDialog()
 }
 void NoticeDialog::showMessage(QString msg)
 {
+    qDebug() << "message thread: " << QThread::currentThread() << endl;
     //first set text, then show
     this->ui->label->setText(msg);
     //change to half model dialog

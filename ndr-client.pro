@@ -7,8 +7,8 @@ CONFIG += ordered
 
 QT += c++14
 
-
 CONFIG(debug, debug|release):{
+    QMAKE_LFLAGS_RELEASE = /DEBUG
     CONFIG += exceptions
 }
 

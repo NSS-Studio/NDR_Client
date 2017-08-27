@@ -8,8 +8,16 @@ QT       += core network widgets xml
 TARGET = ndr-client #目标文件
 TEMPLATE = app
 
-#CONFIG += console #终端可作为调试输出载体
-#DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
+CONFIG(debug, debug|release):{
+    CONFIG += console #终端可作为调试输出载体
+    DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
+    win32 {
+        LIBS += -lDbgHelp
+    }
+}
+
+
+
 include(pppoe/pppoe.pri)
 #include(qxtglobalshortcut5/qxt.pri)
 include(forms/forms.pri)
@@ -32,10 +40,7 @@ HEADERS  += common.h \
             singleapplication.h \
             log.h
 
-
-
 RESOURCES += client.qrc
-
 
 macx {
 	TARGET = "NDR Client"

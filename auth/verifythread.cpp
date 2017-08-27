@@ -6,7 +6,6 @@ VerifyThread::VerifyThread(QString ip,ushort port,QObject *parent) :
 {
     this->host = QHostAddress( ip );
     this->port = port;
-    QMutexLocker tmpLock(&stop_now_lock);
     this->stop_now = false;//此处可能需要加互斥锁
 }
 
@@ -47,6 +46,7 @@ void VerifyThread::run()
             if(stop_now==true)
                 goto exit_thread;
         }
+
         this->sleep(1);
     }
     writeSize = build_challenge( ( _challenge* )bufWrite);

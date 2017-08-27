@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QtGui>
+#include <QThread>
+
 namespace Ui {
 class NoticeDialog;
 }
