@@ -7,6 +7,7 @@
 #include <QNetworkAccessManager>
 #include <QDesktopServices>
 #include <QDomDocument>
+#include <QSslCertificate>
 
 namespace Ui {
 	class FeedbackDialog;
@@ -30,6 +31,7 @@ private slots:
 
 private:
 	Ui::FeedbackDialog *ui;
+    QSslConfiguration sslConf;
 	QNetworkAccessManager nam;
 	QNetworkRequest request;
 	QNetworkReply *reply;
