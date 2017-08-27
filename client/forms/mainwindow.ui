@@ -49,7 +49,7 @@
        <item row="0" column="0">
         <widget class="QPushButton" name="goDnuiBrowser">
          <property name="text">
-          <string>皮皮GO，我们走</string>
+          <string>东软校园导航</string>
          </property>
         </widget>
        </item>
