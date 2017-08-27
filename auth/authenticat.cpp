@@ -54,6 +54,7 @@ void Authenticat::beginVerify(QString ip, ushort port)
 }
 
 void Authenticat::helpEndVerify(Authenticat* auth) {
+    qDebug() << "Authenticat::helpEndVerify(Authenticat* auth)" << endl;
     auth->verifyThread->kill();
     auth->checkFileThread->kill();
 }
@@ -84,13 +85,15 @@ void Authenticat::threadFinished()
     qDebug() << "delete verifyThread begin" << endl;
     if(this->verifyThread && this->verifyThread->isFinished())
     {
-        delete this->verifyThread;
-        this->verifyThread = NULL;
+        this->verifyThread->deleteLater();
+        //delete this->verifyThread;
+        //this->verifyThread = NULL;
     }
     if(this->checkFileThread && this->checkFileThread->isFinished())
     {
-        delete this->checkFileThread;
-        this->checkFileThread = NULL;
+        this->checkFileThread->deleteLater();
+        //delete this->checkFileThread;
+        //this->checkFileThread = NULL;
     }
     qDebug() << "delete verifyThread end" << endl;
     if(count <= 0)
