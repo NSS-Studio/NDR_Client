@@ -655,7 +655,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="52"/>
-        <source>皮皮GO，我们走</source>
+        <source>东软校园导航</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -792,8 +792,8 @@ p, li { white-space: pre-wrap; }
         <translation>ダイヤルアップは成功しました。認証を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="669"/>
-        <location filename="../forms/mainwindow.cpp" line="701"/>
+        <location filename="../forms/mainwindow.cpp" line="673"/>
+        <location filename="../forms/mainwindow.cpp" line="703"/>
         <source>NDR 校园网络认证</source>
         <translation>NDRキャンパスネットワーク認証</translation>
     </message>
@@ -803,8 +803,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/mainwindow.cpp" line="310"/>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
@@ -814,32 +814,32 @@ p, li { white-space: pre-wrap; }
         <translation>ダイヤルが失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="421"/>
+        <location filename="../forms/mainwindow.cpp" line="422"/>
         <source>正在尝试注销</source>
         <translation>取り消しを試している</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="588"/>
+        <location filename="../forms/mainwindow.cpp" line="592"/>
         <source>网络异常断开，正在重新拨号</source>
         <translation>ネットが切断された、改めてダイヤルしている</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
         <source>重新拨号失败</source>
         <translation>再ダイヤル失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>网络异常断开。</source>
         <translation>ネットが異常切断された。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="622"/>
+        <location filename="../forms/mainwindow.cpp" line="626"/>
         <source>拨号成功</source>
         <translation>ダイヤルアップ成功</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="637"/>
+        <location filename="../forms/mainwindow.cpp" line="641"/>
         <source>重播失败，正在关闭验证</source>
         <translation>再ダイヤルが失敗しており、閉鎖検証</translation>
     </message>
@@ -849,38 +849,38 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">NDRキャンパスネットワーク認証</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>警告</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>检查更新失败</source>
         <translation>検査更新が失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="754"/>
+        <location filename="../forms/mainwindow.cpp" line="756"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>アップデートがあります、ダウンロードができない</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="765"/>
+        <location filename="../forms/mainwindow.cpp" line="767"/>
         <source>立即安装</source>
         <translation>今すぐインストール</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="768"/>
+        <location filename="../forms/mainwindow.cpp" line="770"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRは3分以内に切ります、そして更新する、もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="771"/>
+        <location filename="../forms/mainwindow.cpp" line="773"/>
         <source>打开软件包目录</source>
         <translation>パッケージソフト目録を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="764"/>
-        <location filename="../forms/mainwindow.cpp" line="770"/>
+        <location filename="../forms/mainwindow.cpp" line="766"/>
+        <location filename="../forms/mainwindow.cpp" line="772"/>
         <source>稍后提醒</source>
         <translation>後で注意</translation>
     </message>
@@ -889,32 +889,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 日 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="774"/>
+        <location filename="../forms/mainwindow.cpp" line="776"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRはも新しいバージョンのソフトウェアをダウンロードしました、フォルダを開き、手動でインストールしてください。もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开失败</source>
         <translation>オープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开目录失败</source>
         <translation>フォルダをオープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>安装失败</source>
         <translation>インストール失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>启动安装程序失败</source>
         <translation>インストールプログラム起動失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="792"/>
+        <location filename="../forms/mainwindow.cpp" line="794"/>
         <source>请尝试手动安装 %1</source>
         <translation>%1を手動インストールを試してください</translation>
     </message>
@@ -967,20 +967,20 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="51"/>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="92"/>
+        <location filename="../main.cpp" line="94"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="51"/>
+        <location filename="../main.cpp" line="92"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>起動が失敗した
 もうひとりの実例を実行している。もしクライアントが異常脱退、再び試みて下さい。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="94"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>起動が失敗した
@@ -1060,14 +1060,13 @@ p, li { white-space: pre-wrap; }
         <translation>ネットが切れた時、自動ダイヤルする</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="90"/>
+        <location filename="../forms/settingsdialog.ui" line="97"/>
         <source>注销热键：</source>
         <translation>抹消ホットキー：</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="142"/>
         <source>若要关闭热键，请清空编辑框</source>
-        <translation>もし閉鎖ホットキー、どうぞクリア編集ボックスをしてください</translation>
+        <translation type="vanished">もし閉鎖ホットキー、どうぞクリア編集ボックスをしてください</translation>
     </message>
     <message>
         <location filename="../forms/settingsdialog.ui" line="209"/>
@@ -1079,7 +1078,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">閉鎖ホットキーなら、どうぞクリアしてください</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="152"/>
+        <location filename="../forms/settingsdialog.ui" line="88"/>
         <source>拨号完毕隐藏主面板</source>
         <translation>ダイヤル完了、主パネルを隠して</translation>
     </message>

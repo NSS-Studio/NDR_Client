@@ -16,8 +16,6 @@ CONFIG(debug, debug|release):{
     }
 }
 
-
-
 include(pppoe/pppoe.pri)
 #include(qxtglobalshortcut5/qxt.pri)
 include(forms/forms.pri)

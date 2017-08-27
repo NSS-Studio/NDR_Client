@@ -664,7 +664,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="52"/>
-        <source>皮皮GO，我们走</source>
+        <source>东软校园导航</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -809,8 +809,8 @@ p, li { white-space: pre-wrap; }
         <translation>다이얼 성공,오픈 인증</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="669"/>
-        <location filename="../forms/mainwindow.cpp" line="701"/>
+        <location filename="../forms/mainwindow.cpp" line="673"/>
+        <location filename="../forms/mainwindow.cpp" line="703"/>
         <source>NDR 校园网络认证</source>
         <translation>NDR 캠퍼스 네트워크 인증</translation>
     </message>
@@ -820,8 +820,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/mainwindow.cpp" line="310"/>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>提示</source>
         <translation>팁</translation>
     </message>
@@ -831,32 +831,32 @@ p, li { white-space: pre-wrap; }
         <translation>다이얼 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="421"/>
+        <location filename="../forms/mainwindow.cpp" line="422"/>
         <source>正在尝试注销</source>
         <translation>로그아웃중</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="588"/>
+        <location filename="../forms/mainwindow.cpp" line="592"/>
         <source>网络异常断开，正在重新拨号</source>
         <translation>네트워크 이상 끊어 졌다,다시 연결중</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
         <source>重新拨号失败</source>
         <translation>재다시 인증 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>网络异常断开。</source>
         <translation>네트워크 이상 끊어 졌다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="622"/>
+        <location filename="../forms/mainwindow.cpp" line="626"/>
         <source>拨号成功</source>
         <translation>다이얼 성공</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="637"/>
+        <location filename="../forms/mainwindow.cpp" line="641"/>
         <source>重播失败，正在关闭验证</source>
         <translation>재다시 인증 실패,인증 닫는 중</translation>
     </message>
@@ -867,38 +867,38 @@ p, li { white-space: pre-wrap; }
 </translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>警告</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>检查更新失败</source>
         <translation>업데이트 검출 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="754"/>
+        <location filename="../forms/mainwindow.cpp" line="756"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>새로운 버전 검출되었습니다,허나 업데이트 패키지 다운할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="765"/>
+        <location filename="../forms/mainwindow.cpp" line="767"/>
         <source>立即安装</source>
         <translation>즉시 설치</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="768"/>
+        <location filename="../forms/mainwindow.cpp" line="770"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 삼분만에 끊어지며 업데이트를 시작합니다,만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="771"/>
+        <location filename="../forms/mainwindow.cpp" line="773"/>
         <source>打开软件包目录</source>
         <translation>소프트웨어 디렉터리 열기</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="764"/>
-        <location filename="../forms/mainwindow.cpp" line="770"/>
+        <location filename="../forms/mainwindow.cpp" line="766"/>
+        <location filename="../forms/mainwindow.cpp" line="772"/>
         <source>稍后提醒</source>
         <translation>이따 알림</translation>
     </message>
@@ -907,32 +907,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 날 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="774"/>
+        <location filename="../forms/mainwindow.cpp" line="776"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 이미 새로운 버전 패키지를 임시 디렉터리로 다운했습니다,수동으로 디렉터리를 열고 설치하세요.만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开失败</source>
         <translation>열기실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开目录失败</source>
         <translation>디렉터리 열기 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>安装失败</source>
         <translation>설치 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>启动安装程序失败</source>
         <translation>설치 프로그램 실행 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="792"/>
+        <location filename="../forms/mainwindow.cpp" line="794"/>
         <source>请尝试手动安装 %1</source>
         <translation>수동으로 시도해 주십시오%1</translation>
     </message>
@@ -1008,20 +1008,20 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="51"/>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="92"/>
+        <location filename="../main.cpp" line="94"/>
         <source>提示</source>
         <translation>힌트</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="51"/>
+        <location filename="../main.cpp" line="92"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>열기실패
 이미 한 실례가 실행하고있는것을 검출.만약 전번 클라이언트가 이상 종료돼였으면 다시 시도해 보십시오.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="94"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>열기실패
@@ -1101,7 +1101,7 @@ p, li { white-space: pre-wrap; }
         <translation>연결이 끊어지면 자동적으로 다시 연결</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="90"/>
+        <location filename="../forms/settingsdialog.ui" line="97"/>
         <source>注销热键：</source>
         <translation>핫 키 아웃:</translation>
     </message>
@@ -1127,16 +1127,15 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ctrl+Alt+Q</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="142"/>
         <source>若要关闭热键，请清空编辑框</source>
-        <translation>핫 키를 닫을려면,편집틀을 비우세요</translation>
+        <translation type="vanished">핫 키를 닫을려면,편집틀을 비우세요</translation>
     </message>
     <message>
         <source>若要关闭热键，请清空</source>
         <translation type="obsolete">핫 키 끌려면 비우기</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="152"/>
+        <location filename="../forms/settingsdialog.ui" line="88"/>
         <source>拨号完毕隐藏主面板</source>
         <translation>다이얼 완료 주 창 숨기기</translation>
     </message>

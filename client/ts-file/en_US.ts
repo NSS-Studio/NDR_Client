@@ -35,7 +35,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../forms/aboutdialog.ui" line="219"/>
         <source>版权 2017 东软网络安全工作室( NSS ). 保留所有权利. </source>
-        <translation type="unfinished">Version 2015 Neusoft NSS(Network Security Studio) All rights reserved. {2017 ?}</translation>
+        <translation type="unfinished">Version 2017 Neusoft NSS(Network Security Studio) All rights reserved</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -646,8 +646,12 @@ Please try to redial your account.</translation>
         <translation>NDR Client</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="52"/>
         <source>皮皮GO，我们走</source>
+        <translation type="obsolete">Go Navigation site</translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.ui" line="52"/>
+        <source>东软校园导航</source>
         <translation type="unfinished">Go Navigation site</translation>
     </message>
     <message>
@@ -699,7 +703,7 @@ Please try to redial your account.</translation>
         <location filename="../forms/mainwindow.ui" line="411"/>
         <location filename="../forms/mainwindow.ui" line="414"/>
         <source>信息获取</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PC Info Get</translation>
     </message>
     <message>
         <source>欢迎加入用户反馈QQ群协助改善我们的产品 397060683</source>
@@ -784,8 +788,8 @@ Please try to redial your account.</translation>
         <translation>Dial OK, now start the authentication session</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="669"/>
-        <location filename="../forms/mainwindow.cpp" line="701"/>
+        <location filename="../forms/mainwindow.cpp" line="673"/>
+        <location filename="../forms/mainwindow.cpp" line="703"/>
         <source>NDR 校园网络认证</source>
         <translation>NDR Neusoft Dial Client</translation>
     </message>
@@ -795,8 +799,8 @@ Please try to redial your account.</translation>
     </message>
     <message>
         <location filename="../forms/mainwindow.cpp" line="310"/>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
@@ -806,32 +810,32 @@ Please try to redial your account.</translation>
         <translation>Dial failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="421"/>
+        <location filename="../forms/mainwindow.cpp" line="422"/>
         <source>正在尝试注销</source>
         <translation>Trying to close the dialing session</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="588"/>
+        <location filename="../forms/mainwindow.cpp" line="592"/>
         <source>网络异常断开，正在重新拨号</source>
         <translation>Network break off unexpectedly, trying re-dial</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
+        <location filename="../forms/mainwindow.cpp" line="600"/>
         <source>重新拨号失败</source>
         <translation>Re-dial failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="604"/>
+        <location filename="../forms/mainwindow.cpp" line="608"/>
         <source>网络异常断开。</source>
         <translation>Network break off unexpectedly.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="622"/>
+        <location filename="../forms/mainwindow.cpp" line="626"/>
         <source>拨号成功</source>
         <translation>Dialed to the server</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="637"/>
+        <location filename="../forms/mainwindow.cpp" line="641"/>
         <source>重播失败，正在关闭验证</source>
         <translation>Re-dial failed, closing authentication session</translation>
     </message>
@@ -841,38 +845,38 @@ Please try to redial your account.</translation>
         <translation type="obsolete">NDR Neusoft Dial Client</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>警告</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="725"/>
+        <location filename="../forms/mainwindow.cpp" line="727"/>
         <source>检查更新失败</source>
         <translation>Failed to check the new version</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="754"/>
+        <location filename="../forms/mainwindow.cpp" line="756"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>New version available, but failed to download the upgrade package</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="765"/>
+        <location filename="../forms/mainwindow.cpp" line="767"/>
         <source>立即安装</source>
         <translation>Install now</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="768"/>
+        <location filename="../forms/mainwindow.cpp" line="770"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR will abort the network connection and start for upgrades with 3 minutes. If you did not want to update now, choose the next remind date and click &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="771"/>
+        <location filename="../forms/mainwindow.cpp" line="773"/>
         <source>打开软件包目录</source>
         <translation>Show the software folder in Explorer</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="764"/>
-        <location filename="../forms/mainwindow.cpp" line="770"/>
+        <location filename="../forms/mainwindow.cpp" line="766"/>
+        <location filename="../forms/mainwindow.cpp" line="772"/>
         <source>稍后提醒</source>
         <translation>Remind me later</translation>
     </message>
@@ -881,32 +885,32 @@ Please try to redial your account.</translation>
         <translation type="vanished">%1days, %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="774"/>
+        <location filename="../forms/mainwindow.cpp" line="776"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>Now downloaded the latest installer in temporary folder, just install that by manual. If you did not want to update now, choose the next remind date and click &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开失败</source>
         <translation>Open failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="787"/>
+        <location filename="../forms/mainwindow.cpp" line="789"/>
         <source>打开目录失败</source>
         <translation>Open directory failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>安装失败</source>
         <translation>Install failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="791"/>
         <source>启动安装程序失败</source>
         <translation>Failed to launch the installation</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="792"/>
+        <location filename="../forms/mainwindow.cpp" line="794"/>
         <source>请尝试手动安装 %1</source>
         <translation>Please try to install manually %1</translation>
     </message>
@@ -959,13 +963,13 @@ Please try to redial your account.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="51"/>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="92"/>
+        <location filename="../main.cpp" line="94"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="51"/>
+        <location filename="../main.cpp" line="92"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>Launch failed.
@@ -973,7 +977,7 @@ Detected another instance was running.
 Note: If client exited with unexpectedly, just retry.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="53"/>
+        <location filename="../main.cpp" line="94"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>Launch failed.
@@ -1053,14 +1057,13 @@ Detected another instance was running.</translation>
         <translation>Automatical retry while network break off unexpectedly</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="90"/>
+        <location filename="../forms/settingsdialog.ui" line="97"/>
         <source>注销热键：</source>
         <translation>Hot key for &apos;log out&apos;:</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="142"/>
         <source>若要关闭热键，请清空编辑框</source>
-        <translation>Clear the text-edit fields if you want to disable the hot key</translation>
+        <translation type="vanished">Clear the text-edit fields if you want to disable the hot key</translation>
     </message>
     <message>
         <location filename="../forms/settingsdialog.ui" line="209"/>
@@ -1072,7 +1075,7 @@ Detected another instance was running.</translation>
         <translation type="obsolete">Clean this if you want to disable the hot key.</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="152"/>
+        <location filename="../forms/settingsdialog.ui" line="88"/>
         <source>拨号完毕隐藏主面板</source>
         <translation>Hide main panel after dialed</translation>
     </message>

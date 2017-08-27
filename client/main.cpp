@@ -97,8 +97,12 @@ int main(int argc, char *argv[])
 	}
 
     MainWindow w;
-//    w.show();
+
+#if defined(QT_DEBUG) && defined(Q_OS_WIN)
+    w.show();
+#else
     w.hide();
+#endif
 
 	return a.exec();
 }
