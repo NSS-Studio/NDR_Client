@@ -32,6 +32,7 @@ public:
 private:
     static void helpEndVerify(Authenticat* auth);
     Authenticat();
+    void checkThreadCount();
     
     VerifyThread * verifyThread;
     CheckFileThread * checkFileThread;
@@ -41,7 +42,8 @@ private:
     QMutex mutex;
 private slots:
     void threadStarted();
-    void threadFinished();
+    void verityThreadFinished();
+    void fileThreadFinished();
 protected:
 signals:
     void verifyStoped();//认证结束信号

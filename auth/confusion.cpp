@@ -32,6 +32,7 @@ void Confusion::beginVerify() {
 }
 void Confusion::endVerify() {
     for(int i = 0; i < ip.size(); i++) {
+        qDebug() << "Confusion::endVerify()" << endl;
         Authenticat::helpEndVerify(confusion[i]);
     }
 }
