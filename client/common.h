@@ -12,6 +12,17 @@
 #include <QFontDatabase>
 #include <QtCore/QtGlobal>
 
+#define NDR_INNER true
+/** server address*/
+#define NDR_SERVER_INNER "172.24.5.131"
+#define NDR_SERVER_OUTER "172.24.10.13"
+
+#if (NDR_INNER == true)
+#define NDR_SERVER NDR_SERVER_INNER
+#else
+#define NDR_SERVER NDR_SERVER_OUTER
+#endif
+
 #if (QT_VERSION < QT_VERSION_CHECK(5, 9, 1))
 #error "!!! please use qt 5.9.1 or later"
 #endif
@@ -65,23 +76,24 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 70
+#define VERSION_MINOR 71
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
 
+
 /** NDR更新服务器地址和备用服务器地址*/
-#define NDR_UPDATE_SERVER "172.24.5.131"
+#define NDR_UPDATE_SERVER NDR_SERVER
 #define NDR_UPDATE_SERVER_2_BACK "172.24.5.13"
 
 /** NDR导航页*/
 #define NDR_GATE "http://go.neusoft.edu.cn"
 
 /** NDR弹浏览器网页*/
-#define NDR_NSS "172.24.5.131"
+#define NDR_NSS NDR_SERVER
 
 /** NDR通知弹窗地址*/
-#define NDR_POPUP_URL "https://172.24.5.131/messages/popUp.xml"
+#define NDR_POPUP_URL QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
 
 /** NDR主页*/
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
