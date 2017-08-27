@@ -60,13 +60,16 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 	else if(saved_lang == "zh_CN") ui->cmbLanguage->setCurrentIndex(1);
 	QStringList lang_file_list = __getLangFileNameTable();
 	//ui->cmbLanguage->addItems(lang_file_list);
-	QString file_name;
-	foreach(file_name, lang_file_list) {
-		QString lang_name;
-		if(!__getLanguageName(file_name, lang_name)) continue;
-		ui->cmbLanguage->addItem(lang_name, file_name);
-		if(file_name == saved_lang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
-	}
+
+    if (ui->cmbLanguage->count() != 5){
+        QString file_name;
+        foreach(file_name, lang_file_list) {
+            QString lang_name;
+            if(!__getLanguageName(file_name, lang_name)) continue;
+            ui->cmbLanguage->addItem(lang_name, file_name);
+            if(file_name == saved_lang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
+        }
+    }
 
     if(this->exec()==QDialog::Accepted){
         settings->autoRasdial = this->ui->chkAutoRedial->isChecked();
