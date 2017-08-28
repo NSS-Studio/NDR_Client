@@ -14,7 +14,7 @@
 
 #define NDR_INNER true
 /** server address*/
-#define NDR_SERVER_INNER "172.24.5.131"
+#define NDR_SERVER_INNER "172.24.5.130"
 #define NDR_SERVER_OUTER "172.24.10.13"
 
 #if (NDR_INNER == true)
