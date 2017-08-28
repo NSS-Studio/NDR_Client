@@ -193,7 +193,7 @@ void popUpDialog::showMessage()
 
     if (settings->autoClose){
         time = new QTimer(this);
-        connect(time, QTimer::timeout, this, popUpDialog::timeCount);
+        connect(time, SIGNAL(timeout()), this, SLOT(timeCount()));
         timePass = 0;
         time->start(1000);
     }
