@@ -350,7 +350,9 @@
        </sizepolicy>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">QPushButton{
+color:black;
+}</string>
       </property>
       <property name="text">
        <string>登录 (&amp;L)</string>
