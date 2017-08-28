@@ -34,7 +34,7 @@
        <string>基本设置</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="7" column="0">
+       <item row="6" column="0">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -47,17 +47,17 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="0">
-        <widget class="QCheckBox" name="checkBox_3">
-         <property name="text">
-          <string>禁用通知窗口</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0">
         <widget class="QCheckBox" name="chkWebEnable">
          <property name="text">
           <string>禁止启动时唤起导航页面</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="chkAutoClose">
+         <property name="text">
+          <string>自动关闭通知窗口</string>
          </property>
         </widget>
        </item>
@@ -68,17 +68,10 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="5" column="0">
         <widget class="QCheckBox" name="checkBox_2">
          <property name="text">
           <string>随系统启动</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="chkAutoClose">
-         <property name="text">
-          <string>自动关闭通知窗口</string>
          </property>
         </widget>
        </item>

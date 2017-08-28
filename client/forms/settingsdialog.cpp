@@ -10,7 +10,6 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
     ui->setupUi(this);
 
     this->ui->checkBox_2->setEnabled(false);
-    this->ui->checkBox_3->setEnabled(false);
 	ui->cmbLanguage->setItemData(1, "zh_CN");
     //config = new QSettings(appHome + "/common.cfg", QSettings::IniFormat);
 #ifdef Q_OS_MAC
