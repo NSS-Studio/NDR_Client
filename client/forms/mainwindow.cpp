@@ -24,16 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //settings = new SettingsSet(appHome + "/config.ini");
 
     popUp = new popUpDialog();
-    //logoffShortcut = new QxtGlobalShortcut(this);
-    //connect(logoffShortcut, &QxtGlobalShortcut::activated, this, &MainWindow::logoffShortcutActivated);
-    //if(!settings->hotkey.isEmpty() && !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
-    //{
-    //    QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
-    //}
-    //else
-    //{
-    //    logoffShortcut->setDisabled();
-    //}
 
     profile = new LocalStorage(appHome + "/config.db");//如果数据库结构变化，修改文件名抛弃数据
 
@@ -79,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this->loginDialog,SIGNAL(finished(int)),this,SLOT(loginWindowClosed()));
 
     //forget to delete this object, add to mainWindow's child to autoDelete
-    this->noticeDialog = new NoticeDialog();
+    this->noticeDialog = new NoticeDialog(this);
     
     connect(Authenticat::getInstance(),SIGNAL(verifyStoped()),
                   this,SLOT(verifyStoped()),Qt::QueuedConnection);
@@ -112,7 +102,6 @@ MainWindow::MainWindow(QWidget *parent) :
 //最后信息获取按钮的信号连接
     connect(ui->actionGetInfo, &QAction::triggered, this, &MainWindow::getSystemInfo);
     connect(this, &MainWindow::infoWriteStarted, InfoModuleThread::getInstance(), &InfoModuleThread::startGetInfoToWriteFile);
-    //connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished, this, &MainWindow::infoWriteFinished);
 }
 
 MainWindow::~MainWindow()
@@ -176,16 +165,6 @@ QString MainWindow::time_humanable(int sec)
     int day,hour,minute,second;
     int t;
 
-//    t = 24 * 60;
-//    day = min / t;
-//    min %= t;
-//    t = 60;
-//    hour = min / t;
-//    min %= t;
-//    minute = min;
-//    second  = 0;
-
-    //qDebug() << sec/60 << endl;
     t = 24*3600;
     day = sec / t;
 
@@ -199,8 +178,7 @@ QString MainWindow::time_humanable(int sec)
 
     sec %= t;
     second = sec;
-    //qDebug() << " " << day << " " << hour << " " << minute << " " << second << endl;
-    //return QString(year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
+
     return tr("%0 天 %1:%2:%3")
             .arg(day,-3,10,QChar(' '))
             .arg(hour,2,10,QChar('0'))
@@ -226,8 +204,6 @@ void MainWindow::dialFinished(bool ok)
             conn_cfg.setValue("Interface/Etherface", device_name);
             this->username = username;
             int left,top,width,height;
-    //		int desktop_width = QApplication::desktop()->width();
-    //		int desktop_height = QApplication::desktop()->height();
 
             QScreen *screen= QGuiApplication::primaryScreen ();
             QRect mm = screen->availableGeometry() ;
@@ -242,7 +218,7 @@ void MainWindow::dialFinished(bool ok)
                     left = desktop_width - this->width() - 100;
                     top = (desktop_height - this->height())/2;
                 }
-                ///QMessageBox::information(this,"",QString::number(width)+ " " + QString::number(height));
+                //QMessageBox::information(this,"",QString::number(width)+ " " + QString::number(height));
                 this->move(left,top);
                 //this->resize(width,height);
              } else {

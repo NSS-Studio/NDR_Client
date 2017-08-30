@@ -328,7 +328,17 @@ void LoginDialog::on_btnShowPassword_clicked(bool checked)
 #ifdef Q_OS_WIN
 void LoginDialog::on_btnWinsockReset_clicked()
 {
-    QString winsockResetDir = tempDir + "/winsockReset.bat";
+
+    HINSTANCE re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winsock reset",  L"", SW_HIDE);
+
+    //can not use static_cast
+    if ((int)re > 32){
+        QMessageBox::information(this,tr("成功"),tr("Winsock重置成功，谢谢使用"));
+    } else {
+        QMessageBox::information(this,tr("失败"),tr("Winsock重置失败，错误代码 %0").arg((int)re));
+    }
+
+    /*QString winsockResetDir = tempDir + "/winsockReset.bat";
     std::ofstream winsockResetFileTmp ;
     winsockResetFileTmp.open(winsockResetDir.toStdString().c_str(),std::ofstream::out);
     if(!winsockResetFileTmp.is_open())
@@ -355,6 +365,6 @@ void LoginDialog::on_btnWinsockReset_clicked()
     }else{
         qDebug() << "winsock reset succeed" ;
         QMessageBox::information(this,tr("成功"),tr("Winsock重置成功，谢谢使用"));
-    }
+    }*/
 }
 #endif
