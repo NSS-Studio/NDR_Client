@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //this->setWindowFlags(Qt::Dialog);
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
+    //int x, y;
+    //getMoniterSize(x, y);
+    //this -> resize(QSize(x/6.2, y/3));
 
     //settings = new SettingsSet(appHome + "/config.ini");
 
@@ -43,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->pppoe = new PPPoE();
     connect(this->pppoe,SIGNAL(dialFinished(bool)),
             this,SLOT(dialFinished(bool)),Qt::QueuedConnection);
-    connect(this->pppoe,SIGNAL(redialFinished(bool)),
-            this,SLOT(redialFinished(bool)),Qt::QueuedConnection);
+    //connect(this->pppoe,SIGNAL(redialFinished(bool)),
+    //        this,SLOT(redialFinished(bool)),Qt::QueuedConnection);
     connect(this->pppoe,SIGNAL(hangedUp(bool)),
             this,SLOT(hangedUp(bool)),Qt::QueuedConnection);
     
@@ -561,24 +564,32 @@ void MainWindow::hangedUp(bool natural)
             noticeDialog->hide();
             onStartLogining();
         }
-    }else
-    {
+    } else {
 		onStopWorking();
 
         if(settings->autoRasdial)
         {
-            noticeDialog->showMessage(tr("网络异常断开，正在重新拨号"));
+            //QEventLoop eventloop;
+            //QTimer::singleShot(10000, &eventloop, SLOT(quit()));
+            //eventloop.exec();
 
-            QEventLoop eventloop;
-            QTimer::singleShot(10000, &eventloop, SLOT(quit()));
-            eventloop.exec();
 
-            if(!pppoe->redialRAS())
-            {
-                QMessageBox::critical(this,tr("提示"),tr("重新拨号失败"));
+            for (int retryCount = 1; retryCount <=5 && pppoe->isDisconnect(); retryCount++){
+                Sleep(1000);
+
+                noticeDialog->showMessage(tr("网络异常断开，正在重新拨号\n重试次数%0/5").arg(retryCount));
+                QEventLoop eventloop;
+                QTimer::singleShot(500, &eventloop, SLOT(quit()));
+                eventloop.exec();
+
+                pppoe->redialRAS();
             }
-        }else
-        {
+
+            if (pppoe->isDisconnect())
+                emit redialFinished(false);
+            else
+                emit redialFinished(true);
+        } else {
             //this->killTimer(timerId);
             Authenticat::getInstance()->endVerify();
             onStartLogining();
@@ -817,6 +828,15 @@ void MainWindow::getSystemInfo()
     emit infoWriteStarted();
 
     //message->exec();
+}
+
+void MainWindow::getMoniterSize(int &x, int &y)
+{
+    x = GetSystemMetrics(SM_CXSCREEN);
+    y = GetSystemMetrics(SM_CYSCREEN);
+#ifdef QT_DEBUG
+    qDebug() << "Moniter Size: " << x << "x" << y << endl;
+#endif
 }
 
 //void MainWindow::infoWriteFinished() {

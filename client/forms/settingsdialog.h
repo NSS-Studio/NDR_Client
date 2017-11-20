@@ -5,6 +5,12 @@
 #include <QDialog>
 #include <QMessageBox>
 
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <winreg.h>
+#include <winbase.h>
+#endif
+
 class QSettings;
 namespace Ui {
 class SettingsDialog;
@@ -19,6 +25,15 @@ public:
     ~SettingsDialog();
     bool getFormData(SettingsSet *settings);
     bool chkWeb();
+
+#ifdef Q_OS_WIN
+    enum class dialogKinds{stander, question, warning, error};
+
+    bool isRunAsAdmin();
+    bool delReg(HKEY proxyRoot, const QString &keyWay, const QString &keyName);
+    bool creatReg(HKEY proxyRoot, const QString &keyWay, const QString &keyName, const QString &keyValue);
+    QMessageBox::StandardButton message(dialogKinds question, const QString &text);
+#endif
 
 private slots:
     void on_buttonBox_accepted();

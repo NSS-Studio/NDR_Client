@@ -28,7 +28,16 @@ PPPoE::~PPPoE()
 
 void PPPoE::run() {
 	//qDebug() << "PPPoE::run: device_name:" << device_name;
+    //reconnect failed at here; windows bug?? when reconnect three times it will success
+    //bool ret;
+    //if (isRedial)
+    //    for (int i = 0; i < 3 && !ret; i++)
+    //        ret = basedsl -> dial(username, password, device_name, errorMessage);
+    //else
+    //    ret = basedsl -> dial(username, password, device_name, errorMessage);
+
     bool ret = basedsl -> dial(username, password, device_name, errorMessage);
+    qDebug() << "failed: " << errorMessage;
     if(ret){
         if(isRedial)
             emit redialFinished(true);
@@ -60,6 +69,7 @@ void PPPoE::run() {
             emit dialFinished(false);
 
     }
+    qDebug() << "break from pppoe";
 }
 
 QString PPPoE::getIpAddress() {
@@ -129,4 +139,9 @@ void PPPoE::threadFinished()
 
 QStringList PPPoE::getAvailableInterfaces() {
 	return BaseDsl::get_available_interfaces();
+}
+
+bool PPPoE::isDisconnect()
+{
+    return basedsl->isDisconnected();
 }

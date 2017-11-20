@@ -34,6 +34,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	password.toWCharArray(params.szPassword);
 	lstrcpyW(params.szDomain,L"");
     ret=RasDialW(NULL, NULL, &params, (DWORD)NULL, NULL, &hRasConn);
+    qDebug() << "pppoe ret" << ret;
 	if(ret!=0)
 	{
 		 /*****************/

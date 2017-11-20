@@ -12,6 +12,10 @@
 #include <QFontDatabase>
 #include <QtCore/QtGlobal>
 
+#define autoStartRegRoot HKEY_CURRENT_USER
+#define autoSatrtKeyWay "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+#define autoStartkeyName "NDR_AutoStart"
+
 #define NDR_TESTING true
 /** server address*/
 #define NDR_SERVER_INNER "172.24.5.130"
@@ -76,7 +80,7 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 71
+#define VERSION_MINOR 73
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"

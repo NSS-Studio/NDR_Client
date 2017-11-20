@@ -14,6 +14,7 @@ public:
 	bool dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &device_name);
 	bool redialRAS();
 	void hangUp();
+    bool isDisconnect();
 
 	QString lastError();
 	QString getUserName();

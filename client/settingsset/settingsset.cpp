@@ -18,6 +18,7 @@ bool SettingsSet::readAll()
     this->autoRasdial = profile.value(KEY_AUTO_DIAL,true).toBool();
     this->autoMinimize = profile.value(KEY_AUTO_MINIMAIE,true).toBool();
     this->autoClose = profile.value(KEY_AUTO_CLOSE, false).toBool();
+    this->autoStartup = profile.value(KEY_AUTO_STARTUP, false).toBool();
     this->webUpEnable = profile.value(KEY_WEBUP_ENABLE, false).toBool();
     this->language = profile.value(KEY_LANGUAGE).toString();
 
@@ -35,5 +36,6 @@ void SettingsSet::writeAll()
     profile.setValue(KEY_AUTO_DIAL,this->autoRasdial);
     profile.setValue(KEY_AUTO_MINIMAIE,this->autoMinimize);
     profile.setValue(KEY_AUTO_CLOSE, this->autoClose);
+    profile.setValue(KEY_AUTO_STARTUP, this->autoStartup);
     profile.setValue(KEY_LANGUAGE,this->language);
 }

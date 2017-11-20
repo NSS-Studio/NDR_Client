@@ -60,3 +60,5 @@ win32 {
     LIBS += -lpsapi
 }
 
+DISTFILES +=
+

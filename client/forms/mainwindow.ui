@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>300</width>
-    <height>400</height>
+    <width>1200</width>
+    <height>1600</height>
    </size>
   </property>
   <property name="focusPolicy">
@@ -300,7 +300,7 @@
      <x>0</x>
      <y>0</y>
      <width>269</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="defaultUp">

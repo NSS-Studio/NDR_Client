@@ -9,6 +9,7 @@
 #define KEY_LANGUAGE        "lang"
 #define KEY_WEBUP_ENABLE    "webUpEnable"
 #define KEY_AUTO_CLOSE      "autoClose"
+#define KEY_AUTO_STARTUP    "autoStartUp"
 class SettingsSet
 {
 public:
@@ -20,6 +21,7 @@ public:
     bool autoMinimize;
     bool webUpEnable;
     bool autoClose;
+    bool autoStartup;
     
     bool readAll();
     void writeAll();
