@@ -5,10 +5,10 @@ BaseDsl::BaseDsl(const QString &name, QObject *parent) :
 	QObject(parent)
 {
 	this->name = name;
-	connection = NULL;
-	ppp_service = NULL;
-	preferences = NULL;
-	ppp_interface = NULL;
+	connection = nullptr;
+	ppp_service = nullptr;
+	preferences = nullptr;
+	ppp_interface = nullptr;
 }
 
 bool BaseDsl::dial(const QString &username, const QString &password, const QString &device_name, QString &errorMsg)
@@ -18,7 +18,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 
 	if(ppp_service) {
 		CFRelease(ppp_service);
-		ppp_service = NULL;
+		ppp_service = nullptr;
 	}
 	//QSettings conn_cfg(appHome + "/connection.cfg", QSettings::IniFormat);
 /*
@@ -40,7 +40,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	QByteArray password_ba = password.toUtf8();
 	//qDebug() << username_ba << password_ba;
 	QByteArray name_ba = name.toUtf8();
-	CFStringRef name_cf = CFStringCreateWithCString(NULL, name_ba.data(), kCFStringEncodingUTF8);
+	CFStringRef name_cf = CFStringCreateWithCString(nullptr, name_ba.data(), kCFStringEncodingUTF8);
 	CFStringRef ppp_keys[] = {
 		kSCPropNetPPPAuthName,
 		kSCPropNetPPPAuthPassword,
@@ -52,8 +52,8 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		kSCPropNetPPPLogfile
 	};
 	CFTypeRef ppp_values[] = {
-		CFStringCreateWithCString(NULL, username_ba.data(), kCFStringEncodingUTF8),
-		CFStringCreateWithCString(NULL, password_ba.data(), kCFStringEncodingUTF8),
+		CFStringCreateWithCString(nullptr, username_ba.data(), kCFStringEncodingUTF8),
+		CFStringCreateWithCString(nullptr, password_ba.data(), kCFStringEncodingUTF8),
 		kCFBooleanFalse,
 		kCFBooleanFalse,
 		kCFBooleanTrue,
@@ -61,7 +61,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		name_cf,
 		CFSTR("/var/log/ppp.log")
 	};
-	CFDictionaryRef ppp_dict = CFDictionaryCreate(NULL, (const void **)ppp_keys, (const void **)ppp_values, 8, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFDictionaryRef ppp_dict = CFDictionaryCreate(nullptr, (const void **)ppp_keys, (const void **)ppp_values, 8, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
 	CFStringRef interface_keys[] = {
 		kSCPropNetInterfaceType,
@@ -73,21 +73,21 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		kSCValNetInterfaceSubTypePPPoE,
 		CFSTR("Ethernet")
 	};
-	CFDictionaryRef interface_dict = CFDictionaryCreate(NULL, (const void **)interface_keys, (const void **)interface_values, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFDictionaryRef interface_dict = CFDictionaryCreate(nullptr, (const void **)interface_keys, (const void **)interface_values, 3, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CFStringRef ip4_keys[] = {
 		kSCPropNetIPv4ConfigMethod
 	};
 	CFStringRef ip4_values[] = {
 		kSCValNetIPv4ConfigMethodPPP
 	};
-	CFDictionaryRef ip4_dict = CFDictionaryCreate(NULL, (const void **)ip4_keys, (const void **)ip4_values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFDictionaryRef ip4_dict = CFDictionaryCreate(nullptr, (const void **)ip4_keys, (const void **)ip4_values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	CFStringRef ip6_keys[] = {
 		kSCPropNetIPv6ConfigMethod
 	};
 	CFStringRef ip6_values[] = {
 		kSCValNetIPv6ConfigMethodAutomatic
 	};
-	CFDictionaryRef ip6_dict = CFDictionaryCreate(NULL, (const void **)ip6_keys, (const void **)ip6_values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFDictionaryRef ip6_dict = CFDictionaryCreate(nullptr, (const void **)ip6_keys, (const void **)ip6_values, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
 	CFStringRef keys[] = {
 		kSCEntNetInterface,
@@ -103,7 +103,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		ppp_dict,
 		name_cf
 	};
-	CFDictionaryRef dict = CFDictionaryCreate(NULL, (const void **)keys, (const void **)values, 5, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	CFDictionaryRef dict = CFDictionaryCreate(nullptr, (const void **)keys, (const void **)values, 5, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
 	CFRelease(interface_dict);
 	CFRelease(ip4_dict);
@@ -117,10 +117,10 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 			kAuthorizationFlagInteractionAllowed    |
 			kAuthorizationFlagPreAuthorize;
 		AuthorizationRef auth;
-		if(AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment, root_flags, &auth) == noErr) {
-			preferences = SCPreferencesCreateWithAuthorization(NULL, CFSTR("NSS"), NULL, auth);
+		if(AuthorizationCreate(nullptr, kAuthorizationEmptyEnvironment, root_flags, &auth) == noErr) {
+			preferences = SCPreferencesCreateWithAuthorization(nullptr, CFSTR("NSS"), nullptr, auth);
 		} else {
-			preferences = SCPreferencesCreate(NULL, CFSTR("NSS"), NULL);
+			preferences = SCPreferencesCreate(nullptr, CFSTR("NSS"), nullptr);
 		}
 		if(!preferences) {
 			SET_ERROR_MSG("SCPreferencesCreate");
@@ -134,7 +134,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		errorMsg = "No network services";
 		return false;
 	}
-	SCNetworkInterfaceRef en_interface = NULL;
+	SCNetworkInterfaceRef en_interface = nullptr;
 	CFIndex i, service_count = CFArrayGetCount(services);
 	for(i=0; i<service_count; i++) {
 		SCNetworkServiceRef service = (SCNetworkServiceRef)CFArrayGetValueAtIndex(services, i);
@@ -172,7 +172,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 				}
 			} else {
 				QByteArray device_name_ba = device_name.toUtf8();
-				CFStringRef device_name_cf = CFStringCreateWithCString(NULL, device_name_ba.data(), kCFStringEncodingUTF8);
+				CFStringRef device_name_cf = CFStringCreateWithCString(nullptr, device_name_ba.data(), kCFStringEncodingUTF8);
 				CFStringRef bsd_name = SCNetworkInterfaceGetBSDName(iface);
 				qDebug("%s: bsd_name: %s", __func__, bsd_name ? CFStringGetCStringPtr(bsd_name, kCFStringEncodingUTF8) : "(none)");
 				if(CFStringCompare(bsd_name, device_name_cf, 0) == kCFCompareEqualTo) {
@@ -258,7 +258,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 
 	SCPreferencesUnlock(preferences);
 
-	connection = SCNetworkConnectionCreateWithServiceID(NULL, service_id, NULL, NULL);
+	connection = SCNetworkConnectionCreateWithServiceID(nullptr, service_id, nullptr, nullptr);
 	if(!connection) {
 		SET_ERROR_MSG("SCNetworkConnectionCreateWithServiceID");
 		return false;
@@ -270,7 +270,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 		return false;
 	}
 
-	if(!SCNetworkConnectionStart(connection, NULL, 0)) {
+	if(!SCNetworkConnectionStart(connection, nullptr, 0)) {
 		SET_ERROR_MSG("SCNetworkConnectionStart");
 		return false;
 	}
@@ -296,7 +296,7 @@ void BaseDsl::hangUp()
 		if(!SCPreferencesApplyChanges(preferences)) return;
 		SCPreferencesSynchronize(preferences);
 		CFRelease(ppp_service);
-		ppp_service = NULL;
+		ppp_service = nullptr;
 	}
 	sleep(1);
 }
@@ -310,7 +310,7 @@ bool BaseDsl::isDisconnected()
 }
 
 static in_addr_t get_address_by_interface(const char *iface) {
-	struct ifaddrs *ifaddr = NULL, *ifaddr_o;
+	struct ifaddrs *ifaddr = nullptr, *ifaddr_o;
 	if(getifaddrs(&ifaddr) == -1) {
 		perror("getifaddrs");
 		return (in_addr_t)-1;
@@ -350,7 +350,7 @@ BaseDsl::~BaseDsl() {
 }
 
 QStringList BaseDsl::get_available_interfaces() {
-	SCPreferencesRef preferences = SCPreferencesCreate(NULL, CFSTR("NSS"), NULL);
+	SCPreferencesRef preferences = SCPreferencesCreate(nullptr, CFSTR("NSS"), nullptr);
 	CFArrayRef services = SCNetworkServiceCopyAll(preferences);
 	CFRelease(preferences);
 	if(!services) return QStringList();

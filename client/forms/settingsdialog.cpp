@@ -12,6 +12,7 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
     //this->ui->checkBox_2->setEnabled(false);
 	ui->cmbLanguage->setItemData(1, "zh_CN");
     //config = new QSettings(appHome + "/common.cfg", QSettings::IniFormat);
+#ifdef Q_OS_WIN
     QObject::connect(ui->checkBox_2, &QCheckBox::clicked, [=](){
         if (!isRunAsAdmin()){
             message(dialogKinds::warning, "请先以管理员权限运行此程序");
@@ -24,6 +25,7 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
         else
             ui->checkBox_2->setChecked(!delReg(autoStartRegRoot, autoSatrtKeyWay, autoStartkeyName));
     });
+#endif
 #ifdef Q_OS_MAC
 	ui->cmbHotKey->clear();
 	ui->cmbHotKey->addItem("⌘F9");
@@ -107,7 +109,7 @@ bool SettingsDialog::chkWeb()
 void SettingsDialog::on_chkAutoClose_pressed()
 {
     if (!this->ui->chkAutoClose->isChecked()){
-        QMessageBox::StandardButton re = QMessageBox::information(NULL, "警告", "勾选自动关闭通知有可能导致你无法看到来自学校的某些重要通知\n"
+        QMessageBox::StandardButton re = QMessageBox::information(nullptr, "警告", "勾选自动关闭通知有可能导致你无法看到来自学校的某些重要通知\n"
                                              "请再次确认是否关闭", QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
         if (re == QMessageBox::Yes)
             this->ui->chkAutoClose->setChecked(true);

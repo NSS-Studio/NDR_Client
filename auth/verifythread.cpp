@@ -51,7 +51,7 @@ void VerifyThread::run()
     }
     writeSize = build_challenge( ( _challenge* )bufWrite);
     forever{
-        common_header * header = NULL;
+        common_header * header = nullptr;
         forever
         {
             if(stop_now)

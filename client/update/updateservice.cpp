@@ -389,7 +389,7 @@ bool UpdateService::openPackage(QString &errMsg)
 		chdir(install_dir_path);
 		//now we donot unpacking
 		//qDebug("Unpacking \"%s\"", package_path_ptr);
-		execlp("open", "open", package_path_ptr, NULL);
+		execlp("open", "open", package_path_ptr, nullptr);
 	}
 	int status;
 	while(waitpid(pid, &status, 0) < 0) {

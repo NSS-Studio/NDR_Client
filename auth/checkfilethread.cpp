@@ -40,7 +40,7 @@ void CheckFileThread::run()
     num2 = 1;
     writeSize=build_alive("\x00\x00\x00\x00",1,(_alive*)bufWrite);
     forever{
-        _alive * pkg = NULL;
+        _alive * pkg = nullptr;
         forever{
             if(stop_now)
                 goto exit_thread;

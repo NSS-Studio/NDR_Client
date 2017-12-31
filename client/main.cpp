@@ -62,10 +62,6 @@ int main(int argc, char *argv[])
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
-//    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));//设置源码文件字符串编码
-//    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));//设置源码中待翻译字符串编码
-
-    //a.setStyle("cde");
 
     a.setQuitOnLastWindowClosed(false);
 

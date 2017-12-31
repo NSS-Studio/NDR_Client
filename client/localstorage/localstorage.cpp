@@ -6,8 +6,6 @@ LocalStorage::LocalStorage(QString filename, QObject *parent) :
 {
     db =  new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
     db->setDatabaseName(filename); 
-    query = NULL;
-    sum = 0;
 }
 
 LocalStorage::~LocalStorage()
@@ -56,7 +54,7 @@ bool LocalStorage::open()
         QTextStream(stdout) << query->lastError().text();
         db->close();
         delete query;
-        query = NULL;
+        query = nullptr;
         return false;
     }
     sum =1;
@@ -73,7 +71,7 @@ void LocalStorage::close()
         return;
     }
     delete query;
-    query = NULL;
+    query = nullptr;
     db->close();
     sum =0;
 }

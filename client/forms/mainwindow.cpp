@@ -417,7 +417,7 @@ void MainWindow::on_actionLogoff_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-	if(aboutDialog==NULL)
+	if(aboutDialog==nullptr)
 		aboutDialog = new AboutDialog();
 	if(aboutDialog->isVisible())
 		aboutDialog->activateWindow();
@@ -575,13 +575,11 @@ void MainWindow::hangedUp(bool natural)
 
 
             for (int retryCount = 1; retryCount <=5 && pppoe->isDisconnect(); retryCount++){
-                Sleep(1000);
-
+                QThread::sleep(1000);
                 noticeDialog->showMessage(tr("网络异常断开，正在重新拨号\n重试次数%0/5").arg(retryCount));
                 QEventLoop eventloop;
                 QTimer::singleShot(500, &eventloop, SLOT(quit()));
                 eventloop.exec();
-
                 pppoe->redialRAS();
             }
 
@@ -664,7 +662,7 @@ void MainWindow::onStartWorking()
 	trayIcon->setContextMenu(this->ui->menuTrayWorking);
 	trayIcon->show();
     timerId = this->startTimer(1000);
-    this->timerEvent(NULL);
+    this->timerEvent(nullptr);
 
 //	this->logoffShortcut->setEnabled();
 
@@ -713,7 +711,7 @@ void MainWindow::checkFinished(bool error,int major,int minor,QString errMsg)
     if(error && state == Working)
     {
         this->ui->actionLogoff->trigger();
-        QMessageBox::critical(NULL,tr("警告"),tr("检查更新失败") + "\n" + errMsg);
+        QMessageBox::critical(nullptr,tr("警告"),tr("检查更新失败") + "\n" + errMsg);
         
     }
 
@@ -832,11 +830,11 @@ void MainWindow::getSystemInfo()
 
 void MainWindow::getMoniterSize(int &x, int &y)
 {
-    x = GetSystemMetrics(SM_CXSCREEN);
-    y = GetSystemMetrics(SM_CYSCREEN);
-#ifdef QT_DEBUG
-    qDebug() << "Moniter Size: " << x << "x" << y << endl;
-#endif
+//    x = GetSystemMetrics(SM_CXSCREEN);
+//    y = GetSystemMetrics(SM_CYSCREEN);
+//#ifdef QT_DEBUG
+//    qDebug() << "Moniter Size: " << x << "x" << y << endl;
+//#endif
 }
 
 //void MainWindow::infoWriteFinished() {

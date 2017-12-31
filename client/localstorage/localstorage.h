@@ -40,9 +40,9 @@ public:
     void writeSettings(SettingsSet settings);
     
 private:
-    QSqlDatabase *db;
-    QSqlQuery *query;
-    int sum;
+    QSqlDatabase *db = nullptr;
+    QSqlQuery *query = nullptr;
+    int sum = 0;
 signals:
     
 public slots:

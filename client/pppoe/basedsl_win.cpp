@@ -5,7 +5,7 @@ BaseDsl::BaseDsl(const QString &name, QObject *parent) :
 	QObject(parent)
 {
     this->name = name;
-    this->hRasConn = NULL;
+    this->hRasConn = nullptr;
 }
 
 BaseDsl::~BaseDsl()
@@ -33,7 +33,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	username.toWCharArray(params.szUserName);
 	password.toWCharArray(params.szPassword);
 	lstrcpyW(params.szDomain,L"");
-    ret=RasDialW(NULL, NULL, &params, (DWORD)NULL, NULL, &hRasConn);
+    ret=RasDialW(nullptr, nullptr, &params, (DWORD)nullptr, nullptr, &hRasConn);
     qDebug() << "pppoe ret" << ret;
 	if(ret!=0)
 	{
@@ -89,7 +89,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
                 "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
             break;
 		}
-		hRasConn=NULL;
+		hRasConn=nullptr;
 		return false;
 	}
 	return true;
@@ -98,7 +98,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 void BaseDsl::hangUp()
 {
 	RasHangUpW(hRasConn);
-	hRasConn = NULL;
+	hRasConn = nullptr;
 }
 
 bool BaseDsl::isDisconnected()
@@ -148,7 +148,7 @@ bool BaseDsl::preparePhoneBookEntry(QString entryName,QString &errorMessage)
     szEntryName[0]=L'\0';
     rasEntry.dwSize = sizeof(RASENTRYW);
     entryName.toWCharArray(szEntryName);
-    dwRet=RasGetEntryPropertiesW(NULL, szEntryName , &rasEntry,  & dwBufferSize, NULL, NULL); 
+    dwRet=RasGetEntryPropertiesW(nullptr, szEntryName , &rasEntry,  & dwBufferSize, nullptr, nullptr); 
     qDebug() << "dwRet" << dwRet;
     if(ERROR_CANNOT_FIND_PHONEBOOK_ENTRY==dwRet)
     {
@@ -217,7 +217,7 @@ bool BaseDsl::preparePhoneBookEntry(QString entryName,QString &errorMessage)
         rasEntry.dwfNetProtocols  =  RASNP_Ip;
         rasEntry.dwFramingProtocol = RASFP_Ppp;
         rasEntry.dwfNetProtocols = RASNP_Ipv6 | RASNP_Ip;
-        dwRet  =  RasSetEntryPropertiesW(NULL,  szEntryName , &rasEntry, cb, NULL,  0 );
+        dwRet  =  RasSetEntryPropertiesW(nullptr,  szEntryName , &rasEntry, cb, nullptr,  0 );
         if(dwRet)
         {
             WCHAR szError[1024];
