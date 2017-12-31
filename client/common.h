@@ -16,7 +16,12 @@
 #define autoSatrtKeyWay "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
 #define autoStartkeyName "NDR_AutoStart"
 
+#ifndef NDR_TESTING
 #define NDR_TESTING true
+#endif
+
+#define UNUSED(x) (void)(x)
+
 /** server address*/
 #define NDR_SERVER_INNER "172.24.5.130"
 #define NDR_SERVER_OUTER "172.24.10.13"
@@ -88,7 +93,6 @@ extern void __initTempDir();
 
 /** NDR更新服务器地址和备用服务器地址*/
 #define NDR_UPDATE_SERVER NDR_SERVER
-#define NDR_UPDATE_SERVER_2_BACK "172.24.5.13"
 
 /** NDR导航页*/
 #define NDR_GATE "http://go.neusoft.edu.cn"

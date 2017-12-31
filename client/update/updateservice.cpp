@@ -1,12 +1,11 @@
 #include "updateservice.h"
 
-UpdateService::UpdateService(const QString &serverAddr, const QString &serverAddrBak, const QString &tempDirectory, QObject *parent)
-    :QObject(parent),tempDir{tempDirectory},ipAddress{serverAddr},ipAddress_2_back{serverAddrBak},isConnectUpdateServerFail{false}
+UpdateService::UpdateService(const QString &serverAddr, const QString &tempDirectory, QObject *parent)
+    :QObject(parent),tempDir{tempDirectory},ipAddress{serverAddr},isConnectUpdateServerFail{false}
 {
-    //set ssl config
+//  set ssl config
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
-//    !!!!!!!
-//    protocol tlsv1->TlsV1_2OrLater
+//  protocol tlsv1->TlsV1_2OrLater
     this->sslConf.setProtocol(QSsl::TlsV1_2);
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;
@@ -32,8 +31,8 @@ void UpdateService::checkOriginGet()
     if(reply->error() != QNetworkReply::NoError)
     {
         qDebug() << "url_1 failed";
-        QString url="https://" + ipAddress_2_back + "/update/aorigin.xml";
-        qDebug() << "url_2_back" << url;
+        QString url="https://" + ipAddress + "/update/aorigin.xml";
+        qDebug() << "url_1_again" << url;
         delete reply;
         QNetworkRequest tmp=QNetworkRequest( QUrl(url));
         tmp.setSslConfiguration(this->sslConf);
@@ -42,7 +41,7 @@ void UpdateService::checkOriginGet()
     }
     else
     {
-        qDebug() << "url is OK! the update server 172.24.10.13 is very very OK!";
+        qDebug() << "url is OK! the update server " + ipAddress +" is very very OK!";
         this->isConnectUpdateServerFail = true;
         originGetFinished();
     }

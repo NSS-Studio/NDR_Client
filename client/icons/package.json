@@ -1,0 +1,12 @@
+{
+  "title": "NDR_Client",
+  "icon": "logo.icns",
+  "background": "NDRinstall.png",
+  "format": "UDRO",
+  "contents": [
+    { "x": 428, "y": 234, "type": "link", "path": "/Applications" },
+    { "x": 142, "y": 234, "type": "file", "path": "./../../build/client/NDR Client.app" },
+    { "x": 388, "y": 354, "type": "file", "path": "./../../license.txt" },
+    { "x": 488, "y": 354, "type": "file", "path": "./../../whatsnew.txt" }
+  ]
+}

@@ -1,8 +1,3 @@
-# re
-
-# qmake /Users/rabenda/NDR_Client/ndr-client.pro -spec macx-clang CONFIG+=debug CONFIG+=x86_64 && /usr/bin/make qmake_all
-
-
 # macosx && linux_deb && linux_rpm
 
 if [ $# = 1 -a $1 = "clean" ]; then
@@ -26,6 +21,11 @@ fi
 
 if [ $2 = "debug" -o $2 = "release" ]; then
     configBuildMode=$2
+    if [ $2 = "debug" ]; then
+        ndrTesting="true"
+    elif [ $2 = "release" ]; then
+        ndrTesting="false"
+    fi
 else
     printf "buildInfo invaild\n"
     exit 1
@@ -37,14 +37,24 @@ else
     QMAKE=$3
 fi
 
+rm -f ./NDR_Client.dmg
+rm -rf ./build/
+cd client/ts-file/
+chmod +x ./update.sh
+sh ./update.sh
+chmod +x ./release.sh
+sh ./release.sh
+cd ../../
+
 mkdir build
 cd build
 
-$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2
-
+$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2 DEFINES+=NDR_TESTING=$ndrTesting
 make
-macdeployqt ./client/NDR\ Client.app/ -dmg
-mv ./client/NDR\ Client.dmg ./../NDR_Client.dmg
-cd ../
-rm -rf ./build/
-printf "deployqt done!"
+
+macdeployqt ./client/NDR\ Client.app/
+cd ..
+appdmg ./client/icons/package.json ~/Desktop/ndr_0.74_macosx.dmg
+
+printf "deployqt done!\n"
+printf "new dmg in desktop\n"

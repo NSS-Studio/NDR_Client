@@ -83,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	isMainWindowMinimized=false;
 
     //更新模块初始化
-    updateServer = new UpdateService(NDR_UPDATE_SERVER,NDR_UPDATE_SERVER_2_BACK,tempDir);
+    updateServer = new UpdateService(NDR_UPDATE_SERVER,tempDir);
 
     connect(updateServer,&UpdateService::checkFinished, this, &MainWindow::checkFinished);
     connect(updateServer,&UpdateService::downloadFinished, this, &MainWindow::downloadFinished);
@@ -326,6 +326,9 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason)
     default:
         break;
     }
+#else
+    // warning: unused parameter 'reason' [-Wunused-parameter]
+    UNUSED(reason);
 #endif
 }
 
@@ -826,15 +829,6 @@ void MainWindow::getSystemInfo()
     emit infoWriteStarted();
 
     //message->exec();
-}
-
-void MainWindow::getMoniterSize(int &x, int &y)
-{
-//    x = GetSystemMetrics(SM_CXSCREEN);
-//    y = GetSystemMetrics(SM_CYSCREEN);
-//#ifdef QT_DEBUG
-//    qDebug() << "Moniter Size: " << x << "x" << y << endl;
-//#endif
 }
 
 //void MainWindow::infoWriteFinished() {

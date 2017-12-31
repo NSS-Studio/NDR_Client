@@ -91,7 +91,6 @@ private:
 //    HttpsJsonPost *httpsJsonPost;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent* event);
-    void getMoniterSize(int &x, int &y);
     
     QString time_humanable(int sec);
     

@@ -31,7 +31,7 @@ class UpdateService : public QObject
 {
     Q_OBJECT
 public:
-    explicit UpdateService(const QString &serverAddr, const QString &serverAddrBack,const QString &tempDirectory, QObject *parent = 0);
+    explicit UpdateService(const QString &serverAddr,const QString &tempDirectory, QObject *parent = 0);
 	void checkUpdate();
 	void downloadLatestPackage();
 	//bool tryInstall();
@@ -41,7 +41,7 @@ public:
 
 private:
 	QString tempDir;
-    QString ipAddress, ipAddress_2_back;
+    QString ipAddress;
 	QString packageUrl;
 	QString packageFilename;
 	bool running;

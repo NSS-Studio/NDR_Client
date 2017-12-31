@@ -182,14 +182,14 @@ p, li { white-space: pre-wrap; }
         <translation>ダイヤルアップ接続アダプタの初期化は失敗した、%1</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="52"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="185"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="229"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="53"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="186"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="230"/>
         <source>未知错误</source>
         <translation>未知エラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="60"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="61"/>
         <source>1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）
 2.请确保交换机及其连线完好.
 3.请确保网线已插好.
@@ -200,7 +200,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="69"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="70"/>
         <source>1.请检查账号或密码以及套餐设置是否正确.
 2.请检查套餐是否还未生效或已经过期.
 3.请确保当前没有连接到其他Wifi网络.
@@ -209,7 +209,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="76"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="77"/>
         <source>请尝试重新启动计算机.
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -217,7 +217,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="81"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="82"/>
         <source>请重新尝试拨号.
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -225,7 +225,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="86"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="87"/>
         <source>可能是一些拨号所依赖的服务无法启动所致
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -265,7 +265,7 @@ p, li { white-space: pre-wrap; }
 もう一度ダイヤルを試してください。</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="175"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="176"/>
         <source>枚举RAS-CAPABLE设备时返回错误</source>
         <translation>枚挙RAS-CAPABLE設備の際にエラー</translation>
     </message>
@@ -295,7 +295,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">未知エラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="208"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="209"/>
         <source>没有可用的RAS-CAPABLE设备</source>
         <translation>利用できるRAS-CAPABLE設備がありません</translation>
     </message>
@@ -406,92 +406,92 @@ p, li { white-space: pre-wrap; }
         <translation>ランクするために、ランクの前のかぎをクリークしてください</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="31"/>
+        <location filename="../forms/feedbackdialog.cpp" line="34"/>
         <source>反人类设计，BUG一堆，开发者们都去食屎吧！</source>
         <translation>反人類の設計、バグが積まれて、開発者たちも食糞だろう！</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="35"/>
+        <location filename="../forms/feedbackdialog.cpp" line="38"/>
         <source>相比原版客户端差远了，快点更新！</source>
         <translation>古いクライアントに比べてはまただ、早くアップデートしろう！</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="39"/>
+        <location filename="../forms/feedbackdialog.cpp" line="42"/>
         <source>能凑合用，起码有网比没网强 = = </source>
         <translation>いまいち使うことができますが、ネットがあるは何よりだ＝＝</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="42"/>
+        <location filename="../forms/feedbackdialog.cpp" line="45"/>
         <source>用起来还算不错，但在某些功能上还需改善</source>
         <translation>使うことが悪くないが、ある機能はまたまた</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="45"/>
+        <location filename="../forms/feedbackdialog.cpp" line="48"/>
         <source>超级好用啊，给开发者点赞！</source>
         <translation>スーパーで良いんだよ、開発者が1点賛！</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="48"/>
+        <location filename="../forms/feedbackdialog.cpp" line="51"/>
         <source>你是怎么做到的？</source>
         <translation>あなたはどうやってしたのか？</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="52"/>
+        <location filename="../forms/feedbackdialog.cpp" line="55"/>
         <source>%1分 </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="77"/>
+        <location filename="../forms/feedbackdialog.cpp" line="80"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="77"/>
+        <location filename="../forms/feedbackdialog.cpp" line="80"/>
         <source>标题必须保证5个字符以上</source>
         <translation>タイトルは少なくとも５字以上だ</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="147"/>
+        <location filename="../forms/feedbackdialog.cpp" line="151"/>
         <source>连接服务器失败</source>
         <translation>サーバーの接続が失敗した</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="152"/>
+        <location filename="../forms/feedbackdialog.cpp" line="156"/>
         <source>请求服务器失败, 返回状态代码%1</source>
         <translation>請求サーバーが失敗、コードは%1</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="194"/>
+        <location filename="../forms/feedbackdialog.cpp" line="198"/>
         <source>反馈服务器内部错误</source>
         <translation>フィードバックサーバーエラー</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="198"/>
+        <location filename="../forms/feedbackdialog.cpp" line="202"/>
         <source>您提交的过于频繁</source>
         <translation>貴方の送信が頻繁すぎ</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="202"/>
+        <location filename="../forms/feedbackdialog.cpp" line="206"/>
         <source>参数不足</source>
         <translation>パラメータが足りない</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="206"/>
+        <location filename="../forms/feedbackdialog.cpp" line="210"/>
         <source>无法解析的错误</source>
         <translation>解析できないエラー</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="221"/>
+        <location filename="../forms/feedbackdialog.cpp" line="225"/>
         <source>反馈成功</source>
         <translation>フィードバックが成功した</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="221"/>
+        <location filename="../forms/feedbackdialog.cpp" line="225"/>
         <source>感谢您反馈，我们会考虑并尽力采纳您的意见</source>
         <translation>貴方のフィードバックが感謝する、私たちはあなたの意見を受け入れて考える</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="224"/>
+        <location filename="../forms/feedbackdialog.cpp" line="228"/>
         <source>反馈失败</source>
         <translation>フィードバックが失敗した</translation>
     </message>
@@ -548,57 +548,57 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../forms/logindialog.ui" line="26"/>
+        <location filename="../forms/logindialog.ui" line="39"/>
         <source>NDR 东软校园网络认证</source>
         <translation>NDRキャンパスネットワーク認証</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="236"/>
+        <location filename="../forms/logindialog.ui" line="252"/>
         <source>可见</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="283"/>
+        <location filename="../forms/logindialog.ui" line="299"/>
         <source>故障修复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="356"/>
+        <location filename="../forms/logindialog.ui" line="374"/>
         <source>登录 (&amp;L)</source>
         <translation>ログイン(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="331"/>
+        <location filename="../forms/logindialog.ui" line="347"/>
         <source>记住密码</source>
         <translation>パスワードを覚えて</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="318"/>
+        <location filename="../forms/logindialog.ui" line="334"/>
         <source>自动登陆</source>
         <translation>自動登録</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="115"/>
+        <location filename="../forms/logindialog.ui" line="131"/>
         <source>网卡：</source>
         <translation>LANカード：</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="156"/>
+        <location filename="../forms/logindialog.ui" line="172"/>
         <source>套餐：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="169"/>
+        <location filename="../forms/logindialog.ui" line="185"/>
         <source>账号：</source>
         <translation>アカウント：</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="182"/>
+        <location filename="../forms/logindialog.ui" line="198"/>
         <source>密码：</source>
         <translation>パスワード：</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="261"/>
+        <location filename="../forms/logindialog.ui" line="277"/>
         <source>清除账号</source>
         <translation>クリア</translation>
     </message>
@@ -636,13 +636,23 @@ p, li { white-space: pre-wrap; }
         <translation>このアカウントの情報が存在しない</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="357"/>
+        <location filename="../forms/logindialog.cpp" line="336"/>
         <source>成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="357"/>
+        <location filename="../forms/logindialog.cpp" line="336"/>
         <source>Winsock重置成功，谢谢使用</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="338"/>
+        <source>失败</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="338"/>
+        <source>Winsock重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -762,38 +772,44 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">ショートカットキー抹消登録失敗、ショートカットキーは無効、あるいは他のアプリケーションで使用されているかもしれない。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="66"/>
+        <location filename="../forms/mainwindow.cpp" line="59"/>
         <source>NDR</source>
         <translation>NDR</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="66"/>
+        <location filename="../forms/mainwindow.cpp" line="59"/>
         <source>No interface available</source>
         <translation>No interface available</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="163"/>
+        <location filename="../forms/mainwindow.cpp" line="155"/>
         <source>未知</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="167"/>
+        <location filename="../forms/mainwindow.cpp" line="159"/>
         <source>正在拨号. . .</source>
         <translation>ダイヤルアップしている. . .</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="204"/>
+        <location filename="../forms/mainwindow.cpp" line="185"/>
         <source>%0 天 %1:%2:%3</source>
         <translation type="unfinished">%1 日 %1:%2:%3 {0 ?}</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="274"/>
+        <location filename="../forms/mainwindow.cpp" line="253"/>
         <source>拨号成功，开启认证</source>
         <translation>ダイヤルアップは成功しました。認証を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="673"/>
-        <location filename="../forms/mainwindow.cpp" line="703"/>
+        <location filename="../forms/mainwindow.cpp" line="582"/>
+        <source>网络异常断开，正在重新拨号
+重试次数%0/5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/mainwindow.cpp" line="663"/>
+        <location filename="../forms/mainwindow.cpp" line="693"/>
         <source>NDR 校园网络认证</source>
         <translation>NDRキャンパスネットワーク認証</translation>
     </message>
@@ -802,44 +818,41 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">主パネルは最小化しました、設定で自動最小化機能を閉鎖ができます。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="310"/>
-        <location filename="../forms/mainwindow.cpp" line="600"/>
-        <location filename="../forms/mainwindow.cpp" line="608"/>
+        <location filename="../forms/mainwindow.cpp" line="291"/>
+        <location filename="../forms/mainwindow.cpp" line="598"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="310"/>
+        <location filename="../forms/mainwindow.cpp" line="291"/>
         <source>拨号失败</source>
         <translation>ダイヤルが失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="422"/>
+        <location filename="../forms/mainwindow.cpp" line="406"/>
         <source>正在尝试注销</source>
         <translation>取り消しを試している</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="592"/>
         <source>网络异常断开，正在重新拨号</source>
-        <translation>ネットが切断された、改めてダイヤルしている</translation>
+        <translation type="vanished">ネットが切断された、改めてダイヤルしている</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="600"/>
         <source>重新拨号失败</source>
-        <translation>再ダイヤル失敗</translation>
+        <translation type="vanished">再ダイヤル失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="608"/>
+        <location filename="../forms/mainwindow.cpp" line="598"/>
         <source>网络异常断开。</source>
         <translation>ネットが異常切断された。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="626"/>
+        <location filename="../forms/mainwindow.cpp" line="616"/>
         <source>拨号成功</source>
         <translation>ダイヤルアップ成功</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="641"/>
+        <location filename="../forms/mainwindow.cpp" line="631"/>
         <source>重播失败，正在关闭验证</source>
         <translation>再ダイヤルが失敗しており、閉鎖検証</translation>
     </message>
@@ -849,38 +862,38 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">NDRキャンパスネットワーク認証</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="727"/>
+        <location filename="../forms/mainwindow.cpp" line="717"/>
         <source>警告</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="727"/>
+        <location filename="../forms/mainwindow.cpp" line="717"/>
         <source>检查更新失败</source>
         <translation>検査更新が失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="756"/>
+        <location filename="../forms/mainwindow.cpp" line="746"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>アップデートがあります、ダウンロードができない</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="767"/>
+        <location filename="../forms/mainwindow.cpp" line="757"/>
         <source>立即安装</source>
         <translation>今すぐインストール</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="770"/>
+        <location filename="../forms/mainwindow.cpp" line="760"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRは3分以内に切ります、そして更新する、もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="773"/>
+        <location filename="../forms/mainwindow.cpp" line="763"/>
         <source>打开软件包目录</source>
         <translation>パッケージソフト目録を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="766"/>
-        <location filename="../forms/mainwindow.cpp" line="772"/>
+        <location filename="../forms/mainwindow.cpp" line="756"/>
+        <location filename="../forms/mainwindow.cpp" line="762"/>
         <source>稍后提醒</source>
         <translation>後で注意</translation>
     </message>
@@ -889,32 +902,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 日 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="776"/>
+        <location filename="../forms/mainwindow.cpp" line="766"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRはも新しいバージョンのソフトウェアをダウンロードしました、フォルダを開き、手動でインストールしてください。もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="779"/>
         <source>打开失败</source>
         <translation>オープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="789"/>
+        <location filename="../forms/mainwindow.cpp" line="779"/>
         <source>打开目录失败</source>
         <translation>フォルダをオープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="791"/>
+        <location filename="../forms/mainwindow.cpp" line="781"/>
         <source>安装失败</source>
         <translation>インストール失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="791"/>
+        <location filename="../forms/mainwindow.cpp" line="781"/>
         <source>启动安装程序失败</source>
         <translation>インストールプログラム起動失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="794"/>
+        <location filename="../forms/mainwindow.cpp" line="784"/>
         <source>请尝试手动安装 %1</source>
         <translation>%1を手動インストールを試してください</translation>
     </message>
@@ -967,20 +980,20 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="92"/>
-        <location filename="../main.cpp" line="94"/>
+        <location filename="../main.cpp" line="88"/>
+        <location filename="../main.cpp" line="90"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="92"/>
+        <location filename="../main.cpp" line="88"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>起動が失敗した
 もうひとりの実例を実行している。もしクライアントが異常脱退、再び試みて下さい。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="94"/>
+        <location filename="../main.cpp" line="90"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>起動が失敗した
@@ -1035,32 +1048,41 @@ p, li { white-space: pre-wrap; }
         <translation>基本設定</translation>
     </message>
     <message>
+        <location filename="../forms/settingsdialog.ui" line="53"/>
+        <source>禁止启动时唤起导航页面</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.ui" line="60"/>
+        <source>自动关闭通知窗口</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../forms/settingsdialog.ui" line="67"/>
         <source>点&quot;X&quot;直接退出而不最小化到托盘</source>
         <translation>ｘをクリークしたら、最小化ではない、プログラムを終了する</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="40"/>
+        <location filename="../forms/settingsdialog.ui" line="74"/>
         <source>随系统启动</source>
         <translation>システムの起動時、アプリケーションを起動する</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="47"/>
         <source>禁用通知窗口</source>
-        <translation>通知ウインドウを禁止</translation>
+        <translation type="vanished">通知ウインドウを禁止</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="75"/>
+        <location filename="../forms/settingsdialog.ui" line="82"/>
         <source>登录设置</source>
         <translation>ログイン設定</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="81"/>
+        <location filename="../forms/settingsdialog.ui" line="88"/>
         <source>断线自动重连</source>
         <translation>ネットが切れた時、自動ダイヤルする</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="97"/>
+        <location filename="../forms/settingsdialog.ui" line="110"/>
         <source>注销热键：</source>
         <translation>抹消ホットキー：</translation>
     </message>
@@ -1069,7 +1091,7 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">もし閉鎖ホットキー、どうぞクリア編集ボックスをしてください</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="209"/>
+        <location filename="../forms/settingsdialog.ui" line="222"/>
         <source>皮肤：</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1078,29 +1100,54 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">閉鎖ホットキーなら、どうぞクリアしてください</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="88"/>
+        <location filename="../forms/settingsdialog.ui" line="98"/>
         <source>拨号完毕隐藏主面板</source>
         <translation>ダイヤル完了、主パネルを隠して</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="160"/>
+        <location filename="../forms/settingsdialog.ui" line="173"/>
         <source>显示设置</source>
         <translation>表示設定</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="166"/>
+        <location filename="../forms/settingsdialog.ui" line="179"/>
         <source>语言：</source>
         <translation>言語：</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="180"/>
+        <location filename="../forms/settingsdialog.ui" line="193"/>
         <source>自动</source>
         <translation>自動</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.ui" line="196"/>
+        <location filename="../forms/settingsdialog.ui" line="209"/>
         <source>注意：更改语言需要重启程序才能生效。</source>
         <translation>注意：言語を変更したら、発効するのはプログラムを再起動ことが必要。</translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.cpp" line="24"/>
+        <source>/ndr-client.exe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.cpp" line="218"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.cpp" line="222"/>
+        <source>Question</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.cpp" line="228"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/settingsdialog.cpp" line="232"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1118,93 +1165,93 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">プッシュした更新構成ファイルにはパックが見つからない</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="169"/>
+        <location filename="../update/updateservice.cpp" line="168"/>
         <source>找不到安装包资源</source>
         <translation>インストールパッケージ資源が見つからない</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="185"/>
+        <location filename="../update/updateservice.cpp" line="184"/>
         <source>文件下载失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="70"/>
-        <location filename="../update/updateservice.cpp" line="81"/>
+        <location filename="../update/updateservice.cpp" line="69"/>
+        <location filename="../update/updateservice.cpp" line="80"/>
         <source>服务器正在维护中，状态码 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="99"/>
+        <location filename="../update/updateservice.cpp" line="98"/>
         <source>服务器正在维护中,请稍后</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="236"/>
+        <location filename="../update/updateservice.cpp" line="235"/>
         <source>服务器正在维护中</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="317"/>
+        <location filename="../update/updateservice.cpp" line="316"/>
         <source>艾玛，我刚刚下载完的安装包，竟然不见了！！</source>
         <translation>先ほどダウンロードしたインストールパッケージが見つからない！！</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="318"/>
+        <location filename="../update/updateservice.cpp" line="317"/>
         <source>请尝试到e.neusoft.edu.cn下载最新版安装包</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="321"/>
+        <location filename="../update/updateservice.cpp" line="320"/>
         <source>用户未授予客户端权限，执行进程操作被系统拒绝</source>
         <translation>ユーザーがクライアントに権限を授与ない、プロセス操作の実行がシステムに拒否された</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="324"/>
+        <location filename="../update/updateservice.cpp" line="323"/>
         <source>下载的安装包格式错误，导致无法运行，请尝试重新拨号并下载</source>
         <translation>ダウンロードしたインストールパケージのフォーマットが間違い、プログラムを実行することができません、再ダイヤルとをダウンロードしてみてください</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="327"/>
+        <location filename="../update/updateservice.cpp" line="326"/>
         <source>打开文件时发生共享错误</source>
         <translation>ファイルを開く時発生共有エラー</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="330"/>
+        <location filename="../update/updateservice.cpp" line="329"/>
         <source>不合法的文件路径</source>
         <translation>非合法のファイルのパス</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="333"/>
+        <location filename="../update/updateservice.cpp" line="332"/>
         <source>启动应用程序超时</source>
         <translation>アプリケーションの起動がタイムアウトした</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="336"/>
+        <location filename="../update/updateservice.cpp" line="335"/>
         <source>没有关联的应用程序，启动失败</source>
         <translation>関連のないアプリを起動に失敗した</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="338"/>
+        <location filename="../update/updateservice.cpp" line="337"/>
         <source>打开文件时发生未知错误</source>
         <translation>ファイルを開く際に知らない誤りがある</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="361"/>
+        <location filename="../update/updateservice.cpp" line="360"/>
         <source>命令 %1 以状态 %2 退出</source>
         <translation>命令 %1は状態 %2と共に終了</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="369"/>
+        <location filename="../update/updateservice.cpp" line="368"/>
         <source>Unrecognized installation</source>
         <translation>Unrecognized installation</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="403"/>
+        <location filename="../update/updateservice.cpp" line="402"/>
         <source>打开文件夹因收到信号 %1 而中止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="407"/>
+        <location filename="../update/updateservice.cpp" line="406"/>
         <source>打开文件夹以状态 %1 退出</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1251,18 +1298,28 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/popupdialog.cpp" line="24"/>
+        <source> </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../forms/popupdialog.cpp" line="25"/>
+        <location filename="../forms/popupdialog.cpp" line="26"/>
         <source>Unknow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/popupdialog.cpp" line="183"/>
+        <location filename="../forms/popupdialog.cpp" line="185"/>
         <source>1/%0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/popupdialog.cpp" line="210"/>
-        <location filename="../forms/popupdialog.cpp" line="230"/>
+        <location filename="../forms/popupdialog.cpp" line="207"/>
+        <source>%0秒后自动关闭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupdialog.cpp" line="236"/>
+        <location filename="../forms/popupdialog.cpp" line="258"/>
         <source>%0/%1</source>
         <translation type="unfinished"></translation>
     </message>
