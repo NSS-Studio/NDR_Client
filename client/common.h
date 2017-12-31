@@ -27,8 +27,8 @@
 #define NDR_SERVER NDR_SERVER_OUTER
 #endif
 
-#if (QT_VERSION < QT_VERSION_CHECK(5, 9, 1))
-#error "!!! please use qt 5.9.1 or later"
+#if (QT_VERSION < QT_VERSION_CHECK(5, 9, 3))
+#error "!!! please use qt 5.9.3 or later"
 #endif
 
 /** 确定操作系统类型
@@ -80,7 +80,7 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 73
+#define VERSION_MINOR 74
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"

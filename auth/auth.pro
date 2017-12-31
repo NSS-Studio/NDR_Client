@@ -9,12 +9,12 @@ QT       = core network
 TARGET = auth
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += c++1z
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
-
 
 HEADERS     +=  $$PWD/authenticat.h \
                 $$PWD/checkfilethread.h \
