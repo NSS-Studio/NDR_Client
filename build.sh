@@ -1,4 +1,7 @@
-# macosx && linux_deb && linux_rpm
+#!/bin/sh
+# macosx && linux_deb
+
+version="0.74"
 
 if [ $# = 1 -a $1 = "clean" ]; then
     rm -rf ./build/
@@ -39,7 +42,18 @@ else
     QMAKE=$3
 fi
 
-rm -f ./NDR_Client.dmg
+if [ $1 = "debian" ]; then
+    sudo apt update
+    sudo apt install build-essential
+    sudo apt install network-manager-dev
+    sudo apt install libgl1-mesa-dev
+fi
+
+
+if [ $1 = "macosx" ]; then
+    rm -f ./NDR_Client.dmg
+fi
+
 rm -rf ./build/
 cd client/ts-file/
 chmod +x ./update.sh
@@ -56,9 +70,17 @@ make
 if [ $1 = "macosx" ]; then
     macdeployqt ./client/NDR\ Client.app/
     cd ..
-    appdmg ./client/icons/package.json ~/Desktop/ndr_0.74_macosx.dmg
+    appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "deployqt done!\n"
     printf "new dmg in desktop\n"
+    exit 0
+
+else if [ $1 = "debian" ]; then
+
+    printf "deployqt done!\n"
+    printf "create deb in desktop\n"
+    exit 0
 fi
+
 
 
