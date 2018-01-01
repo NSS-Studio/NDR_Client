@@ -6,6 +6,8 @@ version="0.74"
 if [ $# = 1 -a $1 = "clean" ]; then
     rm -rf ./build/
     rm -f ./NDR_Client.dmg
+    rm -f ./debian/opt/ndr/bin/ndr-client
+    rm -rf ./debian/opt/ndr/lib
     printf "clean done!\n"
     exit 0
 fi
@@ -52,6 +54,9 @@ fi
 
 if [ $1 = "macosx" ]; then
     rm -f ./NDR_Client.dmg
+elif [ $1 = "debian" ]; then
+    rm -f ./debian/opt/ndr/bin/ndr-client
+    rm -rf ./debian/opt/ndr/lib
 fi
 
 rm -rf ./build/
@@ -67,17 +72,21 @@ cd build
 
 $QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2 DEFINES+=NDR_TESTING=$ndrTesting
 make
+
+cd ..
 if [ $1 = "macosx" ]; then
-    macdeployqt ./client/NDR\ Client.app/
-    cd ..
-    appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
+    macdeployqt ./build/client/NDR\ Client.app/
     printf "deployqt done!\n"
+    appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "new dmg in desktop\n"
     exit 0
-
 else if [ $1 = "debian" ]; then
-
+    cd ..
+    linuxdeployqt-*-x86_64.AppImage ./build/client/ndr-client -verbose=2 -no-plugins
+    mv ./build/client/ndr-client ./debian/opt/ndr/bin/ndr-client
+    mv ./build/client/lib ./debian/opt/ndr/lib
     printf "deployqt done!\n"
+    dpkg -b debian ndr_${version}_amd64.deb
     printf "create deb in desktop\n"
     exit 0
 fi

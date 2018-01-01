@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=NDR Client
+Name[zh_CN]=NDR 东软网络客户端
+Name[zh_TW]=NDR 東软網路客戶端
+Comment=Connect to the Neusoft LAN
+Comment[zh_CN]=连接到东软校园网
+Comment[zh_TW]=連線到東軟校園網
+Icon=ndr-client
+Exec=ndr-client
+Terminal=false
+StartupNotify=true
+Type=Application

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+NDRPATH="/opt/ndr"
+NDRPATHBIN=$NDRPATH/bin
+NDRPATHLIBS=$NDRPATH/lib
+
+export LD_LIBRARY_PATH="$NDRPATHLIBS:$LD_LIBRARY_PATH"
+exec $NDRPATHBIN/ndr-client
