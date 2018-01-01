@@ -14,28 +14,8 @@
         <translation>NDR Neusoft Network Access Identification Client</translation>
     </message>
     <message>
-        <location filename="../forms/aboutdialog.ui" line="162"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Poilynx, Haoran Wang, M0xkLurk3r, KevinX, Chooop, Vssblt, Rabenda, AnimeColle&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/aboutdialog.ui" line="185"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;未经允许，禁止对软件（包括主程序、依赖库）进行非法的逆向工程或二次开发。本软件及其源码受《中华人民共和国著作权法》、《中华人民共和国计算机信息安全保护条例》等法律法规保护。更多详情，请参见最终用户许可协议。&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;本软件使用了 Qt 5 社区版的类库。该部分软件遵守 GNU LGPL 协议。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/aboutdialog.ui" line="219"/>
         <source>版权 2017 东软网络安全工作室( NSS ). 保留所有权利. </source>
-        <translation type="unfinished">Version 2017 Neusoft NSS(Network Security Studio) All rights reserved</translation>
+        <translation type="obsolete">Version 2017 Neusoft NSS(Network Security Studio) All rights reserved</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -64,6 +44,30 @@ p, li { white-space: pre-wrap; }
         <location filename="../forms/aboutdialog.ui" line="147"/>
         <source>开发人员名单</source>
         <translation>Developer list</translation>
+    </message>
+    <message>
+        <location filename="../forms/aboutdialog.ui" line="162"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;Poilynx, Haoran Wang, M0xkLurk3r, KevinX, Chooop, Vssblt, Rabenda, AnimeColle&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/aboutdialog.ui" line="185"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Ubuntu&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;未经允许，禁止对软件（包括主程序、依赖库）进行非法的逆向工程或二次开发。本软件及其源码受《中华人民共和国著作权法》、《中华人民共和国计算机信息安全保护条例》等法律法规保护。更多详情，请参见最终用户许可协议。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt;&quot;&gt;本软件使用了 Qt 5 社区版的类库。该部分软件遵守 GNU LGPL 协议。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/aboutdialog.ui" line="219"/>
+        <source>版权 2018 东软网络安全工作室( NSS ). 保留所有权利. </source>
+        <translation type="unfinished">Version 2018 Neusoft NSS(Network Security Studio) All rights reserved.</translation>
     </message>
     <message>
         <location filename="../forms/aboutdialog.ui" line="264"/>
