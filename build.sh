@@ -44,19 +44,12 @@ else
     QMAKE=$3
 fi
 
-if [ $1 = "debian" ]; then
-    sudo apt update
-    sudo apt install build-essential
-    sudo apt install network-manager-dev
-    sudo apt install libgl1-mesa-dev
-fi
-
-
 if [ $1 = "macosx" ]; then
     rm -f ./NDR_Client.dmg
 elif [ $1 = "debian" ]; then
     rm -f ./debian/opt/ndr/bin/ndr-client
     rm -rf ./debian/opt/ndr/lib
+    sudo apt install build-essential network-manager-dev libgl1-mesa-dev
 fi
 
 rm -rf ./build/
@@ -80,16 +73,14 @@ if [ $1 = "macosx" ]; then
     appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "new dmg in desktop\n"
     exit 0
-else if [ $1 = "debian" ]; then
-    cd ..
-    linuxdeployqt-*-x86_64.AppImage ./build/client/ndr-client -verbose=2 -no-plugins
-    mv ./build/client/ndr-client ./debian/opt/ndr/bin/ndr-client
-    mv ./build/client/lib ./debian/opt/ndr/lib
+elif [ $1 = "debian" ]; then
+    linuxdeployqt-continuous-x86_64.AppImage ./build/client/ndr-client -no-plugins
+    mkdir -p ./debian/opt/ndr/bin/
+    mv -f ./build/client/ndr-client ./debian/opt/ndr/bin/ndr-client
+    mv -f ./build/client/lib ./debian/opt/ndr/lib
     printf "deployqt done!\n"
     dpkg -b debian ndr_${version}_amd64.deb
+    mv ndr_${version}_amd64.deb ~/Desktop/ndr_${version}_amd64.deb
     printf "create deb in desktop\n"
     exit 0
 fi
-
-
-
