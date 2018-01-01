@@ -14,6 +14,8 @@ fi
 
 if [ $1 = "macosx" ]; then
     platform="macx-clang"
+elif [ $1 = "debian" ]; then
+    platform="linux-g++"
 else
     printf "platdorm invaild\n"
     exit 1
@@ -51,10 +53,12 @@ cd build
 
 $QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2 DEFINES+=NDR_TESTING=$ndrTesting
 make
+if [ $1 = "macosx" ]; then
+    macdeployqt ./client/NDR\ Client.app/
+    cd ..
+    appdmg ./client/icons/package.json ~/Desktop/ndr_0.74_macosx.dmg
+    printf "deployqt done!\n"
+    printf "new dmg in desktop\n"
+fi
 
-macdeployqt ./client/NDR\ Client.app/
-cd ..
-appdmg ./client/icons/package.json ~/Desktop/ndr_0.74_macosx.dmg
 
-printf "deployqt done!\n"
-printf "new dmg in desktop\n"
