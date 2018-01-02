@@ -8,6 +8,7 @@ if [ $# = 1 -a $1 = "clean" ]; then
     rm -f ./NDR_Client.dmg
     rm -f ./debian/opt/ndr/bin/ndr-client
     rm -rf ./debian/opt/ndr/lib
+    rm -rf ./debian/opt/ndr/lib/platforms
     printf "clean done!\n"
     exit 0
 fi
@@ -38,17 +39,21 @@ else
     exit 1
 fi
 
-if [ $# != 3 ]; then
+if [ $# != 3 -a $1 != "debian" ]; then
     QMAKE="qmake"
 else
-    QMAKE=$3
+    QT=$3
+    QMAKE=$QT/bin/qmake
 fi
+
+
 
 if [ $1 = "macosx" ]; then
     rm -f ./NDR_Client.dmg
 elif [ $1 = "debian" ]; then
     rm -f ./debian/opt/ndr/bin/ndr-client
     rm -rf ./debian/opt/ndr/lib
+    rm -rf ./debian/opt/ndr/lib/platforms
     sudo apt install build-essential network-manager-dev libgl1-mesa-dev
 fi
 
@@ -78,6 +83,7 @@ elif [ $1 = "debian" ]; then
     mkdir -p ./debian/opt/ndr/bin/
     mv -f ./build/client/ndr-client ./debian/opt/ndr/bin/ndr-client
     mv -f ./build/client/lib ./debian/opt/ndr/lib
+    cp -r $QT/plugins/platforms ./debian/opt/ndr/lib/platforms
     printf "deployqt done!\n"
     dpkg -b debian ndr_${version}_amd64.deb
     mv ndr_${version}_amd64.deb ~/Desktop/ndr_${version}_amd64.deb
