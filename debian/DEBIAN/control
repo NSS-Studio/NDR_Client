@@ -5,7 +5,7 @@ Architecture: amd64
 Installed-Size: 5076
 Maintainer: rabenda <rabenda.cn@gmail.com>
 Pre-Depends: dpkg (>= 1.16.17)
-Depends:libpng12-0, liblz4-1, liblzma5, libbsd0, libdbus-1-3, libgcrypt20, libxcb1, libc6, libgcc1, libglib2.0-0, libpcre3, libgl1 | libgl1-mesa-glx, libstdc++6, libx11-6, zlib1g, network-manager (>= 0.9), pppoe
+Depends:libxcb-xinerama0, libpng12-0, liblz4-1, liblzma5, libbsd0, libdbus-1-3, libgcrypt20, libxcb1, libc6, libgcc1, libglib2.0-0, libpcre3, libgl1 | libgl1-mesa-glx, libstdc++6, libx11-6, zlib1g, network-manager (>= 0.9), pppoe
 Homepage: http://ndr.neusoft.edu.cn/
 Description: Neusoft NDR client
 
