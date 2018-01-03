@@ -52,8 +52,8 @@ if [ $1 = "macosx" ]; then
     rm -f ./NDR_Client.dmg
 elif [ $1 = "debian" ]; then
     rm -f ./debian/opt/ndr/bin/ndr-client
-    rm -rf ./debian/opt/ndr/lib
-    rm -rf ./debian/opt/ndr/lib/platforms
+    rm -rf ./debian/opt/ndr/bin/lib
+    rm -rf ./debian/opt/ndr/bin/plugins
     # sudo apt install build-essential network-manager-dev libgl1-mesa-dev
 fi
 
