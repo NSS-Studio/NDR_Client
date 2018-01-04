@@ -82,6 +82,7 @@ elif [ $1 = "debian" ]; then
     linuxdeployqt-continuous-x86_64.AppImage ./build/client/ndr-client # -no-plugins
     mkdir -p ./debian/opt/ndr/bin/
     cp -f	./build/client/ndr-client	./debian/opt/ndr/bin/ndr-client
+    cp -f	./build/client/qt.conf	./debian/opt/ndr/bin/qt.conf
     cp -rf	./build/client/lib		./debian/opt/ndr/bin/lib
     cp -rf	./build/client/plugins	./debian/opt/ndr/bin/plugins
     cp -rf  ./build/client/plugins/platforms ./debian/opt/ndr/bin/platforms
