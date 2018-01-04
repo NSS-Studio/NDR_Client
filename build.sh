@@ -85,7 +85,7 @@ elif [ $1 = "debian" ]; then
     cp -f	./build/client/qt.conf	./debian/opt/ndr/bin/qt.conf
     cp -rf	./build/client/lib		./debian/opt/ndr/bin/lib
     cp -rf	./build/client/plugins	./debian/opt/ndr/bin/plugins
-    cp -rf  ./build/client/plugins/platforms ./debian/opt/ndr/bin/platforms
+    cp -rf  ./build/client/doc ./debian/opt/ndr/bin/doc
     printf "deployqt done!\n"
     dpkg -b debian ndr_${version}_amd64.deb
     mv ndr_${version}_amd64.deb ~/Desktop/ndr_${version}_amd64.deb
