@@ -3,9 +3,7 @@
 UpdateService::UpdateService(const QString &serverAddr, const QString &tempDirectory, QObject *parent)
     :QObject(parent),tempDir{tempDirectory},ipAddress{serverAddr},isConnectUpdateServerFail{false}
 {
-//  set ssl config
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
-//  protocol tlsv1->TlsV1_2OrLater
     this->sslConf.setProtocol(QSsl::TlsV1_2);
     this->running = false;
     qDebug() << "tempDir" << tempDirectory;

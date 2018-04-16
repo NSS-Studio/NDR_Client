@@ -20,6 +20,7 @@ void CheckFileThread::run()
     int ret;
     
     this->client = new QUdpSocket();
+    this->client->setProxy(QNetworkProxy::NoProxy);
     
     bool d=this->client->bind(0);
     

@@ -1,0 +1,1 @@
+lupdate.exe ../client.pro

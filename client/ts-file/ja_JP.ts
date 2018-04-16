@@ -176,24 +176,24 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">名はＮＤＲのアダプタを作成してください</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="23"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="22"/>
         <source>请尝试手动创建名为%1的适配器</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="24"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="23"/>
         <source>拨号连接适配器初始化失败，%1</source>
         <translation>ダイヤルアップ接続アダプタの初期化は失敗した、%1</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="53"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="186"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="230"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="52"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="185"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="229"/>
         <source>未知错误</source>
         <translation>未知エラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="61"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="60"/>
         <source>1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）
 2.请确保交换机及其连线完好.
 3.请确保网线已插好.
@@ -204,7 +204,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="70"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="69"/>
         <source>1.请检查账号或密码以及套餐设置是否正确.
 2.请检查套餐是否还未生效或已经过期.
 3.请确保当前没有连接到其他Wifi网络.
@@ -213,7 +213,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="77"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="76"/>
         <source>请尝试重新启动计算机.
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -221,7 +221,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="82"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="81"/>
         <source>请重新尝试拨号.
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -229,7 +229,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="87"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="86"/>
         <source>可能是一些拨号所依赖的服务无法启动所致
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -269,7 +269,7 @@ p, li { white-space: pre-wrap; }
 もう一度ダイヤルを試してください。</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="176"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="175"/>
         <source>枚举RAS-CAPABLE设备时返回错误</source>
         <translation>枚挙RAS-CAPABLE設備の際にエラー</translation>
     </message>
@@ -299,7 +299,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">未知エラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="209"/>
+        <location filename="../pppoe/basedsl_win.cpp" line="208"/>
         <source>没有可用的RAS-CAPABLE设备</source>
         <translation>利用できるRAS-CAPABLE設備がありません</translation>
     </message>
@@ -1169,93 +1169,93 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">プッシュした更新構成ファイルにはパックが見つからない</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="168"/>
+        <location filename="../update/updateservice.cpp" line="166"/>
         <source>找不到安装包资源</source>
         <translation>インストールパッケージ資源が見つからない</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="184"/>
+        <location filename="../update/updateservice.cpp" line="182"/>
         <source>文件下载失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="69"/>
-        <location filename="../update/updateservice.cpp" line="80"/>
+        <location filename="../update/updateservice.cpp" line="67"/>
+        <location filename="../update/updateservice.cpp" line="78"/>
         <source>服务器正在维护中，状态码 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="98"/>
+        <location filename="../update/updateservice.cpp" line="96"/>
         <source>服务器正在维护中,请稍后</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="235"/>
+        <location filename="../update/updateservice.cpp" line="233"/>
         <source>服务器正在维护中</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="316"/>
+        <location filename="../update/updateservice.cpp" line="314"/>
         <source>艾玛，我刚刚下载完的安装包，竟然不见了！！</source>
         <translation>先ほどダウンロードしたインストールパッケージが見つからない！！</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="317"/>
+        <location filename="../update/updateservice.cpp" line="315"/>
         <source>请尝试到e.neusoft.edu.cn下载最新版安装包</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="320"/>
+        <location filename="../update/updateservice.cpp" line="318"/>
         <source>用户未授予客户端权限，执行进程操作被系统拒绝</source>
         <translation>ユーザーがクライアントに権限を授与ない、プロセス操作の実行がシステムに拒否された</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="323"/>
+        <location filename="../update/updateservice.cpp" line="321"/>
         <source>下载的安装包格式错误，导致无法运行，请尝试重新拨号并下载</source>
         <translation>ダウンロードしたインストールパケージのフォーマットが間違い、プログラムを実行することができません、再ダイヤルとをダウンロードしてみてください</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="326"/>
+        <location filename="../update/updateservice.cpp" line="324"/>
         <source>打开文件时发生共享错误</source>
         <translation>ファイルを開く時発生共有エラー</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="329"/>
+        <location filename="../update/updateservice.cpp" line="327"/>
         <source>不合法的文件路径</source>
         <translation>非合法のファイルのパス</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="332"/>
+        <location filename="../update/updateservice.cpp" line="330"/>
         <source>启动应用程序超时</source>
         <translation>アプリケーションの起動がタイムアウトした</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="335"/>
+        <location filename="../update/updateservice.cpp" line="333"/>
         <source>没有关联的应用程序，启动失败</source>
         <translation>関連のないアプリを起動に失敗した</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="337"/>
+        <location filename="../update/updateservice.cpp" line="335"/>
         <source>打开文件时发生未知错误</source>
         <translation>ファイルを開く際に知らない誤りがある</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="360"/>
+        <location filename="../update/updateservice.cpp" line="358"/>
         <source>命令 %1 以状态 %2 退出</source>
         <translation>命令 %1は状態 %2と共に終了</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="368"/>
+        <location filename="../update/updateservice.cpp" line="366"/>
         <source>Unrecognized installation</source>
         <translation>Unrecognized installation</translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="402"/>
+        <location filename="../update/updateservice.cpp" line="400"/>
         <source>打开文件夹因收到信号 %1 而中止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../update/updateservice.cpp" line="406"/>
+        <location filename="../update/updateservice.cpp" line="404"/>
         <source>打开文件夹以状态 %1 退出</source>
         <translation type="unfinished"></translation>
     </message>

@@ -25,13 +25,14 @@ void VerifyThread::run()
     num1 = 1;
     
     this->client = new QUdpSocket();
+    this->client->setProxy(QNetworkProxy::NoProxy);
     
     //this->client->setSocketOption(QAbstractSocket::LowDelayOption,);
     //this->client->setSocketState(QAbstractSocket::ListeningState);
     
     //this->client->setSocketOption(QAbstractSocket);
     
-    
+
     if(!this->client->bind())
     {
         QAbstractSocket::SocketError err;
@@ -173,7 +174,7 @@ void VerifyThread::build_heartbeat(unsigned char sip[],unsigned char seed[],_hea
         ret ^= ((uint32_t*)pkg)[i];
         ret &= (uint32_t)~0;
     }
-    
+
     *(uint32_t*)pkg->crc = ( ret * 19680126 ) & (uint32_t)~0;
     //*(uint32_t*)pkg->crc = ~0;
     memset(pkg->unk2, 0, sizeof(pkg->unk2) );

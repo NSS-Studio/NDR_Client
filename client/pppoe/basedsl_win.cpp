@@ -2,10 +2,9 @@
 #include <QtCore/QDebug>
 
 BaseDsl::BaseDsl(const QString &name, QObject *parent) :
-	QObject(parent)
+    QObject{parent},name{name},hRasConn{NULL}
 {
-    this->name = name;
-    this->hRasConn = nullptr;
+
 }
 
 BaseDsl::~BaseDsl()
@@ -33,7 +32,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 	username.toWCharArray(params.szUserName);
 	password.toWCharArray(params.szPassword);
 	lstrcpyW(params.szDomain,L"");
-    ret=RasDialW(nullptr, nullptr, &params, (DWORD)nullptr, nullptr, &hRasConn);
+    ret=RasDialW(nullptr, nullptr, &params, static_cast<DWORD>(NULL), nullptr, &hRasConn);
     qDebug() << "pppoe ret" << ret;
 	if(ret!=0)
 	{
@@ -89,7 +88,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
                 "\n┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\n") + errorMessage;
             break;
 		}
-		hRasConn=nullptr;
+        hRasConn = NULL;
 		return false;
 	}
 	return true;
@@ -98,7 +97,7 @@ bool BaseDsl::dial(const QString &username, const QString &password, const QStri
 void BaseDsl::hangUp()
 {
 	RasHangUpW(hRasConn);
-	hRasConn = nullptr;
+    hRasConn = NULL;
 }
 
 bool BaseDsl::isDisconnected()
@@ -119,10 +118,10 @@ QString BaseDsl::getIpAddress()
 	rip.dwSize = sizeof(RASPPPIPW);
 	dwBufSize = sizeof(RASPPPIPW);
 	if((dwRet = ::RasGetProjectionInfoW(this->hRasConn,RASP_PppIp,
-					    (LPVOID) &rip,(LPDWORD) &dwBufSize )) == ERROR_SUCCESS )
+                        static_cast<LPVOID>(&rip), static_cast<LPDWORD>(&dwBufSize) )) == ERROR_SUCCESS )
 	{
 		//printf("%s\n",rip.szIpAddress);
-		ipAddress.setUtf16((const unsigned short*)rip.szIpAddress,lstrlenW(rip.szIpAddress)+sizeof(WCHAR));
+        ipAddress.setUtf16(reinterpret_cast<const unsigned short*>(rip.szIpAddress), lstrlenW(rip.szIpAddress)+sizeof(WCHAR));
 	}
 	else
 	{

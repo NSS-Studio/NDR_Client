@@ -35,7 +35,6 @@ SOURCES +=  main.cpp \
             singleapplication.cpp \
             log.cpp
 
-
 HEADERS  += common.h \
             singleapplication.h \
             log.h
