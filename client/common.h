@@ -3,13 +3,13 @@
 
 #include "settingsset.h"
 #include "singleapplication.h"
-#include <QtCore/QString>
+#include <QApplication>
+#include <QFontDatabase>
+#include <QTranslator>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QMap>
-#include <QTranslator>
-#include <QApplication>
-#include <QFontDatabase>
+#include <QtCore/QString>
 #include <QtCore/QtGlobal>
 
 #define autoStartRegRoot HKEY_CURRENT_USER
@@ -39,25 +39,23 @@
 /** 确定操作系统类型
  * 对APP_OS_STR 赋值 windows/linux/macos
  */
-#if   defined(Q_OS_WIN)
-#   define APP_OS_STR "windows"
+#if defined(Q_OS_WIN)
+#define APP_OS_STR "windows"
 #elif defined(Q_OS_LINUX)
-#   define APP_OS_STR "linux"
+#define APP_OS_STR "linux"
 #elif defined(Q_OS_MAC)
-#   define APP_OS_STR "macos"
+#define APP_OS_STR "macos"
 #else
 #error OS is not supported
 #endif
 
 /** 确定处理器架构
- * x86/amd64/arm
+ * x86/amd64
  */
-#if   defined(__i386__)
-#   define APP_ARCH_STR "i386"
+#if defined(__i386__)
+#define APP_ARCH_STR "i386"
 #elif defined(__x86_64__)
-#   define APP_ARCH_STR "amd64"
-#elif defined(__arm__)
-#   define APP_ARCH_STR "arm"
+#define APP_ARCH_STR "amd64"
 #else
 #error Arch is not supported
 #endif
@@ -85,11 +83,10 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 74
+#define VERSION_MINOR 75
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
-
 
 /** NDR更新服务器地址和备用服务器地址*/
 #define NDR_UPDATE_SERVER NDR_SERVER
@@ -101,7 +98,8 @@ extern void __initTempDir();
 #define NDR_NSS NDR_SERVER
 
 /** NDR通知弹窗地址*/
-#define NDR_POPUP_URL QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
+#define NDR_POPUP_URL                                                          \
+    QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
 
 /** NDR主页*/
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
@@ -144,4 +142,6 @@ extern void __initSettingsSet();
 extern void __initLanguage();
 extern void __initFont(QString fontFile);
 extern void __initStyleSheet(SingleApplication *a, QString sheetFile);
+
+extern QString networkInterfaceCardName;
 #endif // COMMON_H

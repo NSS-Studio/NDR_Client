@@ -3,41 +3,45 @@
 /*
  * CONSTRUCTION: set SingleApplication's shareMemory key to <uniqueKey>
  * 				test attach , if success, already has an instance running
- * 				if not running, use shareMemory to create a segment in the memory
- * 				new a server to listem for <uniqueKey>, once received, hand over to SLOT(receiveMessage())
+ * 				if not running, use shareMemory to create a segment in the
+ * memory new a server to listem for <uniqueKey>, once received, hand over to
+ * SLOT(receiveMessage())
  *
  */
-SingleApplication::SingleApplication(int &argc, char *argv[], const QString &uniqueKey) :
-    QApplication(argc, argv), _uniqueKey(uniqueKey)
-{
+SingleApplication::SingleApplication(int &argc, char *argv[],
+                                     const QString &uniqueKey)
+    : QApplication(argc, argv), _uniqueKey(uniqueKey) {
     sharedMemory.setKey(_uniqueKey);
-    if(sharedMemory.attach()){
+    if (sharedMemory.attach()) {
         _isRunning = true;
-    }
-    else{
+    } else {
         _isRunning = false;
-        if(!sharedMemory.create(1)){
-            qDebug()<<"Unable to create single instance";
+        if (!sharedMemory.create(1)) {
+            qDebug() << "Unable to create single instance";
             return;
         }
-        // create local server and listener to incomming message from other instances.
+        // create local server and listener to incomming message from other
+        // instances.
         localServer = new QLocalServer(this);
-//        connect(localServer, SIGNAL(newConnection()), this, SLOT(receiveMessage()));
-        connect(localServer, SIGNAL(newConnection()), this, SLOT(showMainWindow()));
+        // connect(localServer, SIGNAL(newConnection()), this,
+        // SLOT(receiveMessage()));
+        connect(localServer, SIGNAL(newConnection()), this,
+                SLOT(showMainWindow()));
         localServer->listen(_uniqueKey);
     }
 }
 // public slot
 /*
- * RECIVER: waiting for connection.	once get one connection, create a socket to communicate with the client.
+ * RECIVER: waiting for connection.	once get one connection, create a socket to
+ * communicate with the client.
  *
  */
-void SingleApplication::receiveMessage(){
-    qDebug()<<"receiveMessage";
-    QLocalSocket* localSocket = localServer->nextPendingConnection();
-    if(!localSocket->waitForReadyRead(timeout)){
-        qDebug()<<"localSocket waitForReadyRead failed.";
-        qDebug()<<localSocket->errorString().toLatin1();
+void SingleApplication::receiveMessage() {
+    qDebug() << "receiveMessage";
+    QLocalSocket *localSocket = localServer->nextPendingConnection();
+    if (!localSocket->waitForReadyRead(timeout)) {
+        qDebug() << "localSocket waitForReadyRead failed.";
+        qDebug() << localSocket->errorString().toLatin1();
         return;
     }
     QByteArray byteArray = localSocket->readAll();
@@ -45,43 +49,42 @@ void SingleApplication::receiveMessage(){
     emit messageAvailable(message);
     localSocket->disconnectFromServer();
 }
-void SingleApplication::showMainWindow(){
+void SingleApplication::showMainWindow() {
     QLocalSocket *localSocket = localServer->nextPendingConnection();
     if (!localSocket)
         return;
     delete localSocket;
-    //DlgMain::shareInstance()->show();
+    // DlgMain::shareInstance()->show();
 }
 // public functions;
-bool SingleApplication::isRunning(){
-    qDebug()<<"SingleApplication is running? "<<_isRunning;
+bool SingleApplication::isRunning() {
+    qDebug() << "SingleApplication is running? " << _isRunning;
     return _isRunning;
 }
 /*
- * SENDER: if there is already a instance running, create a Socket to communicate with It's Server.
+ * SENDER: if there is already a instance running, create a Socket to
+ * communicate with It's Server.
  *
  */
-bool SingleApplication::sendMessage(const QString &/*message*/){
-    qDebug()<<"sendMessage";
-    if(!_isRunning){
+bool SingleApplication::sendMessage(const QString & /*message*/) {
+    qDebug() << "sendMessage";
+    if (!_isRunning) {
         return false;
     } // no instance, do nothing.
     QLocalSocket localSocket(this);
     localSocket.connectToServer(_uniqueKey, QIODevice::WriteOnly);
-    if(!localSocket.waitForConnected(timeout)){
-        qDebug()<<"waitForConnected";
-        qDebug()<<localSocket.errorString().toLatin1();
+    if (!localSocket.waitForConnected(timeout)) {
+        qDebug() << "waitForConnected";
+        qDebug() << localSocket.errorString().toLatin1();
         return false;
     }
-    if(!localSocket.waitForBytesWritten(timeout)){
-        qDebug()<<"waitForBytesWritten";
-        qDebug()<<localSocket.errorString().toLatin1();
+    if (!localSocket.waitForBytesWritten(timeout)) {
+        qDebug() << "waitForBytesWritten";
+        qDebug() << localSocket.errorString().toLatin1();
         return false;
     }
     localSocket.disconnectFromServer();
     return true;
 }
 
-bool SingleApplication::releaseSharedMemory() {
-	return sharedMemory.detach();
-}
+bool SingleApplication::releaseSharedMemory() { return sharedMemory.detach(); }

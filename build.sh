@@ -1,7 +1,7 @@
 #!/bin/sh
 # macosx && linux_deb
 
-version="0.74"
+version="0.75"
 
 if [ $# = 1 -a $1 = "clean" ]; then
     rm -rf ./build/

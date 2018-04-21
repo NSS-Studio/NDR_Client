@@ -6,6 +6,15 @@
 #include <QPushButton>
 #include <QThread>
 
+#ifdef Q_OS_WIN
+    #define localCode "gbk"
+#elif defined (Q_OS_LINUX)
+    #define localCode "utf8"
+#elif defined (Q_OS_MAC)
+    #define localCode "utf8"
+#else
+    #error "The platform isn't supported!"
+#endif
 
 
 class infoModule: public QObject
@@ -37,9 +46,7 @@ private slots:
 class InfoModuleThread: public QThread {
     Q_OBJECT
 public:
-
     ~InfoModuleThread();
-//    void setButton(QPushButton* button);
     void run();
     static InfoModuleThread* getInstance();
 
@@ -51,11 +58,9 @@ public slots:
 
 
 private:
-    explicit InfoModuleThread(/*QPushButton* button_, */QObject* parent = nullptr);
+    explicit InfoModuleThread(QObject* parent = nullptr);
     infoModule* info_;
-    //QPushButton* button_;
     static InfoModuleThread* instance;
-
 };
 
 #endif // INFOMODULE_H

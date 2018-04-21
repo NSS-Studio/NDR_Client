@@ -26,23 +26,11 @@ void infoModule::getInfo() {
 }
 
 void infoModule::writeInfo() {
-    //QString result = myProcess->readAllStandardOutput();
-
-#ifdef Q_OS_WIN
-    #define localCode "gbk"
-#endif
-#ifdef Q_OS_LINUX
-    #define localCode "utf8"
-#endif
-#ifdef Q_OS_MAC
-    #define localCode "utf8"
-#endif
     qDebug() << "call writeInfo: ";
     QTextCodec* utfCodec = QTextCodec::codecForName(localCode);
     QString result = utfCodec -> toUnicode(myProcess->readAllStandardOutput());
     if (!result.isEmpty()) {
         QTextStream infoTextStream(&info);
-        //QString result = utfCodec->toUnicode(myProcess.readAll());
         infoTextStream.setCodec(localCode);
         infoTextStream << result;
     } else
@@ -57,8 +45,7 @@ infoModule::~infoModule() {
 bool infoModule::getOneInfo(QString const& program, QStringList const& arguments) {
     qDebug() << "call getOneInfo";
     myProcess = new QProcess();
-    connect(myProcess, SIGNAL(readyReadStandardOutput()),
-                     this, SLOT(writeInfo()));
+    connect(myProcess, &QProcess::readyReadStandardOutput,this, &infoModule::writeInfo);
     myProcess->start(program, arguments);
 
     if (!myProcess->waitForStarted())
@@ -159,8 +146,7 @@ bool infoModule::getNslookupInfo() {
     QStringList arguments1, arguments2;
     arguments1 << "www.baidu.com";
     arguments2 << "newjw.neusoft.edu.cn";
-    return getOneInfo(program, arguments1)
-            && getOneInfo(program, arguments2);
+    return getOneInfo(program, arguments1) && getOneInfo(program, arguments2);
 }
 
 InfoModuleThread * InfoModuleThread::instance;
@@ -178,22 +164,14 @@ InfoModuleThread::~InfoModuleThread()
 
 void InfoModuleThread::run()
 {
-//    button_->setEnabled(false);
-//    info_->getInfo();
-//    button_->setEnabled(true);
-    qDebug() << "call thread run";
+    qDebug() << "Call InfoModuleThread run";
     info_ = new infoModule();
     info_->getInfo();
     emit infoGetFinished();
     info_->deleteLater();
 }
 
-//void InfoModuleThread::setButton(QPushButton* button) {
-//    button_ = button;
-//}
-
 void InfoModuleThread::startGetInfoToWriteFile() {
-    //getInstance()->start();
     qDebug() << "call startGetInfoToWriteFile";
     this->start();
 }

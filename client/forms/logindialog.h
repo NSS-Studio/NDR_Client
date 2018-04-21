@@ -49,8 +49,6 @@ private slots:
 #ifdef Q_OS_WIN
     void on_btnWinsockReset_clicked();
 #endif
-
-
 private:
 	Ui::LoginDialog *ui;
 	LocalStorage *profile;
