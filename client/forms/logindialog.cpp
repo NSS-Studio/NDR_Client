@@ -288,32 +288,30 @@ void LoginDialog::on_btnWinsockReset_clicked() {
 
     re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winsock reset", L"",
                       SW_HIDE);
-
     // can not use static_cast
-    if ((int)re <= 32)
+    if ((int)re <= 32){
         QMessageBox::information(
             this, tr("失败"), tr("Winsock重置失败，错误代码 %0").arg((int)re));
-    return;
+        return;
+    }
+
+    re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winhttp reset proxy", L"",
+                      SW_HIDE);
+    if ((int)re <= 32){
+        QMessageBox::information(this, tr("失败"),
+                                 tr("网络代理重置失败，错误代码 %0").arg((int)re));
+        return;
+    }
+
+    re = ShellExecute(NULL, L"runas", L"cmd", L"/C ipconfig /flushdns", L"",
+                      SW_HIDE);
+    if ((int)re <= 32){
+        QMessageBox::information(this, tr("失败"),
+                                 tr("DNS重置失败，错误代码 %0").arg((int)re));
+        return;
+    }
+
+    QMessageBox::information(this, tr("成功"), tr("网络重置成功"));
 }
 
-re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winhttp reset proxy", L"",
-                  SW_HIDE);
-
-if ((int)re <= 32)
-    QMessageBox::information(this, tr("失败"),
-                             tr("网络代理重置失败，错误代码 %0").arg((int)re));
-return;
-}
-
-re = ShellExecute(NULL, L"runas", L"cmd", L"/C ipconfig /flushdns", L"",
-                  SW_HIDE);
-
-if ((int)re <= 32)
-    QMessageBox::information(this, tr("失败"),
-                             tr("DNS重置失败，错误代码 %0").arg((int)re));
-return;
-}
-
-QMessageBox::information(this, tr("成功"), tr("网络重置成功"));
-}
 #endif

@@ -10,7 +10,7 @@ TEMPLATE = app
 CONFIG += c++1z
 
 CONFIG(debug, debug|release):{
-    # CONFIG += console #终端可作为调试输出载体
+    CONFIG += console #终端可作为调试输出载体
     win32 {
         LIBS += -lDbgHelp
     }

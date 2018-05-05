@@ -16,8 +16,9 @@
 #define autoSatrtKeyWay "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
 #define autoStartkeyName "NDR_AutoStart"
 
+//.130 is down now
 #ifndef NDR_TESTING
-#define NDR_TESTING true
+#define NDR_TESTING false
 #endif
 
 #define UNUSED(x) (void)(x)
@@ -83,7 +84,7 @@ extern void __initTempDir();
 #define VERSION_MAJOR 0
 
 /** NDR次版本号*/
-#define VERSION_MINOR 75
+#define VERSION_MINOR 76
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
