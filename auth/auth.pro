@@ -19,11 +19,9 @@ unix {
 HEADERS     +=  $$PWD/authenticat.h \
                 $$PWD/checkfilethread.h \
                 $$PWD/verifythread.h \
-                $$PWD/log.h \
-                $$PWD/confusion.h
+                $$PWD/log.h
 
 SOURCES     +=  $$PWD/authenticat.cpp \
                 $$PWD/checkfilethread.cpp \
                 $$PWD/verifythread.cpp \
-                $$PWD/log.cpp \
-                $$PWD/confusion.cpp
+                $$PWD/log.cpp

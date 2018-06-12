@@ -1,7 +1,7 @@
 #include "authenticat.h"
-#include "confusion.h"
+
 Authenticat * Authenticat::instance;
-Confusion * Authenticat::confusionInstance;
+
 
 Authenticat::Authenticat() :
     QObject(0)
@@ -20,15 +20,6 @@ Authenticat * Authenticat::getInstance()
 
     return instance;
 }
-
-Confusion* Authenticat::getConfusionInstance() {
-    if(confusionInstance == nullptr) {
-        confusionInstance = new Confusion();
-    }
-
-    return confusionInstance;
-}
-
 
 void Authenticat::beginVerify(QString ip, ushort port)
 {
@@ -63,7 +54,6 @@ void Authenticat::helpEndVerify(Authenticat* auth) {
 void Authenticat::endVerify() {
     helpEndVerify(getInstance());
     qDebug() << "Authenticat::endVerify()" << endl;
-    getConfusionInstance()->endVerify();
     /*
     delete this->verifyThread;
     delete this->checkFileThread;

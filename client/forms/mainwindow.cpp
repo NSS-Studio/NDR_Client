@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "../auth/confusion.h"
 #include "infomodule.h"
 #include "logindialog.h"
 #include "singleapplication.h"
@@ -59,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
         loginDialog->close();
         delete loginDialog;
         close();
-        ((SingleApplication *)QApplication::instance())->releaseSharedMemory();
+        static_cast<SingleApplication*>(QApplication::instance())->releaseSharedMemory();
         exit(1);
     }
     this->loginDialog->set_interface_list(interfaces);
@@ -271,9 +270,6 @@ void MainWindow::dialFinished(bool ok) {
         noticeDialog->close();
         Authenticat::getInstance()->beginVerify(
             DRCOM_SERVER_IP, DRCOM_SERVER_PORT); //必须在beginworkingui前
-
-        //! Confusdion!!!!!!!!!!
-        Authenticat::getConfusionInstance()->beginVerify();
 
         // verifyEncrypt();//必须在beginworkingui前
         if (ENABLE_UPDATE)
@@ -790,10 +786,5 @@ void MainWindow::getSystemInfo() {
 
     emit infoWriteStarted();
 
-    // message->exec();
 }
 
-// void MainWindow::infoWriteFinished() {
-//    ui->infoGet->setText(tr("信息获取"));
-//    ui->infoGet->setEnabled(true);
-//}
