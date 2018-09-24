@@ -18,7 +18,6 @@ CONFIG(debug, debug|release):{
 else:CONFIG(release, debug|release):{
     DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
 }
-
 include(pppoe/pppoe.pri)
 include(forms/forms.pri)
 include(update/update.pri)

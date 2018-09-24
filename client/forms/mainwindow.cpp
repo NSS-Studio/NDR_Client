@@ -70,8 +70,8 @@ MainWindow::MainWindow(QWidget *parent)
     // forget to delete this object, add to mainWindow's child to autoDelete
     this->noticeDialog = new NoticeDialog(this);
 
-    connect(Authenticat::getInstance(), SIGNAL(verifyStoped()), this,
-            SLOT(verifyStoped()), Qt::QueuedConnection);
+//    connect(Authenticat::getInstance(), SIGNAL(verifyStoped()), this,
+//            SLOT(verifyStoped()), Qt::QueuedConnection);
 
     connect(this, SIGNAL(minimumWindow()), this, SLOT(hide()),
             Qt::QueuedConnection); //绑定最小化到隐藏
@@ -268,8 +268,8 @@ void MainWindow::dialFinished(bool ok) {
         //            校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
         //        }
         noticeDialog->close();
-        Authenticat::getInstance()->beginVerify(
-            DRCOM_SERVER_IP, DRCOM_SERVER_PORT); //必须在beginworkingui前
+//        Authenticat::getInstance()->beginVerify(
+//            DRCOM_SERVER_IP, DRCOM_SERVER_PORT); //必须在beginworkingui前
 
         // verifyEncrypt();//必须在beginworkingui前
         if (ENABLE_UPDATE)
@@ -390,7 +390,7 @@ void MainWindow::on_actionLogoff_triggered() {
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
 
-    Authenticat::getInstance()->endVerify();
+//    Authenticat::getInstance()->endVerify();
     qDebug() << "Authenticat::getInstance()->endVerify();" << endl;
     this->pppoe->hangUp();
     qDebug() << "this->pppoe->hangUp();" << endl;
@@ -562,7 +562,7 @@ void MainWindow::hangedUp(bool natural) {
                 emit redialFinished(true);
         } else {
             // this->killTimer(timerId);
-            Authenticat::getInstance()->endVerify();
+//            Authenticat::getInstance()->endVerify();
             onStartLogining();
             // beginLoginUI();////////////////////
             QMessageBox::critical(loginDialog, tr("提示"),
@@ -592,7 +592,7 @@ void MainWindow::redialFinished(bool ok) {
         // this->killTimer(timerId);
         this->trayIcon->hide();
         this->hide();
-        Authenticat::getInstance()->endVerify();
+//        Authenticat::getInstance()->endVerify();
         noticeDialog->showMessage(tr("重播失败，正在关闭验证"));
         onStartLogining();
         // QMessageBox::information(this,tr("重播失败"),pppoe->lastError());

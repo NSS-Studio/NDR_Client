@@ -1,7 +1,7 @@
 #!/bin/sh
 # macosx && linux_deb
 
-version="0.75"
+version="0.76"
 
 if [ $# = 1 -a $1 = "clean" ]; then
     rm -rf ./build/
@@ -73,7 +73,7 @@ make
 
 cd ..
 if [ $1 = "macosx" ]; then
-    macdeployqt ./build/client/NDR\ Client.app/
+    $QT/bin/macdeployqt ./build/client/NDR\ Client.app/
     printf "deployqt done!\n"
     appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "new dmg in desktop\n"

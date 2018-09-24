@@ -42,19 +42,19 @@ FORMS +=        $$PWD/aboutdialog.ui \
 #LIBS +=         ../auth/release/libauth.a
 
 
-INCLUDEPATH +=  ../auth/
-authlib = $$OUT_PWD/../auth/
+#INCLUDEPATH +=  ../auth/
+#authlib = $$OUT_PWD/../auth/
 
-win32:{
-    CONFIG(release, debug|release):{
-        authlib = $$authlib/release/
-    }
-    else:CONFIG(debug, debug|release):{
-        authlib = $$authlib/debug/
-    }
-}
+#win32:{
+#    CONFIG(release, debug|release):{
+#        authlib = $$authlib/release/
+#    }
+#    else:CONFIG(debug, debug|release):{
+#        authlib = $$authlib/debug/
+#    }
+#}
 
-LIBS += $$authlib/libauth.a
+#LIBS += $$authlib/libauth.a
 
 win32 {
     LIBS += -lpsapi

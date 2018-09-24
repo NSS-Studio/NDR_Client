@@ -266,18 +266,18 @@ Please try to redial your account.</translation>
         <translation>Error while enumerating RAS-capable devices </translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="157"/>
-        <location filename="../pppoe/basedsl_mac.cpp" line="393"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="160"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="403"/>
         <source>未知网卡</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="273"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="276"/>
         <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="351"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="361"/>
         <source>未知</source>
         <translation>Unknown</translation>
     </message>
@@ -306,7 +306,7 @@ Please try to redial your account.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="185"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="188"/>
         <source>找不到用于拨号的网卡 %1</source>
         <translation>Did not discovered any interfaces named %1 could be dialed</translation>
     </message>
@@ -632,22 +632,38 @@ Please try to redial your account.</translation>
         <translation>Did not found any information about this account</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="292"/>
+        <location filename="../forms/logindialog.cpp" line="302"/>
+        <source>网络代理重置失败，错误代码 %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="310"/>
+        <source>DNS重置失败，错误代码 %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="314"/>
         <source>成功</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="293"/>
-        <source>Winsock重置成功，谢谢使用</source>
-        <translation type="unfinished">Winsock reset success, thanks</translation>
+        <location filename="../forms/logindialog.cpp" line="314"/>
+        <source>网络重置成功</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="296"/>
+        <source>Winsock重置成功，谢谢使用</source>
+        <translation type="obsolete">Winsock reset success, thanks</translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="294"/>
+        <location filename="../forms/logindialog.cpp" line="301"/>
+        <location filename="../forms/logindialog.cpp" line="309"/>
         <source>失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="296"/>
+        <location filename="../forms/logindialog.cpp" line="294"/>
         <source>Winsock重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -772,7 +788,7 @@ Please try to redial your account.</translation>
         <translation type="vanished">Failed to add the hot key of &apos;Log out&apos;, hot key may be illegal or it is in-uses.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="57"/>
+        <location filename="../forms/mainwindow.cpp" line="56"/>
         <source>NDR</source>
         <translation>NDR</translation>
     </message>
@@ -781,39 +797,39 @@ Please try to redial your account.</translation>
         <translation type="vanished">No interface available</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="57"/>
+        <location filename="../forms/mainwindow.cpp" line="56"/>
         <source>No Interface Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="153"/>
+        <location filename="../forms/mainwindow.cpp" line="152"/>
         <source>未知</source>
         <translation>Unknown</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="157"/>
+        <location filename="../forms/mainwindow.cpp" line="156"/>
         <source>正在拨号. . .</source>
         <translation>Dialing...</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="186"/>
+        <location filename="../forms/mainwindow.cpp" line="185"/>
         <source>%0 天 %1:%2:%3</source>
         <translation type="unfinished">%1days, %1:%2:%3 {0 ?}</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="252"/>
+        <location filename="../forms/mainwindow.cpp" line="251"/>
         <source>拨号成功，开启认证</source>
         <translation>Dial OK, now start the authentication session</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="555"/>
+        <location filename="../forms/mainwindow.cpp" line="551"/>
         <source>网络异常断开，正在重新拨号
 重试次数%0/5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="630"/>
-        <location filename="../forms/mainwindow.cpp" line="658"/>
+        <location filename="../forms/mainwindow.cpp" line="626"/>
+        <location filename="../forms/mainwindow.cpp" line="654"/>
         <source>NDR 校园网络认证</source>
         <translation>NDR Neusoft Dial Client</translation>
     </message>
@@ -822,18 +838,18 @@ Please try to redial your account.</translation>
         <translation type="vanished">Main panel had minimize here, you can close the automatical minimization in the `Settings&apos; menu.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="291"/>
-        <location filename="../forms/mainwindow.cpp" line="572"/>
+        <location filename="../forms/mainwindow.cpp" line="287"/>
+        <location filename="../forms/mainwindow.cpp" line="568"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="292"/>
+        <location filename="../forms/mainwindow.cpp" line="288"/>
         <source>拨号失败</source>
         <translation>Dial failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="391"/>
+        <location filename="../forms/mainwindow.cpp" line="387"/>
         <source>正在尝试注销</source>
         <translation>Trying to close the dialing session</translation>
     </message>
@@ -846,17 +862,17 @@ Please try to redial your account.</translation>
         <translation type="vanished">Re-dial failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="573"/>
+        <location filename="../forms/mainwindow.cpp" line="569"/>
         <source>网络异常断开。</source>
         <translation>Network break off unexpectedly.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="588"/>
+        <location filename="../forms/mainwindow.cpp" line="584"/>
         <source>拨号成功</source>
         <translation>Dialed to the server</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="600"/>
+        <location filename="../forms/mainwindow.cpp" line="596"/>
         <source>重播失败，正在关闭验证</source>
         <translation>Re-dial failed, closing authentication session</translation>
     </message>
@@ -866,38 +882,38 @@ Please try to redial your account.</translation>
         <translation type="obsolete">NDR Neusoft Dial Client</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="679"/>
+        <location filename="../forms/mainwindow.cpp" line="675"/>
         <source>警告</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="680"/>
+        <location filename="../forms/mainwindow.cpp" line="676"/>
         <source>检查更新失败</source>
         <translation>Failed to check the new version</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="703"/>
+        <location filename="../forms/mainwindow.cpp" line="699"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>New version available, but failed to download the upgrade package</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="714"/>
+        <location filename="../forms/mainwindow.cpp" line="710"/>
         <source>立即安装</source>
         <translation>Install now</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="717"/>
+        <location filename="../forms/mainwindow.cpp" line="713"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR will abort the network connection and start for upgrades with 3 minutes. If you did not want to update now, choose the next remind date and click &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="723"/>
+        <location filename="../forms/mainwindow.cpp" line="719"/>
         <source>打开软件包目录</source>
         <translation>Show the software folder in Explorer</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="713"/>
-        <location filename="../forms/mainwindow.cpp" line="722"/>
+        <location filename="../forms/mainwindow.cpp" line="709"/>
+        <location filename="../forms/mainwindow.cpp" line="718"/>
         <source>稍后提醒</source>
         <translation>Remind me later</translation>
     </message>
@@ -906,32 +922,32 @@ Please try to redial your account.</translation>
         <translation type="vanished">%1days, %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="727"/>
+        <location filename="../forms/mainwindow.cpp" line="723"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>Now downloaded the latest installer in temporary folder, just install that by manual. If you did not want to update now, choose the next remind date and click &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="744"/>
+        <location filename="../forms/mainwindow.cpp" line="740"/>
         <source>打开失败</source>
         <translation>Open failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="745"/>
+        <location filename="../forms/mainwindow.cpp" line="741"/>
         <source>打开目录失败</source>
         <translation>Open directory failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="747"/>
+        <location filename="../forms/mainwindow.cpp" line="743"/>
         <source>安装失败</source>
         <translation>Install failed</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="748"/>
+        <location filename="../forms/mainwindow.cpp" line="744"/>
         <source>启动安装程序失败</source>
         <translation>Failed to launch the installation</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="751"/>
+        <location filename="../forms/mainwindow.cpp" line="747"/>
         <source>请尝试手动安装 %1</source>
         <translation>Please try to install manually %1</translation>
     </message>
@@ -984,13 +1000,13 @@ Please try to redial your account.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="94"/>
-        <location filename="../main.cpp" line="99"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="103"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
+        <location filename="../main.cpp" line="99"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>Launch failed.
@@ -998,7 +1014,7 @@ Detected another instance was running.
 Note: If client exited with unexpectedly, just retry.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="100"/>
+        <location filename="../main.cpp" line="104"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>Launch failed.

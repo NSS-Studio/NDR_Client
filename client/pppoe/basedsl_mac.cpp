@@ -154,6 +154,9 @@ bool BaseDsl::dial(const QString &username, const QString &password,
 
         if (SCNetworkInterfaceGetInterfaceType(iface) ==
             kSCNetworkInterfaceTypeEthernet) {
+
+
+
             QString unknown_iface_prefix = trUtf8("未知网卡") + " ";
             if (device_name.startsWith(unknown_iface_prefix)) {
                 QString unknown_device_name = device_name;
@@ -313,6 +316,13 @@ bool BaseDsl::isDisconnected() {
         return true;
     qDebug("connection = %p", connection);
     qDebug() << "status" << SCNetworkConnectionGetStatus(connection);
+
+
+    CFStringRef pppStatusKey = CFSTR("Status");
+    auto extendStatus = SCNetworkConnectionCopyExtendedStatus(connection);
+    auto pppStatusValue = CFDictionaryGetValue(extendStatus, pppStatusKey);
+
+    qDebug() << __LINE__ << " " << __FUNCTION__ <<" "<<"ppp status:" <<  pppStatusValue;
     return SCNetworkConnectionGetStatus(connection) ==
            kSCNetworkConnectionDisconnected;
 }

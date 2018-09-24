@@ -27,11 +27,13 @@
 #define NDR_SERVER_INNER "172.24.5.130"
 #define NDR_SERVER_OUTER "172.24.10.13"
 
-#if (NDR_TESTING == true)
-#define NDR_SERVER NDR_SERVER_INNER
-#else
+//#if (NDR_TESTING == true)
+//#define NDR_SERVER NDR_SERVER_INNER
+//#else
+//#define NDR_SERVER NDR_SERVER_OUTER
+//#endif
+
 #define NDR_SERVER NDR_SERVER_OUTER
-#endif
 
 #if (QT_VERSION < QT_VERSION_CHECK(5, 9, 3))
 #error "!!! please use qt 5.9.3 or later"

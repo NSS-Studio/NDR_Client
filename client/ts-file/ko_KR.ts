@@ -278,18 +278,18 @@ p, li { white-space: pre-wrap; }
         <translation>RAS-CAPABLE례를 들때 오류 발생</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="157"/>
-        <location filename="../pppoe/basedsl_mac.cpp" line="393"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="160"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="403"/>
         <source>未知网卡</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="273"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="276"/>
         <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="351"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="361"/>
         <source>未知</source>
         <translation>미지</translation>
     </message>
@@ -319,7 +319,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="185"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="188"/>
         <source>找不到用于拨号的网卡 %1</source>
         <translation>연결로 사용돼는 인터페이스를 찾을 수 없음 %1</translation>
     </message>
@@ -649,22 +649,34 @@ p, li { white-space: pre-wrap; }
         <translation>로컬에서 로그인아이디에 대한 그 어떤 정보도 존재하지 않는다</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="292"/>
+        <location filename="../forms/logindialog.cpp" line="302"/>
+        <source>网络代理重置失败，错误代码 %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="310"/>
+        <source>DNS重置失败，错误代码 %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/logindialog.cpp" line="314"/>
         <source>成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="293"/>
-        <source>Winsock重置成功，谢谢使用</source>
+        <location filename="../forms/logindialog.cpp" line="314"/>
+        <source>网络重置成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="296"/>
+        <location filename="../forms/logindialog.cpp" line="294"/>
+        <location filename="../forms/logindialog.cpp" line="301"/>
+        <location filename="../forms/logindialog.cpp" line="309"/>
         <source>失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="296"/>
+        <location filename="../forms/logindialog.cpp" line="294"/>
         <source>Winsock重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -793,7 +805,7 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">로그아웃의 핫 키 신청 실패,핫 키 무효 또는 기타 응용 프로그램에서 이미 사용중입니다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="57"/>
+        <location filename="../forms/mainwindow.cpp" line="56"/>
         <source>NDR</source>
         <translation>NDR</translation>
     </message>
@@ -802,39 +814,39 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">No interface available</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="57"/>
+        <location filename="../forms/mainwindow.cpp" line="56"/>
         <source>No Interface Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="153"/>
+        <location filename="../forms/mainwindow.cpp" line="152"/>
         <source>未知</source>
         <translation>알 수 없는</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="157"/>
+        <location filename="../forms/mainwindow.cpp" line="156"/>
         <source>正在拨号. . .</source>
         <translation>연결중. . .</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="186"/>
+        <location filename="../forms/mainwindow.cpp" line="185"/>
         <source>%0 天 %1:%2:%3</source>
         <translation type="unfinished">%1 날 %1:%2:%3 {0 ?}</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="252"/>
+        <location filename="../forms/mainwindow.cpp" line="251"/>
         <source>拨号成功，开启认证</source>
         <translation>다이얼 성공,오픈 인증</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="555"/>
+        <location filename="../forms/mainwindow.cpp" line="551"/>
         <source>网络异常断开，正在重新拨号
 重试次数%0/5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="630"/>
-        <location filename="../forms/mainwindow.cpp" line="658"/>
+        <location filename="../forms/mainwindow.cpp" line="626"/>
+        <location filename="../forms/mainwindow.cpp" line="654"/>
         <source>NDR 校园网络认证</source>
         <translation>NDR 캠퍼스 네트워크 인증</translation>
     </message>
@@ -843,18 +855,18 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">주 창은 여기로 최소화돼였습니다,설정에서 자동 최소화 기능을 종료 취소 할수있습니다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="291"/>
-        <location filename="../forms/mainwindow.cpp" line="572"/>
+        <location filename="../forms/mainwindow.cpp" line="287"/>
+        <location filename="../forms/mainwindow.cpp" line="568"/>
         <source>提示</source>
         <translation>팁</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="292"/>
+        <location filename="../forms/mainwindow.cpp" line="288"/>
         <source>拨号失败</source>
         <translation>다이얼 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="391"/>
+        <location filename="../forms/mainwindow.cpp" line="387"/>
         <source>正在尝试注销</source>
         <translation>로그아웃중</translation>
     </message>
@@ -867,17 +879,17 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">재다시 인증 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="573"/>
+        <location filename="../forms/mainwindow.cpp" line="569"/>
         <source>网络异常断开。</source>
         <translation>네트워크 이상 끊어 졌다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="588"/>
+        <location filename="../forms/mainwindow.cpp" line="584"/>
         <source>拨号成功</source>
         <translation>다이얼 성공</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="600"/>
+        <location filename="../forms/mainwindow.cpp" line="596"/>
         <source>重播失败，正在关闭验证</source>
         <translation>재다시 인증 실패,인증 닫는 중</translation>
     </message>
@@ -888,38 +900,38 @@ p, li { white-space: pre-wrap; }
 </translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="679"/>
+        <location filename="../forms/mainwindow.cpp" line="675"/>
         <source>警告</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="680"/>
+        <location filename="../forms/mainwindow.cpp" line="676"/>
         <source>检查更新失败</source>
         <translation>업데이트 검출 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="703"/>
+        <location filename="../forms/mainwindow.cpp" line="699"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>새로운 버전 검출되었습니다,허나 업데이트 패키지 다운할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="714"/>
+        <location filename="../forms/mainwindow.cpp" line="710"/>
         <source>立即安装</source>
         <translation>즉시 설치</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="717"/>
+        <location filename="../forms/mainwindow.cpp" line="713"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 삼분만에 끊어지며 업데이트를 시작합니다,만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="723"/>
+        <location filename="../forms/mainwindow.cpp" line="719"/>
         <source>打开软件包目录</source>
         <translation>소프트웨어 디렉터리 열기</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="713"/>
-        <location filename="../forms/mainwindow.cpp" line="722"/>
+        <location filename="../forms/mainwindow.cpp" line="709"/>
+        <location filename="../forms/mainwindow.cpp" line="718"/>
         <source>稍后提醒</source>
         <translation>이따 알림</translation>
     </message>
@@ -928,32 +940,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 날 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="727"/>
+        <location filename="../forms/mainwindow.cpp" line="723"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 이미 새로운 버전 패키지를 임시 디렉터리로 다운했습니다,수동으로 디렉터리를 열고 설치하세요.만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="744"/>
+        <location filename="../forms/mainwindow.cpp" line="740"/>
         <source>打开失败</source>
         <translation>열기실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="745"/>
+        <location filename="../forms/mainwindow.cpp" line="741"/>
         <source>打开目录失败</source>
         <translation>디렉터리 열기 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="747"/>
+        <location filename="../forms/mainwindow.cpp" line="743"/>
         <source>安装失败</source>
         <translation>설치 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="748"/>
+        <location filename="../forms/mainwindow.cpp" line="744"/>
         <source>启动安装程序失败</source>
         <translation>설치 프로그램 실행 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="751"/>
+        <location filename="../forms/mainwindow.cpp" line="747"/>
         <source>请尝试手动安装 %1</source>
         <translation>수동으로 시도해 주십시오%1</translation>
     </message>
@@ -1029,20 +1041,20 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="94"/>
-        <location filename="../main.cpp" line="99"/>
+        <location filename="../main.cpp" line="98"/>
+        <location filename="../main.cpp" line="103"/>
         <source>提示</source>
         <translation>힌트</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="95"/>
+        <location filename="../main.cpp" line="99"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>열기실패
 이미 한 실례가 실행하고있는것을 검출.만약 전번 클라이언트가 이상 종료돼였으면 다시 시도해 보십시오.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="100"/>
+        <location filename="../main.cpp" line="104"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>열기실패
