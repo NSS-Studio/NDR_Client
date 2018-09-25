@@ -267,17 +267,17 @@ Please try to redial your account.</translation>
     </message>
     <message>
         <location filename="../pppoe/basedsl_mac.cpp" line="160"/>
-        <location filename="../pppoe/basedsl_mac.cpp" line="397"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="393"/>
         <source>未知网卡</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="276"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="272"/>
         <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="361"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="357"/>
         <source>未知</source>
         <translation>Unknown</translation>
     </message>
@@ -306,7 +306,7 @@ Please try to redial your account.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="188"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="184"/>
         <source>找不到用于拨号的网卡 %1</source>
         <translation>Did not discovered any interfaces named %1 could be dialed</translation>
     </message>
@@ -1000,13 +1000,13 @@ Please try to redial your account.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="100"/>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../main.cpp" line="99"/>
+        <location filename="../main.cpp" line="104"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="101"/>
+        <location filename="../main.cpp" line="100"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>Launch failed.
@@ -1014,7 +1014,7 @@ Detected another instance was running.
 Note: If client exited with unexpectedly, just retry.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="106"/>
+        <location filename="../main.cpp" line="105"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>Launch failed.

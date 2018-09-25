@@ -124,8 +124,8 @@ bool BaseDsl::dial(const QString &username, const QString &password,
         return false;
     }
     SCNetworkInterfaceRef en_interface = nullptr;
-    CFIndex i, service_count = CFArrayGetCount(services);
-    for (i = 0; i < service_count; i++) {
+    CFIndex service_count = CFArrayGetCount(services);
+    for (CFIndex i = 0; i < service_count; i++) {
         SCNetworkServiceRef service =
             (SCNetworkServiceRef)CFArrayGetValueAtIndex(services, i);
         CFStringRef service_name = SCNetworkServiceGetName(service);
@@ -155,8 +155,6 @@ bool BaseDsl::dial(const QString &username, const QString &password,
         if (SCNetworkInterfaceGetInterfaceType(iface) ==
             kSCNetworkInterfaceTypeEthernet) {
 
-
-
             QString unknown_iface_prefix = trUtf8("未知网卡") + " ";
             if (device_name.startsWith(unknown_iface_prefix)) {
                 QString unknown_device_name = device_name;
@@ -165,19 +163,15 @@ bool BaseDsl::dial(const QString &username, const QString &password,
                     en_interface = iface;
                 }
             } else {
-                QByteArray device_name_ba = device_name.toUtf8();
-                CFStringRef device_name_cf = CFStringCreateWithCString(
-                    nullptr, device_name_ba.data(), kCFStringEncodingUTF8);
-                // CFStringRef bsd_name = SCNetworkInterfaceGetBSDName(iface);
-                CFStringRef networkInterfaceName =
-                    SCNetworkInterfaceGetLocalizedDisplayName(iface);
-                qDebug("%s: networkInterfaceName: %s", __func__,
-                       networkInterfaceName
-                           ? CFStringGetCStringPtr(networkInterfaceName,
-                                                   kCFStringEncodingUTF8)
-                           : "(none)");
-                if (CFStringCompare(networkInterfaceName, device_name_cf, 0) ==
-                    kCFCompareEqualTo) {
+                //! Associate base_dsl::get_available_interfaces member function
+                //! need the same network interface name
+                CFStringRef networkInterfaceLocalizedDisplayNameString = SCNetworkInterfaceGetLocalizedDisplayName(iface);
+                QString networkInterfaceLocalizedDisplayNameQString = QString::fromCFString(networkInterfaceLocalizedDisplayNameString);
+                CFStringRef networkInterfaceBSDNameString = SCNetworkInterfaceGetBSDName(iface);
+                QString networkInterfaceBSDNameQString = QString::fromCFString(networkInterfaceBSDNameString);
+                QString networkInterfaceName = networkInterfaceLocalizedDisplayNameQString + " " + networkInterfaceBSDNameQString;
+                qDebug() << networkInterfaceName << ": networkInterfaceName: " << __func__;
+                if (networkInterfaceName == device_name) {
                     en_interface = iface;
                 }
             }
@@ -373,8 +367,8 @@ QStringList BaseDsl::get_available_interfaces() {
     if (!services)
         return QStringList();
     QStringList networkInterfaceCardList;
-    for (CFIndex index = 0, service_count = CFArrayGetCount(services);
-         index < service_count; ++index) {
+    CFIndex service_count = CFArrayGetCount(services);
+    for (CFIndex index = 0; index < service_count; ++index) {
         SCNetworkServiceRef service =
             (SCNetworkServiceRef)CFArrayGetValueAtIndex(services, index);
         SCNetworkInterfaceRef iface = SCNetworkServiceGetInterface(service);
