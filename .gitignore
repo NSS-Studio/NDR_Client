@@ -6,3 +6,4 @@ Makefile
 *.a
 ndr-client.pro.user*
 *~
+build/
