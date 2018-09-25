@@ -379,25 +379,19 @@ QStringList BaseDsl::get_available_interfaces() {
             (SCNetworkServiceRef)CFArrayGetValueAtIndex(services, index);
         SCNetworkInterfaceRef iface = SCNetworkServiceGetInterface(service);
         CFStringRef name = SCNetworkInterfaceGetLocalizedDisplayName(iface);
-        CFStringRef bsdn = SCNetworkInterfaceGetBSDName(iface);
-        CFStringRef type = SCNetworkInterfaceGetInterfaceType(iface);
-        qDebug("type = %p", type);
-        qDebug("Network Interface Name: %s\nNetwork Interface Type: "
-               "%s\nNetwork Interface Name: %s\n",
-               name ? CFStringGetCStringPtr(name, kCFStringEncodingUTF8)
-                    : "(none)",
-               type ? CFStringGetCStringPtr(type, kCFStringEncodingUTF8)
-                    : "(none)",
-               bsdn ? CFStringGetCStringPtr(bsdn, kCFStringEncodingUTF8)
-                    : "(none)");
+        QString qLocalizedDisplayName = QString::fromCFString(name);
+        CFStringRef bsdName = SCNetworkInterfaceGetBSDName(iface);
+        QString qBsdName = QString::fromCFString(bsdName);
+        CFStringRef typeName = SCNetworkInterfaceGetInterfaceType(iface);
+        QString qInterfaceTypeName = QString::fromCFString(typeName);
+
+        qDebug() << "Network TypeName: " << qInterfaceTypeName;
+        qDebug() << "Network LocalizedDisplayName: " << qLocalizedDisplayName;
+        qDebug() << "Network BSDName: " << qBsdName;
 
         if (SCNetworkInterfaceGetInterfaceType(iface) ==
             kSCNetworkInterfaceTypeEthernet) {
-            CFStringRef networkInterfaceRawName =
-                SCNetworkInterfaceGetLocalizedDisplayName(iface);
-            char const *networkInterfaceNamePtr = CFStringGetCStringPtr(
-                networkInterfaceRawName, kCFStringEncodingUTF8);
-            QString networkInterfaceName{networkInterfaceNamePtr};
+            QString networkInterfaceName = qLocalizedDisplayName + " " + qBsdName;
             if (networkInterfaceName == QString{})
                 networkInterfaceName =
                     QString("%1 %2").arg(trUtf8("未知网卡")).arg(index);

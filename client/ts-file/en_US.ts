@@ -267,7 +267,7 @@ Please try to redial your account.</translation>
     </message>
     <message>
         <location filename="../pppoe/basedsl_mac.cpp" line="160"/>
-        <location filename="../pppoe/basedsl_mac.cpp" line="403"/>
+        <location filename="../pppoe/basedsl_mac.cpp" line="397"/>
         <source>未知网卡</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1000,13 +1000,13 @@ Please try to redial your account.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="98"/>
-        <location filename="../main.cpp" line="103"/>
+        <location filename="../main.cpp" line="100"/>
+        <location filename="../main.cpp" line="105"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="99"/>
+        <location filename="../main.cpp" line="101"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
         <translation>Launch failed.
@@ -1014,7 +1014,7 @@ Detected another instance was running.
 Note: If client exited with unexpectedly, just retry.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="106"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>Launch failed.

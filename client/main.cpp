@@ -12,6 +12,7 @@
 #include <QSharedMemory>
 #include <QtCore/QTextCodec>
 
+
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
