@@ -5,13 +5,12 @@
 #include <QVector>
 #include <QtSql>
 #include <QSqlDatabase>
-#include "log.h"
 #include "settingsset.h"
 class LocalStorage : public QObject
 {
     Q_OBJECT
 public:
-    explicit LocalStorage(QString filename,QObject *parent = 0);
+    explicit LocalStorage(QString filename,QObject *parent = nullptr);
     ~LocalStorage();
     
     bool open();

@@ -1,4 +1,3 @@
-//#include "authenticat.h"
 #include "common.hpp"
 #include "feedbackdialog.h"
 #include "hangupdialog.h"
@@ -95,7 +94,7 @@ int main(int argc, char *argv[]) {
     __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
 #endif
 
-    Log::setLogFilename(appHome + "/auth.log");
+//    Log::setLogFilename(appHome + "/auth.log");
     // QSettings config(appHome + "/common.cfg", QSettings::IniFormat);
     // QString current_locale = config.value("Locale",
     // QLocale::system().name()).toString(); qDebug() << "current_locale" <<

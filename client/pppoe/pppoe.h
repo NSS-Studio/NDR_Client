@@ -1,13 +1,12 @@
 #ifndef PPPOE_H
 #define PPPOE_H
 #include <QtCore>
-#include "log.h"
 #include "basedsl.h"
 
 class PPPoE : public QThread{
 	Q_OBJECT
 public:
-	explicit PPPoE(QObject *parent=0);
+    explicit PPPoE(QObject *parent = nullptr);
 	~PPPoE();
 	void run();
 	void kill();

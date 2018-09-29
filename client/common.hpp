@@ -122,7 +122,7 @@ extern QStringList __getDrModelPostfixTable();
 
 /** 根据套餐后缀获取套餐描述*/
 extern bool __getDrModelCaption(QString postfix, QString &caption);
-
+extern QString getDrModel(QString const& postfix);
 /** 获取语言所在路径，失败返回空字符串*/
 extern QString getLangDir();
 

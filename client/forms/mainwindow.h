@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "aboutdialog.h"
-//#include "authenticat.h"
 #include "common.hpp"
 #include "localstorage.h"
 #include "logindialog.h"

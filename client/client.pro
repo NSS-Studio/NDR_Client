@@ -31,12 +31,10 @@ UI_DIR=./forms
 
 SOURCES +=  main.cpp \
             common.cpp \
-            log.cpp \
             ndrapplication.cpp \
     tcpserverexception.cpp
 
 HEADERS  += \
-            log.h \
             ndrapplication.hpp \
     tcpserverexception.hpp \
     common.hpp

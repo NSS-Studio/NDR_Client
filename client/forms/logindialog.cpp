@@ -84,10 +84,8 @@ void LoginDialog::getFormData(QString &username, QString &password,
     password = this->ui->editPassword->text();
     device_name = this->ui->comboIface->currentText();
     // model = this->ui->cmbModel->currentText();
-    int index = ui->cmbModel->currentIndex();
-    qDebug("current index: %d", index);
-    assert(index >= 0);
-    model = __getDrModelPostfixTable().at(index);
+    QString captionName = ui->cmbModel->currentText();
+    model = getDrModel(captionName);
     if (autoLogin)
         *autoLogin = this->ui->chkAutoLogin->isChecked();
     if (savePassword)

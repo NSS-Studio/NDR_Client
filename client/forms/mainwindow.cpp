@@ -150,6 +150,8 @@ void MainWindow::tryLogin() {
         this->ui->lblType->setText(model_caption);
     else
         this->ui->lblType->setText(tr("未知"));
+    qDebug() << "Function: " << __PRETTY_FUNCTION__;
+    qDebug() << "PPPoE Account: " << username + postfix;
     realUsername = "\r\n" + username + postfix; //+ "@student";
     //    realUsername=username;//+ "@student";
 
