@@ -109,17 +109,6 @@ QStringList __getLangFileNameTable() {
 }
 
 bool __getLanguageName(QString fileName, QString &langName) {
-//    static const struct {
-//        QString file_name;
-//        QString lang_name;
-//    } table[] = {};
-//    for (unsigned int i = 0; i < (sizeof table) / (sizeof *table); i++) {
-//        qDebug() << table[i].lang_name;
-//        if (fileName == table[i].file_name) {
-//            langName = table[i].lang_name;
-//            return true;
-//        }
-//    }
     QMap<QString, QString> table {
         {"en_US", "English"},
         {"ja_JP", "日本語"},
@@ -150,10 +139,8 @@ void __initLanguage() {
 
     qt_tr.load("qt_" + current_locale + ".qm",
                QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-#ifndef QT_DEBUG
     qApp->installTranslator(&ndr_tr);
     qApp->installTranslator(&qt_tr);
-#endif
 }
 
 void __initFont(QString fontFile) {
