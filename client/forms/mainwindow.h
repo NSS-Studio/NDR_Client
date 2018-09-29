@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 #include "aboutdialog.h"
 //#include "authenticat.h"
-#include "common.h"
+#include "common.hpp"
 #include "localstorage.h"
 #include "logindialog.h"
 #include "noticedialog.h"

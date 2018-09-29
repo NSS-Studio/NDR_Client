@@ -1,5 +1,5 @@
 #include "logindialog.h"
-#include "common.h"
+#include "common.hpp"
 #include "mainwindow.h"
 #include "ui_logindialog.h"
 #include <QCompleter>

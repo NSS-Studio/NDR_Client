@@ -1,18 +1,18 @@
 //#include "authenticat.h"
-#include "common.h"
+#include "common.hpp"
 #include "feedbackdialog.h"
 #include "hangupdialog.h"
 #include "logindialog.h"
 #include "mainwindow.h"
 #include "noticedialog.h"
 #include "pppoe.h"
-#include "singleapplication.h"
+#include "ndrapplication.hpp"
 #include <QApplication>
 #include <QObject>
 #include <QSharedMemory>
 #include <QtCore/QTextCodec>
-
-
+#include <QNetworkProxyFactory>
+#include <QNetworkProxy>
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
@@ -67,11 +67,20 @@ int main(int argc, char *argv[]) {
     SetUnhandledExceptionFilter(
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #endif
-    SingleApplication a(argc, argv, "NSS-DR-CLIENT");
+    QSharedPointer<NdrApplication> ndrApp;
+
+    try {
+        auto app = new NdrApplication("ndr-client-new", argc, argv);
+        ndrApp.reset(app);
+    } catch(TcpServerException& exception) {
+        qDebug() << exception.errorMessage();
+        exit(-1);
+    }
+
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
-    a.setQuitOnLastWindowClosed(false);
+    ndrApp->setQuitOnLastWindowClosed(false);
 
     __initAppHome();     //初始化 应用程序本地目录
     __initTempDir();     //初始化 应用临时文件夹
@@ -92,20 +101,26 @@ int main(int argc, char *argv[]) {
     // QLocale::system().name()).toString(); qDebug() << "current_locale" <<
     // current_locale;
 
-    // 防止进程多开
-    if (a.isRunning()) {
-#ifdef Q_OS_UNIX
-        QMessageBox::information(
-            nullptr, QObject::tr("提示"),
-            QObject::tr("打开失败\n检测到已经有一个实例正在运行。如果客户端上一"
-                        "次异常退出，请重试。"));
-#else
-        QMessageBox::information(
-            nullptr, QObject::tr("提示"),
-            QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
-#endif
-        return 0;
-    }
+//    // 防止进程多开
+//    if (a.isRunning()) {
+//#ifdef Q_OS_UNIX
+//        QMessageBox::information(
+//            nullptr, QObject::tr("提示"),
+//            QObject::tr("打开失败\n检测到已经有一个实例正在运行。如果客户端上一"
+//                        "次异常退出，请重试。"));
+//#else
+//        QMessageBox::information(
+//            nullptr, QObject::tr("提示"),
+//            QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
+//#endif
+//        return 0;
+//    }
+//    QList<QNetworkProxy> networkProxyList = QNetworkProxyFactory::systemProxyForQuery();
+//    for (auto const &networkProxy: networkProxyList)
+//    {
+//        qDebug() << networkProxy.type();
+//    }
+//    qDebug() << "networkProxyLength: " << networkProxyList.size();
 
     MainWindow w;
 
@@ -115,5 +130,5 @@ int main(int argc, char *argv[]) {
     w.hide();
 #endif
 
-    return a.exec();
+    return ndrApp->exec();
 }

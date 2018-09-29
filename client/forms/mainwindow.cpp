@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "infomodule.h"
 #include "logindialog.h"
-#include "singleapplication.h"
+#include "ndrapplication.hpp"
 #include "ui_mainwindow.h"
 #include <QDesktopServices>
 #include <QMessageBox>
@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
         loginDialog->close();
         delete loginDialog;
         close();
-        static_cast<SingleApplication*>(QApplication::instance())->releaseSharedMemory();
+//        static_cast<SingleApplication*>(QApplication::instance())->releaseSharedMemory();
         exit(1);
     }
     this->loginDialog->set_interface_list(interfaces);

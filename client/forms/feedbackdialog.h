@@ -1,6 +1,6 @@
 #ifndef FEEDBACKDIALOG_H
 #define FEEDBACKDIALOG_H
-#include "common.h"
+#include "common.hpp"
 #include <QDialog>
 #include <QMessageBox>
 #include <QtNetwork>

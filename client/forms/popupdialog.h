@@ -1,7 +1,7 @@
 #ifndef POPUPDIALOG_H
 #define POPUPDIALOG_H
 
-#include "common.h"
+#include "common.hpp"
 #include <QObject>
 #include <QDialog>
 #include <QVector>

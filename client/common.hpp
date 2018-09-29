@@ -2,7 +2,7 @@
 #define COMMON_H
 
 #include "settingsset.h"
-#include "singleapplication.h"
+//#include "ndrapplication.hpp"
 #include <QApplication>
 #include <QFontDatabase>
 #include <QTranslator>
@@ -11,6 +11,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QtGlobal>
+#define LOCAL_SERVER_PORT 20412
 
 #define autoStartRegRoot HKEY_CURRENT_USER
 #define autoSatrtKeyWay "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
@@ -144,7 +145,7 @@ extern QTranslator ndr_tr, qt_tr;
 extern void __initSettingsSet();
 extern void __initLanguage();
 extern void __initFont(QString fontFile);
-extern void __initStyleSheet(SingleApplication *a, QString sheetFile);
+//extern void __initStyleSheet(NdrApplication* a, QString sheetFile);
 
 extern QString networkInterfaceCardName;
 #endif // COMMON_H

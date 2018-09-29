@@ -1,7 +1,7 @@
 #ifndef ABOUTDIALOG_H
 #define ABOUTDIALOG_H
 
-#include "common.h"
+#include "common.hpp"
 #include <QDialog>
 #include <QCloseEvent>
 namespace Ui {

@@ -1,6 +1,6 @@
 #ifndef UPDATESERVICE_H
 #define UPDATESERVICE_H
-#include "common.h"
+#include "common.hpp"
 //#include "httpgeteventloop.h"
 #include <QObject>
 #include <QtNetwork>

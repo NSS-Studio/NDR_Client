@@ -1,4 +1,4 @@
-#include "common.h"
+#include "common.hpp"
 #include <QtCore/QDebug>
 #include <QtCore/QLibraryInfo>
 
@@ -173,22 +173,22 @@ void __initFont(QString fontFile) {
     }
 }
 
-void __initStyleSheet(SingleApplication *a, QString sheetFile) {
-    // QString sheetName = "default";
-    QFile file(sheetFile);
-    file.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(file.readAll());
-#if defined Q_OS_WIN || defined Q_OS_MAC
-    QString appath = a->applicationDirPath();
-#ifdef Q_OS_WIN
-    styleSheet.replace("$[SKIN_PATH]", appath + "/skin");
-#else
-    styleSheet.replace("$[SKIN_PATH]", appath + "/../Resources/skin");
-#endif
-#else
-    styleSheet.replace("$[SKIN_PATH]", "/usr/share/ndr-client/skin");
-#endif
-    qDebug() << styleSheet;
-    // a->setStyleSheet(styleSheet);
-    a->setStyleSheet(styleSheet);
-}
+//void __initStyleSheet(NdrApplication *a, QString sheetFile) {
+//    // QString sheetName = "default";
+//    QFile file(sheetFile);
+//    file.open(QFile::ReadOnly);
+//    QString styleSheet = QLatin1String(file.readAll());
+//#if defined Q_OS_WIN || defined Q_OS_MAC
+//    QString appath = a->applicationDirPath();
+//#ifdef Q_OS_WIN
+//    styleSheet.replace("$[SKIN_PATH]", appath + "/skin");
+//#else
+//    styleSheet.replace("$[SKIN_PATH]", appath + "/../Resources/skin");
+//#endif
+//#else
+//    styleSheet.replace("$[SKIN_PATH]", "/usr/share/ndr-client/skin");
+//#endif
+//    qDebug() << styleSheet;
+//    // a->setStyleSheet(styleSheet);
+//    a->setStyleSheet(styleSheet);
+//}

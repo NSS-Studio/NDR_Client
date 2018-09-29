@@ -20,5 +20,6 @@ macx{
     SOURCES += $$PWD/basedsl_mac.cpp
     LIBS += -framework SystemConfiguration \
             -framework CoreFoundation \
-            -framework Security -framework Carbon
+            -framework Security \
+            -framework Carbon
 }

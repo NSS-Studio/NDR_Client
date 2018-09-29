@@ -31,12 +31,15 @@ UI_DIR=./forms
 
 SOURCES +=  main.cpp \
             common.cpp \
-            singleapplication.cpp \
-            log.cpp
+            log.cpp \
+            ndrapplication.cpp \
+    tcpserverexception.cpp
 
-HEADERS  += common.h \
-            singleapplication.h \
-            log.h
+HEADERS  += \
+            log.h \
+            ndrapplication.hpp \
+    tcpserverexception.hpp \
+    common.hpp
 
 RESOURCES += client.qrc
 
