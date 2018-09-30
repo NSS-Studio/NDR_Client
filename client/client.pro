@@ -39,7 +39,8 @@ HEADERS  += \
             ndrapplication.hpp \
     tcpserverexception.hpp \
     common.hpp \
-    utils.hpp
+    utils.hpp \
+    ndrconfig.hpp
 
 RESOURCES += client.qrc
 

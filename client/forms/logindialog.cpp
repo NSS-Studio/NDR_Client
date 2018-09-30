@@ -46,7 +46,7 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent)
     QCompleter *completer = new QCompleter(this);
     completer->setCompletionMode(QCompleter::PopupCompletion);
     ui->cmbAccount->setCompleter(completer);
-    this->setWindowTitle("[" + __getVersionString() + "] " +
+    this->setWindowTitle("[" + utils::getVersionString() + "] " +
                          this->windowTitle());
     /*
 int desktop_width = QApplication::desktop()->width();

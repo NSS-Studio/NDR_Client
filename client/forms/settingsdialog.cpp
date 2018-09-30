@@ -74,14 +74,14 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
 	QString saved_lang = settings->language;
 	if(saved_lang.isEmpty()) ui->cmbLanguage->setCurrentIndex(0);	// Auto
 	else if(saved_lang == "zh_CN") ui->cmbLanguage->setCurrentIndex(1);
-	QStringList lang_file_list = __getLangFileNameTable();
+    QStringList lang_file_list = utils::getLangFileNameTable();
 	//ui->cmbLanguage->addItems(lang_file_list);
 
     if (ui->cmbLanguage->count() != 5){
         QString file_name;
         foreach(file_name, lang_file_list) {
             QString lang_name;
-            if(!__getLanguageName(file_name, lang_name)) continue;
+            if(!utils::getLanguageName(file_name, lang_name)) continue;
             ui->cmbLanguage->addItem(lang_name, file_name);
             if(file_name == saved_lang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
         }

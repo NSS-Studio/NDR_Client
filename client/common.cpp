@@ -4,13 +4,6 @@
 
 QString networkInterfaceCardName;
 
-QString __getVersionString() {
-    quint8 majorVersion = VERSION_MAJOR;
-    quint8 minorVersion = VERSION_MINOR;
-    Q_ASSERT(minorVersion < 100);
-    return QString("%1").arg(majorVersion + minorVersion / 100.0, 0, 'f', 2);
-}
-
 QString appHome;
 
 void __initAppHome() {
@@ -39,58 +32,9 @@ void __initSettingsSet() {
     settings = new SettingsSet(appHome + "/config.ini");
 }
 
-QString getLangDir() {
-    qDebug() << "Function :"<< __PRETTY_FUNCTION__;
-    QString r = ":/translate/" LANGUAGE_DIR_NAME;
-    return QFile::exists(r) ? r : QString();
-}
-
-QStringList __getLangFileNameTable() {
-    static QString lang_dir = getLangDir();
-    qDebug() << "lang_dir" << lang_dir;
-    if (lang_dir.isEmpty())
-        return QStringList();
-    QDir dir(lang_dir);
-    QStringList filter("ndr.*.qm");
-    QStringList filelist =
-        dir.entryList(filter, QDir::Files | QDir::CaseSensitive);
-    qDebug() << "filelist" << filelist;
-    if (filelist.isEmpty())
-        return filelist;
-    filelist.replaceInStrings("ndr.", QString());
-    filelist.replaceInStrings(".qm", QString());
-#if 0
-	QStringList r;
-	QString file_name;
-	foreach(file_name, filelist) {
-		qDebug() << "file_name" << file_name;
-		QString lang_name;
-		if(__getLanguageName(file_name, lang_name)) r << lang_name;
-	}
-	return r;
-#else
-    return filelist;
-#endif
-}
-
-bool __getLanguageName(QString fileName, QString &langName) {
-    QMap<QString, QString> table {
-        {"en_US", "English"},
-        {"ja_JP", "日本語"},
-        {"ko_KR", "한국의"},
-        {"zh_CN", "简体中文"}
-    };
-    qDebug() << "Function :"<< __PRETTY_FUNCTION__;
-    if (table.find(fileName) == table.cend()) {
-        return false;
-    }
-    langName = table[fileName];
-    return true;
-}
-
 QTranslator ndr_tr, qt_tr;
 void __initLanguage() {
-    QString lang_dir = getLangDir();
+    QString lang_dir = utils::getLangDir();
 
     qDebug() << "lang_dir" << lang_dir;
     qDebug() << "language" << settings->language;

@@ -7,7 +7,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     ui->setupUi(this);
-    this->ui->lblVersion->setText(" " + tr("版本") + " " + __getVersionString());
+    this->ui->lblVersion->setText(" " + tr("版本") + " " + utils::getVersionString());
     this->ui->lblBuildTime->setText(tr("构建于")+ " " + COMPL_DATATIME);
 }
 
