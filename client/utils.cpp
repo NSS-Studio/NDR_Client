@@ -2,6 +2,12 @@
 
 namespace utils {
 
+    QString appHome; //家目录
+    QString tempDir; //临时文件夹
+    /** 设置项*/
+    QSharedPointer<SettingsSet> settings;
+    QTranslator ndr_tr, qt_tr;
+
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {
             {QString{QObject::tr("考试专用")}, QString{""}},
@@ -87,6 +93,48 @@ namespace utils {
         }
         langName = table[fileName];
         return true;
+    }
+
+
+    void initAppHome() {
+        QDir home = QDir::home();
+        appHome = home.path() + "/.nssdr";
+        if (!QFile::exists(appHome)) {
+            home.mkdir(".nssdr");
+        }
+        qDebug() << appHome;
+    }
+
+    void initTempDir() {
+        QDir temp = QDir::temp();
+        tempDir = temp.path() + "/ndr";
+        if (!QFile::exists(tempDir)) {
+            temp.mkdir("ndr");
+        }
+        qDebug() << tempDir;
+    }
+
+    void initSettingsSet() {
+        settings.reset(new SettingsSet{appHome + "/config.ini"});
+    }
+
+    void initLanguage() {
+        QString lang_dir = utils::getLangDir();
+
+        qDebug() << "lang_dir" << lang_dir;
+        qDebug() << "language" << utils::settings->language;
+        QString current_locale = utils::settings->language;
+        if (current_locale.isEmpty())
+            current_locale = QLocale::system().name();
+        qDebug() << "current_locale" << current_locale;
+        if (!ndr_tr.load("ndr." + current_locale + ".qm", lang_dir)) {
+            qDebug() << "Load Qm file error";
+        }
+
+        qt_tr.load("qt_" + current_locale + ".qm",
+                   QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+        qApp->installTranslator(&ndr_tr);
+        qApp->installTranslator(&qt_tr);
     }
 }
 

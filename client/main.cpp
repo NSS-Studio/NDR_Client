@@ -76,15 +76,12 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
 
+    qDebug() << utils::appHome;
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
     ndrApp->setQuitOnLastWindowClosed(false);
 
-    __initAppHome();     //初始化 应用程序本地目录
-    __initTempDir();     //初始化 应用临时文件夹
-    __initSettingsSet(); //初始化 配置
-    __initLanguage();    //初始化 语言
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
     __initFont(
         ":/font/ztgj.ttf"); //初始化 默认字体,Windows他妈的字体渲染像屎一样，用

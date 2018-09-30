@@ -15,19 +15,13 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
-    // this->setWindowFlags(Qt::Dialog);
+
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
-    // int x, y;
-    // getMoniterSize(x, y);
-    // this -> resize(QSize(x/6.2, y/3));
-
-    // settings = new SettingsSet(appHome + "/config.ini");
 
     popUp = new popUpDialog();
 
-    profile = new LocalStorage(
-        appHome + "/config.db"); //如果数据库结构变化，修改文件名抛弃数据
+    profile = new LocalStorage(utils::appHome + "/config.db"); //如果数据库结构变化，修改文件名抛弃数据
 
     this->ui->menuTrayLogin->menuAction()->setVisible(false);
     this->ui->menuTrayWorking->menuAction()->setVisible(false);
@@ -79,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent)
     isMainWindowMinimized = false;
 
     //更新模块初始化
-    updateServer = new UpdateService(NDR_UPDATE_SERVER, tempDir);
+    updateServer = new UpdateService(NDR_UPDATE_SERVER, utils::tempDir);
 
     connect(updateServer, &UpdateService::checkFinished, this,
             &MainWindow::checkFinished);
@@ -203,7 +197,7 @@ void MainWindow::dialFinished(bool ok) {
             profile->setLoginInfo(username, savePassword ? password : "",
                                   manner);
             profile->setDeviceName(device_name); // Deprecated
-            QSettings conn_cfg(appHome + "/connection.cfg",
+            QSettings conn_cfg(utils::appHome + "/connection.cfg",
                                QSettings::IniFormat);
             conn_cfg.setValue("Interface/Etherface", device_name);
             this->username = username;
@@ -277,7 +271,7 @@ void MainWindow::dialFinished(bool ok) {
         if (ENABLE_UPDATE)
             updateServer->checkUpdate();
         // getInfoAboutNss
-        if (!settings->webUpEnable)
+        if (!utils::settings->webUpEnable)
             getMessageFromNSS();
 
     } else {
@@ -329,7 +323,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-    if (settings->quitWhileCloseWindow) {
+    if (utils::settings->quitWhileCloseWindow) {
         this->ui->actionLogoff->trigger();
         app_exiting = true;
     } else {
@@ -504,8 +498,8 @@ void MainWindow::on_actionSettings_triggered() {
 
     if (settingsDialog == nullptr)
         settingsDialog = new SettingsDialog();
-    if (settingsDialog->getFormData(settings)) {
-        settings->writeAll();
+    if (settingsDialog->getFormData(utils::settings.get())) {
+        utils::settings->writeAll();
         // if(!settings->hotkey.isEmpty() &&
         // !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
         //{
@@ -541,7 +535,7 @@ void MainWindow::hangedUp(bool natural) {
     } else {
         onStopWorking();
 
-        if (settings->autoRasdial) {
+        if (utils::settings->autoRasdial) {
             // QEventLoop eventloop;
             // QTimer::singleShot(10000, &eventloop, SLOT(quit()));
             // eventloop.exec();

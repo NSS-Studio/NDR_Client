@@ -19,6 +19,12 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
     }
 
     qDebug() << "Create localTcpServer successful";
+
+    utils::initAppHome();     //初始化 应用程序本地目录
+    utils::initTempDir();     //初始化 应用临时文件夹
+    utils::initSettingsSet(); //初始化 配置
+    utils::initLanguage();    //初始化 语言
+    qDebug() << "Init configure successful";
 }
 
 NdrApplication::~NdrApplication() {

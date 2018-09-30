@@ -168,7 +168,7 @@ void LoginDialog::show() {
             qDebug() << "saved_device_name" << saved_device_name;
             set_device_name(saved_device_name);
         } else {
-            QSettings conn_cfg(appHome + "/connection.cfg",
+            QSettings conn_cfg(utils::appHome + "/connection.cfg",
                                QSettings::IniFormat);
             saved_device_name =
                 conn_cfg.value("Interface/Etherface").toString();

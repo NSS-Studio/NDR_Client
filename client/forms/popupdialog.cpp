@@ -59,7 +59,7 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
     sslConf.setProtocol(QSsl::TlsV1_2);
 
 
-    history = new QSettings(appHome + "/history.ini", QSettings::IniFormat);
+    history = new QSettings(utils::appHome + "/history.ini", QSettings::IniFormat);
     historyNum = 0;
     QString message;
     do{
@@ -191,7 +191,7 @@ void popUpDialog::showMessage()
     connect(nextPage, &QPushButton::clicked, this, &popUpDialog::goNextPage);
     connect(prePage, &QPushButton::clicked, this, &popUpDialog::goPrePage);
 
-    if (settings->autoClose){
+    if (utils::settings->autoClose){
         time = new QTimer(this);
         connect(time, SIGNAL(timeout()), this, SLOT(timeCount()));
         timePass = 0;

@@ -1,14 +1,17 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
-
+#include <ndrconfig.hpp>
 #include <QObject>
 #include <QStringList>
 #include <QMap>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
+#include <QTranslator>
+#include <QApplication>
+#include <QLibraryInfo>
+#include <settingsset.h>
 
-#include <ndrconfig.hpp>
 namespace utils {
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
@@ -32,6 +35,18 @@ namespace utils {
      * @return 成功/失败
      */
     bool getLanguageName(QString fileName, QString &langName);
+
+    extern QString appHome; //家目录
+    void initAppHome();
+
+    extern QString tempDir; //临时文件夹
+    void initTempDir();
+
+    /** 设置项*/
+    extern QSharedPointer<SettingsSet> settings;
+    void initSettingsSet();
+    extern QTranslator ndr_tr, qt_tr;
+    void initLanguage();
 }
 
 #endif // UTILS_HPP
