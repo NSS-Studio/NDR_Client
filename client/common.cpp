@@ -38,44 +38,9 @@ SettingsSet *settings;
 void __initSettingsSet() {
     settings = new SettingsSet(appHome + "/config.ini");
 }
-static QMap<QString, QString> drModelId{
-    {QString{QObject::tr("考试专用")}, QString{""}},
-    {QString{QObject::tr("教育网2M")}, QString{"@edu"}},
-    {QString{QObject::tr("联通合约20M")}, QString{"@cnc"}},
-    {QString{QObject::tr("联通合约30M")}, QString{"@cnc30a"}},
-    {QString{QObject::tr("联通合约50M")}, QString{"@cnc50a"}},
-    {QString{QObject::tr("电信10M")}, QString{"@ct10"}},
-    {QString{QObject::tr("电信合约10M")}, QString{"@ct10a"}}
-};
-
-QStringList __getDrModelPostfixTable() {
-    QStringList table = drModelId.keys();
-    return table;
-}
-
-QString getDrModel(QString const& postfix) {
-    return drModelId[postfix];
-}
-bool __getDrModelCaption(QString postfix, QString &caption) {
-    qDebug() << "Function :"<< __PRETTY_FUNCTION__ << "postfix:" << postfix;
-    if (drModelId.find(postfix) == drModelId.cend()) {
-        return false;
-    }
-    caption = postfix;
-    return true;
-}
 
 QString getLangDir() {
     qDebug() << "Function :"<< __PRETTY_FUNCTION__;
-    /*
-#ifdef Q_OS_WIN
-    QString r = QApplication::applicationDirPath() + "/" LANGUAGE_DIR_NAME;
-#elif defined Q_OS_MAC
-    QString r = QApplication::applicationDirPath() + "/../" LANGUAGE_DIR_NAME;
-#else
-    QString r = "/usr/share/ndr-client/" LANGUAGE_DIR_NAME;
-#endif
-    */
     QString r = ":/translate/" LANGUAGE_DIR_NAME;
     return QFile::exists(r) ? r : QString();
 }

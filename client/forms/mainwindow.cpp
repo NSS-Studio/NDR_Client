@@ -146,7 +146,7 @@ void MainWindow::tryLogin() {
 
     // h
     QString model_caption;
-    if (__getDrModelCaption(postfix, model_caption))
+    if (utils::getDrModelCaption(postfix, model_caption))
         this->ui->lblType->setText(model_caption);
     else
         this->ui->lblType->setText(tr("未知"));

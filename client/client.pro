@@ -32,12 +32,14 @@ UI_DIR=./forms
 SOURCES +=  main.cpp \
             common.cpp \
             ndrapplication.cpp \
-    tcpserverexception.cpp
+    tcpserverexception.cpp \
+    utils.cpp
 
 HEADERS  += \
             ndrapplication.hpp \
     tcpserverexception.hpp \
-    common.hpp
+    common.hpp \
+    utils.hpp
 
 RESOURCES += client.qrc
 

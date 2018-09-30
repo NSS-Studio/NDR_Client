@@ -34,12 +34,12 @@ LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent)
     this->ui->cmbModel->clear();
     QStringList captionList;
     QStringList postfitList;
-    postfitList = __getDrModelPostfixTable();
+    postfitList = utils::getDrModelPostfixTable();
 
     foreach (QString postfit, postfitList) {
         qDebug() << postfit;
         QString caption;
-        __getDrModelCaption(postfit, caption);
+        utils::getDrModelCaption(postfit, caption);
         this->ui->cmbModel->addItem(caption);
     }
 
@@ -85,7 +85,7 @@ void LoginDialog::getFormData(QString &username, QString &password,
     device_name = this->ui->comboIface->currentText();
     // model = this->ui->cmbModel->currentText();
     QString captionName = ui->cmbModel->currentText();
-    model = getDrModel(captionName);
+    model = utils::getDrModel(captionName);
     if (autoLogin)
         *autoLogin = this->ui->chkAutoLogin->isChecked();
     if (savePassword)
@@ -220,7 +220,7 @@ void LoginDialog::on_cmbAccount_editTextChanged(const QString &arg1) {
             if (profile->getLoginInfo(arg1, password, manner)) {
                 this->ui->chkSavePasswd->setChecked(!password.isEmpty());
                 this->ui->editPassword->setText(password);
-                index = __getDrModelPostfixTable().indexOf(manner);
+                index = utils::getDrModelPostfixTable().indexOf(manner);
                 index = (index < 0) ? 0 : index;
                 this->ui->cmbModel->setCurrentIndex(index);
 
@@ -255,7 +255,7 @@ void LoginDialog::set_interface_list(QStringList const &list) {
 }
 
 void LoginDialog::closeEvent(QCloseEvent *e) {
-    qDebug("function: LoginDialog::closeEvent(%p)", e);
+    qDebug() << "Function: " << __PRETTY_FUNCTION__ << " : arg pointer -> " << e;
     qApp->exit();
     e->accept();
 }

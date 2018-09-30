@@ -71,8 +71,6 @@ extern void __initAppHome();
 
 extern QString tempDir; //临时文件夹
 extern void __initTempDir();
-/** 语言存放文件夹*/
-#define LANGUAGE_DIR_NAME "lang"
 
 /** 网卡适配器名称*/
 #define NDR_PHONEBOOK_NAME "NDR"
@@ -112,20 +110,6 @@ extern void __initTempDir();
 #define ENABLE_UPDATE 1
 extern QString __getVersionString();
 
-/*
-extern bool __getDrModelName(int id,QString &name);
-extern bool __getDrModelPostfix(int id,QString &postfix);
-extern QVector<int> __getDrModelIdList();
-*/
-/** 获取账户名套餐后缀列表*/
-extern QStringList __getDrModelPostfixTable();
-
-/** 根据套餐后缀获取套餐描述*/
-extern bool __getDrModelCaption(QString postfix, QString &caption);
-extern QString getDrModel(QString const& postfix);
-/** 获取语言所在路径，失败返回空字符串*/
-extern QString getLangDir();
-
 /** 获取语言文件列表*/
 extern QStringList __getLangFileNameTable();
 
@@ -148,4 +132,5 @@ extern void __initFont(QString fontFile);
 //extern void __initStyleSheet(NdrApplication* a, QString sheetFile);
 
 extern QString networkInterfaceCardName;
+#include <utils.hpp>
 #endif // COMMON_H
