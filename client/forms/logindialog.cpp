@@ -4,14 +4,19 @@
 #include <QCompleter>
 #include <QVector>
 #include <utils.hpp>
-LoginDialog::LoginDialog(LocalStorage *profile, QSharedPointer<NdrApplication> app, QWidget *parent)
-    : QDialog{parent}, ndrApp{app}, ui{new Ui::LoginDialog} {
+LoginDialog::LoginDialog(QSharedPointer<LocalStorage> profile,
+                         QSharedPointer<ResourceManager> resourcemanager,
+                         QWidget *parent)
+    : QDialog{parent},
+      profile{profile},
+      resourcemanager{resourcemanager},
+      ui{new Ui::LoginDialog} {
     Qt::WindowFlags flags = Qt::Dialog;
     flags |= Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint;
     setWindowFlags(flags);
     ui->setupUi(this);
 
-    pppoe = ndrApp->getPPPoE();
+    pppoe = resourcemanager->getPPPoE();
 
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();
@@ -29,7 +34,6 @@ LoginDialog::LoginDialog(LocalStorage *profile, QSharedPointer<NdrApplication> a
     ui->btnDelUserInfo->setMaximumHeight(edit_height);
 #endif
     // this->ui->chkAutoLogin->setEnabled(false);
-    this->profile = profile;
 
     this->ui->cmbModel->clear();
     QStringList captionList;

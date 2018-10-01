@@ -14,15 +14,18 @@
 #include <utils.hpp>
 
 
-MainWindow::MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent)
-    : QMainWindow{parent}, ndrApp{app}, ui{new Ui::MainWindow} {
-    pppoe = ndrApp->getPPPoE();
+MainWindow::MainWindow(QSharedPointer<ResourceManager> resourcemanager, QWidget *parent)
+    : QMainWindow{parent},
+      resourcemanager{resourcemanager},
+      ui{new Ui::MainWindow} {
+
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
 
-    popUp = new popUpDialog();
+    pppoe = resourcemanager->getPPPoE();
+    loginDialog = resourcemanager->getLoginDialog();
 
-    profile = new LocalStorage(utils::appHome + "/config.db"); //如果数据库结构变化，修改文件名抛弃数据
+    popUp = new popUpDialog();
 
     this->ui->menuTrayLogin->menuAction()->setVisible(false);
     this->ui->menuTrayWorking->menuAction()->setVisible(false);
@@ -43,30 +46,25 @@ MainWindow::MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent)
     connect(pppoe.get(), SIGNAL(hangedUp(bool)), this, SLOT(hangedUp(bool)),
             Qt::QueuedConnection);
 
-    this->loginDialog = new LoginDialog(profile, this->ndrApp);
-
 #ifndef Q_OS_WIN
     QStringList interfaces = pppoe->getAvailableInterfaces();
     if (interfaces.count() == 0) {
         QMessageBox::critical(this, tr("NDR"), tr("No Interface Available"));
         QApplication::instance()->exit(1);
         loginDialog->close();
-        delete loginDialog;
         close();
-//        static_cast<SingleApplication*>(QApplication::instance())->releaseSharedMemory();
         exit(1);
     }
     this->loginDialog->set_interface_list(interfaces);
 #endif
-    connect(this->loginDialog, SIGNAL(myaccepted()), this, SLOT(tryLogin()));
-    connect(this->loginDialog, SIGNAL(finished(int)), this,
+    connect(loginDialog.get(), &LoginDialog::myaccepted,
+            this, &MainWindow::tryLogin);
+    connect(loginDialog.get(), SIGNAL(finished(int)), this,
             SLOT(loginWindowClosed()));
 
     // forget to delete this object, add to mainWindow's child to autoDelete
     this->noticeDialog = new NoticeDialog(this);
 
-//    connect(Authenticat::getInstance(), SIGNAL(verifyStoped()), this,
-//            SLOT(verifyStoped()), Qt::QueuedConnection);
 
     connect(this, SIGNAL(minimumWindow()), this, SLOT(hide()),
             Qt::QueuedConnection); //绑定最小化到隐藏
@@ -106,7 +104,6 @@ MainWindow::~MainWindow() {
     if (updateServer)
         delete updateServer;
 
-    delete loginDialog;
     if (aboutDialog)
         delete aboutDialog;
     if (settingsDialog)
@@ -275,7 +272,7 @@ void MainWindow::dialFinished(bool ok) {
 #ifdef Q_OS_MAC
         if (!pppoe->lastError().isEmpty())
 #endif
-            QMessageBox::information(loginDialog, tr("提示"),
+            QMessageBox::information(loginDialog.get(), tr("提示"),
                                      tr("拨号失败") + "\n" +
                                          pppoe->lastError());
     }
@@ -556,7 +553,7 @@ void MainWindow::hangedUp(bool natural) {
 //            Authenticat::getInstance()->endVerify();
             onStartLogining();
             // beginLoginUI();////////////////////
-            QMessageBox::critical(loginDialog, tr("提示"),
+            QMessageBox::critical(loginDialog.get(), tr("提示"),
                                   tr("网络异常断开。"));
         }
     }
@@ -686,7 +683,7 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
         if (state == Working) {
             qDebug() << errMsg;
             ui->actionLogoff->trigger();
-            QMessageBox::critical(loginDialog, "更新错误",
+            QMessageBox::critical(loginDialog.get(), "更新错误",
                                   tr("检查到新版本，但无法下载更新包") + "\n" +
                                       errMsg);
         }
@@ -726,7 +723,7 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
             if (state == Working)
                 ui->actionLogoff->trigger();
             QMessageBox::warning(
-                loginDialog,
+                loginDialog.get(),
 #ifdef Q_OS_LINUX
                 tr("打开失败"),
                 tr("打开目录失败")

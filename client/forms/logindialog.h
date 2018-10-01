@@ -5,7 +5,6 @@
 #include <QDialog>
 #include <QMessageBox>
 #include "localstorage.hpp"
-#include <ndrapplication.hpp>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -14,7 +13,7 @@
 #include <fstream>
 #else
 #endif
-
+#include <resourcemanager.hpp>
 
 namespace Ui {
 class LoginDialog;
@@ -25,7 +24,9 @@ class LoginDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit LoginDialog(LocalStorage *profile, QSharedPointer<NdrApplication> app, QWidget *parent = nullptr);
+    explicit LoginDialog(QSharedPointer<LocalStorage> profile,
+                         QSharedPointer<ResourceManager> resourcemanager,
+                         QWidget *parent = nullptr);
 	~LoginDialog();
 	void getFormData(QString &username, QString &password, QString &type, QString &device_name, bool *autoLogin=0, bool *savePassword=0);
 	//bool show(QString &username,QString password, int &type);
@@ -52,10 +53,10 @@ private slots:
     void on_btnWinsockReset_clicked();
 #endif
 private:
-    QSharedPointer<NdrApplication> ndrApp;
+    QSharedPointer<LocalStorage> profile;
+    QSharedPointer<ResourceManager> resourcemanager;
     QSharedPointer<PPPoE> pppoe;
-	Ui::LoginDialog *ui;
-	LocalStorage *profile;
+    Ui::LoginDialog* ui;
 	QString autoLoginUser;
 	void set_device_name(const QString &);
 	void closeEvent(QCloseEvent * e);

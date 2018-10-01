@@ -15,7 +15,7 @@
 #include <QHBoxLayout>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
-#include <ndrapplication.hpp>
+#include <resourcemanager.hpp>
 namespace Ui {
 class MainWindow;
 }
@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent = nullptr);
+    explicit MainWindow(QSharedPointer<ResourceManager> resourcemanager, QWidget *parent = nullptr);
     ~MainWindow();
     enum State { Logining, Working, Others };
 
@@ -53,10 +53,10 @@ private slots:
     void on_goDnuiBrowser_clicked();
 
 private:
-    QSharedPointer<NdrApplication> ndrApp;
+    QSharedPointer<ResourceManager> resourcemanager;
     QSharedPointer<PPPoE> pppoe;
+    QSharedPointer<LoginDialog> loginDialog;
     Ui::MainWindow *ui;
-    LoginDialog *loginDialog;
     NoticeDialog *noticeDialog;
     SettingsDialog *settingsDialog;
     AboutDialog *aboutDialog;
@@ -85,7 +85,6 @@ private:
 
 public slots:
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
-    //    void logoffShortcutActivated();
 protected:
     void closeEvent(QCloseEvent *event);
 signals:

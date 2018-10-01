@@ -1,7 +1,6 @@
 #include "feedbackdialog.h"
 #include "hangupdialog.h"
 #include "logindialog.h"
-#include "mainwindow.h"
 #include "noticedialog.h"
 #include <pppoe.hpp>
 #include <ndrapplication.hpp>
@@ -13,13 +12,15 @@
 #include <QNetworkProxy>
 #include <utils.hpp>
 #include <QStyleFactory>
+
+#include <resourcemanager.hpp>
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 //! windows debug
-LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕获
+LONG ApplicationCrashHagetPPPoE()ndler(EXCEPTION_POINTERS *pException) { //程式异常捕获
     /*
      ***保存数据代码***
      */
@@ -94,13 +95,16 @@ int main(int argc, char *argv[]) {
     // QLocale::system().name()).toString(); qDebug() << "current_locale" <<
     // current_locale;
 
-    MainWindow w{ndrApp};
+//    MainWindow w{ndrApp};
 
-#if defined(QT_DEBUG)
-    w.show();
-#else
-    w.hide();
-#endif
+//#if defined(QT_DEBUG)
+//    w.show();
+//#else
+//    w.hide();
+//#endif
+
+    ResourceManager resourceManager{};
+    resourceManager.InitResourceManager();
 
     return ndrApp->exec();
 }
