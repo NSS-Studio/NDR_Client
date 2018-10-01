@@ -15,7 +15,10 @@ public:
      * @param errorMessage 拨号失败错误消息
      * @return true返回成功
      */
-    virtual bool dial(const QString &username, const QString &password,const QString &device_name, QString &errorMessage) = 0;
+    virtual bool dial(QString const &username,
+                      QString const &password,
+                      QString const &device_name,
+                      QString &errorMessage) = 0;
 
     /**
      * @brief hangUp 挂断

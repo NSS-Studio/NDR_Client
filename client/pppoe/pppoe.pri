@@ -1,8 +1,7 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
-HEADERS +=  $$PWD/basedsl.h \
-            $$PWD/basedsl.hpp \
+HEADERS +=  $$PWD/basedsl.hpp \
             $$PWD/pppoe.hpp \
             $$PWD/basedslfactory.hpp
 
@@ -11,7 +10,8 @@ SOURCES +=  $$PWD/pppoe.cpp \
             $$PWD/basedslfactory.cpp
 
 win32 {
-    SOURCES += $$PWD/basedsl_win.cpp
+    HEADERS += $$PWD/windowsbasedsl.hpp
+    SOURCES += $$PWD/windowsbasedsl.cpp
     LIBS    +=  -luser32 \
                 -lrasapi32
 }

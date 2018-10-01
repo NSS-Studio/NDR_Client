@@ -2,7 +2,7 @@
 #define PPPOE_HPP
 #include <QtCore>
 #include <basedsl.hpp>
-class PPPoE : public QThread {
+class PPPoE final : public QThread {
 	Q_OBJECT
 public:
     explicit PPPoE(QObject *parent = nullptr);

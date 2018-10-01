@@ -6,7 +6,7 @@
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <sys/types.h>
-class MacOsBaseDsl : public BaseDsl
+class MacOsBaseDsl final: public BaseDsl
 {
 public:
     MacOsBaseDsl();
