@@ -65,8 +65,6 @@ private:
     QMenu *myMenu;
     popUpDialog *popUp;
 
-    //    QxtGlobalShortcut * logoffShortcut;
-
     State state;
     bool app_exiting; //退出标记
     bool isMainWindowMinimized;
@@ -77,16 +75,11 @@ private:
     QString username;
     int timerId;
 
-    // SettingsSet *settings;
     UpdateService *updateServer;
-    //    InterfaceInfo *interfaceInfo;
-    //    HttpsJsonPost *httpsJsonPost;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent *event);
 
     QString time_humanable(int sec);
-
-    // void sendData();
 
     void verifyEncrypt();
 

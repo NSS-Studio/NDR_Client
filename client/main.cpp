@@ -3,8 +3,8 @@
 #include "logindialog.h"
 #include "mainwindow.h"
 #include "noticedialog.h"
-#include "pppoe.hpp"
-#include "ndrapplication.hpp"
+#include <pppoe.hpp>
+#include <ndrapplication.hpp>
 #include <QApplication>
 #include <QObject>
 #include <QSharedMemory>
@@ -54,15 +54,12 @@ LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕
 int main(int argc, char *argv[]) {
     //  high dpi support!
     // this support is so bad, we can not use it
-
 #ifdef Q_OS_MAC
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
 #ifndef Q_OS_MAC
     QApplication::setStyle("cleanlooks");
 #endif
-
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
     SetUnhandledExceptionFilter(
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
@@ -76,6 +73,8 @@ int main(int argc, char *argv[]) {
         qDebug() << exception.errorMessage();
         exit(-1);
     }
+
+
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
