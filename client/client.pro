@@ -23,7 +23,6 @@ include(forms/forms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
-include(infomodule/infomodule.pri)
 
 #不用UIC 因为可能导致更新UI 实际引用错误的遗忘BUG
 #指定UI_DIR可以避免此问题 qmake会自动生成

@@ -48,7 +48,6 @@ private slots:
     void checkFinished(bool error, int major, int minor, QString errMsg);
     void downloadFinished(bool error, QString errMsg);
     void loginWindowClosed();
-    void getSystemInfo();
     void getMessageFromNSS();
 
     void on_goDnuiBrowser_clicked();
@@ -98,7 +97,6 @@ protected:
     void closeEvent(QCloseEvent *event);
 signals:
     void minimumWindow();
-    void infoWriteStarted();
 };
 
 #endif // MAINWINDOW_H

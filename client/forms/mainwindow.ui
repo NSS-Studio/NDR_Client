@@ -300,7 +300,7 @@
      <x>0</x>
      <y>0</y>
      <width>269</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -327,7 +327,6 @@
      <string notr="true">menuTrayLogin</string>
     </property>
     <addaction name="actionShowWindow"/>
-    <addaction name="actionGetInfo"/>
     <addaction name="actionSettings"/>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
@@ -400,21 +399,6 @@
    </property>
    <property name="text">
     <string>反馈</string>
-   </property>
-  </action>
-  <action name="actionGetInfo">
-   <property name="icon">
-    <iconset resource="../client.qrc">
-     <normaloff>:/icons/icons/about.png</normaloff>:/icons/icons/about.png</iconset>
-   </property>
-   <property name="text">
-    <string>信息获取</string>
-   </property>
-   <property name="iconText">
-    <string>信息获取</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
  </widget>

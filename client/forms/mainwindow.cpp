@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "infomodule.h"
 #include "logindialog.h"
 #include "ndrapplication.hpp"
 #include "ui_mainwindow.h"
@@ -95,11 +94,6 @@ MainWindow::MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent)
     /***/
     // updateServer->checkUpdate();
     //最后信息获取按钮的信号连接
-    connect(ui->actionGetInfo, &QAction::triggered, this,
-            &MainWindow::getSystemInfo);
-    connect(this, &MainWindow::infoWriteStarted,
-            InfoModuleThread::getInstance(),
-            &InfoModuleThread::startGetInfoToWriteFile);
 }
 
 MainWindow::~MainWindow() {
@@ -754,34 +748,5 @@ void MainWindow::on_goDnuiBrowser_clicked() {
     QUrl web(QString(NDR_GATE));
     QDesktopServices::openUrl(web);
     ui->goDnuiBrowser->setEnabled(true);
-}
-
-void MainWindow::getSystemInfo() {
-    qDebug() << "call infoGet clicked";
-    // too ugly ↓↓↓↓
-    // QDialog *message = new QDialog(this, Qt::WindowMinimizeButtonHint);
-    // QLabel *label = new QLabel(message);
-    // QHBoxLayout *lay = new QHBoxLayout();
-    //
-    // lay->addWidget(label);
-    // message->setLayout(lay);
-    // message->setFixedSize(322, 80);
-    //
-    // label->setFrameStyle(QFrame::StyledPanel);
-    // label->setText("现在程序正在获取信息，请耐心等候.\n"
-    //               "当信息获取完毕时本对话框会自动关闭.\n"
-    //               "信息文件将会保存在您的桌面，文件名为：Info.txt");
-    // message->setWindowTitle(tr("正在处理..."));
-    // message->setWindowIcon(QIcon(tr("/icon/about.png")));
-
-    noticeDialog->showMessage("现在程序正在获取信息，请耐心等候.\n"
-                              "当信息获取完毕时本对话框会自动关闭.\n"
-                              "信息文件将会保存在您的桌面，文件名为：Info.txt");
-
-    connect(InfoModuleThread::getInstance(), &InfoModuleThread::infoGetFinished,
-            noticeDialog, &NoticeDialog::close);
-
-    emit infoWriteStarted();
-
 }
 
