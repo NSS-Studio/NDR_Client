@@ -315,8 +315,9 @@ void LocalStorage::setDeviceName(const QString &name) {
 bool LocalStorage::getDeviceName(QString &name) {
     qDebug() << "Function: " << __PRETTY_FUNCTION__;
 	QString sql("SELECT device FROM config WHERE id=0");
-    if(!query->exec(sql) || !query->next())
+    if(!query->exec(sql) || !query->next()) {
         return false;
+    }
 	name = query->value(0).toString();
 	return true;
 }
