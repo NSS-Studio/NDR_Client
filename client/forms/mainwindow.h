@@ -4,7 +4,7 @@
 #include "localstorage.h"
 #include "logindialog.h"
 #include "noticedialog.h"
-#include "pppoe.h"
+#include <pppoe.hpp>
 #include "settingsdialog.h"
 #include "feedbackdialog.h"
 #include "getinfoaboutnss.h"
@@ -15,7 +15,7 @@
 #include <QHBoxLayout>
 #include <QMainWindow>
 #include <QSystemTrayIcon>
-
+#include <ndrapplication.hpp>
 namespace Ui {
 class MainWindow;
 }
@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent = nullptr);
     ~MainWindow();
     enum State { Logining, Working, Others };
 
@@ -54,8 +54,9 @@ private slots:
     void on_goDnuiBrowser_clicked();
 
 private:
+    QSharedPointer<NdrApplication> ndrApp;
+    QSharedPointer<PPPoE> pppoe;
     Ui::MainWindow *ui;
-    PPPoE *pppoe;
     LoginDialog *loginDialog;
     NoticeDialog *noticeDialog;
     SettingsDialog *settingsDialog;

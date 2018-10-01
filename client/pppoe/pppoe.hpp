@@ -1,8 +1,7 @@
-#ifndef PPPOE_H
-#define PPPOE_H
+#ifndef PPPOE_HPP
+#define PPPOE_HPP
 #include <QtCore>
-#include "basedsl.h"
-
+#include "basedsl.hpp"
 class PPPoE : public QThread{
 	Q_OBJECT
 public:
@@ -19,7 +18,7 @@ public:
 	QString getUserName();
 	QString getIpAddress();
 
-	static QStringList getAvailableInterfaces();
+    QStringList getAvailableInterfaces();
 
 private:
 	BaseDsl *basedsl;
@@ -29,8 +28,8 @@ private:
 	QString device_name;
 	QString errorMessage;
 	bool preparePhoneBook();
-	bool stop_now;
-	bool isRedial;
+    bool stop_now = false;
+    bool isRedial = false;
 	bool isDisconnectNaturally;
 	bool dialSucceed;
 
@@ -45,4 +44,4 @@ private slots:
 
 
 
-#endif // PPPOE_H
+#endif // PPPOE_HPP

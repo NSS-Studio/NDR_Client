@@ -2,9 +2,13 @@ INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
 HEADERS +=  $$PWD/basedsl.h \
-            $$PWD/pppoe.h
+            $$PWD/basedsl.hpp \
+            $$PWD/pppoe.hpp \
+            $$PWD/basedslfactory.hpp
 
-SOURCES +=  $$PWD/pppoe.cpp
+SOURCES +=  $$PWD/pppoe.cpp \
+            $$PWD/basedsl.cpp \
+            $$PWD/basedslfactory.cpp
 
 win32{
     SOURCES += $$PWD/basedsl_win.cpp
@@ -17,7 +21,8 @@ unix:!macx {
     INCLUDEPATH += /usr/include/NetworkManager
 }
 macx{
-    SOURCES += $$PWD/basedsl_mac.cpp
+    HEADERS += $$PWD/macosbasedsl.hpp
+    SOURCES += $$PWD/macosbasedsl.cpp
     LIBS += -framework SystemConfiguration \
             -framework CoreFoundation \
             -framework Security \

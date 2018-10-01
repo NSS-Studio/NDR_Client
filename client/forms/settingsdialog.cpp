@@ -1,7 +1,6 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
-#include "common.hpp"
-
+#include <utils.hpp>
 SettingsDialog::SettingsDialog( QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)

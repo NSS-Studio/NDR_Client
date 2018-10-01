@@ -4,8 +4,7 @@
 #include <QDomDocument>
 #include <QVector>
 #include <QDesktopServices>
-#include "common.hpp"
-
+#include <utils.hpp>
 
 GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
     : QObject(parent), m_Address{address}

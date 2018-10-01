@@ -4,12 +4,14 @@
 #include <QCompleter>
 #include <QVector>
 #include <utils.hpp>
-LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent)
-    : QDialog(parent), ui(new Ui::LoginDialog) {
+LoginDialog::LoginDialog(LocalStorage *profile, QSharedPointer<NdrApplication> app, QWidget *parent)
+    : QDialog{parent}, ndrApp{app}, ui{new Ui::LoginDialog} {
     Qt::WindowFlags flags = Qt::Dialog;
     flags |= Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint;
     setWindowFlags(flags);
     ui->setupUi(this);
+
+    pppoe = ndrApp->getPPPoE();
 
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();
@@ -105,7 +107,7 @@ void LoginDialog::on_btnLogin_clicked() {
     // this->accept();
     emit myaccepted();
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
-    QStringList networkInterface = PPPoE::getAvailableInterfaces();
+    QStringList networkInterface = this->pppoe->getAvailableInterfaces();
     this->set_interface_list(networkInterface);
     this->set_device_name(utils::networkInterfaceCardName);
 #endif

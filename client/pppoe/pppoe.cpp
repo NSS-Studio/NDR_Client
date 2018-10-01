@@ -1,25 +1,17 @@
-#include "pppoe.h"
-
-#include <QtCore/QDebug>
+#include "pppoe.hpp"
 #include <utils.hpp>
-PPPoE::PPPoE(QObject *parent) : QThread(parent)
+#include "basedslfactory.hpp"
+PPPoE::PPPoE(QObject *parent) : QThread{parent}
 {
-    basedsl = new BaseDsl(NDR_PHONEBOOK_NAME);
-    stop_now = false;
-    isRedial = false;
+    basedsl = BaseDslFactory::getCurrentPlatformBaseDsl();
     connect(this, SIGNAL(finished()), this, SLOT(threadFinished()), Qt::QueuedConnection);
-//#ifdef Q_OS_WIN
-    //this->hRasConn = NULL;
-//#endif
-//#ifdef Q_OS_LINUX
-//    qDBusRegisterMetaType<Connection>();
-//#endif
 }
 
 QString PPPoE::lastError()
 {
     return this->errorMessage;
 }
+
 PPPoE::~PPPoE()
 {
     
@@ -138,7 +130,7 @@ void PPPoE::threadFinished()
 }
 
 QStringList PPPoE::getAvailableInterfaces() {
-	return BaseDsl::get_available_interfaces();
+    return basedsl->getAvailableInterfaces();
 }
 
 bool PPPoE::isDisconnect()

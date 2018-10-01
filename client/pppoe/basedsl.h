@@ -91,10 +91,7 @@ private:
     QDBusObjectPath objectPath;
     QDBusObjectPath activeObjectPath;
 #elif defined Q_OS_MAC
-    SCNetworkConnectionRef connection;
-    SCNetworkServiceRef ppp_service;
-    SCPreferencesRef preferences;
-    SCNetworkInterfaceRef ppp_interface;
+
 #endif
 };
 

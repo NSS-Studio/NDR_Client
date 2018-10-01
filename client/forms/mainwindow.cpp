@@ -15,9 +15,9 @@
 #include <utils.hpp>
 
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) {
-
+MainWindow::MainWindow(QSharedPointer<NdrApplication> app, QWidget *parent)
+    : QMainWindow{parent}, ndrApp{app}, ui{new Ui::MainWindow} {
+    pppoe = ndrApp->getPPPoE();
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
 
@@ -38,16 +38,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(trayIcon, &QSystemTrayIcon::activated, this,
             &MainWindow::iconActivated);
 
-    this->pppoe = new PPPoE();
-    connect(this->pppoe, SIGNAL(dialFinished(bool)), this,
+    //Init PPPoE singals&slots
+    connect(pppoe.get(), SIGNAL(dialFinished(bool)), this,
             SLOT(dialFinished(bool)), Qt::QueuedConnection);
-    connect(this->pppoe, SIGNAL(hangedUp(bool)), this, SLOT(hangedUp(bool)),
+    connect(pppoe.get(), SIGNAL(hangedUp(bool)), this, SLOT(hangedUp(bool)),
             Qt::QueuedConnection);
 
-    this->loginDialog = new LoginDialog(profile);
+    this->loginDialog = new LoginDialog(profile, this->ndrApp);
 
 #ifndef Q_OS_WIN
-    QStringList interfaces = PPPoE::getAvailableInterfaces();
+    QStringList interfaces = pppoe->getAvailableInterfaces();
     if (interfaces.count() == 0) {
         QMessageBox::critical(this, tr("NDR"), tr("No Interface Available"));
         QApplication::instance()->exit(1);
@@ -121,7 +121,6 @@ MainWindow::~MainWindow() {
     if (feedbackDialog)
         delete feedbackDialog;
 
-    delete pppoe;
     trayIcon->hide();
     delete trayIcon;
     delete ui;

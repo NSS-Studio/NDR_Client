@@ -26,8 +26,15 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
     utils::initSettingsSet(); //初始化 配置
     utils::initLanguage();    //初始化 语言
     qDebug() << "Init configure successful";
+
+    qDebug() << "Init PPPoE";
+    pppoe.reset(new PPPoE{});
 }
 
 NdrApplication::~NdrApplication() {
 
+}
+
+QSharedPointer<PPPoE> NdrApplication::getPPPoE() {
+    return pppoe;
 }

@@ -3,7 +3,7 @@
 #include "logindialog.h"
 #include "mainwindow.h"
 #include "noticedialog.h"
-#include "pppoe.h"
+#include "pppoe.hpp"
 #include "ndrapplication.hpp"
 #include <QApplication>
 #include <QObject>
@@ -12,7 +12,7 @@
 #include <QNetworkProxyFactory>
 #include <QNetworkProxy>
 #include <utils.hpp>
-
+#include <QStyleFactory>
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
@@ -77,16 +77,13 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
 
-    qDebug() << utils::appHome;
-
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
     ndrApp->setQuitOnLastWindowClosed(false);
 
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
-    utils::initFont(
-        ":/font/ztgj.ttf"); //初始化 默认字体,Windows他妈的字体渲染像屎一样，用
-    //默认吧
+    utils::initFont(":/font/ztgj.ttf");
+    //初始化 默认字体,Windows他妈的字体渲染像屎一样，用默认吧
 #endif
 #if 0 //样式没法看，有时间好好把图P一P，暂时闭了
     __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
@@ -98,28 +95,7 @@ int main(int argc, char *argv[]) {
     // QLocale::system().name()).toString(); qDebug() << "current_locale" <<
     // current_locale;
 
-//    // 防止进程多开
-//    if (a.isRunning()) {
-//#ifdef Q_OS_UNIX
-//        QMessageBox::information(
-//            nullptr, QObject::tr("提示"),
-//            QObject::tr("打开失败\n检测到已经有一个实例正在运行。如果客户端上一"
-//                        "次异常退出，请重试。"));
-//#else
-//        QMessageBox::information(
-//            nullptr, QObject::tr("提示"),
-//            QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
-//#endif
-//        return 0;
-//    }
-//    QList<QNetworkProxy> networkProxyList = QNetworkProxyFactory::systemProxyForQuery();
-//    for (auto const &networkProxy: networkProxyList)
-//    {
-//        qDebug() << networkProxy.type();
-//    }
-//    qDebug() << "networkProxyLength: " << networkProxyList.size();
-
-    MainWindow w;
+    MainWindow w{ndrApp};
 
 #if defined(QT_DEBUG)
     w.show();
