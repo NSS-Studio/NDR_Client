@@ -10,17 +10,20 @@ SOURCES +=  $$PWD/pppoe.cpp \
             $$PWD/basedsl.cpp \
             $$PWD/basedslfactory.cpp
 
-win32{
+win32 {
     SOURCES += $$PWD/basedsl_win.cpp
     LIBS    +=  -luser32 \
                 -lrasapi32
 }
+
 unix:!macx {
-    SOURCES += $$PWD/basedsl_linux.cpp
+    HEADERS += $$PWD/linuxbasedsl.hpp
+    SOURCES += $$PWD/linuxbasedsl.cpp
     QT      += dbus
     INCLUDEPATH += /usr/include/NetworkManager
 }
-macx{
+
+macx {
     HEADERS += $$PWD/macosbasedsl.hpp
     SOURCES += $$PWD/macosbasedsl.cpp
     LIBS += -framework SystemConfiguration \

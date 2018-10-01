@@ -1,7 +1,7 @@
 #include <basedsl.hpp>
-
-BaseDsl::BaseDsl(const QString &name, QObject *parent)
-    :QObject{parent},name{name} {
+#include <utils.hpp>
+BaseDsl::BaseDsl(QObject *parent)
+    :QObject{parent},name{NDR_PHONEBOOK_NAME} {
 
 }
 

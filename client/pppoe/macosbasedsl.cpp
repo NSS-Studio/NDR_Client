@@ -2,7 +2,6 @@
 #include <utils.hpp>
 #include <QHostAddress>
 MacOsBaseDsl::MacOsBaseDsl()
-    :BaseDsl{NDR_PHONEBOOK_NAME}
 {
 
 }

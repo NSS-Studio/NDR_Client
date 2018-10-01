@@ -4,7 +4,7 @@
 class BaseDsl : public QObject {
     Q_OBJECT
 public:
-    explicit BaseDsl(const QString &name, QObject *parent = nullptr);
+    explicit BaseDsl(QObject *parent = nullptr);
     virtual ~BaseDsl();
 
     /**
