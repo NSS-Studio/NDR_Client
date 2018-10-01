@@ -54,7 +54,7 @@ LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕
 int main(int argc, char *argv[]) {
     //  high dpi support!
     // this support is so bad, we can not use it
-#ifdef Q_OS_MAC
+#if defined (Q_OS_MAC) || defined (Q_OS_WIN32)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 #ifndef Q_OS_MAC

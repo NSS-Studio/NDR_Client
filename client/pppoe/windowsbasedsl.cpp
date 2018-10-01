@@ -1,4 +1,5 @@
 #include "windowsbasedsl.hpp"
+#include <utils.hpp>
 
 WindowsBaseDsl::WindowsBaseDsl()
     :hRasConn{NULL}
