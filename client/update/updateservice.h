@@ -1,7 +1,6 @@
 #ifndef UPDATESERVICE_H
 #define UPDATESERVICE_H
-#include "common.hpp"
-//#include "httpgeteventloop.h"
+
 #include <QObject>
 #include <QtNetwork>
 #include <QDomDocument>
@@ -31,7 +30,7 @@ class UpdateService : public QObject
 {
     Q_OBJECT
 public:
-    explicit UpdateService(const QString &serverAddr,const QString &tempDirectory, QObject *parent = 0);
+    explicit UpdateService(const QString &serverAddr,const QString &tempDirectory, QObject *parent = nullptr);
 	void checkUpdate();
 	void downloadLatestPackage();
 	//bool tryInstall();

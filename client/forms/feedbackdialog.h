@@ -1,6 +1,5 @@
 #ifndef FEEDBACKDIALOG_H
 #define FEEDBACKDIALOG_H
-#include "common.hpp"
 #include <QDialog>
 #include <QMessageBox>
 #include <QtNetwork>
@@ -18,7 +17,7 @@ class FeedbackDialog : public QDialog
 	Q_OBJECT
 
 public:
-	explicit FeedbackDialog(QWidget *parent = 0);
+    explicit FeedbackDialog(QWidget *parent = nullptr);
 	~FeedbackDialog();
 	void setLoginData(QString account,QString combo);
 	void show();

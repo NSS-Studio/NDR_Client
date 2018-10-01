@@ -1,7 +1,7 @@
 #include "feedbackdialog.h"
 #include "ui_feedbackdialog.h"
 #include <QDesktopWidget>
-
+#include <utils.hpp>
 FeedbackDialog::FeedbackDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FeedbackDialog)
@@ -104,7 +104,7 @@ void FeedbackDialog::on_btnSubmit_clicked()
     
     //http://172.24.10.118/ndr/report.php?action=user_report
    
-    QString urlStr="https://" NDR_FEEDBACK_SERVER "/feedback/report.php";
+    QString urlStr=QString("https://%0/feedback/report.php").arg(NDR_FEEDBACK_SERVER);
     qDebug() << "url_str" << urlStr;
     QUrl urlFeedback(urlStr);
     QUrlQuery query;

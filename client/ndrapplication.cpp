@@ -1,5 +1,6 @@
 #include "ndrapplication.hpp"
-
+#include <utils.hpp>
+#include <QMessageBox>
 NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
     :QApplication{argc, argv},
       appName{appName},

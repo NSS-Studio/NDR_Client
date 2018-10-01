@@ -1,5 +1,5 @@
 #include "popupdialog.h"
-
+#include <utils.hpp>
 popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
 {
     qDebug() << "create popUpDialog" << endl;

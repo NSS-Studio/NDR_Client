@@ -1,7 +1,6 @@
 #ifndef BASEDSL_H
 #define BASEDSL_H
 
-#include "common.hpp"
 #include <QObject>
 #if defined(Q_OS_WIN32)
 

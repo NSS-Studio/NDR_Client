@@ -1,11 +1,9 @@
 #include "logindialog.h"
-#include "common.hpp"
 #include "mainwindow.h"
 #include "ui_logindialog.h"
 #include <QCompleter>
 #include <QVector>
-#include <assert.h>
-
+#include <utils.hpp>
 LoginDialog::LoginDialog(LocalStorage *profile, QWidget *parent)
     : QDialog(parent), ui(new Ui::LoginDialog) {
     Qt::WindowFlags flags = Qt::Dialog;
@@ -109,7 +107,7 @@ void LoginDialog::on_btnLogin_clicked() {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
     QStringList networkInterface = PPPoE::getAvailableInterfaces();
     this->set_interface_list(networkInterface);
-    this->set_device_name(networkInterfaceCardName);
+    this->set_device_name(utils::networkInterfaceCardName);
 #endif
     this->hide();
 }

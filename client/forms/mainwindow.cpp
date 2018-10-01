@@ -12,6 +12,8 @@
 #include <QtGui/QMacStyle>
 #endif
 */
+#include <utils.hpp>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -154,7 +156,7 @@ void MainWindow::tryLogin() {
 
     // TODO delete
 
-    networkInterfaceCardName = device_name;
+    utils::networkInterfaceCardName = device_name;
 
     // this->show();
     // Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);

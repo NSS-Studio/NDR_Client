@@ -1,13 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "aboutdialog.h"
-#include "common.hpp"
 #include "localstorage.h"
 #include "logindialog.h"
 #include "noticedialog.h"
 #include "pppoe.h"
 #include "settingsdialog.h"
-//#include "qxtglobalshortcut.h"
 #include "feedbackdialog.h"
 #include "getinfoaboutnss.h"
 #include "hangupdialog.h"

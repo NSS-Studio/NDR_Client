@@ -1,4 +1,3 @@
-#include "common.hpp"
 #include "feedbackdialog.h"
 #include "hangupdialog.h"
 #include "logindialog.h"
@@ -12,6 +11,8 @@
 #include <QtCore/QTextCodec>
 #include <QNetworkProxyFactory>
 #include <QNetworkProxy>
+#include <utils.hpp>
+
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
@@ -83,7 +84,7 @@ int main(int argc, char *argv[]) {
     ndrApp->setQuitOnLastWindowClosed(false);
 
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
-    __initFont(
+    utils::initFont(
         ":/font/ztgj.ttf"); //初始化 默认字体,Windows他妈的字体渲染像屎一样，用
     //默认吧
 #endif

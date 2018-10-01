@@ -1,7 +1,7 @@
 #include "pppoe.h"
 
 #include <QtCore/QDebug>
-
+#include <utils.hpp>
 PPPoE::PPPoE(QObject *parent) : QThread(parent)
 {
     basedsl = new BaseDsl(NDR_PHONEBOOK_NAME);

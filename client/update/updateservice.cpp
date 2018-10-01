@@ -1,5 +1,5 @@
 #include "updateservice.h"
-
+#include <utils.hpp>
 UpdateService::UpdateService(const QString &serverAddr, const QString &tempDirectory, QObject *parent)
     :QObject(parent),tempDir{tempDirectory},ipAddress{serverAddr},isConnectUpdateServerFail{false}
 {

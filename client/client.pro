@@ -30,7 +30,6 @@ include(infomodule/infomodule.pri)
 UI_DIR=./forms
 
 SOURCES +=  main.cpp \
-            common.cpp \
             ndrapplication.cpp \
     tcpserverexception.cpp \
     utils.cpp
@@ -38,7 +37,6 @@ SOURCES +=  main.cpp \
 HEADERS  += \
             ndrapplication.hpp \
     tcpserverexception.hpp \
-    common.hpp \
     utils.hpp \
     ndrconfig.hpp
 

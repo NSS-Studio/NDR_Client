@@ -10,9 +10,16 @@
 #include <QTranslator>
 #include <QApplication>
 #include <QLibraryInfo>
+#include <QFontDatabase>
 #include <settingsset.h>
-
+#include <ndrapplication.hpp>
 namespace utils {
+    extern QString appHome; //家目录
+    extern QString tempDir; //临时文件夹
+    extern QString networkInterfaceCardName;
+    extern QSharedPointer<SettingsSet> settings;
+    extern QTranslator ndr_tr, qt_tr;
+
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
 
@@ -36,17 +43,19 @@ namespace utils {
      */
     bool getLanguageName(QString fileName, QString &langName);
 
-    extern QString appHome; //家目录
+
     void initAppHome();
 
-    extern QString tempDir; //临时文件夹
+
     void initTempDir();
 
     /** 设置项*/
     extern QSharedPointer<SettingsSet> settings;
     void initSettingsSet();
-    extern QTranslator ndr_tr, qt_tr;
+
     void initLanguage();
+    void initFont(QString fontFile);
+    void initStyleSheet(NdrApplication* a, QString sheetFile);
 }
 
 #endif // UTILS_HPP
