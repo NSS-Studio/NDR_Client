@@ -1,8 +1,8 @@
 #ifndef PPPOE_HPP
 #define PPPOE_HPP
 #include <QtCore>
-#include "basedsl.hpp"
-class PPPoE : public QThread{
+#include <basedsl.hpp>
+class PPPoE : public QThread {
 	Q_OBJECT
 public:
     explicit PPPoE(QObject *parent = nullptr);
@@ -21,7 +21,7 @@ public:
     QStringList getAvailableInterfaces();
 
 private:
-	BaseDsl *basedsl;
+    QSharedPointer<BaseDsl> basedsl;
 	QString entryName;
 	QString username;
 	QString password;

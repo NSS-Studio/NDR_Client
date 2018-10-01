@@ -4,7 +4,7 @@
 PPPoE::PPPoE(QObject *parent) : QThread{parent}
 {
     basedsl = BaseDslFactory::getCurrentPlatformBaseDsl();
-    connect(this, SIGNAL(finished()), this, SLOT(threadFinished()), Qt::QueuedConnection);
+    connect(this, &PPPoE::finished, this, &PPPoE::threadFinished, Qt::QueuedConnection);
 }
 
 QString PPPoE::lastError()
@@ -28,7 +28,7 @@ void PPPoE::run() {
     //else
     //    ret = basedsl -> dial(username, password, device_name, errorMessage);
 
-    bool ret = basedsl -> dial(username, password, device_name, errorMessage);
+    bool ret = basedsl->dial(username, password, device_name, errorMessage);
     qDebug() << "failed: " << errorMessage;
     if(ret){
         if(isRedial)

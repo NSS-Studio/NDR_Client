@@ -1,5 +1,5 @@
 #include "basedslfactory.hpp"
-
+#include <QSharedPointer>
 #if defined(Q_OS_MAC)
 #include <macosbasedsl.hpp>
 using PlatformBaseDsl = MacOsBaseDsl;
@@ -10,7 +10,11 @@ using PlatformBaseDsl = LinuxBaseDsl;
 #error "The platform is not supported"
 #endif
 
-
-BaseDsl* BaseDslFactory::getCurrentPlatformBaseDsl() {
-    return new PlatformBaseDsl{};
+namespace BaseDslFactory {
+    static QSharedPointer<BaseDsl> platformBaseDsl{new PlatformBaseDsl{}};
+    QSharedPointer<BaseDsl> getCurrentPlatformBaseDsl() {
+        return platformBaseDsl;
+    }
 }
+
+

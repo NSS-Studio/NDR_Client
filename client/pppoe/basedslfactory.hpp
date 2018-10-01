@@ -4,7 +4,7 @@
 #include "basedsl.hpp"
 namespace BaseDslFactory
 {
-    BaseDsl* getCurrentPlatformBaseDsl();
+    QSharedPointer<BaseDsl> getCurrentPlatformBaseDsl();
 };
 
 #endif // BASEDSLFACTORY_HPP
