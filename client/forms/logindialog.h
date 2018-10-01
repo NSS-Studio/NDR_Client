@@ -25,7 +25,6 @@ class LoginDialog : public QDialog
     
 public:
     explicit LoginDialog(QSharedPointer<LocalStorage> profile,
-                         QSharedPointer<ResourceManager> resourcemanager,
                          QWidget *parent = nullptr);
 	~LoginDialog();
 	void getFormData(QString &username, QString &password, QString &type, QString &device_name, bool *autoLogin=0, bool *savePassword=0);
@@ -54,7 +53,6 @@ private slots:
 #endif
 private:
     QSharedPointer<LocalStorage> profile;
-    QSharedPointer<ResourceManager> resourcemanager;
     QSharedPointer<PPPoE> pppoe;
     Ui::LoginDialog* ui;
 	QString autoLoginUser;

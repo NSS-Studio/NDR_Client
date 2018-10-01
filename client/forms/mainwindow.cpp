@@ -14,16 +14,15 @@
 #include <utils.hpp>
 
 
-MainWindow::MainWindow(QSharedPointer<ResourceManager> resourcemanager, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-      resourcemanager{resourcemanager},
       ui{new Ui::MainWindow} {
 
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
 
-    pppoe = resourcemanager->getPPPoE();
-    loginDialog = resourcemanager->getLoginDialog();
+    pppoe = utils::resourceManager->getPPPoE();
+    loginDialog = utils::resourceManager->getLoginDialog();
 
     popUp = new popUpDialog();
 

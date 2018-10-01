@@ -8,6 +8,7 @@ namespace utils {
     QSharedPointer<SettingsSet> settings;
     QTranslator ndr_tr, qt_tr;
     QString networkInterfaceCardName;
+    QSharedPointer<ResourceManager> resourceManager;
 
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {
@@ -168,6 +169,11 @@ namespace utils {
         qDebug() << styleSheet;
         // a->setStyleSheet(styleSheet);
         a->setStyleSheet(styleSheet);
+    }
+
+    void initResourceManager() {
+        resourceManager.reset(new ResourceManager{});
+        resourceManager->InitResourceManager();
     }
 }
 

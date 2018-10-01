@@ -13,12 +13,14 @@
 #include <QFontDatabase>
 #include <settingsset.hpp>
 #include <ndrapplication.hpp>
+#include <resourcemanager.hpp>
 namespace utils {
     extern QString appHome; //家目录
     extern QString tempDir; //临时文件夹
     extern QString networkInterfaceCardName;
     extern QSharedPointer<SettingsSet> settings;
     extern QTranslator ndr_tr, qt_tr;
+    extern QSharedPointer<ResourceManager> resourceManager;
 
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
@@ -56,6 +58,7 @@ namespace utils {
     void initLanguage();
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
+    void initResourceManager();
 }
 
 #endif // UTILS_HPP

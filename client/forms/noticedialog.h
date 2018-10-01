@@ -14,7 +14,7 @@ class NoticeDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit NoticeDialog(QWidget *parent = 0);
+    explicit NoticeDialog(QWidget *parent = nullptr);
     ~NoticeDialog();
     void showMessage(QString msg);
 protected:

@@ -1,7 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include <QCloseEvent>
+#include <QHBoxLayout>
+#include <QMainWindow>
+#include <QSystemTrayIcon>
+
 #include "aboutdialog.h"
-#include "localstorage.hpp"
+#include <localstorage.hpp>
 #include "logindialog.h"
 #include "noticedialog.h"
 #include <pppoe.hpp>
@@ -11,10 +16,6 @@
 #include "hangupdialog.h"
 #include "popupdialog.h"
 #include "updateservice.h"
-#include <QCloseEvent>
-#include <QHBoxLayout>
-#include <QMainWindow>
-#include <QSystemTrayIcon>
 #include <resourcemanager.hpp>
 namespace Ui {
 class MainWindow;
@@ -24,7 +25,7 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QSharedPointer<ResourceManager> resourcemanager, QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     enum State { Logining, Working, Others };
 
@@ -53,7 +54,6 @@ private slots:
     void on_goDnuiBrowser_clicked();
 
 private:
-    QSharedPointer<ResourceManager> resourcemanager;
     QSharedPointer<PPPoE> pppoe;
     QSharedPointer<LoginDialog> loginDialog;
     Ui::MainWindow *ui;

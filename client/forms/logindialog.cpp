@@ -5,18 +5,16 @@
 #include <QVector>
 #include <utils.hpp>
 LoginDialog::LoginDialog(QSharedPointer<LocalStorage> profile,
-                         QSharedPointer<ResourceManager> resourcemanager,
                          QWidget *parent)
     : QDialog{parent},
       profile{profile},
-      resourcemanager{resourcemanager},
       ui{new Ui::LoginDialog} {
     Qt::WindowFlags flags = Qt::Dialog;
     flags |= Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint;
     setWindowFlags(flags);
     ui->setupUi(this);
 
-    pppoe = resourcemanager->getPPPoE();
+    pppoe = utils::resourceManager->getPPPoE();
 
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();

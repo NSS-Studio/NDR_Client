@@ -12,7 +12,7 @@ class MessageViewerDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit MessageViewerDialog(QWidget *parent = 0);
+    explicit MessageViewerDialog(QWidget *parent = nullptr);
     ~MessageViewerDialog();
     
 private:

@@ -95,16 +95,7 @@ int main(int argc, char *argv[]) {
     // QLocale::system().name()).toString(); qDebug() << "current_locale" <<
     // current_locale;
 
-//    MainWindow w{ndrApp};
-
-//#if defined(QT_DEBUG)
-//    w.show();
-//#else
-//    w.hide();
-//#endif
-
-    ResourceManager resourceManager{};
-    resourceManager.InitResourceManager();
+    utils::initResourceManager();
 
     return ndrApp->exec();
 }
