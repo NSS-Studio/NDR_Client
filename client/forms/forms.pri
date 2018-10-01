@@ -1,4 +1,4 @@
-QT +=	widgets gui xml core
+QT += widgets gui xml core
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 HEADERS +=      $$PWD/aboutdialog.h \
@@ -30,35 +30,7 @@ FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/feedbackdialog.ui \
                 $$PWD/hangupdialog.ui
 
-#INCLUDEPATH +=  $$PWD/../update
-#DEPENDPATH +=   $$PWD/../update
-
-#INCLUDEPATH +=  $$PWD/../update/updateservice.h
-#SOURCES     +=  $$PWD/../update/updateservice.cpp
-
-#千万不用$$PWD 要不然auth相对路径会错误
-#这样解决了一个编译依赖问题
-#INCLUDEPATH +=  ../auth/
-#LIBS +=         ../auth/release/libauth.a
-
-
-#INCLUDEPATH +=  ../auth/
-#authlib = $$OUT_PWD/../auth/
-
-#win32:{
-#    CONFIG(release, debug|release):{
-#        authlib = $$authlib/release/
-#    }
-#    else:CONFIG(debug, debug|release):{
-#        authlib = $$authlib/debug/
-#    }
-#}
-
-#LIBS += $$authlib/libauth.a
-
 win32 {
     LIBS += -lpsapi
 }
-
-DISTFILES +=
 

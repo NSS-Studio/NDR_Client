@@ -4,7 +4,7 @@
 //同时修改mainwindow 构造函数中的消息绑定
 #include <QDialog>
 #include <QMessageBox>
-#include "localstorage.h"
+#include "localstorage.hpp"
 #include <ndrapplication.hpp>
 
 #ifdef Q_OS_WIN

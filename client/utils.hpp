@@ -11,7 +11,7 @@
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QFontDatabase>
-#include <settingsset.h>
+#include <settingsset.hpp>
 #include <ndrapplication.hpp>
 namespace utils {
     extern QString appHome; //家目录

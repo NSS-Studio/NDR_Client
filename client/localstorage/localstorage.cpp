@@ -1,18 +1,15 @@
-#include "localstorage.h"
-#include <QtCore/QDebug>
+#include "localstorage.hpp"
 
 LocalStorage::LocalStorage(QString filename, QObject *parent) :
     QObject(parent)
 {
-    db =  new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+    db = QSharedPointer<QSqlDatabase>{
+                new QSqlDatabase{QSqlDatabase::addDatabase("QSQLITE")}
+            };
     db->setDatabaseName(filename); 
 }
 
-LocalStorage::~LocalStorage()
-{
-    delete db;
-    if(query)
-        delete query;
+LocalStorage::~LocalStorage() {
 }
 
 bool LocalStorage::open()
@@ -46,20 +43,18 @@ bool LocalStorage::open()
 		");";
     QString sql_create_config_field = 
             "INSERT OR IGNORE INTO config (id, autologin) VALUES (0, NULL);";
-    query = new QSqlQuery(*db);
+    query = QSharedPointer<QSqlQuery>{new QSqlQuery(*db)};
     if(!query->exec(sql_create_user_table)
             || (!query->exec(sql_create_config_table))
             ||(!query->exec(sql_create_config_field)))
     {
-        QTextStream(stdout) << query->lastError().text();
+        qDebug() << query->lastError().text();
         db->close();
-        delete query;
-        query = nullptr;
+        query.reset();
         return false;
     }
-    sum =1;
+    sum = 1;
     return true;
-    
 }
 
 void LocalStorage::close()
@@ -70,8 +65,7 @@ void LocalStorage::close()
         sum --;
         return;
     }
-    delete query;
-    query = nullptr;
+    query.reset();
     db->close();
     sum =0;
 }
@@ -137,8 +131,7 @@ void LocalStorage::setLoginInfo(QString username,QString password,QString manner
             return;
         }
     }
-    sql =
-            "UPDATE config SET lastlogin=? WHERE id=0";
+    sql = "UPDATE config SET lastlogin=? WHERE id=0";
     query->prepare(sql);
     query->bindValue(0,username);
     if(!query->exec())
@@ -196,11 +189,10 @@ void LocalStorage::setAutoLoginUser(QString username)
 
 bool LocalStorage::getAutoLoginUser(QString &username)
 {
-    QString sql = 
-            "SELECT autologin FROM config WHERE id=0";
+    QString sql{"SELECT autologin FROM config WHERE id=0"};
     if(!query->exec(sql))
     {
-        QTextStream(stdout) << query->lastError().text() << endl;
+        qDebug() << query->lastError().text() << endl;
         return false;
     }
     if(!query->next())
@@ -211,14 +203,13 @@ bool LocalStorage::getAutoLoginUser(QString &username)
 
 void LocalStorage::setUserOnlineTime(QString username,int time)
 {
-    QString sql =
-            "UPDATE user SET oltime=? WHERE username=?";
+    QString sql{"UPDATE user SET oltime=? WHERE username=?"};
     query->prepare(sql);
     query->bindValue(0,time);
     query->bindValue(1,username);
     if(!query->exec())
     {
-        QTextStream(stdout) << query->lastError().text() << endl;
+        qDebug() << query->lastError().text() << endl;
     }
 }
 
@@ -230,7 +221,7 @@ bool LocalStorage::getUserOnlineTime(QString username,int &time)
     query->bindValue(0,username);
     if(!query->exec())
     {
-        QTextStream(stdout) << query->lastError().text() << endl;
+        qDebug() << query->lastError().text() << endl;
     }
     if(query->next())
     {
@@ -255,7 +246,7 @@ void LocalStorage::setMainWindowRect(QString username,int x,int y,int width,int 
     query->bindValue(4,username);
     if(!query->exec())
     {
-        QTextStream(stdout) << query->lastError().text() << endl;
+        qDebug() << query->lastError().text() << endl;
     }
 }
 
@@ -267,7 +258,7 @@ bool LocalStorage::getMainWindowRect(QString username,int &x,int &y,int &width,i
     query->bindValue(0,username);
     if(!query->exec())
     {
-        //QTextStream(stdout) << query->lastError().text() << endl;
+        qDebug() << query->lastError().text() << endl;
     }
     if(query->next())
     {
@@ -294,37 +285,38 @@ bool LocalStorage::getMainWindowRect(QString username,int &x,int &y,int &width,i
 }
 bool LocalStorage::getLastLoginUser(QString &username)
 {
+    qDebug() << "Function: " << __PRETTY_FUNCTION__ <<" enter" ;
     qDebug() << "query" << query ;
-    qDebug() << "getLastLoginUser() enter" ;
-    QString sql = 
-            "SELECT lastlogin FROM config WHERE id=0";
-    qDebug() << "step-1" ;
+    QString sql{"SELECT lastlogin FROM config WHERE id=0"};
+    qDebug() << "step -1" ;
     
     if(!query->exec(sql))
     {
         return false;
     }
-    qDebug() << "step0" ;
+    qDebug() << "step 0" ;
     if(!query->next())
         return false;
-    qDebug() << "step1" ;
+    qDebug() << "step 1" ;
     username = query->value(0).toString();
     return true;
 }
 
 
 void LocalStorage::setDeviceName(const QString &name) {
-	qDebug("function: setDeviceName(QString &<%s>)", name.toLocal8Bit().data());
+    qDebug() << "Function: " << __PRETTY_FUNCTION__ << " arg: " << name;
 	QString sql("UPDATE config SET device=? WHERE id=0");
 	query->prepare(sql);
 	query->bindValue(0, name);
-	if(!query->exec()) qWarning() << query->lastError().text();
+    if(!query->exec())
+        qWarning() << query->lastError().text();
 }
 
 bool LocalStorage::getDeviceName(QString &name) {
-	qDebug("function: getDeviceName(QString &)");
+    qDebug() << "Function: " << __PRETTY_FUNCTION__;
 	QString sql("SELECT device FROM config WHERE id=0");
-	if(!query->exec(sql) || !query->next()) return false;
+    if(!query->exec(sql) || !query->next())
+        return false;
 	name = query->value(0).toString();
 	return true;
 }

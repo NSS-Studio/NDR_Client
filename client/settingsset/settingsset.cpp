@@ -1,6 +1,6 @@
-#include "settingsset.h"
+#include "settingsset.hpp"
 #include <QDebug>
-#include <QtCore/QLocale>
+#include <QLocale>
 
 SettingsSet::SettingsSet(QString filename)
 {

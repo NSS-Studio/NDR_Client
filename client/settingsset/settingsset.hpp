@@ -1,7 +1,7 @@
 #ifndef SETTINGSSET_H
 #define SETTINGSSET_H
-#include <QtCore/QString>
-#include <QtCore/QSettings>
+#include <QString>
+#include <QSettings>
 #define KEY_HOTKEY          "hotkey"
 #define KEY_QUIT_WHEN_CLOSE "close_to_quit"
 #define KEY_AUTO_DIAL       "auto_redial"
@@ -10,7 +10,7 @@
 #define KEY_WEBUP_ENABLE    "webUpEnable"
 #define KEY_AUTO_CLOSE      "autoClose"
 #define KEY_AUTO_STARTUP    "autoStartUp"
-class SettingsSet
+class SettingsSet final
 {
 public:
     SettingsSet(QString filename);

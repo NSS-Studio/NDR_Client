@@ -1,7 +1,7 @@
 #ifndef SETTINGSDIALOG_H
 #define SETTINGSDIALOG_H
-#include "localstorage.h"
-#include "settingsset.h"
+#include "localstorage.hpp"
+#include "settingsset.hpp"
 #include <QDialog>
 #include <QMessageBox>
 

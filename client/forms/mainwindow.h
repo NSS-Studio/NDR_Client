@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "aboutdialog.h"
-#include "localstorage.h"
+#include "localstorage.hpp"
 #include "logindialog.h"
 #include "noticedialog.h"
 #include <pppoe.hpp>

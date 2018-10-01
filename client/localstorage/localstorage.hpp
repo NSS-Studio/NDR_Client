@@ -5,8 +5,8 @@
 #include <QVector>
 #include <QtSql>
 #include <QSqlDatabase>
-#include "settingsset.h"
-class LocalStorage : public QObject
+#include <settingsset.hpp>
+class LocalStorage final : public QObject
 {
     Q_OBJECT
 public:
@@ -39,13 +39,9 @@ public:
     void writeSettings(SettingsSet settings);
     
 private:
-    QSqlDatabase *db = nullptr;
-    QSqlQuery *query = nullptr;
-    int sum = 0;
-signals:
-    
-public slots:
-    
+    QSharedPointer<QSqlDatabase> db;
+    QSharedPointer<QSqlQuery> query;
+    int sum = 0;    
 };
 
 #endif // LOCALSTORAGE_H
