@@ -7,7 +7,8 @@
 QT  += core network widgets xml
 TARGET = ndr-client #目标文件
 TEMPLATE = app
-CONFIG += c++17
+CONFIG += c++14 warn_on exceptions
+
 
 CONFIG(debug, debug|release):{
     CONFIG += console #终端可作为调试输出载体

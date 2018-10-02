@@ -21,7 +21,7 @@ namespace utils {
     extern QSharedPointer<SettingsSet> settings;
     extern QTranslator ndr_tr, qt_tr;
     extern QSharedPointer<ResourceManager> resourceManager;
-
+    extern QSharedPointer<NdrApplication> ndrApp;
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
 
@@ -59,6 +59,7 @@ namespace utils {
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
     void initResourceManager();
+    void initNdrApp(int argc, char *argv[]);
 }
 
 #endif // UTILS_HPP

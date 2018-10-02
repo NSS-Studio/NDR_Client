@@ -65,21 +65,15 @@ int main(int argc, char *argv[]) {
     SetUnhandledExceptionFilter(
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #endif
-    QSharedPointer<NdrApplication> ndrApp;
 
-    try {
-        auto app = new NdrApplication("ndr-client-new", argc, argv);
-        ndrApp.reset(app);
-    } catch(TcpServerException& exception) {
-        qDebug() << exception.errorMessage();
-        exit(-1);
-    }
+    utils::initNdrApp(argc, argv);
+
 
 
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
-    ndrApp->setQuitOnLastWindowClosed(false);
+    utils::ndrApp->setQuitOnLastWindowClosed(false);
 
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
     utils::initFont(":/font/ztgj.ttf");
@@ -97,5 +91,5 @@ int main(int argc, char *argv[]) {
 
     utils::initResourceManager();
 
-    return ndrApp->exec();
+    return utils::ndrApp->exec();
 }

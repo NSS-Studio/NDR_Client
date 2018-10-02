@@ -258,7 +258,7 @@ void LoginDialog::set_interface_list(QStringList const &list) {
 
 void LoginDialog::closeEvent(QCloseEvent *e) {
     qDebug() << "Function: " << __PRETTY_FUNCTION__ << " : arg pointer -> " << e;
-    qApp->exit();
+    utils::ndrApp->exit();
     e->accept();
 }
 
