@@ -33,13 +33,13 @@ SOURCES +=  main.cpp \
             ndrapplication.cpp \
             tcpserverexception.cpp \
             utils.cpp \
-    resourcemanager.cpp
+            resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
             tcpserverexception.hpp \
             utils.hpp \
             ndrconfig.hpp \
-    resourcemanager.hpp
+            resourcemanager.hpp
 
 RESOURCES += client.qrc
 
@@ -54,7 +54,13 @@ unix:!macx{
 
 win32 {
     QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x500
-    RC_FILE +=  $$PWD/appicon_win/appicon.rc
+    RC_FILE +=  $$PWD/appicon_win/appicon.rc    \
+                $$PWD/appicon_win/ndr.rc
+
+    DISTFILES += \
+                $$PWD/appicon_win/ndr.rc    \
+                $$PWD/appicon_win/ndr-client.exe.manifest
+
 }
 
 CODEFORTR = UTF-8

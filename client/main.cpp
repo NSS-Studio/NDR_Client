@@ -20,7 +20,7 @@
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 //! windows debug
-LONG ApplicationCrashHagetPPPoE()ndler(EXCEPTION_POINTERS *pException) { //程式异常捕获
+LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕获
     /*
      ***保存数据代码***
      */
