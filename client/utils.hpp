@@ -14,6 +14,7 @@
 #include <settingsset.hpp>
 #include <ndrapplication.hpp>
 #include <resourcemanager.hpp>
+#include <qaesencryption.h>
 namespace utils {
     extern QString appHome; //家目录
     extern QString tempDir; //临时文件夹
@@ -22,6 +23,7 @@ namespace utils {
     extern QTranslator ndr_tr, qt_tr;
     extern QSharedPointer<ResourceManager> resourceManager;
     extern QSharedPointer<NdrApplication> ndrApp;
+    extern QSharedPointer<QAESEncryption> encryption;
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
 
