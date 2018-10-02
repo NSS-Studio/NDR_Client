@@ -10,7 +10,6 @@ namespace utils {
     QString networkInterfaceCardName;
     QSharedPointer<ResourceManager> resourceManager;
     QSharedPointer<NdrApplication> ndrApp;
-
     QSharedPointer<QAESEncryption> encryption;
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {

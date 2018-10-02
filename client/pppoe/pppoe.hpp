@@ -2,6 +2,7 @@
 #define PPPOE_HPP
 #include <QtCore>
 #include <basedsl.hpp>
+#include <QVariant>
 class PPPoE final : public QThread {
 	Q_OBJECT
 public:
@@ -17,7 +18,7 @@ public:
 	QString lastError();
 	QString getUserName();
 	QString getIpAddress();
-
+    QVariant getHostMacAddress();
     QStringList getAvailableInterfaces();
 
 private:

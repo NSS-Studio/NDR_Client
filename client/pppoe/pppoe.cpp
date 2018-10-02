@@ -1,6 +1,7 @@
 #include "pppoe.hpp"
 #include <utils.hpp>
 #include "basedslfactory.hpp"
+#include <QNetworkInterface>
 PPPoE::PPPoE(QObject *parent) : QThread{parent}
 {
     basedsl = BaseDslFactory::getCurrentPlatformBaseDsl();
@@ -68,13 +69,15 @@ QString PPPoE::getIpAddress() {
     return basedsl->getIpAddress();
 }
 
-/*
-bool PPPoE::waitForResult()
-{
-    this->wait();
-    return hRasConn?true:false;
+QVariant PPPoE::getHostMacAddress() {
+    auto interfaceList = QNetworkInterface::allInterfaces();
+    for (auto const& interface : interfaceList) {
+        if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
+            return QVariant{interface.hardwareAddress()};
+        }
+    }
+    return QVariant{};
 }
-*/
 
 QString PPPoE::getUserName()
 {
