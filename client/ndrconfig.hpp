@@ -1,7 +1,7 @@
 #ifndef NDRCONFIG_HPP
 #define NDRCONFIG_HPP
 
-#include <QtGlobal>
+#include <QGlobalStatic>
 #if (QT_VERSION < QT_VERSION_CHECK(5, 9, 5))
 #error "!!! please use qt 5.9.5 or later"
 #endif

@@ -7,7 +7,7 @@
 #include <QApplication>
 #include <QObject>
 #include <QSharedMemory>
-#include <QtCore/QTextCodec>
+#include <QTextCodec>
 #include <QNetworkProxyFactory>
 #include <QNetworkProxy>
 #include <utils.hpp>
