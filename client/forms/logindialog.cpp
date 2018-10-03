@@ -258,7 +258,7 @@ void LoginDialog::set_interface_list(QStringList const &list) {
 
 void LoginDialog::closeEvent(QCloseEvent *e) {
     qDebug() << "Function: " << __PRETTY_FUNCTION__ << " : arg pointer -> " << e;
-    utils::ndrApp->exit();
+    qApp->exit();
     e->accept();
 }
 
@@ -275,11 +275,7 @@ void LoginDialog::set_device_name(const QString &name) {
 }
 
 void LoginDialog::on_btnShowPassword_clicked(bool checked) {
-    if (checked) {
-        ui->editPassword->setEchoMode(QLineEdit::Normal);
-    } else {
-        ui->editPassword->setEchoMode(QLineEdit::Password);
-    }
+    ui->editPassword->setEchoMode(checked ? QLineEdit::Normal: QLineEdit::Password);
 }
 
 #ifdef Q_OS_WIN

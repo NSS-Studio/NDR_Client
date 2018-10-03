@@ -25,8 +25,6 @@
 #define autoSatrtKeyWay "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
 #define autoStartkeyName "NDR_AutoStart"
 
-#define UNUSED(x) (void)(x)
-
 /** 确定操作系统类型
  * 对APP_OS_STR 赋值 windows/linux/macos
  */

@@ -33,12 +33,10 @@ UI_DIR=./forms
 
 SOURCES +=  main.cpp \
             ndrapplication.cpp \
-            tcpserverexception.cpp \
             utils.cpp \
     resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
-            tcpserverexception.hpp \
             utils.hpp \
             ndrconfig.hpp \
     resourcemanager.hpp

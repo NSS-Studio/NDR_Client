@@ -309,7 +309,7 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
     }
 #else
     // warning: unused parameter 'reason' [-Wunused-parameter]
-    UNUSED(reason);
+    Q_UNUSED(reason);
 #endif
 }
 

@@ -65,15 +65,10 @@ int main(int argc, char *argv[]) {
     SetUnhandledExceptionFilter(
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #endif
-
-    utils::initNdrApp(argc, argv);
-
-
-
-
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
+    NdrApplication ndrApp("ndr-client-new", argc, argv);
 
-    utils::ndrApp->setQuitOnLastWindowClosed(false);
+    ndrApp.setQuitOnLastWindowClosed(false);
 
 #if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
     utils::initFont(":/font/ztgj.ttf");
@@ -91,5 +86,5 @@ int main(int argc, char *argv[]) {
 
     utils::initResourceManager();
 
-    return utils::ndrApp->exec();
+    return ndrApp.exec();
 }

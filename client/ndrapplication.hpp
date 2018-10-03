@@ -3,8 +3,6 @@
 
 #include <QApplication>
 #include <QTcpServer>
-#include "tcpserverexception.hpp"
-#include <pppoe.hpp>
 class NdrApplication: public QApplication
 {
 public:
