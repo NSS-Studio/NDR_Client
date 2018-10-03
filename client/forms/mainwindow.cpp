@@ -14,8 +14,10 @@
 #include <utils.hpp>
 
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
+                       QWidget *parent)
     : QMainWindow{parent},
+      profile{profile},
       ui{new Ui::MainWindow} {
 
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
@@ -79,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
             &MainWindow::downloadFinished);
 
     this->ui->lblAllTime->setText("NULL");
-    this->ui->lblFlow->setText("NULL");
+    this->ui->lblMacAddress->setText("NULL");
 
     aboutDialog = nullptr;
     settingsDialog = nullptr;
@@ -115,7 +117,6 @@ MainWindow::~MainWindow() {
     delete trayIcon;
     delete ui;
 
-    delete profile;
     // delete logoffShortcut;
     delete popUp;
     // delete settings;
@@ -237,7 +238,7 @@ void MainWindow::dialFinished(bool ok) {
 
         noticeDialog->showMessage(tr("拨号成功，开启认证"));
         this->ui->lblAddress->setText(pppoe->getIpAddress());
-
+        this->ui->lblMacAddress->setText(pppoe->getHostMacAddress().toString());
         this->connTime = 0;
         this->ui->lblTime->setText(time_humanable(connTime));
 
@@ -246,14 +247,13 @@ void MainWindow::dialFinished(bool ok) {
         QTimer::singleShot(800, &eventloop, SLOT(quit()));
         eventloop.exec();
 
-        //! 废除自动最小化 因为上了皮皮GO！！！！！！！！！！！
-        //        if(settings->autoMinimize)
-        //        {
-        //            this->isMainWindowMinimized=true;
-        //            this->hide();
-        //            this->trayIcon->showMessage(tr("NDR
-        //            校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
-        //        }
+//                if(settings->autoMinimize)
+//                {
+//                    this->isMainWindowMinimized=true;
+//                    this->hide();
+//                    this->trayIcon->showMessage(tr("NDR
+//                    校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
+//                }
         noticeDialog->close();
 //        Authenticat::getInstance()->beginVerify(
 //            DRCOM_SERVER_IP, DRCOM_SERVER_PORT); //必须在beginworkingui前
@@ -469,11 +469,11 @@ void MainWindow::timerEvent(QTimerEvent *) {
     */
     static int timepassed = 0;
     static int time = 0;
-    int flow;
-    if (!(timepassed % 60) && _get_account_state(&time, &flow)) {
-        this->ui->lblFlow->setText(
-            QString("%1 KB").arg(flow, -3, 10, QChar(' ')));
-    }
+//    int flow;
+//    if (!(timepassed % 60) && _get_account_state(&time, &flow)) {
+//        this->ui->lblFlow->setText(
+//            QString("%1 KB").arg(flow, -3, 10, QChar(' ')));
+//    }
     this->ui->lblTime->setText(time_humanable(timepassed));
 
     // server return minute

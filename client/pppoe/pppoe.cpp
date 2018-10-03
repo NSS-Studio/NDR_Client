@@ -66,17 +66,38 @@ void PPPoE::run() {
 }
 
 QString PPPoE::getIpAddress() {
-    return basedsl->getIpAddress();
+    auto interfaceList = QNetworkInterface::allInterfaces();
+
+    for (auto const &interface: interfaceList) {
+        if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
+            qDebug() << interface.name();
+            qDebug() << interface.type();
+            qDebug() << interface.hardwareAddress();
+            auto addressEntries = interface.addressEntries();
+            qDebug() << addressEntries.size();
+            auto address = addressEntries.front();
+            qDebug() << address.ip();
+            return address.ip().toString();
+        }
+    }
+    return {};
+    //return basedsl->getIpAddress();
 }
 
 QVariant PPPoE::getHostMacAddress() {
-    auto interfaceList = QNetworkInterface::allInterfaces();
-    for (auto const& interface : interfaceList) {
-        if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
-            return QVariant{interface.hardwareAddress()};
-        }
-    }
-    return QVariant{};
+//    auto interfaceList = QNetworkInterface::allInterfaces();
+//    for (auto const& interface : interfaceList) {
+//        if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
+//            return QVariant{interface.hardwareAddress()};
+//        }
+//    }
+//    return QVariant{};
+#if defined (Q_OS_MACX) || defined (Q_OS_LINUX)
+    auto interface = QNetworkInterface::interfaceFromName(this->device_name);
+    return QVariant{interface.hardwareAddress()};
+#else
+    return {};
+#endif
 }
 
 QString PPPoE::getUserName()
@@ -88,7 +109,7 @@ QString PPPoE::getUserName()
 
 bool PPPoE::dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &device_name)
 {
-	//qDebug() << "PPPoE::dialRAS" << "device_name" << device_name;
+    qDebug() << "PPPoE::dialRAS" << "device_name" << device_name;
     if(this->isRunning())
         return false;
     this->entryName = entryName;
