@@ -57,6 +57,7 @@ int main(int argc, char *argv[]) {
     //  high dpi support!
     // this support is so bad, we can not use it
     qInstallMessageHandler(utils::messageHandler);
+    QNetworkProxyFactory::setUseSystemConfiguration(false);
 
 #if defined (Q_OS_MAC) || defined (Q_OS_WIN32)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
