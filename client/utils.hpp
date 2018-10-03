@@ -61,12 +61,11 @@ namespace utils {
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
     void initResourceManager();
-<<<<<<< HEAD
+
     void initNdrApp(int argc, char *argv[]);
 
     void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
-=======
->>>>>>> 7efb562103497ccb09584b67d3dd4e9f11c189e3
+
 }
 
 #endif // UTILS_HPP

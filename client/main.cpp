@@ -69,7 +69,8 @@ int main(int argc, char *argv[]) {
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #endif
 
-    utils::initNdrApp(argc, argv);
+    //need to implement
+    //utils::initNdrApp(argc, argv);
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
     NdrApplication ndrApp("ndr-client-new", argc, argv);
