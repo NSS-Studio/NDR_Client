@@ -93,6 +93,8 @@ QVariant PPPoE::getHostMacAddress() {
 //    }
 //    return QVariant{};
 #if defined (Q_OS_MACX) || defined (Q_OS_LINUX)
+
+    qDebug() << "device_name: " << this->device_name;
     auto interface = QNetworkInterface::interfaceFromName(this->device_name);
     return QVariant{interface.hardwareAddress()};
 #else

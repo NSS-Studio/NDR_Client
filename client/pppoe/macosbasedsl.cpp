@@ -133,7 +133,7 @@ bool MacOsBaseDsl::dial(const QString &username, const QString &password,const Q
         if (SCNetworkInterfaceGetInterfaceType(iface) ==
             kSCNetworkInterfaceTypeEthernet) {
 
-            QString unknown_iface_prefix = trUtf8("未知网卡") + " ";
+            QString unknown_iface_prefix = tr("未知网卡") + " ";
             if (device_name.startsWith(unknown_iface_prefix)) {
                 QString unknown_device_name = device_name;
                 unknown_device_name.remove(unknown_iface_prefix);
@@ -147,7 +147,7 @@ bool MacOsBaseDsl::dial(const QString &username, const QString &password,const Q
                 QString networkInterfaceLocalizedDisplayNameQString = QString::fromCFString(networkInterfaceLocalizedDisplayNameString);
                 CFStringRef networkInterfaceBSDNameString = SCNetworkInterfaceGetBSDName(iface);
                 QString networkInterfaceBSDNameQString = QString::fromCFString(networkInterfaceBSDNameString);
-                QString networkInterfaceName = networkInterfaceLocalizedDisplayNameQString + " " + networkInterfaceBSDNameQString;
+                QString networkInterfaceName = networkInterfaceBSDNameQString;
                 qDebug() << networkInterfaceName << ": networkInterfaceName: " << __func__;
                 if (networkInterfaceName == device_name) {
                     en_interface = iface;
@@ -156,7 +156,7 @@ bool MacOsBaseDsl::dial(const QString &username, const QString &password,const Q
         }
     }
     if (!en_interface) {
-        errorMessage = trUtf8("找不到用于拨号的网卡 %1").arg(QString(device_name));
+        errorMessage = tr("找不到用于拨号的网卡 %1").arg(QString(device_name));
         CFRelease(services);
         return false;
     }
@@ -222,7 +222,7 @@ bool MacOsBaseDsl::dial(const QString &username, const QString &password,const Q
     SCNetworkConnectionStatus status = SCNetworkConnectionGetStatus(connection);
     if (status != kSCNetworkConnectionDisconnected) {
         errorMessage =
-            trUtf8("期待目标连接的状态为 0，但是当前的状态为 %1").arg(status);
+            tr("期待目标连接的状态为 0，但是当前的状态为 %1").arg(status);
         return false;
     }
 
@@ -328,10 +328,10 @@ QStringList MacOsBaseDsl::getAvailableInterfaces() {
 
         if (SCNetworkInterfaceGetInterfaceType(iface) ==
             kSCNetworkInterfaceTypeEthernet) {
-            QString networkInterfaceName = qLocalizedDisplayName + " " + qBsdName;
+            QString networkInterfaceName = qBsdName;
             if (networkInterfaceName == QString{})
                 networkInterfaceName =
-                    QString("%1 %2").arg(trUtf8("未知网卡")).arg(index);
+                    QString("%1 %2").arg(tr("未知网卡")).arg(index);
             if (!networkInterfaceCardList.contains(networkInterfaceName))
                 networkInterfaceCardList.append(networkInterfaceName);
         }
