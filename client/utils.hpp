@@ -14,6 +14,7 @@
 #include <settingsset.hpp>
 #include <ndrapplication.hpp>
 #include <resourcemanager.hpp>
+
 namespace utils {
     extern QString appHome; //家目录
     extern QString tempDir; //临时文件夹

@@ -33,13 +33,15 @@ SOURCES +=  main.cpp \
             ndrapplication.cpp \
             tcpserverexception.cpp \
             utils.cpp \
-            resourcemanager.cpp
+            resourcemanager.cpp \
+            utils_log.cpp
 
 HEADERS  += ndrapplication.hpp \
             tcpserverexception.hpp \
             utils.hpp \
             ndrconfig.hpp \
-            resourcemanager.hpp
+            resourcemanager.hpp \
+            utils_log.h
 
 RESOURCES += client.qrc
 
@@ -61,6 +63,11 @@ win32 {
                 $$PWD/appicon_win/ndr.rc    \
                 $$PWD/appicon_win/ndr-client.exe.manifest
 
+    SOURCES += \
+                utils_netfix.cpp
+
+    HEADERS += \
+                utils_netfix.h
 }
 
 CODEFORTR = UTF-8
