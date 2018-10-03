@@ -205,7 +205,3 @@ QStringList LinuxBaseDsl::getAvailableInterfaces() {
     }
     return networkInterface;
 }
-
-QString LinuxBaseDsl::getDeviceName() {
-    return this->device
-}
