@@ -15,6 +15,7 @@
 #include <ndrapplication.hpp>
 #include <resourcemanager.hpp>
 #include <qaesencryption.h>
+
 namespace utils {
     extern QString appHome; //家目录
     extern QString tempDir; //临时文件夹
@@ -60,6 +61,11 @@ namespace utils {
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
     void initResourceManager();
+
+    void initNdrApp(int argc, char *argv[]);
+
+    void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+
 }
 
 #endif // UTILS_HPP
