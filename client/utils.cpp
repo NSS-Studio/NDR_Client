@@ -9,7 +9,7 @@ namespace utils {
     QTranslator ndr_tr, qt_tr;
     QString networkInterfaceCardName;
     QSharedPointer<ResourceManager> resourceManager;
-    QSharedPointer<NdrApplication> ndrApp;
+    QSharedPointer<QAESEncryption> encryption;
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {
             {QString{QObject::tr("考试专用")}, QString{""}},
@@ -174,16 +174,6 @@ namespace utils {
     void initResourceManager() {
         resourceManager.reset(new ResourceManager{});
         resourceManager->InitResourceManager();
-    }
-
-    void initNdrApp(int argc, char *argv[]) {
-        try {
-            auto app = new NdrApplication("ndr-client-new", argc, argv);
-            ndrApp.reset(app);
-        } catch(TcpServerException& exception) {
-            qDebug() << exception.errorMessage();
-            exit(-1);
-        }
     }
 }
 

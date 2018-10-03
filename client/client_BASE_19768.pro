@@ -24,8 +24,6 @@ include(forms/forms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
-include(auth/auth.pri)
-include(3rd_party/Qt-AES/qaesencryption.pro)
 
 #不用UIC 因为可能导致更新UI 实际引用错误的遗忘BUG
 #指定UI_DIR可以避免此问题 qmake会自动生成
@@ -33,44 +31,30 @@ UI_DIR=./forms
 
 SOURCES +=  main.cpp \
             ndrapplication.cpp \
+            tcpserverexception.cpp \
             utils.cpp \
-            resourcemanager.cpp
+    resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
+            tcpserverexception.hpp \
             utils.hpp \
             ndrconfig.hpp \
-            resourcemanager.hpp
+    resourcemanager.hpp
 
 RESOURCES += client.qrc
 
 macx {
 	TARGET = "NDR Client"
 	ICON = icons/logo.icns
-
-        SOURCES += \
-                    $$PWD/utils_log_unix.cpp
 }
 
 unix:!macx{
-        SOURCES += \
-                    $$PWD/utils_log_unix.cpp
+
 }
 
 win32 {
     QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x500
-    RC_FILE +=  $$PWD/appicon_win/appicon.rc    \
-                $$PWD/appicon_win/ndr.rc
-
-    DISTFILES += \
-                $$PWD/appicon_win/ndr.rc    \
-                $$PWD/appicon_win/ndr-client.exe.manifest
-
-    SOURCES += \
-                $$PWD/utils_netfix.cpp    \
-                $$PWD/utils_log_win.cpp
-
-    HEADERS += \
-                $$PWD/utils_netfix.h
+    RC_FILE +=  $$PWD/appicon_win/appicon.rc
 }
 
 CODEFORTR = UTF-8

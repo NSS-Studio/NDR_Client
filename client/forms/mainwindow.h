@@ -25,7 +25,8 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QSharedPointer<LocalStorage> profile,
+                        QWidget *parent = nullptr);
     ~MainWindow();
     enum State { Logining, Working, Others };
 
@@ -56,6 +57,7 @@ private slots:
 private:
     QSharedPointer<PPPoE> pppoe;
     QSharedPointer<LoginDialog> loginDialog;
+    QSharedPointer<LocalStorage> profile;
     Ui::MainWindow *ui;
     NoticeDialog *noticeDialog;
     SettingsDialog *settingsDialog;
@@ -68,8 +70,6 @@ private:
     State state;
     bool app_exiting; //退出标记
     bool isMainWindowMinimized;
-
-    LocalStorage *profile;
     int connTime;
     int allTime;
     QString username;

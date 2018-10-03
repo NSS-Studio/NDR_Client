@@ -14,6 +14,7 @@
 #include <settingsset.hpp>
 #include <ndrapplication.hpp>
 #include <resourcemanager.hpp>
+#include <qaesencryption.h>
 
 namespace utils {
     extern QString appHome; //家目录
@@ -22,7 +23,7 @@ namespace utils {
     extern QSharedPointer<SettingsSet> settings;
     extern QTranslator ndr_tr, qt_tr;
     extern QSharedPointer<ResourceManager> resourceManager;
-    extern QSharedPointer<NdrApplication> ndrApp;
+    extern QSharedPointer<QAESEncryption> encryption;
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
 
@@ -60,9 +61,12 @@ namespace utils {
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
     void initResourceManager();
+<<<<<<< HEAD
     void initNdrApp(int argc, char *argv[]);
 
     void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+=======
+>>>>>>> 7efb562103497ccb09584b67d3dd4e9f11c189e3
 }
 
 #endif // UTILS_HPP

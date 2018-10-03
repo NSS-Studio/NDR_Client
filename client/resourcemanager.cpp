@@ -18,7 +18,7 @@ void ResourceManager::InitResourceManager() {
     pppoe.reset(new PPPoE{});
     profile.reset(new LocalStorage{utils::appHome + "/config.db"});
     loginDialog.reset(new LoginDialog{profile});
-    mainWindow.reset(new MainWindow{});
+    mainWindow.reset(new MainWindow{profile});
 
 #ifndef QT_DEBUG
     mainWindow->show();

@@ -34,43 +34,27 @@ UI_DIR=./forms
 SOURCES +=  main.cpp \
             ndrapplication.cpp \
             utils.cpp \
-            resourcemanager.cpp
+    resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
             utils.hpp \
             ndrconfig.hpp \
-            resourcemanager.hpp
+    resourcemanager.hpp
 
 RESOURCES += client.qrc
 
 macx {
 	TARGET = "NDR Client"
 	ICON = icons/logo.icns
-
-        SOURCES += \
-                    $$PWD/utils_log_unix.cpp
 }
 
 unix:!macx{
-        SOURCES += \
-                    $$PWD/utils_log_unix.cpp
+
 }
 
 win32 {
     QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x500
-    RC_FILE +=  $$PWD/appicon_win/appicon.rc    \
-                $$PWD/appicon_win/ndr.rc
-
-    DISTFILES += \
-                $$PWD/appicon_win/ndr.rc    \
-                $$PWD/appicon_win/ndr-client.exe.manifest
-
-    SOURCES += \
-                $$PWD/utils_netfix.cpp    \
-                $$PWD/utils_log_win.cpp
-
-    HEADERS += \
-                $$PWD/utils_netfix.h
+    RC_FILE +=  $$PWD/appicon_win/appicon.rc
 }
 
 CODEFORTR = UTF-8
