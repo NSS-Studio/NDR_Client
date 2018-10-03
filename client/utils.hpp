@@ -61,6 +61,8 @@ namespace utils {
     void initStyleSheet(NdrApplication* a, QString sheetFile);
     void initResourceManager();
     void initNdrApp(int argc, char *argv[]);
+
+    void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 }
 
 #endif // UTILS_HPP

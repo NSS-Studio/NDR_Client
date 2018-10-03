@@ -33,25 +33,27 @@ SOURCES +=  main.cpp \
             ndrapplication.cpp \
             tcpserverexception.cpp \
             utils.cpp \
-            resourcemanager.cpp \
-            utils_log.cpp
+            resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
             tcpserverexception.hpp \
             utils.hpp \
             ndrconfig.hpp \
-            resourcemanager.hpp \
-            utils_log.h
+            resourcemanager.hpp
 
 RESOURCES += client.qrc
 
 macx {
 	TARGET = "NDR Client"
 	ICON = icons/logo.icns
+
+        SOURCES += \
+                    $$PWD/utils_log_unix.cpp
 }
 
 unix:!macx{
-
+        SOURCES += \
+                    $$PWD/utils_log_unix.cpp
 }
 
 win32 {
@@ -64,10 +66,11 @@ win32 {
                 $$PWD/appicon_win/ndr-client.exe.manifest
 
     SOURCES += \
-                utils_netfix.cpp
+                $$PWD/utils_netfix.cpp    \
+                $$PWD/utils_log_win.cpp
 
     HEADERS += \
-                utils_netfix.h
+                $$PWD/utils_netfix.h
 }
 
 CODEFORTR = UTF-8

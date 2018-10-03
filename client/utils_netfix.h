@@ -9,28 +9,27 @@
 #include <winreg.h>
 #include <tchar.h>
 
-namespace utils {
 #define WinsockPATH "System\\CurrentControlSet\\Services\\Winsock"
 #define Winsock2PATH "System\\CurrentControlSet\\Services\\Winsock2"
 
-class utils_netfix : public QObject
-{
-    Q_OBJECT
-public:
-    explicit utils_netfix(QObject *parent = nullptr);
-    ~utils_netfix();
+namespace utils {
+    class utils_netfix : public QObject
+    {
+        Q_OBJECT
+    public:
+        explicit utils_netfix(QObject *parent = nullptr);
+        ~utils_netfix();
 
-    void backUpRegistry(const QString &path);
-    void fixNetWork();
+        void backUpRegistry(const QString &path);
+        void fixNetWork();
 
- signals:
-    void workFinish();
+     signals:
+        void workFinish();
 
- private:
-    void cmd(const QString &program, const QStringList &arg);
-    void backUp(HKEY proxyRoot, const QString &keyWay, const QString &saveWay);
-};
-
+     private:
+        void cmd(const QString &program, const QStringList &arg);
+        void backUp(HKEY proxyRoot, const QString &keyWay, const QString &saveWay);
+    };
 }
 
 #endif // UTILS_NETFIX_H

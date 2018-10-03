@@ -12,8 +12,9 @@
 #include <QNetworkProxy>
 #include <utils.hpp>
 #include <QStyleFactory>
-
+#include <qapplication.h>
 #include <resourcemanager.hpp>
+
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
@@ -55,6 +56,8 @@ LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕
 int main(int argc, char *argv[]) {
     //  high dpi support!
     // this support is so bad, we can not use it
+    qInstallMessageHandler(utils::messageHandler);
+
 #if defined (Q_OS_MAC) || defined (Q_OS_WIN32)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
@@ -67,9 +70,6 @@ int main(int argc, char *argv[]) {
 #endif
 
     utils::initNdrApp(argc, argv);
-
-
-
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
 
