@@ -408,48 +408,6 @@ void MainWindow::verifyStoped() {
     qDebug() << "verifyStoped() exit";
 }
 
-static bool _get_account_state(int *time, int *flow) {
-    Q_ASSERT(time);
-    Q_ASSERT(flow);
-    QNetworkAccessManager nam;
-    QNetworkReply *reply;
-    QEventLoop eventloop;
-
-    reply = nam.get(QNetworkRequest(QUrl("http://172.24.253.35/")));
-    QObject::connect(reply, SIGNAL(finished()), &eventloop, SLOT(quit()));
-    QTimer::singleShot(10 * 1000, &eventloop, SLOT(quit()));
-    eventloop.exec();
-    // this->ui->textBrowser->setText(reply->readAll());
-    if (!reply->isFinished()) {
-        reply->abort();
-        qDebug() << "_get_account_state"
-                 << "http request timeout";
-        return false;
-    }
-    QString stateValue =
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
-
-    if (stateValue != "200") {
-        qDebug() << "_get_account_state"
-                 << "stauts code not 200.";
-        return false;
-    }
-    QString html = reply->readAll();
-    QRegExp regexp("time='(\\d+)[ ]*';flow='(\\d+)[ ]*';");
-    int pos = html.indexOf(regexp);
-    if (pos >= 0) {
-        qDebug() << "matched string ->" << regexp.capturedTexts();
-        *time = regexp.cap(1).toInt();
-        *flow = regexp.cap(2).toInt();
-        qDebug() << "time:" << *time;
-        qDebug() << "flow:" << *flow;
-        return true;
-    } else {
-        qDebug() << "_get_account_state"
-                 << "unmatched.";
-        return false;
-    }
-}
 void MainWindow::timerEvent(QTimerEvent *) {
     /*
     static int i=0;

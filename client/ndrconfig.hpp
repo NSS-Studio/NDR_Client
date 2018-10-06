@@ -6,6 +6,11 @@
 #error "!!! please use qt 5.9.5 or later"
 #endif
 
+/** r-plug server address*/
+#define NDR_PLUG_SERVER "172.24.10.13"
+/** r-plug server port*/
+#define NDR_PLUG_PORT 30412
+
 /** server address*/
 #define NDR_SERVER "172.24.10.13"
 

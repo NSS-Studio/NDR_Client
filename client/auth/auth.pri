@@ -1,8 +1,6 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
-HEADERS += \
-    $$PWD/authverify.hpp
+HEADERS += $$PWD/authverify.hpp
 
-SOURCES += \
-    $$PWD/authverify.cpp
+SOURCES += $$PWD/authverify.cpp
