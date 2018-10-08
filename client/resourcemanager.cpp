@@ -20,7 +20,7 @@ void ResourceManager::InitResourceManager() {
     loginDialog.reset(new LoginDialog{profile});
     mainWindow.reset(new MainWindow{profile});
 
-#ifndef QT_DEBUG
+#ifdef QT_DEBUG
     mainWindow->show();
 #endif
     loginDialog->show();

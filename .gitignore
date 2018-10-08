@@ -7,3 +7,4 @@ Makefile
 ndr-client.pro.user*
 *~
 build/
+/client/lang/ndr*
