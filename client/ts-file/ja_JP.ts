@@ -176,65 +176,12 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">名はＮＤＲのアダプタを作成してください</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="22"/>
-        <source>请尝试手动创建名为%1的适配器</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="23"/>
         <source>拨号连接适配器初始化失败，%1</source>
-        <translation>ダイヤルアップ接続アダプタの初期化は失敗した、%1</translation>
+        <translation type="vanished">ダイヤルアップ接続アダプタの初期化は失敗した、%1</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="52"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="185"/>
-        <location filename="../pppoe/basedsl_win.cpp" line="229"/>
         <source>未知错误</source>
-        <translation>未知エラー</translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="60"/>
-        <source>1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）
-2.请确保交换机及其连线完好.
-3.请确保网线已插好.
-若如上做问题仍未解决，请上报修网报修
-网址为: http://bx.neusoft.edu.cn/
- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="69"/>
-        <source>1.请检查账号或密码以及套餐设置是否正确.
-2.请检查套餐是否还未生效或已经过期.
-3.请确保当前没有连接到其他Wifi网络.
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="76"/>
-        <source>请尝试重新启动计算机.
-
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="81"/>
-        <source>请重新尝试拨号.
-
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="86"/>
-        <source>可能是一些拨号所依赖的服务无法启动所致
-
-┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">未知エラー</translation>
     </message>
     <message>
         <source>
@@ -269,25 +216,12 @@ p, li { white-space: pre-wrap; }
 もう一度ダイヤルを試してください。</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="175"/>
         <source>枚举RAS-CAPABLE设备时返回错误</source>
-        <translation>枚挙RAS-CAPABLE設備の際にエラー</translation>
+        <translation type="vanished">枚挙RAS-CAPABLE設備の際にエラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="160"/>
-        <location filename="../pppoe/basedsl_mac.cpp" line="393"/>
-        <source>未知网卡</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="272"/>
-        <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="357"/>
         <source>未知</source>
-        <translation>未知</translation>
+        <translation type="vanished">未知</translation>
     </message>
     <message>
         <source>枚举RAS-CAPABLE设备时返回错误
@@ -299,24 +233,16 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">未知エラー</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_win.cpp" line="208"/>
         <source>没有可用的RAS-CAPABLE设备</source>
-        <translation>利用できるRAS-CAPABLE設備がありません</translation>
+        <translation type="vanished">利用できるRAS-CAPABLE設備がありません</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_linux.cpp" line="60"/>
         <source>找不到网卡 %1 或该网卡被占用</source>
-        <translation>LANカード見つからない %1 あるいはこのLANカードが占領された</translation>
+        <translation type="vanished">LANカード見つからない %1 あるいはこのLANカードが占領された</translation>
     </message>
     <message>
-        <location filename="../pppoe/basedsl_linux.cpp" line="120"/>
-        <source>您可使用以下命令行来查看错误信息</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/basedsl_mac.cpp" line="184"/>
         <source>找不到用于拨号的网卡 %1</source>
-        <translation>ダイヤル用のカードが見つからない %1</translation>
+        <translation type="vanished">ダイヤル用のカードが見つからない %1</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -550,6 +476,19 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>LinuxBaseDsl</name>
+    <message>
+        <location filename="../pppoe/linuxbasedsl.cpp" line="63"/>
+        <source>找不到网卡 %1 或该网卡被占用</source>
+        <translation type="unfinished">LANカード見つからない %1 あるいはこのLANカードが占領された</translation>
+    </message>
+    <message>
+        <location filename="../pppoe/linuxbasedsl.cpp" line="131"/>
+        <source>您可使用以下命令行来查看错误信息</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginDialog</name>
     <message>
         <location filename="../forms/logindialog.ui" line="39"/>
@@ -640,36 +579,60 @@ p, li { white-space: pre-wrap; }
         <translation>このアカウントの情報が存在しない</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="302"/>
+        <location filename="../forms/logindialog.cpp" line="298"/>
         <source>网络代理重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="310"/>
+        <location filename="../forms/logindialog.cpp" line="306"/>
         <source>DNS重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="314"/>
+        <location filename="../forms/logindialog.cpp" line="310"/>
         <source>成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="314"/>
+        <location filename="../forms/logindialog.cpp" line="310"/>
         <source>网络重置成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="294"/>
-        <location filename="../forms/logindialog.cpp" line="301"/>
-        <location filename="../forms/logindialog.cpp" line="309"/>
+        <location filename="../forms/logindialog.cpp" line="290"/>
+        <location filename="../forms/logindialog.cpp" line="297"/>
+        <location filename="../forms/logindialog.cpp" line="305"/>
         <source>失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="294"/>
+        <location filename="../forms/logindialog.cpp" line="290"/>
         <source>Winsock重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MacOsBaseDsl</name>
+    <message>
+        <location filename="../pppoe/macosbasedsl.cpp" line="136"/>
+        <location filename="../pppoe/macosbasedsl.cpp" line="334"/>
+        <source>未知网卡</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/macosbasedsl.cpp" line="159"/>
+        <source>找不到用于拨号的网卡 %1</source>
+        <translation type="unfinished">ダイヤル用のカードが見つからない %1</translation>
+    </message>
+    <message>
+        <location filename="../pppoe/macosbasedsl.cpp" line="225"/>
+        <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/macosbasedsl.cpp" line="301"/>
+        <source>未知</source>
+        <translation type="unfinished">未知</translation>
     </message>
 </context>
 <context>
@@ -716,7 +679,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../forms/mainwindow.ui" line="154"/>
-        <source>Traffic：</source>
+        <source>macAddress：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -730,22 +693,16 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="411"/>
-        <location filename="../forms/mainwindow.ui" line="414"/>
-        <source>信息获取</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>欢迎加入用户反馈QQ群协助改善我们的产品 397060683</source>
         <translation type="vanished">私たちの製品を協力するために、ユーザーフィードバックＱＱグループへよこそ　397060683</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="345"/>
+        <location filename="../forms/mainwindow.ui" line="344"/>
         <source>注销</source>
         <translation type="unfinished">切断</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="354"/>
+        <location filename="../forms/mainwindow.ui" line="353"/>
         <source>激活窗口</source>
         <translation>アクティブウィンドウ</translation>
     </message>
@@ -754,28 +711,28 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">パネルを開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="363"/>
-        <location filename="../forms/mainwindow.ui" line="366"/>
+        <location filename="../forms/mainwindow.ui" line="362"/>
+        <location filename="../forms/mainwindow.ui" line="365"/>
         <source>退出</source>
         <translation>終了</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="375"/>
+        <location filename="../forms/mainwindow.ui" line="374"/>
         <source>设置</source>
         <translation>設定</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="384"/>
+        <location filename="../forms/mainwindow.ui" line="383"/>
         <source>关于</source>
         <translation type="unfinished">について</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="393"/>
+        <location filename="../forms/mainwindow.ui" line="392"/>
         <source>显示登录窗</source>
         <translation>ログインウィンドウを表示</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="402"/>
+        <location filename="../forms/mainwindow.ui" line="401"/>
         <source>反馈</source>
         <translation type="unfinished">意見</translation>
     </message>
@@ -788,7 +745,7 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">ショートカットキー抹消登録失敗、ショートカットキーは無効、あるいは他のアプリケーションで使用されているかもしれない。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="56"/>
+        <location filename="../forms/mainwindow.cpp" line="53"/>
         <source>NDR</source>
         <translation>NDR</translation>
     </message>
@@ -797,39 +754,39 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">No interface available</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="56"/>
+        <location filename="../forms/mainwindow.cpp" line="53"/>
         <source>No Interface Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="152"/>
+        <location filename="../forms/mainwindow.cpp" line="138"/>
         <source>未知</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="156"/>
+        <location filename="../forms/mainwindow.cpp" line="144"/>
         <source>正在拨号. . .</source>
         <translation>ダイヤルアップしている. . .</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="185"/>
+        <location filename="../forms/mainwindow.cpp" line="173"/>
         <source>%0 天 %1:%2:%3</source>
         <translation type="unfinished">%1 日 %1:%2:%3 {0 ?}</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="251"/>
+        <location filename="../forms/mainwindow.cpp" line="239"/>
         <source>拨号成功，开启认证</source>
         <translation>ダイヤルアップは成功しました。認証を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="551"/>
+        <location filename="../forms/mainwindow.cpp" line="496"/>
         <source>网络异常断开，正在重新拨号
 重试次数%0/5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="626"/>
-        <location filename="../forms/mainwindow.cpp" line="654"/>
+        <location filename="../forms/mainwindow.cpp" line="571"/>
+        <location filename="../forms/mainwindow.cpp" line="599"/>
         <source>NDR 校园网络认证</source>
         <translation>NDRキャンパスネットワーク認証</translation>
     </message>
@@ -838,18 +795,18 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">主パネルは最小化しました、設定で自動最小化機能を閉鎖ができます。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="287"/>
-        <location filename="../forms/mainwindow.cpp" line="568"/>
+        <location filename="../forms/mainwindow.cpp" line="274"/>
+        <location filename="../forms/mainwindow.cpp" line="513"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="288"/>
+        <location filename="../forms/mainwindow.cpp" line="275"/>
         <source>拨号失败</source>
         <translation>ダイヤルが失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="387"/>
+        <location filename="../forms/mainwindow.cpp" line="374"/>
         <source>正在尝试注销</source>
         <translation>取り消しを試している</translation>
     </message>
@@ -862,17 +819,17 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">再ダイヤル失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="569"/>
+        <location filename="../forms/mainwindow.cpp" line="514"/>
         <source>网络异常断开。</source>
         <translation>ネットが異常切断された。</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="584"/>
+        <location filename="../forms/mainwindow.cpp" line="529"/>
         <source>拨号成功</source>
         <translation>ダイヤルアップ成功</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="596"/>
+        <location filename="../forms/mainwindow.cpp" line="541"/>
         <source>重播失败，正在关闭验证</source>
         <translation>再ダイヤルが失敗しており、閉鎖検証</translation>
     </message>
@@ -882,38 +839,38 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">NDRキャンパスネットワーク認証</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="675"/>
+        <location filename="../forms/mainwindow.cpp" line="620"/>
         <source>警告</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="676"/>
+        <location filename="../forms/mainwindow.cpp" line="621"/>
         <source>检查更新失败</source>
         <translation>検査更新が失敗しました</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="699"/>
+        <location filename="../forms/mainwindow.cpp" line="644"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>アップデートがあります、ダウンロードができない</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="710"/>
+        <location filename="../forms/mainwindow.cpp" line="655"/>
         <source>立即安装</source>
         <translation>今すぐインストール</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="713"/>
+        <location filename="../forms/mainwindow.cpp" line="658"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRは3分以内に切ります、そして更新する、もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="719"/>
+        <location filename="../forms/mainwindow.cpp" line="664"/>
         <source>打开软件包目录</source>
         <translation>パッケージソフト目録を開く</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="709"/>
-        <location filename="../forms/mainwindow.cpp" line="718"/>
+        <location filename="../forms/mainwindow.cpp" line="654"/>
+        <location filename="../forms/mainwindow.cpp" line="663"/>
         <source>稍后提醒</source>
         <translation>後で注意</translation>
     </message>
@@ -922,32 +879,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 日 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="723"/>
+        <location filename="../forms/mainwindow.cpp" line="668"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDRはも新しいバージョンのソフトウェアをダウンロードしました、フォルダを開き、手動でインストールしてください。もしあなたはすぐに更新したくない、次のヒントを選択して、そして%1をクリックしてください</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="740"/>
+        <location filename="../forms/mainwindow.cpp" line="685"/>
         <source>打开失败</source>
         <translation>オープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="741"/>
+        <location filename="../forms/mainwindow.cpp" line="686"/>
         <source>打开目录失败</source>
         <translation>フォルダをオープン失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="743"/>
+        <location filename="../forms/mainwindow.cpp" line="688"/>
         <source>安装失败</source>
         <translation>インストール失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="744"/>
+        <location filename="../forms/mainwindow.cpp" line="689"/>
         <source>启动安装程序失败</source>
         <translation>インストールプログラム起動失敗</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="747"/>
+        <location filename="../forms/mainwindow.cpp" line="692"/>
         <source>请尝试手动安装 %1</source>
         <translation>%1を手動インストールを試してください</translation>
     </message>
@@ -1000,57 +957,59 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="99"/>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="100"/>
         <source>打开失败
 检测到已经有一个实例正在运行。如果客户端上一次异常退出，请重试。</source>
-        <translation>起動が失敗した
+        <translation type="vanished">起動が失敗した
 もうひとりの実例を実行している。もしクライアントが異常脱退、再び試みて下さい。</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="105"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>起動が失敗した
 もうひとりの実例を実行している。</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="65"/>
+        <location filename="../utils.cpp" line="15"/>
         <source>考试专用</source>
         <translation>試験のみ</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="67"/>
+        <location filename="../utils.cpp" line="16"/>
         <source>教育网2M</source>
         <translation>教育2M</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="69"/>
         <source>联通20M</source>
-        <translation>聯通20M</translation>
+        <translation type="vanished">聯通20M</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="71"/>
+        <location filename="../utils.cpp" line="17"/>
+        <source>联通合约20M</source>
+        <translation type="unfinished">聯通契約30M {20M?}</translation>
+    </message>
+    <message>
+        <location filename="../utils.cpp" line="18"/>
         <source>联通合约30M</source>
         <translation>聯通契約30M</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="73"/>
+        <location filename="../utils.cpp" line="19"/>
         <source>联通合约50M</source>
         <translation type="unfinished">聯通契約30M {50M?}</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="75"/>
+        <location filename="../utils.cpp" line="20"/>
         <source>电信10M</source>
         <translation>電信10M</translation>
     </message>
     <message>
-        <location filename="../common.cpp" line="77"/>
+        <location filename="../utils.cpp" line="21"/>
         <source>电信合约10M</source>
         <translation>電信契約10M</translation>
     </message>
@@ -1145,27 +1104,27 @@ p, li { white-space: pre-wrap; }
         <translation>注意：言語を変更したら、発効するのはプログラムを再起動ことが必要。</translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="24"/>
+        <location filename="../forms/settingsdialog.cpp" line="23"/>
         <source>/ndr-client.exe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="218"/>
+        <location filename="../forms/settingsdialog.cpp" line="217"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="222"/>
+        <location filename="../forms/settingsdialog.cpp" line="221"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="228"/>
+        <location filename="../forms/settingsdialog.cpp" line="227"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="232"/>
+        <location filename="../forms/settingsdialog.cpp" line="231"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1282,6 +1241,80 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>解包程序以状态 %1 退出</source>
         <translation type="vanished">解冻プログラムは状态%1で終了</translation>
+    </message>
+</context>
+<context>
+    <name>WindowsBaseDsl</name>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="24"/>
+        <source>请尝试手动创建名为%1的适配器</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="25"/>
+        <source>拨号连接适配器初始化失败，%1</source>
+        <translation type="unfinished">ダイヤルアップ接続アダプタの初期化は失敗した、%1</translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="54"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="187"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="231"/>
+        <source>未知错误</source>
+        <translation type="unfinished">未知エラー</translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="62"/>
+        <source>1.检查网络线路是否通畅（尝试使用其他可正常拨号PC连接该网口拨号）
+2.请确保交换机及其连线完好.
+3.请确保网线已插好.
+若如上做问题仍未解决，请上报修网报修
+网址为: http://bx.neusoft.edu.cn/
+ ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="71"/>
+        <source>1.请检查账号或密码以及套餐设置是否正确.
+2.请检查套餐是否还未生效或已经过期.
+3.请确保当前没有连接到其他Wifi网络.
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="78"/>
+        <source>请尝试重新启动计算机.
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="83"/>
+        <source>请重新尝试拨号.
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="88"/>
+        <source>可能是一些拨号所依赖的服务无法启动所致
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="177"/>
+        <source>枚举RAS-CAPABLE设备时返回错误</source>
+        <translation type="unfinished">枚挙RAS-CAPABLE設備の際にエラー</translation>
+    </message>
+    <message>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="210"/>
+        <source>没有可用的RAS-CAPABLE设备</source>
+        <translation type="unfinished">利用できるRAS-CAPABLE設備がありません</translation>
     </message>
 </context>
 <context>

@@ -22,7 +22,7 @@ void ResourceManager::InitResourceManager() {
     mainWindow.reset(new MainWindow{profile});
     popUpInfomationDialog.reset(new PopUpInfomationDialog{});
 
-#ifndef QT_DEBUG
+#ifdef QT_DEBUG
     mainWindow->show();
 #endif
     loginDialog->show();
