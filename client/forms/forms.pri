@@ -9,7 +9,7 @@ HEADERS +=      $$PWD/aboutdialog.h \
                 $$PWD/messageviewerdialog.h \
                 $$PWD/hangupdialog.h \
                 $$PWD/feedbackdialog.h \
-                $$PWD/popupdialog.h
+    $$PWD/popupinfomationdialog.h
 
 SOURCES +=      $$PWD/aboutdialog.cpp \
                 $$PWD/mainwindow.cpp \
@@ -19,7 +19,7 @@ SOURCES +=      $$PWD/aboutdialog.cpp \
                 $$PWD/messageviewerdialog.cpp \
                 $$PWD/hangupdialog.cpp \
                 $$PWD/feedbackdialog.cpp \
-                $$PWD/popupdialog.cpp
+    $$PWD/popupinfomationdialog.cpp
 
 FORMS +=        $$PWD/aboutdialog.ui \
                 $$PWD/mainwindow.ui \

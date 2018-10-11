@@ -109,32 +109,6 @@ bool WindowsBaseDsl::isDisconnected() {
     return ret || rcs.rasconnstate == RASCS_Disconnected;
 }
 
-QString WindowsBaseDsl::getIpAddress() {
-    DWORD dwBufSize;
-    DWORD dwRet;
-    RASPPPIPW rip;
-    QString ipAddress;
-    rip.dwSize = sizeof(RASPPPIPW);
-    dwBufSize = sizeof(RASPPPIPW);
-    if((dwRet = ::RasGetProjectionInfoW(this->hRasConn,RASP_PppIp,
-                        static_cast<LPVOID>(&rip), static_cast<LPDWORD>(&dwBufSize) )) == ERROR_SUCCESS )
-    {
-        //printf("%s\n",rip.szIpAddress);
-        ipAddress.setUtf16(reinterpret_cast<const unsigned short*>(rip.szIpAddress), lstrlenW(rip.szIpAddress)+sizeof(WCHAR));
-    }
-    else
-    {
-        /*
-        char szErr[1024];
-        printf("Get pppip failed ,Error: %d\n",dwRet);
-        RasGetErrorString(dwRet,szErr,1024);
-        printf("ErrMsg: %s\n",szErr);
-        */
-        ipAddress = "";
-    }
-    return ipAddress;
-}
-
 QStringList WindowsBaseDsl::getAvailableInterfaces() {
     return QStringList{};
 }

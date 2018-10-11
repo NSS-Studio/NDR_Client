@@ -1,6 +1,6 @@
-#include "popupdialog.h"
+#include "popupinfomationdialog.h"
 #include <utils.hpp>
-popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
+PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
 {
     qDebug() << "create popUpDialog" << endl;
     pageNow = 1;
@@ -74,7 +74,7 @@ popUpDialog::popUpDialog(QWidget *parent) : QDialog(parent)
 }
 
 
-popUpDialog::~popUpDialog()
+PopUpInfomationDialog::~PopUpInfomationDialog()
 {
     qDebug() << "delete popUpDialog" << endl;
     delete popUp;
@@ -84,7 +84,7 @@ popUpDialog::~popUpDialog()
 //---------------------------function---------------------------//
 
 
-void popUpDialog::getXmlFromNSS(const QString &url)
+void PopUpInfomationDialog::getXmlFromNSS(const QString &url)
 {
     bool flag = true;
 #ifdef Q_OS_WIN
@@ -96,11 +96,11 @@ void popUpDialog::getXmlFromNSS(const QString &url)
         request.setSslConfiguration(this->sslConf);
 
         reply = manager.get(request);
-        connect(reply, &QNetworkReply::finished, this, &popUpDialog::getXmlDone);
+        connect(reply, &QNetworkReply::finished, this, &PopUpInfomationDialog::getXmlDone);
     }
 }
 
-void popUpDialog::getXmlDone()
+void PopUpInfomationDialog::getXmlDone()
 {
     qDebug() << "getXmlDone()" << endl;
     if (reply -> error() != QNetworkReply::NoError){
@@ -171,7 +171,7 @@ void popUpDialog::getXmlDone()
     }
 }
 
-void popUpDialog::showMessage()
+void PopUpInfomationDialog::showMessage()
 {
     qDebug() << "showMessage()" << endl;
     if (group.isEmpty()){
@@ -188,8 +188,8 @@ void popUpDialog::showMessage()
     if (pageNow == group.size())
         nextPage -> setEnabled(false);
 
-    connect(nextPage, &QPushButton::clicked, this, &popUpDialog::goNextPage);
-    connect(prePage, &QPushButton::clicked, this, &popUpDialog::goPrePage);
+    connect(nextPage, &QPushButton::clicked, this, &PopUpInfomationDialog::goNextPage);
+    connect(prePage, &QPushButton::clicked, this, &PopUpInfomationDialog::goPrePage);
 
     if (utils::settings->autoClose){
         time = new QTimer(this);
@@ -200,7 +200,7 @@ void popUpDialog::showMessage()
     popUp -> show();
 }
 
-void popUpDialog::timeCount()
+void PopUpInfomationDialog::timeCount()
 {
     if (timePass != 10){
         timePass++;
@@ -212,12 +212,12 @@ void popUpDialog::timeCount()
     }
 }
 
-void popUpDialog::resetTime()
+void PopUpInfomationDialog::resetTime()
 {
     timePass = 0;
 }
 
-void popUpDialog::goNextPage()
+void PopUpInfomationDialog::goNextPage()
 {
     qDebug() << "goNextPage()" << endl;
     if (pageNow < group.size())
@@ -239,7 +239,7 @@ void popUpDialog::goNextPage()
     resetTime();
 }
 
-void popUpDialog::goPrePage()
+void PopUpInfomationDialog::goPrePage()
 {
     qDebug() << "goPrePage()" << endl;
     if (pageNow > 1)

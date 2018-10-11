@@ -142,19 +142,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>macAddress：</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item row="0" column="2" rowspan="2">
@@ -213,19 +200,6 @@
          </item>
          <item>
           <widget class="QLabel" name="lblAllTime">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>TextLabel</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="lblMacAddress">
            <property name="minimumSize">
             <size>
              <width>0</width>

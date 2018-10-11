@@ -26,7 +26,7 @@ void AuthVerify::run() {
     qDebug() << "Function :" << __PRETTY_FUNCTION__
              << " AuthVerify run";
     QHostAddress const ndrPlugServer{NDR_PLUG_SERVER};
-    quint16 ndrPlugPort{NDR_PLUG_PORT};
+    quint16 const ndrPlugPort{NDR_PLUG_PORT};
     while (true) {
 
 

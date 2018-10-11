@@ -4,6 +4,7 @@
 #include <mainwindow.h>
 #include <logindialog.h>
 #include <localstorage.hpp>
+#include <popupinfomationdialog.h>
 
 ResourceManager::ResourceManager()
 {
@@ -19,6 +20,7 @@ void ResourceManager::InitResourceManager() {
     profile.reset(new LocalStorage{utils::appHome + "/config.db"});
     loginDialog.reset(new LoginDialog{profile});
     mainWindow.reset(new MainWindow{profile});
+    popUpInfomationDialog.reset(new PopUpInfomationDialog{});
 
 #ifndef QT_DEBUG
     mainWindow->show();
@@ -32,4 +34,8 @@ QSharedPointer<PPPoE> ResourceManager::getPPPoE() {
 
 QSharedPointer<LoginDialog> ResourceManager::getLoginDialog() {
     return loginDialog;
+}
+
+QSharedPointer<PopUpInfomationDialog> ResourceManager::getPopUpInfomationDialog() {
+    return popUpInfomationDialog;
 }

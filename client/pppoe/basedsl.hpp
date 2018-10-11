@@ -31,11 +31,6 @@ public:
      */
     virtual bool isDisconnected() = 0;
     /**
-     * @brief getIpAddress 获取IP地址
-     * @return IP地址字符串
-     */
-    virtual QString getIpAddress() = 0;
-    /**
      * @brief get_available_interfaces 获取可用网卡列表
      * @return 网卡名字符串列表
      */

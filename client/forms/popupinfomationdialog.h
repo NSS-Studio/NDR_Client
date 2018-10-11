@@ -41,12 +41,12 @@
 */
 #endif
 
-class popUpDialog : public QDialog
+class PopUpInfomationDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit popUpDialog(QWidget *parent = nullptr);
-    ~popUpDialog();
+    explicit PopUpInfomationDialog(QWidget *parent = nullptr);
+    ~PopUpInfomationDialog();
 
     void getXmlFromNSS(const QString &url);
 

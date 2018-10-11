@@ -274,34 +274,6 @@ bool MacOsBaseDsl::isDisconnected()
     return SCNetworkConnectionGetStatus(connection) == kSCNetworkConnectionDisconnected;
 }
 
-static in_addr_t getAddressByInterface(const char *iface) {
-    struct ifaddrs *ifaddr = nullptr, *ifaddr_o;
-    if (getifaddrs(&ifaddr) == -1) {
-        perror("getifaddrs");
-        return (in_addr_t)-1;
-    }
-    ifaddr_o = ifaddr;
-    do {
-        if (ifaddr->ifa_addr && ifaddr->ifa_addr->sa_family == AF_INET &&
-            strcmp(ifaddr->ifa_name, iface) == 0) {
-            in_addr_t r =
-                ((struct sockaddr_in *)ifaddr->ifa_addr)->sin_addr.s_addr;
-            freeifaddrs(ifaddr_o);
-            return r;
-        }
-        ifaddr = ifaddr->ifa_next;
-    } while (ifaddr);
-    freeifaddrs(ifaddr_o);
-    return (in_addr_t)-1;
-}
-
-QString MacOsBaseDsl::getIpAddress() {
-    in_addr_t addr = getAddressByInterface("ppp0");
-    if (addr == (in_addr_t)-1)
-        return tr("未知");
-    return QHostAddress(htonl(addr)).toString();
-}
-
 QStringList MacOsBaseDsl::getAvailableInterfaces() {
     SCPreferencesRef preferences =
         SCPreferencesCreate(nullptr, CFSTR("NSS"), nullptr);

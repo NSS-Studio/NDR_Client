@@ -156,28 +156,6 @@ bool LinuxBaseDsl::isDisconnected() {
         state != NM_ACTIVE_CONNECTION_STATE_ACTIVATED;
 }
 
-QString LinuxBaseDsl::getIpAddress() {
-    QDBusInterface active_prop(NM_DBUS_SERVICE, activeObjectPath.path(), "org.freedesktop.DBus.Properties", QDBusConnection::systemBus());
-    QDBusReply<QDBusVariant> device_reply = active_prop.call("Get", NM_DBUS_INTERFACE_ACTIVE_CONNECTION, "Devices");
-    if(!device_reply.isValid()) {
-        return device_reply.error().message();
-    }
-    QDBusArgument args = device_reply.value().variant().value<QDBusArgument>();
-    args.beginArray();
-    QDBusObjectPath device_object_path;
-    args >> device_object_path;
-    //qDebug() << device_object_path.path();
-    args.endArray();
-    QDBusInterface device_prop(NM_DBUS_SERVICE, device_object_path.path(), "org.freedesktop.DBus.Properties", QDBusConnection::systemBus());
-    QDBusReply<QDBusVariant> ipaddr_reply = device_prop.call("Get", NM_DBUS_INTERFACE_DEVICE, "Ip4Address");
-    if(!ipaddr_reply.isValid()) {
-        return ipaddr_reply.error().message();
-    }
-    unsigned int ipaddr = ipaddr_reply.value().variant().toUInt();
-    qDebug("ipaddr = %u", ipaddr);
-    return QHostAddress(htonl(ipaddr)).toString();
-}
-
 QStringList LinuxBaseDsl::getAvailableInterfaces() {
     QDBusInterface networkmanager(NM_DBUS_SERVICE,
                                   NM_DBUS_PATH,

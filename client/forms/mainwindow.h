@@ -14,7 +14,7 @@
 #include "feedbackdialog.h"
 #include "getinfoaboutnss.h"
 #include "hangupdialog.h"
-#include "popupdialog.h"
+#include "popupinfomationdialog.h"
 #include "updateservice.h"
 #include <resourcemanager.hpp>
 namespace Ui {
@@ -58,6 +58,7 @@ private:
     QSharedPointer<PPPoE> pppoe;
     QSharedPointer<LoginDialog> loginDialog;
     QSharedPointer<LocalStorage> profile;
+    QSharedPointer<PopUpInfomationDialog> popUpInfomationDialog;
     Ui::MainWindow *ui;
     NoticeDialog *noticeDialog;
     SettingsDialog *settingsDialog;
@@ -65,7 +66,6 @@ private:
     FeedbackDialog *feedbackDialog;
     QSystemTrayIcon *trayIcon;
     QMenu *myMenu;
-    popUpDialog *popUp;
 
     State state;
     bool app_exiting; //退出标记

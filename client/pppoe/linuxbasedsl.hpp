@@ -26,7 +26,6 @@ public:
               QString &errorMessage);
     void hangUp();
     bool isDisconnected();
-    QString getIpAddress();
     QStringList getAvailableInterfaces();
 
 private:

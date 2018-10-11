@@ -18,7 +18,6 @@ public:
 	QString lastError();
 	QString getUserName();
 	QString getIpAddress();
-    QVariant getHostMacAddress();
     QStringList getAvailableInterfaces();
 
 private:

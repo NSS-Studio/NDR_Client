@@ -26,7 +26,7 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
     pppoe = utils::resourceManager->getPPPoE();
     loginDialog = utils::resourceManager->getLoginDialog();
 
-    popUp = new popUpDialog();
+    popUpInfomationDialog = utils::resourceManager->getPopUpInfomationDialog();
 
     this->ui->menuTrayLogin->menuAction()->setVisible(false);
     this->ui->menuTrayWorking->menuAction()->setVisible(false);
@@ -81,7 +81,6 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
             &MainWindow::downloadFinished);
 
     this->ui->lblAllTime->setText("NULL");
-    this->ui->lblMacAddress->setText("NULL");
 
     aboutDialog = nullptr;
     settingsDialog = nullptr;
@@ -116,10 +115,6 @@ MainWindow::~MainWindow() {
     trayIcon->hide();
     delete trayIcon;
     delete ui;
-
-    // delete logoffShortcut;
-    delete popUp;
-    // delete settings;
 }
 
 void MainWindow::tryLogin() {
@@ -238,7 +233,6 @@ void MainWindow::dialFinished(bool ok) {
 
         noticeDialog->showMessage(tr("拨号成功，开启认证"));
         this->ui->lblAddress->setText(pppoe->getIpAddress());
-        this->ui->lblMacAddress->setText(pppoe->getHostMacAddress().toString());
         this->connTime = 0;
         this->ui->lblTime->setText(time_humanable(connTime));
 
@@ -439,7 +433,7 @@ void MainWindow::timerEvent(QTimerEvent *) {
     // time ++ ;
 
     if (!(timepassed % 300))
-        popUp->getXmlFromNSS(NDR_POPUP_URL);
+        popUpInfomationDialog->getXmlFromNSS(NDR_POPUP_URL);
     timepassed += 1;
 }
 
@@ -545,11 +539,6 @@ void MainWindow::redialFinished(bool ok) {
     qDebug() << "redialFinished() exit";
 }
 
-// void MainWindow::logoffShortcutActivated()
-//{
-//    this->ui->actionLogoff->trigger();
-//    qDebug() << "HOTKEY";
-//}
 
 void MainWindow::on_actionActionFeedback_triggered() {
     if (!feedbackDialog)

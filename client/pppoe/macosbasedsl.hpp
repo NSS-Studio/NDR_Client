@@ -14,7 +14,6 @@ public:
     bool dial(const QString &username, const QString &password,const QString &device_name, QString &errorMessage);
     void hangUp();
     bool isDisconnected();
-    QString getIpAddress();
     QStringList getAvailableInterfaces();
 private:
     SCNetworkConnectionRef connection = nullptr;

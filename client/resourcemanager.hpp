@@ -6,6 +6,7 @@ class PPPoE;
 class MainWindow;
 class LoginDialog;
 class LocalStorage;
+class PopUpInfomationDialog;
 class ResourceManager final
 {
 public:
@@ -15,12 +16,13 @@ public:
 
     QSharedPointer<PPPoE> getPPPoE();
     QSharedPointer<LoginDialog> getLoginDialog();
-
+    QSharedPointer<PopUpInfomationDialog> getPopUpInfomationDialog();
 private:
     QSharedPointer<PPPoE> pppoe;
     QSharedPointer<MainWindow> mainWindow;
     QSharedPointer<LocalStorage> profile;
     QSharedPointer<LoginDialog> loginDialog;
+    QSharedPointer<PopUpInfomationDialog> popUpInfomationDialog;
 };
 
 #endif // RESOURCEMANAGER_HPP
