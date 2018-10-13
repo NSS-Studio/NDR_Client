@@ -262,7 +262,7 @@ void PopUpInfomationDialog::goPrePage()
 }
 
 #ifdef Q_OS_WIN
-bool popUpDialog::checkWindow()
+bool PopUpInfomationDialog::checkWindow()
 {
     qDebug() << "checkWindow()" << endl;
 
