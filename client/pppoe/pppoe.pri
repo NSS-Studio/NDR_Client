@@ -20,7 +20,6 @@ unix:!macx {
     HEADERS += $$PWD/linuxbasedsl.hpp
     SOURCES += $$PWD/linuxbasedsl.cpp
     QT      += dbus
-    INCLUDEPATH += /usr/include/NetworkManager
 }
 
 macx {
