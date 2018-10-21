@@ -10,7 +10,7 @@ public:
 	~PPPoE();
 	void run();
 	void kill();
-	bool dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &device_name);
+    bool dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &deviceName);
 	bool redialRAS();
 	void hangUp();
     bool isDisconnect();
@@ -18,14 +18,16 @@ public:
 	QString lastError();
 	QString getUserName();
 	QString getIpAddress();
+    QString getDeviceName() const;
     QStringList getAvailableInterfaces();
 
 private:
+    void setDeviceName(QString const& deviceName);
     QSharedPointer<BaseDsl> basedsl;
 	QString entryName;
 	QString username;
 	QString password;
-	QString device_name;
+    QString deviceName;
 	QString errorMessage;
 	bool preparePhoneBook();
     bool stop_now = false;

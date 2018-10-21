@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/qmlforms">
+        <file>PopUpInfomation.qml</file>
+        <file>PopUpInfomationForm.ui.qml</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>qmlforms/image.png</file>
+    </qresource>
+</RCC>

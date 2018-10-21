@@ -111,7 +111,7 @@ void LoginDialog::on_btnLogin_clicked() {
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
     QStringList networkInterface = this->pppoe->getAvailableInterfaces();
     this->set_interface_list(networkInterface);
-    this->set_device_name(utils::networkInterfaceCardName);
+    this->set_device_name(pppoe->getDeviceName());
 #endif
     this->hide();
 }

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT  += core network widgets xml
+QT  += core network widgets xml quick svg
 TARGET = ndr-client #目标文件
 TEMPLATE = app
 CONFIG += c++14 warn_on exceptions
@@ -41,7 +41,8 @@ HEADERS  += ndrapplication.hpp \
             ndrconfig.hpp \
             resourcemanager.hpp
 
-RESOURCES += client.qrc
+RESOURCES += client.qrc \
+             qmlforms.qrc
 
 macx {
 	TARGET = "NDR Client"

@@ -139,9 +139,6 @@ void MainWindow::tryLogin() {
     noticeDialog->showMessage(tr("正在拨号. . ."));
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, device_name);
 
-    // TODO delete
-
-    utils::networkInterfaceCardName = device_name;
 
     // this->show();
     // Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);

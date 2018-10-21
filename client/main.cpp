@@ -15,6 +15,12 @@
 #include <qapplication.h>
 #include <resourcemanager.hpp>
 
+#include <QQuickView>
+#include <QQmlContext>
+#include <QQuickItem>
+#include <QQmlEngine>
+#include <QQmlComponent>
+
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
 #endif
@@ -75,6 +81,10 @@ int main(int argc, char *argv[]) {
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
     NdrApplication ndrApp("ndr-client-new", argc, argv);
+    if (ndrApp.shouldExit()) {
+        exit(-1);
+    }
+
 
     ndrApp.setQuitOnLastWindowClosed(false);
 
@@ -93,6 +103,25 @@ int main(int argc, char *argv[]) {
     // current_locale;
 
     utils::initResourceManager();
+
+//    QQmlEngine engine;
+//    QQmlComponent component(&engine, QUrl("qrc:/qmlforms/PopUpInfomationForm.ui.qml"));
+//    QObject *object = component.create();
+
+
+
+//    QQuickView view;
+////    view.setResizeMode(QQuickView::SizeRootObjectToView);
+//    view.setSource(QUrl("qrc:/qmlforms/PopUpInfomationForm.ui.qml"));
+//    auto text = view.rootObject()->findChild<QQuickItem*>("welcome");
+//    if (text) {
+//        text->setProperty("text", "哞菇， 咕咕咕");
+//    } else {
+
+//    }
+//    view.setFlag(Qt::FramelessWindowHint, true);
+//    view.show();
+
 
     return ndrApp.exec();
 }

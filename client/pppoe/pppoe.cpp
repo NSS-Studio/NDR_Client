@@ -29,7 +29,7 @@ void PPPoE::run() {
     //else
     //    ret = basedsl -> dial(username, password, device_name, errorMessage);
 
-    bool ret = basedsl->dial(username, password, device_name, errorMessage);
+    bool ret = basedsl->dial(username, password, deviceName, errorMessage);
     qDebug() << "failed: " << errorMessage;
     if(ret){
         if(isRedial)
@@ -98,7 +98,7 @@ bool PPPoE::dialRAS(const QString &entryName, const QString &username, const QSt
     this->entryName = entryName;
     this->username = username;
     this->password = password;
-    this->device_name = device_name;
+    this->deviceName = device_name;
     this->isRedial = false;
     this->stop_now = false;
     qDebug() << "username" << username;
@@ -143,4 +143,8 @@ QStringList PPPoE::getAvailableInterfaces() {
 bool PPPoE::isDisconnect()
 {
     return basedsl->isDisconnected();
+}
+
+QString PPPoE::getDeviceName() const {
+    return this->deviceName;
 }
