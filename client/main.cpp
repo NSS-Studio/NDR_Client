@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
 #if 0 //样式没法看，有时间好好把图P一P，暂时闭了
     __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
 #endif
-    utils::initResourceManager();
+    utils::resourceManager.InitResourceManager();
 
 //    QQmlEngine engine;
 //    QQmlComponent component(&engine, QUrl("qrc:/qmlforms/PopUpInfomationForm.ui.qml"));

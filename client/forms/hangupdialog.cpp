@@ -17,9 +17,7 @@ HangupDialog::HangupDialog(QWidget *parent) :
 #endif
 }
 
-HangupDialog::~HangupDialog()
-{
-    delete ui;
+HangupDialog::~HangupDialog() {
 }
 
 void HangupDialog::closeEvent(QCloseEvent *event)

@@ -7,29 +7,27 @@
 #include <QDesktopServices>
 #include <QDomDocument>
 #include <QSslCertificate>
-
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
 namespace Ui {
 	class FeedbackDialog;
 }
 
-class FeedbackDialog : public QDialog
+class FeedbackDialog : public QDialog, public QEnableSharedFromThis<FeedbackDialog>
 {
 	Q_OBJECT
-
 public:
     explicit FeedbackDialog(QWidget *parent = nullptr);
 	~FeedbackDialog();
 	void setLoginData(QString account,QString combo);
 	void show();
-
 private slots:
 	void on_sldScore_sliderMoved(int position);
 	void on_chkToScore_clicked(bool checked);
 	void on_btnSubmit_clicked();
 	void postFinished();
-
 private:
-	Ui::FeedbackDialog *ui;
+    QSharedPointer<Ui::FeedbackDialog> ui;
     QSslConfiguration sslConf;
 	QNetworkAccessManager nam;
 	QNetworkRequest request;

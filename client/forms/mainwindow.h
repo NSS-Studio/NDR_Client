@@ -6,27 +6,29 @@
 #include <QSystemTrayIcon>
 
 #include "aboutdialog.h"
-#include <localstorage.hpp>
+#include "localstorage.hpp"
 #include "logindialog.h"
 #include "noticedialog.h"
-#include <pppoe.hpp>
+#include "pppoe.hpp"
 #include "settingsdialog.h"
 #include "feedbackdialog.h"
 #include "getinfoaboutnss.h"
 #include "hangupdialog.h"
 #include "popupinfomationdialog.h"
 #include "updateservice.h"
-#include <resourcemanager.hpp>
+#include "resourcemanager.hpp"
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow, public QEnableSharedFromThis<MainWindow>
+{
     Q_OBJECT
 
 public:
-    explicit MainWindow(QSharedPointer<LocalStorage> profile,
-                        QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     enum class State { Logining, Working, Others };
 
@@ -55,16 +57,11 @@ private slots:
     void on_goDnuiBrowser_clicked();
 
 private:
-    QSharedPointer<PPPoE> pppoe;
-    QSharedPointer<LoginDialog> loginDialog;
-    QSharedPointer<LocalStorage> profile;
-    QSharedPointer<PopUpInfomationDialog> popUpInfomationDialog;
-    QSharedPointer<AboutDialog> aboutDialog;
     QSharedPointer<QSystemTrayIcon> trayIcon;
     QSharedPointer<Ui::MainWindow> ui;
     QSharedPointer<NoticeDialog> noticeDialog;
-    SettingsDialog *settingsDialog;
-    FeedbackDialog *feedbackDialog;
+    QSharedPointer<SettingsDialog>settingsDialog;
+    QSharedPointer<FeedbackDialog> feedbackDialog;
     QMenu *myMenu;
 
     State state;

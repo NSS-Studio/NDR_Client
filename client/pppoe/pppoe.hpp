@@ -3,7 +3,12 @@
 #include <QtCore>
 #include <basedsl.hpp>
 #include <QVariant>
-class PPPoE final : public QThread {
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
+class PPPoE final :
+        public QThread,
+        public QEnableSharedFromThis<PPPoE>
+{
 	Q_OBJECT
 public:
     explicit PPPoE(QObject *parent = nullptr);

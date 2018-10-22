@@ -4,17 +4,15 @@
 #include <QCompleter>
 #include <QVector>
 #include <utils.hpp>
-LoginDialog::LoginDialog(QSharedPointer<LocalStorage> profile,
-                         QWidget *parent)
+LoginDialog::LoginDialog(QWidget *parent)
     : QDialog{parent},
-      profile{profile},
       ui{new Ui::LoginDialog} {
     Qt::WindowFlags flags = Qt::Dialog;
     flags |= Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint;
     setWindowFlags(flags);
     ui->setupUi(this);
 
-    pppoe = utils::resourceManager->getPPPoE();
+    auto pppoe = utils::resourceManager.getPPPoE();
 
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();
@@ -38,7 +36,7 @@ LoginDialog::LoginDialog(QSharedPointer<LocalStorage> profile,
     QStringList postfitList;
     postfitList = utils::getDrModelPostfixTable();
 
-    foreach (QString postfit, postfitList) {
+    for(auto const& postfit :postfitList) {
         qDebug() << postfit;
         QString caption;
         utils::getDrModelCaption(postfit, caption);
@@ -63,22 +61,8 @@ this->move((desktop_width-this->width())/2,(desktop_height-this->height())/2-200
 #endif
 }
 
-LoginDialog::~LoginDialog() { delete ui; }
-/*
-bool LoginDialog::show(QString &username,QString password,int &type)
-{
-    if(this->exec()==QDialog::Accepted)
-    {
-        username=this->ui->cmbAccount->currentText();
-        password=this->ui->editPassword->text();
-        type = this->ui->comboBox->currentIndex();
-        return true;
-    }else
-    {
-        return false;
-    }
-}
-*/
+LoginDialog::~LoginDialog() { }
+
 void LoginDialog::getFormData(QString &username, QString &password,
                               QString &model, QString &device_name,
                               bool *autoLogin, bool *savePassword) {
@@ -109,7 +93,8 @@ void LoginDialog::on_btnLogin_clicked() {
     // this->accept();
     emit myaccepted();
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
-    QStringList networkInterface = this->pppoe->getAvailableInterfaces();
+    auto pppoe = utils::resourceManager.getPPPoE();
+    QStringList networkInterface = pppoe->getAvailableInterfaces();
     this->set_interface_list(networkInterface);
     this->set_device_name(pppoe->getDeviceName());
 #endif
@@ -117,6 +102,7 @@ void LoginDialog::on_btnLogin_clicked() {
 }
 
 void LoginDialog::on_btnDelUserInfo_clicked() {
+    auto profile = utils::resourceManager.getProfile();
     if (profile->open()) {
         int index;
         index = ui->cmbAccount->findText(ui->cmbAccount->currentText());
@@ -150,7 +136,7 @@ this->ui->cmbAccount->removeItem(index);
 
 void LoginDialog::show() {
     QStringList list;
-
+    auto profile = utils::resourceManager.getProfile();
     if (profile->open()) {
         QString preUsername, prePassword;
         QString saved_device_name;
@@ -214,6 +200,7 @@ void LoginDialog::show() {
 }
 
 void LoginDialog::on_cmbAccount_editTextChanged(const QString &arg1) {
+    auto profile = utils::resourceManager.getProfile();
     if (arg1.length() > 1) {
         if (profile->open()) {
             QString password;

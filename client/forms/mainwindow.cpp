@@ -8,19 +8,16 @@
 #include <QUrl>
 #include "utils.hpp"
 
-MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
-                       QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-      profile{profile},
       ui{new Ui::MainWindow} {
 
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
 
-    pppoe = utils::resourceManager->getPPPoE();
-    loginDialog = utils::resourceManager->getLoginDialog();
-    aboutDialog = utils::resourceManager->getAboutDialog();
-    popUpInfomationDialog = utils::resourceManager->getPopUpInfomationDialog();
+    auto pppoe = utils::resourceManager.getPPPoE();
+    auto loginDialog = utils::resourceManager.getLoginDialog();
+    auto aboutDialog = utils::resourceManager.getAboutDialog();
 
     ui->menuTrayLogin->menuAction()->setVisible(false);
     ui->menuTrayWorking->menuAction()->setVisible(false);
@@ -48,7 +45,7 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
         close();
         exit(1);
     }
-    this->loginDialog->set_interface_list(interfaces);
+    loginDialog->set_interface_list(interfaces);
 #endif
     connect(loginDialog.get(), &LoginDialog::myaccepted, this, &MainWindow::tryLogin);
     connect(loginDialog.get(), &LoginDialog::finished, this, &MainWindow::loginWindowClosed);
@@ -75,11 +72,6 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
 }
 
 MainWindow::~MainWindow() {
-    if (settingsDialog)
-        delete settingsDialog;
-    if (feedbackDialog)
-        delete feedbackDialog;
-
     trayIcon->hide();
 }
 
@@ -88,6 +80,7 @@ void MainWindow::tryLogin() {
     QString realUsername;
     QString postfix;
     onStopLogining();
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     loginDialog->getFormData(username, password, postfix, deviceName);
     this->ui->lblAccount->setText(username);
 
@@ -100,6 +93,7 @@ void MainWindow::tryLogin() {
     realUsername = "\r\n" + username + postfix;
     //    realUsername=username;
     noticeDialog->showMessage(tr("正在拨号. . ."));
+    auto pppoe = utils::resourceManager.getPPPoE();
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, deviceName);
 }
 
@@ -130,6 +124,9 @@ QString MainWindow::time_humanable(int sec) {
 
 void MainWindow::dialFinished(bool ok) {
     qDebug() << QString("dialFinished(%1) enter").arg(ok);
+    auto profile = utils::resourceManager.getProfile();
+    auto loginDialog = utils::resourceManager.getLoginDialog();
+    auto pppoe = utils::resourceManager.getPPPoE();
     if (ok) {
         if (profile->open()) {
             QString username, password, device_name;
@@ -271,12 +268,12 @@ void MainWindow::on_actionQuit_triggered() {
 
 void MainWindow::on_actionShowWindow_triggered() {
     //奇怪
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     if (state == State::Working) {
         this->show();
         this->activateWindow();
         isMainWindowMinimized = false;
     } else if (state == State::Logining) {
-        // loginDialog->showNormal();
         loginDialog->show();
         loginDialog->activateWindow();
     }
@@ -298,14 +295,15 @@ void MainWindow::on_actionLogoff_triggered() {
     QEventLoop loop;
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
-
-    this->pppoe->hangUp();
+    auto pppoe = utils::resourceManager.getPPPoE();
+    pppoe->hangUp();
     qDebug() << "this->pppoe->hangUp();" << endl;
     onStopWorking();
     qDebug() << "onStopWorking();" << endl;
 }
 
 void MainWindow::on_actionAbout_triggered() {
+    auto aboutDialog = utils::resourceManager.getAboutDialog();
     if (aboutDialog->isVisible())
         aboutDialog->activateWindow();
     else
@@ -333,14 +331,16 @@ void MainWindow::timerEvent(QTimerEvent *) {
     this->ui->lblAllTime->setText(time_humanable(time * 60 + timepassed % 60));
     // time ++ ;
 
-    if (!(timepassed % 300))
-        popUpInfomationDialog->getXmlFromNSS(NDR_POPUP_URL);
+//    auto popUpInfomationDialog = utils::resourceManager.getPopUpInfomationDialog();
+
+//    if (!(timepassed % 300))
+//        popUpInfomationDialog->getXmlFromNSS(NDR_POPUP_URL);
     timepassed += 1;
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    if (settingsDialog == nullptr)
-        settingsDialog = new SettingsDialog();
+    if (settingsDialog.isNull())
+        settingsDialog.reset(new SettingsDialog{});
     if (settingsDialog->getFormData(utils::settings.get())) {
         utils::settings->writeAll();
     }
@@ -348,7 +348,9 @@ void MainWindow::on_actionSettings_triggered() {
 
 void MainWindow::hangedUp(bool natural) {
     qDebug() << "hangedUp() enter";
-
+    auto profile = utils::resourceManager.getProfile();
+    auto pppoe = utils::resourceManager.getPPPoE();
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     if (profile->open()) {
         profile->setUserOnlineTime(this->username, allTime);
 
@@ -423,7 +425,8 @@ void MainWindow::redialFinished(bool ok) {
 
 void MainWindow::on_actionActionFeedback_triggered() {
     if (!feedbackDialog)
-        feedbackDialog = new FeedbackDialog(this);
+        feedbackDialog.reset(new FeedbackDialog{});
+    auto pppoe = utils::resourceManager.getPPPoE();
     feedbackDialog->setLoginData(pppoe->getUserName().trimmed(), "0");
     if (feedbackDialog->isVisible())
         feedbackDialog->activateWindow();
@@ -433,8 +436,8 @@ void MainWindow::on_actionActionFeedback_triggered() {
 
 void MainWindow::onStartWorking() {
     qDebug() << "Timer creat" << endl;
-    // QMessageBox::information(this,"","onStartWorking");
-
+    auto loginDialog = utils::resourceManager.getLoginDialog();
+    auto pppoe = utils::resourceManager.getPPPoE();
     this->show();
     loginDialog->hide();
     trayIcon->setIcon(QIcon(":/icons/icons/tray_working.png"));
@@ -464,6 +467,7 @@ void MainWindow::onStartLogining() {
     qDebug() << "Function: onStartLogining" << endl;
     // QMessageBox::information(this,"","onStartLogining");
     this->hide();
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     loginDialog->show();
     trayIcon->setIcon(QIcon(":/icons/icons/tray_login.png"));
     trayIcon->setToolTip(tr("NDR 校园网络认证"));
@@ -475,7 +479,7 @@ void MainWindow::onStartLogining() {
 }
 
 void MainWindow::onStopLogining() {
-    // QMessageBox::information(this,"","onStopLogining");
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     this->state = State::Others;
     this->trayIcon->hide();
     loginDialog->hide();
@@ -499,6 +503,7 @@ void MainWindow::checkFinished(bool error, int major, int minor,
 
 void MainWindow::downloadFinished(bool error, QString errMsg) {
     qDebug() << "downloadFinished() enter";
+    auto loginDialog = utils::resourceManager.getLoginDialog();
     if (error) {
         if (state == State::Working) {
             qDebug() << errMsg;

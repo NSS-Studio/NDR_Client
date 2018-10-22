@@ -22,7 +22,7 @@
 #include <QDesktopWidget>
 #include <QSettings>
 #include <QSharedPointer>
-
+#include <QEnableSharedFromThis>
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <winuser.h>
@@ -42,14 +42,15 @@
 */
 #endif
 
-class PopUpInfomationDialog : public QDialog
+class PopUpInfomationDialog:
+        public QObject,
+        public QEnableSharedFromThis<PopUpInfomationDialog>
 {
     Q_OBJECT
 public:
-    explicit PopUpInfomationDialog(QWidget *parent = nullptr);
+    explicit PopUpInfomationDialog();
     ~PopUpInfomationDialog();
-
-    void getXmlFromNSS(const QString &url);
+    void getXmlFromNSS(QString const &url);
 
 private slots:
     void getXmlDone();
@@ -58,7 +59,7 @@ private slots:
     void timeCount();
 
 private:
-    QSharedPointer<QDialog> popUp;
+    QDialog* popUp;
     QLabel *laTitle;
     QLabel *laAuth;
     QLabel *page;

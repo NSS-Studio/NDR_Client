@@ -13,17 +13,15 @@ ResourceManager::ResourceManager()
 }
 
 ResourceManager::~ResourceManager() {
-
 }
 
 void ResourceManager::InitResourceManager() {
+    aboutDialog.reset(new AboutDialog{});
     pppoe.reset(new PPPoE{});
     profile.reset(new LocalStorage{utils::appHome + "/config.db"});
-    loginDialog.reset(new LoginDialog{profile});
-    mainWindow.reset(new MainWindow{profile});
-    popUpInfomationDialog.reset(new PopUpInfomationDialog{});
-    aboutDialog.reset(new AboutDialog{});
-
+    loginDialog.reset(new LoginDialog{});
+    mainWindow.reset(new MainWindow{});
+//    popUpInfomationDialog.reset(new PopUpInfomationDialog{});
 #ifdef QT_DEBUG
     mainWindow->show();
 #endif
@@ -31,17 +29,21 @@ void ResourceManager::InitResourceManager() {
 }
 
 QSharedPointer<PPPoE> ResourceManager::getPPPoE() {
-    return pppoe;
+    return pppoe->sharedFromThis();
 }
 
 QSharedPointer<LoginDialog> ResourceManager::getLoginDialog() {
-    return loginDialog;
+    return loginDialog->sharedFromThis();
 }
 
-QSharedPointer<PopUpInfomationDialog> ResourceManager::getPopUpInfomationDialog() {
-    return popUpInfomationDialog;
-}
+//QSharedPointer<PopUpInfomationDialog> ResourceManager::getPopUpInfomationDialog() {
+//    return popUpInfomationDialog->sharedFromThis();
+//}
 
 QSharedPointer<AboutDialog> ResourceManager::getAboutDialog() {
-    return aboutDialog;
+    return aboutDialog->sharedFromThis();
+}
+
+QSharedPointer<LocalStorage> ResourceManager::getProfile() {
+    return profile->sharedFromThis();
 }

@@ -9,7 +9,5 @@ MessageViewerDialog::MessageViewerDialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
-MessageViewerDialog::~MessageViewerDialog()
-{
-    delete ui;
+MessageViewerDialog::~MessageViewerDialog() {
 }

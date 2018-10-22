@@ -4,11 +4,12 @@
 #include <QDialog>
 #include <QCloseEvent>
 #include <QSharedPointer>
+#include <QEnableSharedFromThis>
 namespace Ui {
 class AboutDialog;
 }
 
-class AboutDialog : public QDialog
+class AboutDialog : public QDialog, public QEnableSharedFromThis<AboutDialog>
 {
     Q_OBJECT
 public:

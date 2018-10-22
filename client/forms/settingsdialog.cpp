@@ -33,11 +33,7 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
 #endif
 }
 
-SettingsDialog::~SettingsDialog()
-{
-    qDebug() << "settingDialog delete";
-	delete ui;
-//	delete config;
+SettingsDialog::~SettingsDialog() {
 }
 
 void SettingsDialog::on_buttonBox_accepted()

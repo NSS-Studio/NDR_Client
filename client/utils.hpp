@@ -22,7 +22,7 @@ namespace utils {
     extern QString networkInterfaceCardName;
     extern QSharedPointer<SettingsSet> settings;
     extern QTranslator ndr_tr, qt_tr;
-    extern QSharedPointer<ResourceManager> resourceManager;
+    extern ResourceManager resourceManager;
     extern QSharedPointer<QAESEncryption> encryption;
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
@@ -60,10 +60,6 @@ namespace utils {
     void initLanguage();
     void initFont(QString fontFile);
     void initStyleSheet(NdrApplication* a, QString sheetFile);
-    void initResourceManager();
-
-    void initNdrApp(int argc, char *argv[]);
-
     void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 }

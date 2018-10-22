@@ -5,8 +5,12 @@
 #include <QVector>
 #include <QtSql>
 #include <QSqlDatabase>
-#include <settingsset.hpp>
-class LocalStorage final : public QObject
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
+#include "settingsset.hpp"
+class LocalStorage final :
+        public QObject,
+        public QEnableSharedFromThis<LocalStorage>
 {
     Q_OBJECT
 public:

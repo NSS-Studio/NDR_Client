@@ -4,28 +4,29 @@
 //同时修改mainwindow 构造函数中的消息绑定
 #include <QDialog>
 #include <QMessageBox>
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
 #include "localstorage.hpp"
+#include "resourcemanager.hpp"
 
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <shellapi.h>
 #include <cstring>
 #include <fstream>
-#else
 #endif
-#include <resourcemanager.hpp>
+
 
 namespace Ui {
 class LoginDialog;
 }
 
-class LoginDialog : public QDialog
+class LoginDialog : public QDialog, public QEnableSharedFromThis<LoginDialog>
 {
     Q_OBJECT
     
 public:
-    explicit LoginDialog(QSharedPointer<LocalStorage> profile,
-                         QWidget *parent = nullptr);
+    explicit LoginDialog(QWidget *parent = nullptr);
 	~LoginDialog();
 	void getFormData(QString &username, QString &password, QString &type, QString &device_name, bool *autoLogin=0, bool *savePassword=0);
 	//bool show(QString &username,QString password, int &type);
@@ -44,21 +45,16 @@ private slots:
 	void on_chkAutoLogin_clicked(bool checked);
 	void on_chkSavePasswd_clicked(bool checked);
 	void handle_model_change(int);
-
     void on_btnShowPassword_clicked(bool checked);
-
 
 #ifdef Q_OS_WIN
     void on_btnWinsockReset_clicked();
 #endif
 private:
-    QSharedPointer<LocalStorage> profile;
-    QSharedPointer<PPPoE> pppoe;
-    Ui::LoginDialog* ui;
+    QSharedPointer<Ui::LoginDialog> ui;
 	QString autoLoginUser;
 	void set_device_name(const QString &);
 	void closeEvent(QCloseEvent * e);
-
 signals:
 	void myaccepted();
 };

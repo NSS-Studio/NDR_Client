@@ -3,6 +3,7 @@
 
 #include <QApplication>
 #include <QTcpServer>
+class ResourceManager;
 class NdrApplication: public QApplication
 {
 public:

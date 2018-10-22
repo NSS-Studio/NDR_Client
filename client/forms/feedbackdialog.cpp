@@ -17,12 +17,8 @@ FeedbackDialog::FeedbackDialog(QWidget *parent) :
     sslConf.setProtocol(QSsl::TlsV1_2);
 }
 
-FeedbackDialog::~FeedbackDialog()
-{
-    delete ui;
+FeedbackDialog::~FeedbackDialog() {
 }
-
-
 
 void FeedbackDialog::on_sldScore_sliderMoved(int position)
 {

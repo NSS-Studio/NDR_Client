@@ -4,24 +4,26 @@
 #include "settingsset.hpp"
 #include <QDialog>
 #include <QMessageBox>
-
+#include <QSettings>
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <winreg.h>
 #include <winbase.h>
 #endif
 
-class QSettings;
 namespace Ui {
 class SettingsDialog;
 }
 
-class SettingsDialog : public QDialog
+class SettingsDialog:
+        public QDialog,
+        public QEnableSharedFromThis<SettingsDialog>
 {
     Q_OBJECT
-    
 public:
-    explicit SettingsDialog(QWidget *parent=0);
+    explicit SettingsDialog(QWidget *parent = nullptr);
     ~SettingsDialog();
     bool getFormData(SettingsSet *settings);
     bool chkWeb();
@@ -37,14 +39,11 @@ public:
 
 private slots:
     void on_buttonBox_accepted();
-    
     void on_SettingsDialog_finished(int /*result*/);
-
     void on_chkAutoClose_pressed();
 
 private:
-	Ui::SettingsDialog *ui;
-	//QSettings *config;
+    QSharedPointer<Ui::SettingsDialog> ui;
 };
 
 #endif // SETTINGSDIALOG_H

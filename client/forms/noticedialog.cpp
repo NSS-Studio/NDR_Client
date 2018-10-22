@@ -18,9 +18,7 @@ NoticeDialog::NoticeDialog(QWidget *parent) :
 
 }
 
-NoticeDialog::~NoticeDialog()
-{
-    delete ui;
+NoticeDialog::~NoticeDialog() {
 }
 void NoticeDialog::showMessage(QString msg)
 {

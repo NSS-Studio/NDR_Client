@@ -1,30 +1,32 @@
 #include "popupinfomationdialog.h"
 #include <utils.hpp>
-PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
+PopUpInfomationDialog::PopUpInfomationDialog()
+    :QObject{nullptr}
 {
     qDebug() << "create popUpDialog" << endl;
     pageNow = 1;
-    popUp.reset(new QDialog{this, Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint});
-    popUp -> setWindowTitle(tr("通知"));
-    //popUp -> setWindowFlags(Qt::WindowStaysOnTopHint);
-    popUp -> setFixedSize(364, 228);
-    popUp -> move((QApplication::desktop()->availableGeometry().width() - popUp->width()), QApplication::desktop()->availableGeometry().height() - popUp->height() - 40);
+    popUp = new QDialog{nullptr, Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint};
+    popUp->setWindowTitle(tr("通知"));
+    popUp->setFixedSize(364, 228);
+    popUp->move(QApplication::desktop()->availableGeometry().width() - popUp->width(),
+                QApplication::desktop()->availableGeometry().height() - popUp->height() - 40);
 
-    qDebug() << QApplication::desktop()->availableGeometry().width() << " " << QApplication::desktop()->availableGeometry().height() << endl;
+    qDebug() << QApplication::desktop()->availableGeometry().width() << " "
+             << QApplication::desktop()->availableGeometry().height() << endl;
     mainLay = new QVBoxLayout();
     hbAuth = new QHBoxLayout();
     hbTitle = new QHBoxLayout();
     hbPage = new QHBoxLayout();
 
     page = new QLabel(tr("N/N"));
-    nextPage = new QPushButton(tr(">"), popUp.get());
-    prePage = new QPushButton(tr("<"), popUp.get());
-    laAuth = new QLabel(tr("作者: "), popUp.get());
-    laTitle = new QLabel(tr("标题: "), popUp.get());
-    closeTime = new QLabel(tr(" "), popUp.get());
-    liAuth = new QLineEdit(tr("Unknow"), popUp.get());
-    liTitle = new QLineEdit(tr("Unknow"), popUp.get());
-    teText = new QTextBrowser(popUp.get());
+    nextPage = new QPushButton(tr(">"), popUp);
+    prePage = new QPushButton(tr("<"), popUp);
+    laAuth = new QLabel(tr("作者: "), popUp);
+    laTitle = new QLabel(tr("标题: "), popUp);
+    closeTime = new QLabel(tr(" "), popUp);
+    liAuth = new QLineEdit(tr("Unknow"), popUp);
+    liTitle = new QLineEdit(tr("Unknow"), popUp);
+    teText = new QTextBrowser(popUp);
 
     liTitle -> setReadOnly(true);
     liAuth -> setReadOnly(true);
@@ -73,8 +75,8 @@ PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
     //popUp -> exec();
 }
 
-
 PopUpInfomationDialog::~PopUpInfomationDialog() {
+    popUp->deleteLater();
 }
 
 //---------------------------function---------------------------//

@@ -12,7 +12,7 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
 
     if (localListenningState == false) {
         QMessageBox::information(nullptr, QObject::tr("提示"), QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
-        qDebug() << "Function :"<< __PRETTY_FUNCTION__ << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
+        qDebug() << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
         exitState = true;
     } else {
         this->isRunning = true;

@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QtGui>
 #include <QThread>
-
+#include <QSharedPointer>
 namespace Ui {
 class NoticeDialog;
 }
@@ -23,7 +23,7 @@ protected:
     void mouseReleaseEvent ( QMouseEvent  * e );
     //void mouseDoubleClickEvent( QMouseEvent  * e );
 private:
-    Ui::NoticeDialog *ui;
+    QSharedPointer<Ui::NoticeDialog> ui;
     int x,y;
     bool isDown;
 };

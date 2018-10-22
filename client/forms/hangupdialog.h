@@ -7,28 +7,28 @@
 #include <QEventLoop>
 #include <QTimer>
 #include <QDebug>
+#include <QSharedPointer>
+#include <QEnableSharedFromThis>
 namespace Ui {
 class HangupDialog;
 }
 
-class HangupDialog : public QDialog
+class HangupDialog : public QDialog, public QEnableSharedFromThis<HangupDialog>
 {
     Q_OBJECT
-
 public:
-    explicit HangupDialog(QWidget *parent = 0);
+    explicit HangupDialog(QWidget *parent = nullptr);
     ~HangupDialog();
     void waitForUserAccept();
 	void setMessage(const QString &);
 	void setAcceptButtonText(const QString &);
 	void setDelayButtonText(const QString &);
-
 private slots:
     void on_btnDelay_clicked();
     void on_btnAccept_clicked();
 
 private:
-    Ui::HangupDialog *ui;
+    QSharedPointer<Ui::HangupDialog> ui;
     void closeEvent(QCloseEvent * event);
     bool event(QEvent * e);
     void timerEvent(QTimerEvent *);
@@ -36,7 +36,6 @@ private:
     int restTime;
     int timerId;
     bool close_now;
-
 };
 
 #endif // HANGUPDIALOG_H
