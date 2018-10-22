@@ -21,6 +21,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QSettings>
+#include <QSharedPointer>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -57,7 +58,7 @@ private slots:
     void timeCount();
 
 private:
-    QDialog *popUp;
+    QSharedPointer<QDialog> popUp;
     QLabel *laTitle;
     QLabel *laAuth;
     QLabel *page;

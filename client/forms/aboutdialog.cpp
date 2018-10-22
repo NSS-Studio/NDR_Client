@@ -11,19 +11,16 @@ AboutDialog::AboutDialog(QWidget *parent) :
     this->ui->lblBuildTime->setText(tr("构建于")+ " " + COMPL_DATATIME);
 }
 
-AboutDialog::~AboutDialog()
-{
-    delete ui;
+AboutDialog::~AboutDialog() {
+
 }
 
-void AboutDialog::on_AboutDialog_finished(int /*result*/)
-{
+void AboutDialog::on_AboutDialog_finished(int /*result*/) {
     
 }
 
 void AboutDialog::on_pushButton_clicked()
 {
-    //this->reject();
     this->hide();
 }
 

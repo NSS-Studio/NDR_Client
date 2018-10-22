@@ -76,15 +76,11 @@ int main(int argc, char *argv[]) {
         (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
 #endif
 
-    //need to implement
-    //utils::initNdrApp(argc, argv);
-
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
     NdrApplication ndrApp("ndr-client-new", argc, argv);
     if (ndrApp.shouldExit()) {
         exit(-1);
     }
-
 
     ndrApp.setQuitOnLastWindowClosed(false);
 
@@ -95,13 +91,6 @@ int main(int argc, char *argv[]) {
 #if 0 //样式没法看，有时间好好把图P一P，暂时闭了
     __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
 #endif
-
-//    Log::setLogFilename(appHome + "/auth.log");
-    // QSettings config(appHome + "/common.cfg", QSettings::IniFormat);
-    // QString current_locale = config.value("Locale",
-    // QLocale::system().name()).toString(); qDebug() << "current_locale" <<
-    // current_locale;
-
     utils::initResourceManager();
 
 //    QQmlEngine engine;
@@ -121,7 +110,6 @@ int main(int argc, char *argv[]) {
 //    }
 //    view.setFlag(Qt::FramelessWindowHint, true);
 //    view.show();
-
 
     return ndrApp.exec();
 }

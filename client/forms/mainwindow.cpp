@@ -6,13 +6,7 @@
 #include <QMessageBox>
 #include <QScreen>
 #include <QUrl>
-/*
-#ifdef Q_OS_MAC
-#include <QtGui/QMacStyle>
-#endif
-*/
-#include <utils.hpp>
-
+#include "utils.hpp"
 
 MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
                        QWidget *parent)
@@ -25,26 +19,24 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
 
     pppoe = utils::resourceManager->getPPPoE();
     loginDialog = utils::resourceManager->getLoginDialog();
-
+    aboutDialog = utils::resourceManager->getAboutDialog();
     popUpInfomationDialog = utils::resourceManager->getPopUpInfomationDialog();
 
-    this->ui->menuTrayLogin->menuAction()->setVisible(false);
-    this->ui->menuTrayWorking->menuAction()->setVisible(false);
+    ui->menuTrayLogin->menuAction()->setVisible(false);
+    ui->menuTrayWorking->menuAction()->setVisible(false);
     if (!QSystemTrayIcon::isSystemTrayAvailable()) {
-        trayIcon = nullptr;
         qDebug() << "System tray is not available, tray icon disabled";
-        return;
+    } else {
+        trayIcon.reset(new QSystemTrayIcon{});
+        this->trayIcon->show();
+        connect(trayIcon.get(), &QSystemTrayIcon::activated, this,
+                &MainWindow::iconActivated);
     }
 
-    trayIcon = new QSystemTrayIcon();
-    this->trayIcon->show();
-    connect(trayIcon, &QSystemTrayIcon::activated, this,
-            &MainWindow::iconActivated);
-
     //Init PPPoE singals&slots
-    connect(pppoe.get(), SIGNAL(dialFinished(bool)), this,
-            SLOT(dialFinished(bool)), Qt::QueuedConnection);
-    connect(pppoe.get(), SIGNAL(hangedUp(bool)), this, SLOT(hangedUp(bool)),
+    connect(pppoe.get(), &PPPoE::dialFinished, this,
+            &MainWindow::dialFinished, Qt::QueuedConnection);
+    connect(pppoe.get(), &PPPoE::hangedUp, this, &MainWindow::hangedUp,
             Qt::QueuedConnection);
 
 #ifndef Q_OS_WIN
@@ -58,90 +50,57 @@ MainWindow::MainWindow(QSharedPointer<LocalStorage> profile,
     }
     this->loginDialog->set_interface_list(interfaces);
 #endif
-    connect(loginDialog.get(), &LoginDialog::myaccepted,
-            this, &MainWindow::tryLogin);
-    connect(loginDialog.get(), SIGNAL(finished(int)), this,
-            SLOT(loginWindowClosed()));
+    connect(loginDialog.get(), &LoginDialog::myaccepted, this, &MainWindow::tryLogin);
+    connect(loginDialog.get(), &LoginDialog::finished, this, &MainWindow::loginWindowClosed);
 
-    // forget to delete this object, add to mainWindow's child to autoDelete
-    this->noticeDialog = new NoticeDialog(this);
+    noticeDialog.reset(new NoticeDialog{});
 
-
-    connect(this, SIGNAL(minimumWindow()), this, SLOT(hide()),
-            Qt::QueuedConnection); //绑定最小化到隐藏
-
+    connect(this, &MainWindow::minimumWindow, this, &MainWindow::hide, Qt::QueuedConnection); //绑定最小化到隐藏
     isMainWindowMinimized = false;
 
     //更新模块初始化
-    updateServer = new UpdateService(NDR_UPDATE_SERVER, utils::tempDir);
+    updateServer.reset(new UpdateService{NDR_UPDATE_SERVER, utils::tempDir}) ;
 
-    connect(updateServer, &UpdateService::checkFinished, this,
-            &MainWindow::checkFinished);
-    connect(updateServer, &UpdateService::downloadFinished, this,
-            &MainWindow::downloadFinished);
+    connect(updateServer.get(), &UpdateService::checkFinished, this, &MainWindow::checkFinished);
+    connect(updateServer.get(), &UpdateService::downloadFinished, this, &MainWindow::downloadFinished);
 
-    this->ui->lblAllTime->setText("NULL");
+    this->ui->lblAllTime->setText("NUL");
 
-    aboutDialog = nullptr;
     settingsDialog = nullptr;
     feedbackDialog = nullptr;
     app_exiting = false;
 
     onStartLogining();
 
-    /***/
-    // updateServer->checkUpdate();
-    //最后信息获取按钮的信号连接
 }
 
 MainWindow::~MainWindow() {
-    // can not kill timer at this function, the time counter will crash
-    // this->killTimer(timerId);
-
-    if (noticeDialog != nullptr)
-        delete noticeDialog;
-
-    if (updateServer)
-        delete updateServer;
-
-    if (aboutDialog)
-        delete aboutDialog;
     if (settingsDialog)
         delete settingsDialog;
-
     if (feedbackDialog)
         delete feedbackDialog;
 
     trayIcon->hide();
-    delete trayIcon;
-    delete ui;
 }
 
 void MainWindow::tryLogin() {
-    QString username, password, device_name, errorMessage;
+    QString username, password, deviceName, errorMessage;
     QString realUsername;
     QString postfix;
     onStopLogining();
-    loginDialog->getFormData(username, password, postfix, device_name);
+    loginDialog->getFormData(username, password, postfix, deviceName);
     this->ui->lblAccount->setText(username);
 
-    // h
     QString model_caption;
     if (utils::getDrModelCaption(postfix, model_caption))
         this->ui->lblType->setText(model_caption);
     else
         this->ui->lblType->setText(tr("未知"));
-    qDebug() << "Function: " << __PRETTY_FUNCTION__;
     qDebug() << "PPPoE Account: " << username + postfix;
-    realUsername = "\r\n" + username + postfix; //+ "@student";
-    //    realUsername=username;//+ "@student";
-
+    realUsername = "\r\n" + username + postfix;
+    //    realUsername=username;
     noticeDialog->showMessage(tr("正在拨号. . ."));
-    pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, device_name);
-
-
-    // this->show();
-    // Authenticat::getInstance()->beginVerify(DRCOM_SERVER_IP,DRCOM_SERVER_PORT);
+    pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, deviceName);
 }
 
 QString MainWindow::time_humanable(int sec) {
@@ -201,8 +160,6 @@ void MainWindow::dialFinished(bool ok) {
                     left = desktop_width - this->width() - 100;
                     top = (desktop_height - this->height()) / 2;
                 }
-                // QMessageBox::information(this,"",QString::number(width)+ " "
-                // + QString::number(height));
                 this->move(left, top);
                 // this->resize(width,height);
             } else {
@@ -237,22 +194,10 @@ void MainWindow::dialFinished(bool ok) {
         QEventLoop eventloop;
         QTimer::singleShot(800, &eventloop, SLOT(quit()));
         eventloop.exec();
-
-//                if(settings->autoMinimize)
-//                {
-//                    this->isMainWindowMinimized=true;
-//                    this->hide();
-//                    this->trayIcon->showMessage(tr("NDR
-//                    校园网络认证"),tr("主面板已最小化到这里，您可以进入设置关闭自动最小化功能。"),QSystemTrayIcon::Information,4000);
-//                }
         noticeDialog->close();
-//        Authenticat::getInstance()->beginVerify(
-//            DRCOM_SERVER_IP, DRCOM_SERVER_PORT); //必须在beginworkingui前
 
-        // verifyEncrypt();//必须在beginworkingui前
         if (ENABLE_UPDATE)
             updateServer->checkUpdate();
-        // getInfoAboutNss
         if (!utils::settings->webUpEnable)
             getMessageFromNSS();
 
@@ -272,8 +217,6 @@ void MainWindow::dialFinished(bool ok) {
 
 void MainWindow::getMessageFromNSS() {
     GetInfoAboutNSS *info = GetInfoAboutNSS::getInstance();
-    //    connect(info, &GetInfoAboutNSS::endGetInfo, info,
-    //    &GetInfoAboutNSS::deleteLater);
     info->checkInfoGet();
 }
 
@@ -281,18 +224,6 @@ void MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
 #ifndef Q_OS_MAC
     switch (reason) {
     case QSystemTrayIcon::Trigger:
-        /*
-                if(state==Working)
-                {
-                    this->show();
-                    this->activateWindow();
-                isMainWindowMinimized=false;
-                }
-                else if(state==Logining)
-                {
-                    loginDialog->show();
-                    loginDialog->activateWindow();
-                }*/
         on_actionShowWindow_triggered();
         break;
     default:
@@ -329,7 +260,7 @@ void MainWindow::changeEvent(QEvent *event) {
 }
 
 void MainWindow::on_actionQuit_triggered() {
-    if (state == Working) {
+    if (state == State::Working) {
         app_exiting = true;
         this->ui->actionLogoff->trigger();
         return;
@@ -340,11 +271,11 @@ void MainWindow::on_actionQuit_triggered() {
 
 void MainWindow::on_actionShowWindow_triggered() {
     //奇怪
-    if (state == Working) {
+    if (state == State::Working) {
         this->show();
         this->activateWindow();
         isMainWindowMinimized = false;
-    } else if (state == Logining) {
+    } else if (state == State::Logining) {
         // loginDialog->showNormal();
         loginDialog->show();
         loginDialog->activateWindow();
@@ -368,8 +299,6 @@ void MainWindow::on_actionLogoff_triggered() {
     QTimer::singleShot(100, &loop, SLOT(quit()));
     loop.exec();
 
-//    Authenticat::getInstance()->endVerify();
-    qDebug() << "Authenticat::getInstance()->endVerify();" << endl;
     this->pppoe->hangUp();
     qDebug() << "this->pppoe->hangUp();" << endl;
     onStopWorking();
@@ -377,8 +306,6 @@ void MainWindow::on_actionLogoff_triggered() {
 }
 
 void MainWindow::on_actionAbout_triggered() {
-    if (aboutDialog == nullptr)
-        aboutDialog = new AboutDialog();
     if (aboutDialog->isVisible())
         aboutDialog->activateWindow();
     else
@@ -388,10 +315,8 @@ void MainWindow::on_actionAbout_triggered() {
 void MainWindow::verifyStoped() {
     qDebug() << "verifyStoped() enter";
     {
-        // trayIcon->show();
         noticeDialog->hide(); //重播失败，正在关闭验证
         if (!this->app_exiting) {
-
             // onStartLogining();
             // beginLoginUI();
         }
@@ -400,29 +325,8 @@ void MainWindow::verifyStoped() {
 }
 
 void MainWindow::timerEvent(QTimerEvent *) {
-    /*
-    static int i=0;
-    if(++i>=10)
-    {
-        i=0;
-        if(profile->open())
-        {
-            profile->setUserOnlineTime(this->username,this->allTime);
-            profile->close();
-        }
-    }
-    connTime +=1;
-    allTime +=1;
-    this->ui->lblTime->setText(parseSec(connTime));
-    this->ui->lblAllTime->setText(parseSec(allTime));
-    */
     static int timepassed = 0;
     static int time = 0;
-//    int flow;
-//    if (!(timepassed % 60) && _get_account_state(&time, &flow)) {
-//        this->ui->lblFlow->setText(
-//            QString("%1 KB").arg(flow, -3, 10, QChar(' ')));
-//    }
     this->ui->lblTime->setText(time_humanable(timepassed));
 
     // server return minute
@@ -435,20 +339,11 @@ void MainWindow::timerEvent(QTimerEvent *) {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-
     if (settingsDialog == nullptr)
         settingsDialog = new SettingsDialog();
     if (settingsDialog->getFormData(utils::settings.get())) {
         utils::settings->writeAll();
-        // if(!settings->hotkey.isEmpty() &&
-        // !logoffShortcut->setShortcut(QKeySequence(settings->hotkey)))
-        //{
-        //    QMessageBox::critical(this,tr("错误"),tr("注销快捷键注册失败,快捷键无效或者可能已经被其他应用程序占用。"));
-        //    this->logoffShortcut->setDisabled();
-        //}
     }
-    //    delete settingsDialog;
-    //    settingsDialog = nullptr;
 }
 
 void MainWindow::hangedUp(bool natural) {
@@ -476,10 +371,6 @@ void MainWindow::hangedUp(bool natural) {
         onStopWorking();
 
         if (utils::settings->autoRasdial) {
-            // QEventLoop eventloop;
-            // QTimer::singleShot(10000, &eventloop, SLOT(quit()));
-            // eventloop.exec();
-
             for (int retryCount = 1; retryCount <= 5 && pppoe->isDisconnect();
                  retryCount++) {
                 QThread::sleep(1000);
@@ -497,17 +388,13 @@ void MainWindow::hangedUp(bool natural) {
             else
                 emit redialFinished(true);
         } else {
-            // this->killTimer(timerId);
-//            Authenticat::getInstance()->endVerify();
             onStartLogining();
-            // beginLoginUI();////////////////////
             QMessageBox::critical(loginDialog.get(), tr("提示"),
                                   tr("网络异常断开。"));
         }
     }
 
     qDebug() << "hangedUp() exit";
-    // if(app_exiting) qApp->quit();
 }
 
 void MainWindow::redialFinished(bool ok) {
@@ -522,13 +409,10 @@ void MainWindow::redialFinished(bool ok) {
         QTimer::singleShot(500, &eventloop, SLOT(quit()));
         eventloop.exec();
         this->noticeDialog->hide();
-
-        // this->logoffShortcut->setEnabled();
     } else {
         // this->killTimer(timerId);
         this->trayIcon->hide();
         this->hide();
-//        Authenticat::getInstance()->endVerify();
         noticeDialog->showMessage(tr("重播失败，正在关闭验证"));
         onStartLogining();
         // QMessageBox::information(this,tr("重播失败"),pppoe->lastError());
@@ -563,13 +447,13 @@ void MainWindow::onStartWorking() {
 
     //	this->logoffShortcut->setEnabled();
 
-    this->state = Working;
+    this->state = State::Working;
     ui->mainToolBar->show();
 }
 
 void MainWindow::onStopWorking() {
     qDebug() << "Timer delete" << endl;
-    this->state = Others;
+    this->state = State::Others;
     this->trayIcon->hide();
     this->hide();
     ui->mainToolBar->hide();
@@ -586,32 +470,25 @@ void MainWindow::onStartLogining() {
 
     trayIcon->setContextMenu(this->ui->menuTrayLogin);
     trayIcon->show();
-    // trayIcon->de
-    // this->kill Timer(timerId); //timer kill when it didn't brith
 
-    this->state = Logining;
+    this->state = State::Logining;
 }
 
 void MainWindow::onStopLogining() {
     // QMessageBox::information(this,"","onStopLogining");
-    this->state = Others;
+    this->state = State::Others;
     this->trayIcon->hide();
     loginDialog->hide();
 }
 
 void MainWindow::checkFinished(bool error, int major, int minor,
                                QString errMsg) {
-    if (error && state == Working) {
+    if (error && state == State::Working) {
         this->ui->actionLogoff->trigger();
         QMessageBox::critical(nullptr, tr("警告"),
                               tr("检查更新失败") + "\n" + errMsg);
     }
 
-    /*  20160828 by cxh : use "!=" to easyly rollback
-     *  Warning!!!:
-     *      It Only Used at Non-developers Can Develop the New_NDR and Need to
-     * Rollback ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓This↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-     */
     if (major > VERSION_MAJOR || minor > VERSION_MINOR) {
         qDebug() << "需要更新！！！！！！！！！！！！";
         updateServer->downloadLatestPackage();
@@ -623,7 +500,7 @@ void MainWindow::checkFinished(bool error, int major, int minor,
 void MainWindow::downloadFinished(bool error, QString errMsg) {
     qDebug() << "downloadFinished() enter";
     if (error) {
-        if (state == Working) {
+        if (state == State::Working) {
             qDebug() << errMsg;
             ui->actionLogoff->trigger();
             QMessageBox::critical(loginDialog.get(), "更新错误",
@@ -663,7 +540,7 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
         if (updateServer->openPackage(errMsg1)) {
             ui->actionQuit->trigger();
         } else {
-            if (state == Working)
+            if (state == State::Working)
                 ui->actionLogoff->trigger();
             QMessageBox::warning(
                 loginDialog.get(),
@@ -677,7 +554,6 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
                     + "\n" + errMsg1 + "\n" +
                     tr("请尝试手动安装 %1").arg(updateServer->packagePath()));
         }
-        // QMessageBox::information(0,"提示","打开文件");
     }
 }
 
@@ -685,7 +561,7 @@ void MainWindow::loginWindowClosed() { app_exiting = true; }
 
 void MainWindow::on_goDnuiBrowser_clicked() {
     ui->goDnuiBrowser->setEnabled(false);
-    QUrl web(QString(NDR_GATE));
+    QUrl web{QString{NDR_GATE}};
     QDesktopServices::openUrl(web);
     ui->goDnuiBrowser->setEnabled(true);
 }

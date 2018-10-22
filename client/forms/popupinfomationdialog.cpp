@@ -4,7 +4,7 @@ PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
 {
     qDebug() << "create popUpDialog" << endl;
     pageNow = 1;
-    popUp = new QDialog(this, Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint);
+    popUp.reset(new QDialog{this, Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint});
     popUp -> setWindowTitle(tr("通知"));
     //popUp -> setWindowFlags(Qt::WindowStaysOnTopHint);
     popUp -> setFixedSize(364, 228);
@@ -17,14 +17,14 @@ PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
     hbPage = new QHBoxLayout();
 
     page = new QLabel(tr("N/N"));
-    nextPage = new QPushButton(tr(">"), popUp);
-    prePage = new QPushButton(tr("<"), popUp);
-    laAuth = new QLabel(tr("作者: "), popUp);
-    laTitle = new QLabel(tr("标题: "), popUp);
-    closeTime = new QLabel(tr(" "), popUp);
-    liAuth = new QLineEdit(tr("Unknow"), popUp);
-    liTitle = new QLineEdit(tr("Unknow"), popUp);
-    teText = new QTextBrowser(popUp);
+    nextPage = new QPushButton(tr(">"), popUp.get());
+    prePage = new QPushButton(tr("<"), popUp.get());
+    laAuth = new QLabel(tr("作者: "), popUp.get());
+    laTitle = new QLabel(tr("标题: "), popUp.get());
+    closeTime = new QLabel(tr(" "), popUp.get());
+    liAuth = new QLineEdit(tr("Unknow"), popUp.get());
+    liTitle = new QLineEdit(tr("Unknow"), popUp.get());
+    teText = new QTextBrowser(popUp.get());
 
     liTitle -> setReadOnly(true);
     liAuth -> setReadOnly(true);
@@ -74,11 +74,7 @@ PopUpInfomationDialog::PopUpInfomationDialog(QWidget *parent) : QDialog(parent)
 }
 
 
-PopUpInfomationDialog::~PopUpInfomationDialog()
-{
-    qDebug() << "delete popUpDialog" << endl;
-    delete popUp;
-
+PopUpInfomationDialog::~PopUpInfomationDialog() {
 }
 
 //---------------------------function---------------------------//

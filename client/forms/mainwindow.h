@@ -28,7 +28,7 @@ public:
     explicit MainWindow(QSharedPointer<LocalStorage> profile,
                         QWidget *parent = nullptr);
     ~MainWindow();
-    enum State { Logining, Working, Others };
+    enum class State { Logining, Working, Others };
 
 private slots:
     void on_actionQuit_triggered();
@@ -59,12 +59,12 @@ private:
     QSharedPointer<LoginDialog> loginDialog;
     QSharedPointer<LocalStorage> profile;
     QSharedPointer<PopUpInfomationDialog> popUpInfomationDialog;
-    Ui::MainWindow *ui;
-    NoticeDialog *noticeDialog;
+    QSharedPointer<AboutDialog> aboutDialog;
+    QSharedPointer<QSystemTrayIcon> trayIcon;
+    QSharedPointer<Ui::MainWindow> ui;
+    QSharedPointer<NoticeDialog> noticeDialog;
     SettingsDialog *settingsDialog;
-    AboutDialog *aboutDialog;
     FeedbackDialog *feedbackDialog;
-    QSystemTrayIcon *trayIcon;
     QMenu *myMenu;
 
     State state;
@@ -75,7 +75,7 @@ private:
     QString username;
     int timerId;
 
-    UpdateService *updateServer;
+    QSharedPointer<UpdateService> updateServer;
     void timerEvent(QTimerEvent *);
     void changeEvent(QEvent *event);
 

@@ -4,7 +4,8 @@
 #include <mainwindow.h>
 #include <logindialog.h>
 #include <localstorage.hpp>
-#include <popupinfomationdialog.h>
+#include "popupinfomationdialog.h"
+#include "aboutdialog.h"
 
 ResourceManager::ResourceManager()
 {
@@ -21,7 +22,7 @@ void ResourceManager::InitResourceManager() {
     loginDialog.reset(new LoginDialog{profile});
     mainWindow.reset(new MainWindow{profile});
     popUpInfomationDialog.reset(new PopUpInfomationDialog{});
-
+    aboutDialog.reset(new AboutDialog{});
 
 #ifdef QT_DEBUG
     mainWindow->show();
@@ -39,4 +40,8 @@ QSharedPointer<LoginDialog> ResourceManager::getLoginDialog() {
 
 QSharedPointer<PopUpInfomationDialog> ResourceManager::getPopUpInfomationDialog() {
     return popUpInfomationDialog;
+}
+
+QSharedPointer<AboutDialog> ResourceManager::getAboutDialog() {
+    return aboutDialog;
 }

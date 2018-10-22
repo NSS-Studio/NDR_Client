@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QCloseEvent>
+#include <QSharedPointer>
 namespace Ui {
 class AboutDialog;
 }
@@ -10,18 +11,14 @@ class AboutDialog;
 class AboutDialog : public QDialog
 {
     Q_OBJECT
-    
 public:
     explicit AboutDialog(QWidget *parent = nullptr);
     ~AboutDialog();
-    
 private slots:
     void on_AboutDialog_finished(int /*result*/);
-    
     void on_pushButton_clicked();
-    
 private:
-    Ui::AboutDialog *ui;
+    QSharedPointer<Ui::AboutDialog> ui;
     void closeEvent(QCloseEvent *event);
 };
 
