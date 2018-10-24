@@ -8,8 +8,7 @@ AuthVerify::AuthVerify()
 }
 
 void AuthVerify::authStop() {
-    qDebug() << "Function :" << __PRETTY_FUNCTION__
-             << "Set stop object = true And ThreadID: "
+    qDebug() << "Set stop object = true And ThreadID: "
              << QThread::currentThreadId();
     requestInterruption();
 }
@@ -23,8 +22,7 @@ void AuthVerify::authStart() {
 }
 
 void AuthVerify::run() {
-    qDebug() << "Function :" << __PRETTY_FUNCTION__
-             << " AuthVerify run";
+    qDebug() << " AuthVerify run";
     QHostAddress const ndrPlugServer{NDR_PLUG_SERVER};
     quint16 const ndrPlugPort{NDR_PLUG_PORT};
     while (true) {

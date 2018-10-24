@@ -7,7 +7,7 @@ namespace utils {
     /** 设置项*/
     QSharedPointer<SettingsSet> settings;
     QTranslator ndr_tr, qt_tr;
-    ResourceManager resourceManager;
+//    ResourceManager resourceManager;
     QSharedPointer<QAESEncryption> encryption;
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {

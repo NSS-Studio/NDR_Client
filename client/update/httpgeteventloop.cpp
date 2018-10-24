@@ -1,33 +1,26 @@
 #include "httpgeteventloop.h"
 
-HttpGetEventLoop::HttpGetEventLoop(QObject *parent) :
-    QEventLoop(parent)
-{
-    isError=true;
+HttpGetEventLoop::HttpGetEventLoop(QObject *parent)
+    :QEventLoop{parent} {
 }
 
-void HttpGetEventLoop::getFinished(bool error)
-{
-    isError = error;
+void HttpGetEventLoop::getFinished(bool error) {
+    this->isError = error;
     this->quit();
 }
 
-//bool HttpGetEventLoop::waitForGetting(QHttp &http)
-//{
-//    connect(&http,SIGNAL(done(bool)),this,SLOT(getFinished(bool)));
-//    this->exec();
-//    return isError;
-//}
-
 bool HttpGetEventLoop::waitForGettingFinished(QNetworkAccessManager *manager)
 {
-    connect(manager,SIGNAL(finished(QNetworkReply*)),this,SLOT(getFinished(QNetworkReply*)));
+    connect(manager, &QNetworkAccessManager::finished,
+            this,
+            static_cast<void (HttpGetEventLoop::*)(QNetworkReply *)>
+            (&HttpGetEventLoop::getFinished));
     this->exec();
     return isError;
 }
 
 void HttpGetEventLoop::getFinished(QNetworkReply *reply)
 {
-    this->isError = (reply->error()!=QNetworkReply::NoError);
+    this->isError = (reply->error() != QNetworkReply::NoError);
     this->quit();
 }

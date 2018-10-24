@@ -17,7 +17,7 @@ public:
      */
     virtual bool dial(QString const &username,
                       QString const &password,
-                      QString const &device_name,
+                      QString const &deviceName,
                       QString &errorMessage) = 0;
 
     /**

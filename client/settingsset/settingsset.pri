@@ -1,7 +1,6 @@
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 
-HEADERS += \     
-    $$PWD/settingsset.hpp
+HEADERS += $$PWD/settingsset.hpp
 
-SOURCES +=      $$PWD/settingsset.cpp
+SOURCES += $$PWD/settingsset.cpp

@@ -13,7 +13,7 @@
 #include <QFontDatabase>
 #include <settingsset.hpp>
 #include <ndrapplication.hpp>
-#include <resourcemanager.hpp>
+//#include <resourcemanager.hpp>
 #include <qaesencryption.h>
 
 namespace utils {
@@ -22,7 +22,7 @@ namespace utils {
     extern QString networkInterfaceCardName;
     extern QSharedPointer<SettingsSet> settings;
     extern QTranslator ndr_tr, qt_tr;
-    extern ResourceManager resourceManager;
+//    extern ResourceManager resourceManager;
     extern QSharedPointer<QAESEncryption> encryption;
     /** 获取账户名套餐后缀列表*/
     QStringList getDrModelPostfixTable();
