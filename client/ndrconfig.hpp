@@ -2,8 +2,8 @@
 #define NDRCONFIG_HPP
 
 #include <QGlobalStatic>
-#if (QT_VERSION < QT_VERSION_CHECK(5, 9, 5))
-#error "!!! please use qt 5.9.5 or later"
+#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 2))
+#error "Please use Qt version higher than 5.11.2 in Compiling environment"
 #endif
 
 /** r-plug server address*/
@@ -14,11 +14,11 @@
 /** server address*/
 #define NDR_SERVER "172.24.10.13"
 
-/** NDR主版本号*/
-#define VERSION_MAJOR 0
+/** NDR major version*/
+#define NDR_MAJOR_VERSION 0
 
-/** NDR次版本号*/
-#define VERSION_MINOR 76
+/** NDR minor version*/
+#define NDR_MINOR_VERSION 76
 
 /** NDR local bind port set*/
 #define LOCAL_SERVER_PORT 20412
@@ -60,19 +60,19 @@
 /** 网卡适配器名称*/
 #define NDR_PHONEBOOK_NAME "NDR"
 
-/** DRCOM服务器地址*/
-#define DRCOM_SERVER_IP "172.24.253.35"
+///** DRCOM服务器地址*/
+//#define DRCOM_SERVER_IP "172.24.253.35"
 
-/** DRCOM服务器端口号*/
-#define DRCOM_SERVER_PORT 61440
+///** DRCOM服务器端口号*/
+//#define DRCOM_SERVER_PORT 61440
 
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
 
-/** NDR更新服务器地址和备用服务器地址*/
+/** NDR更新服务器地址 */
 #define NDR_UPDATE_SERVER NDR_SERVER
 
-/** NDR导航页*/
+/** NDR导航页 */
 #define NDR_GATE "http://go.neusoft.edu.cn"
 
 /** NDR弹浏览器网页*/

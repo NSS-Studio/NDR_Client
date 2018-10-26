@@ -9,12 +9,9 @@ class NdrApplication: public QApplication
 public:
     NdrApplication(QString const& appName, int &argc, char **argv);
     ~NdrApplication();
-    bool shouldExit();
 private:
     QScopedPointer<QTcpServer> localServer;
     QString appName;
-    bool exitState = false;
-    bool isRunning = false;
 };
 
 #endif // NDRAPPLICATION_HPP

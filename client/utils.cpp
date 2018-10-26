@@ -47,10 +47,8 @@ namespace utils {
     }
 
     QString getVersionString() {
-        quint8 majorVersion = VERSION_MAJOR;
-        quint8 minorVersion = VERSION_MINOR;
-        Q_ASSERT(minorVersion < 100);
-        return QString("%1").arg(majorVersion + minorVersion / 100.0, 0, 'f', 2);
+        Q_STATIC_ASSERT(NDR_MINOR_VERSION < 100);
+        return QString(NDR_MAJOR_VERSION + "." + NDR_MINOR_VERSION);
     }
 
     QStringList getLangFileNameTable() {
@@ -67,18 +65,7 @@ namespace utils {
             return filelist;
         filelist.replaceInStrings("ndr.", QString());
         filelist.replaceInStrings(".qm", QString());
-    #if 0
-        QStringList r;
-        QString file_name;
-        foreach(file_name, filelist) {
-            qDebug() << "file_name" << file_name;
-            QString lang_name;
-            if(__getLanguageName(file_name, lang_name)) r << lang_name;
-        }
-        return r;
-    #else
         return filelist;
-    #endif
     }
 
     bool getLanguageName(QString fileName, QString &langName) {
