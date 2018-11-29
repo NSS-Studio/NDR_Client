@@ -5,8 +5,8 @@ HttpGetEventLoop::HttpGetEventLoop(QObject *parent)
 }
 
 void HttpGetEventLoop::getFinished(bool error) {
-    this->isError = error;
-    this->quit();
+    isError = error;
+    quit();
 }
 
 bool HttpGetEventLoop::waitForGettingFinished(QNetworkAccessManager *manager)
@@ -21,6 +21,6 @@ bool HttpGetEventLoop::waitForGettingFinished(QNetworkAccessManager *manager)
 
 void HttpGetEventLoop::getFinished(QNetworkReply *reply)
 {
-    this->isError = (reply->error() != QNetworkReply::NoError);
-    this->quit();
+    isError = (reply->error() != QNetworkReply::NoError);
+    quit();
 }

@@ -26,17 +26,17 @@ private:
     void readyOpen();
     void openWeb();
 
-    QString m_Address;
-    QNetworkAccessManager m_NetGet;
+    QString address;
+    QNetworkAccessManager netGet;
     QNetworkRequest *tmp;
-    QNetworkReply *m_Reply;
+    QNetworkReply *reply;
     struct Message
     {
-        QString m_Url;
-        QString m_StratTime;
-        QString m_EndTime;
+        QString url;
+        QString stratTime;
+        QString endTime;
     };
-    QVector<Message> m_Message;
+    QVector<Message> messageList;
     QSslConfiguration sslConf;
 
     bool needShow;

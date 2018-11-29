@@ -7,7 +7,7 @@
 #include <utils.hpp>
 
 GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
-    : QObject(parent), m_Address{address}
+    : QObject(parent), address{address}
 {
     qDebug() << "GetInfoAboutNSS()" << endl;
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
@@ -28,13 +28,13 @@ void GetInfoAboutNSS::checkInfoGet()
 {
     qDebug() << "checkInfoGet()" << endl;
 
-    QString url="https://" + m_Address + "/messages/webUp.xml";
+    QString url="https://" + address + "/messages/webUp.xml";
     tmp = new QNetworkRequest{QUrl(url)};
     tmp->setSslConfiguration(this->sslConf);
 
-    m_Reply = m_NetGet.get(*tmp);
+    reply = netGet.get(*tmp);
 
-    connect(m_Reply, &QNetworkReply::finished, this, &GetInfoAboutNSS::checkInfoGetFinish);
+    connect(reply, &QNetworkReply::finished, this, &GetInfoAboutNSS::checkInfoGetFinish);
 
 
     qDebug() << "message url: " << url << endl;
@@ -53,17 +53,17 @@ void GetInfoAboutNSS::checkInfoGet()
 void GetInfoAboutNSS::checkInfoGetFinish()
 {
     qDebug() << "checkInfoGetFinish()" << endl;
-    if(m_Reply->error() != QNetworkReply::NoError)
+    if(reply->error() != QNetworkReply::NoError)
     {
         //! Because We Get Failed, But We don't need close this client
-        qDebug() << "Get MessageInfo Failed: " << m_Reply->errorString() << endl;
+        qDebug() << "Get MessageInfo Failed: " << reply->errorString() << endl;
 
         //if failed, retry, need to set retry count
-        m_Reply = m_NetGet.get(*tmp);
+        reply = netGet.get(*tmp);
         return;
     }
 
-    QString stateValue = m_Reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
+    QString stateValue = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString();
 
     qDebug() << "Http state value" << stateValue;
     if(stateValue!="200" && stateValue!="301")
@@ -74,7 +74,7 @@ void GetInfoAboutNSS::checkInfoGetFinish()
     }
     QByteArray xml;
 
-    xml=m_Reply->readAll();
+    xml=reply->readAll();
     qDebug() << "xml string:\n" << xml;
 
     QDomDocument doc;
@@ -103,7 +103,7 @@ void GetInfoAboutNSS::checkInfoGetFinish()
 
             temp = node.attribute("endTime").toStdString();
             QString endTime{temp.c_str()};
-            m_Message.push_back(Message{http, startTime, endTime});
+            messageList.push_back(Message{http, startTime, endTime});
         }
 
         QDomNodeList needs = root.elementsByTagName("needShow");
@@ -144,24 +144,19 @@ void GetInfoAboutNSS::openWeb()
     QDateTime currentTime = QDateTime::currentDateTime();
     QVector<QUrl> openUrl;
     QString format{"yyyy-MM-dd hh:mm:ss:zzz"};
-    for(int i = 0; i < m_Message.size(); ++i)
+    for(int i = 0; i < messageList.size(); ++i)
     {
-        QDateTime start = QDateTime::fromString(m_Message[i].m_StratTime, format);
-        QDateTime end = QDateTime::fromString(m_Message[i].m_EndTime, format);
+        QDateTime start = QDateTime::fromString(messageList[i].stratTime, format);
+        QDateTime end = QDateTime::fromString(messageList[i].endTime, format);
         if(start <= currentTime && currentTime <= end)
-            openUrl.push_back(QUrl{m_Message[i].m_Url});
+            openUrl.push_back(QUrl{messageList[i].url});
     }
 
     for (auto i : openUrl)
         QDesktopServices::openUrl(i);
 
     openUrl.erase(openUrl.begin(), openUrl.end());
-    m_Message.erase(m_Message.begin(), m_Message.end());
-    //for(int i = 0; i < openUrl.size(); ++i)
-    //{
-    //    QDesktopServices::openUrl(openUrl[i]);
-    //}
-
+    messageList.erase(messageList.begin(), messageList.end());
 
     qDebug() << "emit endGetInfo" << endl;
     emit endGetInfo();
@@ -172,6 +167,6 @@ GetInfoAboutNSS::~GetInfoAboutNSS()
     qDebug() << "delete GetInfoAboutNSS" << endl;
     if (tmp != nullptr)
         delete tmp;
-    if (m_Reply != nullptr)
-        delete m_Reply;
+    if (reply != nullptr)
+        delete reply;
 }
