@@ -1010,7 +1010,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>提示</source>
         <translation>ヒント</translation>
     </message>
@@ -1021,7 +1021,7 @@ p, li { white-space: pre-wrap; }
 もうひとりの実例を実行している。もしクライアントが異常脱退、再び試みて下さい。</translation>
     </message>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>起動が失敗した

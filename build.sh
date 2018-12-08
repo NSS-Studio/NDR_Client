@@ -1,7 +1,7 @@
 #!/bin/sh
 # macosx && linux_deb
 
-version="0.76"
+version="0.80"
 
 if [ $# = 1 -a $1 = "clean" ]; then
     rm -rf ./build/
@@ -13,7 +13,7 @@ if [ $# = 1 -a $1 = "clean" ]; then
     exit 0
 fi
 
-if [ $# != 2 -a $# != 3 ]; then
+if [ $# != 3 ]; then
     printf "parameter invaild\n"
     exit 1
 fi
@@ -29,24 +29,13 @@ fi
 
 if [ $2 = "debug" -o $2 = "release" ]; then
     configBuildMode=$2
-    if [ $2 = "debug" ]; then
-        ndrTesting="true"
-    elif [ $2 = "release" ]; then
-        ndrTesting="false"
-    fi
 else
     printf "buildInfo invaild\n"
     exit 1
 fi
 
-if [ $# != 3 -a $1 != "debian" ]; then
-    QMAKE="qmake"
-else
-    QT=$3
-    QMAKE=$QT/bin/qmake
-fi
-
-
+QT=$3
+QMAKE=$QT/bin/qmake
 
 if [ $1 = "macosx" ]; then
     rm -f ./NDR_Client.dmg
@@ -54,7 +43,7 @@ elif [ $1 = "debian" ]; then
     rm -f ./debian/opt/ndr/bin/ndr-client
     rm -rf ./debian/opt/ndr/bin/lib
     rm -rf ./debian/opt/ndr/bin/plugins
-    # sudo apt install build-essential network-manager-dev libgl1-mesa-dev
+    # sudo apt install -y build-essential network-manager-dev libgl1-mesa-dev
 fi
 
 rm -rf ./build/
@@ -68,7 +57,7 @@ cd ../../
 mkdir build
 cd build
 
-$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2 DEFINES+=NDR_TESTING=$ndrTesting
+$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2
 make
 
 cd ..

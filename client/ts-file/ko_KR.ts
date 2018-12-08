@@ -1047,7 +1047,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>提示</source>
         <translation>힌트</translation>
     </message>
@@ -1058,7 +1058,7 @@ p, li { white-space: pre-wrap; }
 이미 한 실례가 실행하고있는것을 검출.만약 전번 클라이언트가 이상 종료돼였으면 다시 시도해 보십시오.</translation>
     </message>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>열기실패

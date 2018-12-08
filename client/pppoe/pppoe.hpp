@@ -4,10 +4,8 @@
 #include <basedsl.hpp>
 #include <QVariant>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
-class PPPoE final :
-        public QThread,
-        public QEnableSharedFromThis<PPPoE>
+
+class PPPoE final : public QThread
 {
 	Q_OBJECT
 public:

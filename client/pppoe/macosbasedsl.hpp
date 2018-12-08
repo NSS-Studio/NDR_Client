@@ -8,6 +8,7 @@
 #include <sys/types.h>
 class MacOsBaseDsl final: public BaseDsl
 {
+    Q_OBJECT
 public:
     MacOsBaseDsl();
     ~MacOsBaseDsl();

@@ -1014,7 +1014,7 @@ Please try to redial your account.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>提示</source>
         <translation>Notice</translation>
     </message>
@@ -1026,7 +1026,7 @@ Detected another instance was running.
 Note: If client exited with unexpectedly, just retry.</translation>
     </message>
     <message>
-        <location filename="../ndrapplication.cpp" line="14"/>
+        <location filename="../ndrapplication.cpp" line="15"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>Launch failed.

@@ -7,6 +7,7 @@
 #include <windows.h>
 class WindowsBaseDsl final: public BaseDsl
 {
+    Q_OBJECT
 public:
     WindowsBaseDsl();
     ~WindowsBaseDsl();

@@ -6,11 +6,8 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
 #include "settingsset.hpp"
-class LocalStorage final :
-        public QObject,
-        public QEnableSharedFromThis<LocalStorage>
+class LocalStorage final : public QObject
 {
     Q_OBJECT
 public:

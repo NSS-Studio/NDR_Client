@@ -17,6 +17,7 @@ typedef QMap<QString, QMap<QString, QVariant>> Connection;
 Q_DECLARE_METATYPE(Connection)
 class LinuxBaseDsl final: public BaseDsl
 {
+    Q_OBJECT
 public:
     LinuxBaseDsl();
     ~LinuxBaseDsl();

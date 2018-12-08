@@ -1,5 +1,11 @@
 欢迎使用 NDR 东软校园网络认证客户端！
 
+Version 0.80 Build 20181208 更新日志：
+
+*   修复macOS用户界面显示问题
+*   修复macOS测试版Crash的问题
+*   基于Qt5.12编译 NDR的macOS版本支持系统最低为macOS 10.12
+
 Version 0.76 Build 20180925 更新日志：
 
 漏洞修复：
