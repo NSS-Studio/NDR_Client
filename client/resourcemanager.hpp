@@ -32,8 +32,8 @@ private:
     AboutDialog* aboutDialog = nullptr;
     PopUpInfomationDialog* popUpInfomationDialog = nullptr;
     QMutex mutex;
-    enum class InitState { TRUE,FALSE};
-    InitState initState = InitState::FALSE;
+    enum class InitState { DONE,UNDONE};
+    InitState initState = InitState::UNDONE;
 };
 
 #endif // RESOURCEMANAGER_HPP

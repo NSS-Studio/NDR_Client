@@ -345,92 +345,92 @@ p, li { white-space: pre-wrap; }
         <translation>별점 앞을 클릭해서 점수를 매기</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="34"/>
+        <location filename="../forms/feedbackdialog.cpp" line="30"/>
         <source>反人类设计，BUG一堆，开发者们都去食屎吧！</source>
         <translation>안티 인류의 디자인,BUG한 더미,개발자 들 똥을 처먹으랑!</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="38"/>
+        <location filename="../forms/feedbackdialog.cpp" line="34"/>
         <source>相比原版客户端差远了，快点更新！</source>
         <translation>원본 클라이언트보다 훨씬 멀었어,빨리 업데이트!</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="42"/>
+        <location filename="../forms/feedbackdialog.cpp" line="38"/>
         <source>能凑合用，起码有网比没网强 = = </source>
         <translation>그럭저럭 쓸 수 있다,적어도 인터넷 없는것보다 좋다 = = </translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="45"/>
+        <location filename="../forms/feedbackdialog.cpp" line="41"/>
         <source>用起来还算不错，但在某些功能上还需改善</source>
         <translation>써 보니 그런대로 괜찮다,허나 일부 기능에서 개선이 필요하다</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="48"/>
+        <location filename="../forms/feedbackdialog.cpp" line="44"/>
         <source>超级好用啊，给开发者点赞！</source>
         <translation>넘 좋아요,개발자 짱!</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="51"/>
+        <location filename="../forms/feedbackdialog.cpp" line="47"/>
         <source>你是怎么做到的？</source>
         <translation>어떻게 한거야?</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="55"/>
+        <location filename="../forms/feedbackdialog.cpp" line="51"/>
         <source>%1分 </source>
         <translation>%1분 </translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="80"/>
+        <location filename="../forms/feedbackdialog.cpp" line="76"/>
         <source>提示</source>
         <translation>팁</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="80"/>
+        <location filename="../forms/feedbackdialog.cpp" line="76"/>
         <source>标题必须保证5个字符以上</source>
         <translation>제목은 반드시 5글자 이상 보장해야 한다</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="151"/>
+        <location filename="../forms/feedbackdialog.cpp" line="147"/>
         <source>连接服务器失败</source>
         <translation>서버 연결 실패</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="156"/>
+        <location filename="../forms/feedbackdialog.cpp" line="152"/>
         <source>请求服务器失败, 返回状态代码%1</source>
         <translation>서버 요청 실패,상태 코드 복귀%1</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="198"/>
+        <location filename="../forms/feedbackdialog.cpp" line="194"/>
         <source>反馈服务器内部错误</source>
         <translation>피드백 서버 내부 오류</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="202"/>
+        <location filename="../forms/feedbackdialog.cpp" line="198"/>
         <source>您提交的过于频繁</source>
         <translation>당신의 제출이 지나치게 빈번합니다</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="206"/>
+        <location filename="../forms/feedbackdialog.cpp" line="202"/>
         <source>参数不足</source>
         <translation>매개 변수가 부족하다</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="210"/>
+        <location filename="../forms/feedbackdialog.cpp" line="206"/>
         <source>无法解析的错误</source>
         <translation>처리할 수 없는 오류</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="225"/>
+        <location filename="../forms/feedbackdialog.cpp" line="221"/>
         <source>反馈成功</source>
         <translation>피드백 성공</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="225"/>
+        <location filename="../forms/feedbackdialog.cpp" line="221"/>
         <source>感谢您反馈，我们会考虑并尽力采纳您的意见</source>
         <translation>당신의 피드백을 감사합니다,우리는  당신의 의견을 고려 및 힘껏 받아들이겠습니다</translation>
     </message>
     <message>
-        <location filename="../forms/feedbackdialog.cpp" line="228"/>
+        <location filename="../forms/feedbackdialog.cpp" line="224"/>
         <source>反馈失败</source>
         <translation>피드백 실패</translation>
     </message>
@@ -505,52 +505,52 @@ p, li { white-space: pre-wrap; }
         <translation>NDR 뉴소프트 캠퍼스 네트워크 인증</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="252"/>
+        <location filename="../forms/logindialog.ui" line="231"/>
         <source>可见</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="299"/>
+        <location filename="../forms/logindialog.ui" line="307"/>
         <source>故障修复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="374"/>
+        <location filename="../forms/logindialog.ui" line="382"/>
         <source>登录 (&amp;L)</source>
         <translation>로그인 (&amp;L)</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="347"/>
+        <location filename="../forms/logindialog.ui" line="355"/>
         <source>记住密码</source>
         <translation type="unfinished">비밀호 기억</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="334"/>
+        <location filename="../forms/logindialog.ui" line="342"/>
         <source>自动登陆</source>
         <translation>자동 로그인</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="131"/>
+        <location filename="../forms/logindialog.ui" line="100"/>
         <source>网卡：</source>
         <translation>네트워크 카드:</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="172"/>
+        <location filename="../forms/logindialog.ui" line="156"/>
         <source>套餐：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="185"/>
+        <location filename="../forms/logindialog.ui" line="282"/>
         <source>账号：</source>
         <translation>아이디:</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="198"/>
+        <location filename="../forms/logindialog.ui" line="247"/>
         <source>密码：</source>
         <translation>비밀번호:</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.ui" line="277"/>
+        <location filename="../forms/logindialog.ui" line="178"/>
         <source>清除账号</source>
         <translation>제거</translation>
     </message>
@@ -559,63 +559,63 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">PushButton</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="99"/>
-        <location filename="../forms/logindialog.cpp" line="104"/>
-        <location filename="../forms/logindialog.cpp" line="125"/>
-        <location filename="../forms/logindialog.cpp" line="132"/>
-        <location filename="../forms/logindialog.cpp" line="139"/>
+        <location filename="../forms/logindialog.cpp" line="81"/>
+        <location filename="../forms/logindialog.cpp" line="86"/>
+        <location filename="../forms/logindialog.cpp" line="109"/>
+        <location filename="../forms/logindialog.cpp" line="116"/>
+        <location filename="../forms/logindialog.cpp" line="123"/>
         <source>提示</source>
         <translation>팁</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="99"/>
+        <location filename="../forms/logindialog.cpp" line="81"/>
         <source>账号不能为空</source>
         <translation>로그인아이디가 비얼수는 없다</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="104"/>
+        <location filename="../forms/logindialog.cpp" line="86"/>
         <source>密码不能为空</source>
         <translation>비밀번호가 비얼수는 없다</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="133"/>
+        <location filename="../forms/logindialog.cpp" line="117"/>
         <source>删除成功  </source>
         <translation>삭제 성공 </translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="140"/>
+        <location filename="../forms/logindialog.cpp" line="124"/>
         <source>本地不存在该账号的任何信息</source>
         <translation>로컬에서 로그인아이디에 대한 그 어떤 정보도 존재하지 않는다</translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="298"/>
+        <location filename="../forms/logindialog.cpp" line="283"/>
         <source>网络代理重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="306"/>
+        <location filename="../forms/logindialog.cpp" line="291"/>
         <source>DNS重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="310"/>
+        <location filename="../forms/logindialog.cpp" line="295"/>
         <source>成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="310"/>
+        <location filename="../forms/logindialog.cpp" line="295"/>
         <source>网络重置成功</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../forms/logindialog.cpp" line="275"/>
+        <location filename="../forms/logindialog.cpp" line="282"/>
         <location filename="../forms/logindialog.cpp" line="290"/>
-        <location filename="../forms/logindialog.cpp" line="297"/>
-        <location filename="../forms/logindialog.cpp" line="305"/>
         <source>失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/logindialog.cpp" line="290"/>
+        <location filename="../forms/logindialog.cpp" line="275"/>
         <source>Winsock重置失败，错误代码 %0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -624,7 +624,7 @@ p, li { white-space: pre-wrap; }
     <name>MacOsBaseDsl</name>
     <message>
         <location filename="../pppoe/macosbasedsl.cpp" line="136"/>
-        <location filename="../pppoe/macosbasedsl.cpp" line="334"/>
+        <location filename="../pppoe/macosbasedsl.cpp" line="306"/>
         <source>未知网卡</source>
         <translation type="unfinished"></translation>
     </message>
@@ -636,11 +636,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../pppoe/macosbasedsl.cpp" line="225"/>
         <source>期待目标连接的状态为 0，但是当前的状态为 %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../pppoe/macosbasedsl.cpp" line="301"/>
-        <source>未知</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -687,17 +682,11 @@ p, li { white-space: pre-wrap; }
         <translation>총 시간:</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="154"/>
-        <source>macAddress：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="../forms/mainwindow.ui" line="158"/>
         <location filename="../forms/mainwindow.ui" line="171"/>
         <location filename="../forms/mainwindow.ui" line="184"/>
         <location filename="../forms/mainwindow.ui" line="197"/>
         <location filename="../forms/mainwindow.ui" line="210"/>
-        <location filename="../forms/mainwindow.ui" line="223"/>
-        <location filename="../forms/mainwindow.ui" line="236"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
@@ -714,12 +703,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">menuTrayLogin</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="344"/>
+        <location filename="../forms/mainwindow.ui" line="318"/>
         <source>注销</source>
         <translation>로그아웃</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="353"/>
+        <location filename="../forms/mainwindow.ui" line="327"/>
         <source>激活窗口</source>
         <translation>활성 창</translation>
     </message>
@@ -728,28 +717,28 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">주 창 열기</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="362"/>
-        <location filename="../forms/mainwindow.ui" line="365"/>
+        <location filename="../forms/mainwindow.ui" line="336"/>
+        <location filename="../forms/mainwindow.ui" line="339"/>
         <source>退出</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="374"/>
+        <location filename="../forms/mainwindow.ui" line="348"/>
         <source>设置</source>
         <translation>설치</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="383"/>
+        <location filename="../forms/mainwindow.ui" line="357"/>
         <source>关于</source>
         <translation>정보</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="392"/>
+        <location filename="../forms/mainwindow.ui" line="366"/>
         <source>显示登录窗</source>
         <translation>로그인 창 보이기</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.ui" line="401"/>
+        <location filename="../forms/mainwindow.ui" line="375"/>
         <source>反馈</source>
         <translation>피드백</translation>
     </message>
@@ -762,7 +751,7 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">로그아웃의 핫 키 신청 실패,핫 키 무효 또는 기타 응용 프로그램에서 이미 사용중입니다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="53"/>
+        <location filename="../forms/mainwindow.cpp" line="41"/>
         <source>NDR</source>
         <translation>NDR</translation>
     </message>
@@ -771,39 +760,39 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">No interface available</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="53"/>
+        <location filename="../forms/mainwindow.cpp" line="41"/>
         <source>No Interface Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="138"/>
+        <location filename="../forms/mainwindow.cpp" line="90"/>
         <source>未知</source>
         <translation>알 수 없는</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="144"/>
+        <location filename="../forms/mainwindow.cpp" line="94"/>
         <source>正在拨号. . .</source>
         <translation>연결중. . .</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="173"/>
+        <location filename="../forms/mainwindow.cpp" line="117"/>
         <source>%0 天 %1:%2:%3</source>
         <translation type="unfinished">%1 날 %1:%2:%3 {0 ?}</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="239"/>
+        <location filename="../forms/mainwindow.cpp" line="184"/>
         <source>拨号成功，开启认证</source>
         <translation>다이얼 성공,오픈 인증</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="496"/>
+        <location filename="../forms/mainwindow.cpp" line="378"/>
         <source>网络异常断开，正在重新拨号
 重试次数%0/5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="571"/>
-        <location filename="../forms/mainwindow.cpp" line="599"/>
+        <location filename="../forms/mainwindow.cpp" line="442"/>
+        <location filename="../forms/mainwindow.cpp" line="471"/>
         <source>NDR 校园网络认证</source>
         <translation>NDR 캠퍼스 네트워크 인증</translation>
     </message>
@@ -812,18 +801,18 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">주 창은 여기로 최소화돼였습니다,설정에서 자동 최소화 기능을 종료 취소 할수있습니다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="274"/>
-        <location filename="../forms/mainwindow.cpp" line="513"/>
+        <location filename="../forms/mainwindow.cpp" line="206"/>
+        <location filename="../forms/mainwindow.cpp" line="392"/>
         <source>提示</source>
         <translation>팁</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="275"/>
+        <location filename="../forms/mainwindow.cpp" line="207"/>
         <source>拨号失败</source>
         <translation>다이얼 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="374"/>
+        <location filename="../forms/mainwindow.cpp" line="291"/>
         <source>正在尝试注销</source>
         <translation>로그아웃중</translation>
     </message>
@@ -836,17 +825,17 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">재다시 인증 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="514"/>
+        <location filename="../forms/mainwindow.cpp" line="393"/>
         <source>网络异常断开。</source>
         <translation>네트워크 이상 끊어 졌다.</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="529"/>
+        <location filename="../forms/mainwindow.cpp" line="407"/>
         <source>拨号成功</source>
         <translation>다이얼 성공</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="541"/>
+        <location filename="../forms/mainwindow.cpp" line="416"/>
         <source>重播失败，正在关闭验证</source>
         <translation>재다시 인증 실패,인증 닫는 중</translation>
     </message>
@@ -857,38 +846,38 @@ p, li { white-space: pre-wrap; }
 </translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="620"/>
+        <location filename="../forms/mainwindow.cpp" line="490"/>
         <source>警告</source>
         <translation>경고</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="621"/>
+        <location filename="../forms/mainwindow.cpp" line="491"/>
         <source>检查更新失败</source>
         <translation>업데이트 검출 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="644"/>
+        <location filename="../forms/mainwindow.cpp" line="512"/>
         <source>检查到新版本，但无法下载更新包</source>
         <translation>새로운 버전 검출되었습니다,허나 업데이트 패키지 다운할 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="655"/>
+        <location filename="../forms/mainwindow.cpp" line="523"/>
         <source>立即安装</source>
         <translation>즉시 설치</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="658"/>
+        <location filename="../forms/mainwindow.cpp" line="526"/>
         <source>NDR 将会在三分钟之内挂断并开启更新，如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 삼분만에 끊어지며 업데이트를 시작합니다,만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="664"/>
+        <location filename="../forms/mainwindow.cpp" line="532"/>
         <source>打开软件包目录</source>
         <translation>소프트웨어 디렉터리 열기</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="654"/>
-        <location filename="../forms/mainwindow.cpp" line="663"/>
+        <location filename="../forms/mainwindow.cpp" line="522"/>
+        <location filename="../forms/mainwindow.cpp" line="531"/>
         <source>稍后提醒</source>
         <translation>이따 알림</translation>
     </message>
@@ -897,32 +886,32 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">%1 날 %2:%3:%4</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="668"/>
+        <location filename="../forms/mainwindow.cpp" line="536"/>
         <source>NDR 已经将新版本软件包下载到了临时目录，请打开目录并手动安装。如果您不想立即更新，请选择下次提示的时间并单击“%1”</source>
         <translation>NDR른 이미 새로운 버전 패키지를 임시 디렉터리로 다운했습니다,수동으로 디렉터리를 열고 설치하세요.만약 즉시 업데이트를 원하지않는다면 다음 힌트 시간을 선택하고 클릭하세요“%1”</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="685"/>
+        <location filename="../forms/mainwindow.cpp" line="553"/>
         <source>打开失败</source>
         <translation>열기실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="686"/>
+        <location filename="../forms/mainwindow.cpp" line="554"/>
         <source>打开目录失败</source>
         <translation>디렉터리 열기 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="688"/>
+        <location filename="../forms/mainwindow.cpp" line="556"/>
         <source>安装失败</source>
         <translation>설치 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="689"/>
+        <location filename="../forms/mainwindow.cpp" line="557"/>
         <source>启动安装程序失败</source>
         <translation>설치 프로그램 실행 실패</translation>
     </message>
     <message>
-        <location filename="../forms/mainwindow.cpp" line="692"/>
+        <location filename="../forms/mainwindow.cpp" line="560"/>
         <source>请尝试手动安装 %1</source>
         <translation>수동으로 시도해 주십시오%1</translation>
     </message>
@@ -996,9 +985,69 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>PopUpInfomationDialog</name>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="9"/>
+        <source>通知</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="21"/>
+        <source>N/N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="22"/>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="23"/>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="24"/>
+        <source>作者: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="25"/>
+        <source>标题: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="26"/>
+        <source> </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="27"/>
+        <location filename="../forms/popupinfomationdialog.cpp" line="28"/>
+        <source>Unknow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="183"/>
+        <source>1/%0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="205"/>
+        <source>%0秒后自动关闭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../forms/popupinfomationdialog.cpp" line="234"/>
+        <location filename="../forms/popupinfomationdialog.cpp" line="256"/>
+        <source>%0/%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="../ndrapplication.cpp" line="15"/>
+        <location filename="../ndrapplication.cpp" line="14"/>
         <source>提示</source>
         <translation>힌트</translation>
     </message>
@@ -1009,19 +1058,19 @@ p, li { white-space: pre-wrap; }
 이미 한 실례가 실행하고있는것을 검출.만약 전번 클라이언트가 이상 종료돼였으면 다시 시도해 보십시오.</translation>
     </message>
     <message>
-        <location filename="../ndrapplication.cpp" line="15"/>
+        <location filename="../ndrapplication.cpp" line="14"/>
         <source>打开失败
 检测到已经有一个实例正在运行。</source>
         <translation>열기실패
 이미 한 실례가 실행하고있는것을 검출.</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="15"/>
+        <location filename="../utils.cpp" line="14"/>
         <source>考试专用</source>
         <translation>시험용</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="16"/>
+        <location filename="../utils.cpp" line="15"/>
         <source>教育网2M</source>
         <translation>교육 인터넷2M</translation>
     </message>
@@ -1030,27 +1079,27 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">연통20M</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="17"/>
+        <location filename="../utils.cpp" line="16"/>
         <source>联通合约20M</source>
         <translation type="unfinished">연통계약20M {20M?}</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="18"/>
+        <location filename="../utils.cpp" line="17"/>
         <source>联通合约30M</source>
         <translation>연통계약20M</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="19"/>
+        <location filename="../utils.cpp" line="18"/>
         <source>联通合约50M</source>
         <translation type="unfinished">연통계약20M {50M?}</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="20"/>
+        <location filename="../utils.cpp" line="19"/>
         <source>电信10M</source>
         <translation>전신10M</translation>
     </message>
     <message>
-        <location filename="../utils.cpp" line="21"/>
+        <location filename="../utils.cpp" line="20"/>
         <source>电信合约10M</source>
         <translation>전신계약10M</translation>
     </message>
@@ -1166,22 +1215,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="217"/>
+        <location filename="../forms/settingsdialog.cpp" line="213"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="221"/>
+        <location filename="../forms/settingsdialog.cpp" line="217"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="227"/>
+        <location filename="../forms/settingsdialog.cpp" line="223"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../forms/settingsdialog.cpp" line="231"/>
+        <location filename="../forms/settingsdialog.cpp" line="227"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1314,8 +1363,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../pppoe/windowsbasedsl.cpp" line="54"/>
-        <location filename="../pppoe/windowsbasedsl.cpp" line="187"/>
-        <location filename="../pppoe/windowsbasedsl.cpp" line="231"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="161"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="205"/>
         <source>未知错误</source>
         <translation type="unfinished">알수없는 오류</translation>
     </message>
@@ -1364,74 +1413,14 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pppoe/windowsbasedsl.cpp" line="177"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="151"/>
         <source>枚举RAS-CAPABLE设备时返回错误</source>
         <translation type="unfinished">RAS-CAPABLE례를 들때 오류 발생</translation>
     </message>
     <message>
-        <location filename="../pppoe/windowsbasedsl.cpp" line="210"/>
+        <location filename="../pppoe/windowsbasedsl.cpp" line="184"/>
         <source>没有可用的RAS-CAPABLE设备</source>
         <translation type="unfinished">사용할 수 있는RAS-CAPABLE장치가 없습니다</translation>
-    </message>
-</context>
-<context>
-    <name>popUpDialog</name>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="8"/>
-        <source>通知</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="19"/>
-        <source>N/N</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="20"/>
-        <source>&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="21"/>
-        <source>&lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="22"/>
-        <source>作者: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="23"/>
-        <source>标题: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="24"/>
-        <source> </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="25"/>
-        <location filename="../forms/popupdialog.cpp" line="26"/>
-        <source>Unknow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="185"/>
-        <source>1/%0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="207"/>
-        <source>%0秒后自动关闭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../forms/popupdialog.cpp" line="236"/>
-        <location filename="../forms/popupdialog.cpp" line="258"/>
-        <source>%0/%1</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,6 +1,7 @@
 #include "ndrapplication.hpp"
 #include <utils.hpp>
 #include <QMessageBox>
+#include <QTimer>
 NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
     :QApplication{argc, argv},
       appName{appName}
@@ -13,13 +14,8 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
     if (localListenningState == false) {
         QMessageBox::information(nullptr, QObject::tr("提示"), QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
         qDebug() << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
-        // Don't use qApp->exit()
-        // Because qApp don't run function exec()
-        // So qApp->exit() will do Nothing
+        QTimer::singleShot(0, qApp, SLOT(quit()));
 
-        // quick_exit is c++ function
-        // Don't use exit because quick_exit don't run deconstruct function
-        quick_exit(EXIT_FAILURE);
     } else {
         qDebug() << "Create localTcpServer successful";
 
@@ -27,6 +23,15 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
         utils::initTempDir();     //初始化 应用临时文件夹
         utils::initSettingsSet(); //初始化 配置
         utils::initLanguage();    //初始化 语言
+
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
+        utils::initFont(":/font/ztgj.ttf");
+        //初始化 默认字体,Windows他妈的字体渲染像屎一样，用默认吧
+#endif
+#if 0 //样式没法看，有时间好好把图P一P，暂时闭了
+        __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
+#endif
+        utils::resourceManager.InitResourceManager();
         qDebug() << "Init configure successful";
     }
 }

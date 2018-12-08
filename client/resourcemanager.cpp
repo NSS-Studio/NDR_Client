@@ -9,14 +9,14 @@
 #include "aboutdialog.h"
 
 ResourceManager::~ResourceManager() {
-    if (initState == InitState::TRUE) {
+    if (initState == InitState::DONE) {
         pppoe->deleteLater();
         mainWindow->deleteLater();
         profile->deleteLater();
         loginDialog->deleteLater();
         aboutDialog->deleteLater();
         popUpInfomationDialog->deleteLater();
-        initState = InitState::FALSE;
+        initState = InitState::UNDONE;
     }
 }
 
@@ -28,7 +28,7 @@ void ResourceManager::InitResourceManager() noexcept{
     loginDialog = new LoginDialog{};
     mainWindow = new MainWindow{};
     popUpInfomationDialog = new PopUpInfomationDialog{};
-    initState = InitState::TRUE;
+    initState = InitState::DONE;
 #ifdef QT_DEBUG
     mainWindow->show();
 #endif

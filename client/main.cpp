@@ -77,32 +77,5 @@ int main(int argc, char *argv[]) {
 
     ndrApp.setQuitOnLastWindowClosed(false);
 
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX)
-    utils::initFont(":/font/ztgj.ttf");
-    //初始化 默认字体,Windows他妈的字体渲染像屎一样，用默认吧
-#endif
-#if 0 //样式没法看，有时间好好把图P一P，暂时闭了
-    __initStyleSheet(&a,":/style/"  "default"  ".qss"); //初始化 样式表
-#endif
-    utils::resourceManager.InitResourceManager();
-
-//    QQmlEngine engine;
-//    QQmlComponent component(&engine, QUrl("qrc:/qmlforms/PopUpInfomationForm.ui.qml"));
-//    QObject *object = component.create();
-
-
-
-//    QQuickView view;
-////    view.setResizeMode(QQuickView::SizeRootObjectToView);
-//    view.setSource(QUrl("qrc:/qmlforms/PopUpInfomationForm.ui.qml"));
-//    auto text = view.rootObject()->findChild<QQuickItem*>("welcome");
-//    if (text) {
-//        text->setProperty("text", "哞菇， 咕咕咕");
-//    } else {
-
-//    }
-//    view.setFlag(Qt::FramelessWindowHint, true);
-//    view.show();
-
     return ndrApp.exec();
 }
