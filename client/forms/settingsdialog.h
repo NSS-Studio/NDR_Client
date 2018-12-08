@@ -6,7 +6,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
+
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <winreg.h>
@@ -17,9 +17,7 @@ namespace Ui {
 class SettingsDialog;
 }
 
-class SettingsDialog:
-        public QDialog,
-        public QEnableSharedFromThis<SettingsDialog>
+class SettingsDialog final: public QDialog
 {
     Q_OBJECT
 public:

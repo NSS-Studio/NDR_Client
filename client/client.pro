@@ -20,7 +20,7 @@ else:CONFIG(release, debug|release):{
     DEFINES += QT_NO_DEBUG_OUTPUT #调试输入开关
 }
 include(pppoe/pppoe.pri)
-#include(forms/forms.pri)
+include(forms/forms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
@@ -34,12 +34,12 @@ UI_DIR=./forms
 SOURCES +=  main.cpp \
             ndrapplication.cpp \
             utils.cpp \
-#            resourcemanager.cpp
+            resourcemanager.cpp
 
 HEADERS  += ndrapplication.hpp \
             utils.hpp \
             ndrconfig.hpp \
-#            resourcemanager.hpp
+            resourcemanager.hpp
 
 RESOURCES += client.qrc \
              qmlforms.qrc

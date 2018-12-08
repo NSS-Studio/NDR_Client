@@ -18,12 +18,11 @@
 #include "updateservice.h"
 #include "resourcemanager.hpp"
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow, public QEnableSharedFromThis<MainWindow>
+class MainWindow final: public QMainWindow
 {
     Q_OBJECT
 

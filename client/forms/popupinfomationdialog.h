@@ -22,7 +22,7 @@
 #include <QDesktopWidget>
 #include <QSettings>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
+
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <winuser.h>
@@ -42,9 +42,7 @@
 */
 #endif
 
-class PopUpInfomationDialog:
-        public QObject,
-        public QEnableSharedFromThis<PopUpInfomationDialog>
+class PopUpInfomationDialog final: public QObject
 {
     Q_OBJECT
 public:

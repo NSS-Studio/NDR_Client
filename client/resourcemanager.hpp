@@ -2,6 +2,8 @@
 #define RESOURCEMANAGER_HPP
 
 #include <QSharedPointer>
+#include <QMutex>
+
 class PPPoE;
 class MainWindow;
 class LoginDialog;
@@ -11,21 +13,27 @@ class AboutDialog;
 class ResourceManager final
 {
 public:
-    ResourceManager();
+    ResourceManager() = default;
     ~ResourceManager();
-    void InitResourceManager();
-    QSharedPointer<PPPoE> getPPPoE();
-    QSharedPointer<LoginDialog> getLoginDialog();
-//    QSharedPointer<PopUpInfomationDialog> getPopUpInfomationDialog();
-    QSharedPointer<AboutDialog> getAboutDialog();
-    QSharedPointer<LocalStorage> getProfile();
+    ResourceManager(ResourceManager const&) = delete;
+    ResourceManager(ResourceManager &&) = delete;
+    void operator=(ResourceManager const&) = delete;
+    void InitResourceManager() noexcept;
+    PPPoE* getPPPoE() const noexcept;
+    LoginDialog* getLoginDialog() const noexcept;
+    PopUpInfomationDialog* getPopUpInfomationDialog() const noexcept;
+    AboutDialog* getAboutDialog() const noexcept;
+    LocalStorage* getProfile() const noexcept;
 private:
-    QSharedPointer<PPPoE> pppoe;
-    QSharedPointer<MainWindow> mainWindow;
-    QSharedPointer<LocalStorage> profile;
-    QSharedPointer<LoginDialog> loginDialog;
-    QSharedPointer<AboutDialog> aboutDialog;
-//    QSharedPointer<PopUpInfomationDialog> popUpInfomationDialog;
+    PPPoE* pppoe = nullptr;
+    MainWindow* mainWindow = nullptr;
+    LocalStorage* profile = nullptr;
+    LoginDialog* loginDialog = nullptr;
+    AboutDialog* aboutDialog = nullptr;
+    PopUpInfomationDialog* popUpInfomationDialog = nullptr;
+    QMutex mutex;
+    enum class InitState { TRUE,FALSE};
+    InitState initState = InitState::FALSE;
 };
 
 #endif // RESOURCEMANAGER_HPP

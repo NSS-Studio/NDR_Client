@@ -8,12 +8,12 @@
 #include <QTimer>
 #include <QDebug>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
+
 namespace Ui {
 class HangupDialog;
 }
 
-class HangupDialog : public QDialog, public QEnableSharedFromThis<HangupDialog>
+class HangupDialog final: public QDialog
 {
     Q_OBJECT
 public:

@@ -18,7 +18,10 @@
 #define NDR_MAJOR_VERSION 0
 
 /** NDR minor version*/
-#define NDR_MINOR_VERSION 76
+#define NDR_MINOR_VERSION 80
+
+/** NDR version */
+#define NDR_VERSION (NDR_MAJOR_VERSION * 100 + NDR_MINOR_VERSION)
 
 /** NDR local bind port set*/
 #define LOCAL_SERVER_PORT 20412
@@ -60,12 +63,6 @@
 /** 网卡适配器名称*/
 #define NDR_PHONEBOOK_NAME "NDR"
 
-///** DRCOM服务器地址*/
-//#define DRCOM_SERVER_IP "172.24.253.35"
-
-///** DRCOM服务器端口号*/
-//#define DRCOM_SERVER_PORT 61440
-
 /** NDR用户反馈服务器地址*/
 #define NDR_FEEDBACK_SERVER "172.24.10.13"
 
@@ -86,6 +83,6 @@
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
 
 /** 开启更新*/
-#define ENABLE_UPDATE 1
+#define ENABLE_UPDATE true
 
 #endif // NDRCONFIG_HPP

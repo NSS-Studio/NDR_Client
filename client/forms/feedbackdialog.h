@@ -8,12 +8,12 @@
 #include <QDomDocument>
 #include <QSslCertificate>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
+
 namespace Ui {
 	class FeedbackDialog;
 }
 
-class FeedbackDialog : public QDialog, public QEnableSharedFromThis<FeedbackDialog>
+class FeedbackDialog final: public QDialog
 {
 	Q_OBJECT
 public:

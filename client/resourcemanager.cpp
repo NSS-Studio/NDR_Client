@@ -4,46 +4,53 @@
 #include <mainwindow.h>
 #include <logindialog.h>
 #include <localstorage.hpp>
+#include <QMutexLocker>
 #include "popupinfomationdialog.h"
 #include "aboutdialog.h"
 
-ResourceManager::ResourceManager()
-{
-
-}
-
 ResourceManager::~ResourceManager() {
+    if (initState == InitState::TRUE) {
+        pppoe->deleteLater();
+        mainWindow->deleteLater();
+        profile->deleteLater();
+        loginDialog->deleteLater();
+        aboutDialog->deleteLater();
+        popUpInfomationDialog->deleteLater();
+        initState = InitState::FALSE;
+    }
 }
 
-void ResourceManager::InitResourceManager() {
-    aboutDialog.reset(new AboutDialog{});
-    pppoe.reset(new PPPoE{});
-    profile.reset(new LocalStorage{utils::appHome + "/config.db"});
-    loginDialog.reset(new LoginDialog{});
-    mainWindow.reset(new MainWindow{});
-//    popUpInfomationDialog.reset(new PopUpInfomationDialog{});
+void ResourceManager::InitResourceManager() noexcept{
+    QMutexLocker locker{&mutex};
+    aboutDialog = new AboutDialog{};
+    pppoe = new PPPoE{};
+    profile = new LocalStorage{utils::appHome + "/config.db"};
+    loginDialog = new LoginDialog{};
+    mainWindow = new MainWindow{};
+    popUpInfomationDialog = new PopUpInfomationDialog{};
+    initState = InitState::TRUE;
 #ifdef QT_DEBUG
     mainWindow->show();
 #endif
     loginDialog->show();
 }
 
-QSharedPointer<PPPoE> ResourceManager::getPPPoE() {
-    return pppoe->sharedFromThis();
+PPPoE* ResourceManager::getPPPoE() const noexcept{
+    return pppoe;
 }
 
-QSharedPointer<LoginDialog> ResourceManager::getLoginDialog() {
-    return loginDialog->sharedFromThis();
+LoginDialog* ResourceManager::getLoginDialog() const noexcept{
+    return loginDialog;
 }
 
-//QSharedPointer<PopUpInfomationDialog> ResourceManager::getPopUpInfomationDialog() {
-//    return popUpInfomationDialog->sharedFromThis();
-//}
-
-QSharedPointer<AboutDialog> ResourceManager::getAboutDialog() {
-    return aboutDialog->sharedFromThis();
+PopUpInfomationDialog* ResourceManager::getPopUpInfomationDialog() const noexcept{
+    return popUpInfomationDialog;
 }
 
-QSharedPointer<LocalStorage> ResourceManager::getProfile() {
-    return profile->sharedFromThis();
+AboutDialog* ResourceManager::getAboutDialog() const noexcept{
+    return aboutDialog;
+}
+
+LocalStorage* ResourceManager::getProfile() const noexcept{
+    return profile;
 }

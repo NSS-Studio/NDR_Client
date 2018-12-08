@@ -9,7 +9,7 @@ namespace Ui {
 class NoticeDialog;
 }
 
-class NoticeDialog : public QDialog
+class NoticeDialog final : public QDialog
 {
     Q_OBJECT
     

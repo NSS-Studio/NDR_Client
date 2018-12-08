@@ -5,7 +5,6 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QSharedPointer>
-#include <QEnableSharedFromThis>
 #include "localstorage.hpp"
 #include "resourcemanager.hpp"
 
@@ -21,7 +20,7 @@ namespace Ui {
 class LoginDialog;
 }
 
-class LoginDialog : public QDialog, public QEnableSharedFromThis<LoginDialog>
+class LoginDialog final: public QDialog
 {
     Q_OBJECT
     

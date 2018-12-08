@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto pppoe = utils::resourceManager.getPPPoE();
     auto loginDialog = utils::resourceManager.getLoginDialog();
-    auto aboutDialog = utils::resourceManager.getAboutDialog();
 
     ui->menuTrayLogin->menuAction()->setVisible(false);
     ui->menuTrayWorking->menuAction()->setVisible(false);
@@ -31,9 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //Init PPPoE singals&slots
-    connect(pppoe.get(), &PPPoE::dialFinished, this,
+    connect(pppoe, &PPPoE::dialFinished, this,
             &MainWindow::dialFinished, Qt::QueuedConnection);
-    connect(pppoe.get(), &PPPoE::hangedUp, this, &MainWindow::hangedUp,
+    connect(pppoe, &PPPoE::hangedUp, this, &MainWindow::hangedUp,
             Qt::QueuedConnection);
 
 #ifndef Q_OS_WIN
@@ -47,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
     loginDialog->set_interface_list(interfaces);
 #endif
-    connect(loginDialog.get(), &LoginDialog::myaccepted, this, &MainWindow::tryLogin);
-    connect(loginDialog.get(), &LoginDialog::finished, this, &MainWindow::loginWindowClosed);
+    connect(loginDialog, &LoginDialog::myaccepted, this, &MainWindow::tryLogin);
+    connect(loginDialog, &LoginDialog::finished, this, &MainWindow::loginWindowClosed);
 
     noticeDialog.reset(new NoticeDialog{});
 
@@ -204,7 +203,7 @@ void MainWindow::dialFinished(bool ok) {
 #ifdef Q_OS_MAC
         if (!pppoe->lastError().isEmpty())
 #endif
-            QMessageBox::information(loginDialog.get(), tr("提示"),
+            QMessageBox::information(loginDialog, tr("提示"),
                                      tr("拨号失败") + "\n" +
                                          pppoe->lastError());
     }
@@ -267,7 +266,6 @@ void MainWindow::on_actionQuit_triggered() {
 }
 
 void MainWindow::on_actionShowWindow_triggered() {
-    //奇怪
     auto loginDialog = utils::resourceManager.getLoginDialog();
     if (state == State::Working) {
         this->show();
@@ -391,7 +389,7 @@ void MainWindow::hangedUp(bool natural) {
                 emit redialFinished(true);
         } else {
             onStartLogining();
-            QMessageBox::critical(loginDialog.get(), tr("提示"),
+            QMessageBox::critical(loginDialog, tr("提示"),
                                   tr("网络异常断开。"));
         }
     }
@@ -493,7 +491,9 @@ void MainWindow::checkFinished(bool error, int major, int minor,
                               tr("检查更新失败") + "\n" + errMsg);
     }
 
-    if (major > VERSION_MAJOR || minor > VERSION_MINOR) {
+    auto ndrVersion = major * 100 + minor;
+
+    if (ndrVersion > NDR_VERSION) {
         qDebug() << "需要更新！！！！！！！！！！！！";
         updateServer->downloadLatestPackage();
     } else {
@@ -508,7 +508,7 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
         if (state == State::Working) {
             qDebug() << errMsg;
             ui->actionLogoff->trigger();
-            QMessageBox::critical(loginDialog.get(), "更新错误",
+            QMessageBox::critical(loginDialog, "更新错误",
                                   tr("检查到新版本，但无法下载更新包") + "\n" +
                                       errMsg);
         }
@@ -548,7 +548,7 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
             if (state == State::Working)
                 ui->actionLogoff->trigger();
             QMessageBox::warning(
-                loginDialog.get(),
+                loginDialog,
 #ifdef Q_OS_LINUX
                 tr("打开失败"),
                 tr("打开目录失败")

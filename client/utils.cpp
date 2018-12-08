@@ -7,7 +7,7 @@ namespace utils {
     /** 设置项*/
     QSharedPointer<SettingsSet> settings;
     QTranslator ndr_tr, qt_tr;
-//    ResourceManager resourceManager;
+    ResourceManager resourceManager;
     QSharedPointer<QAESEncryption> encryption;
     QMap<QString, QString> const& getDrModelId() {
         static QMap<QString, QString> const drModelId = {
@@ -31,7 +31,7 @@ namespace utils {
     }
 
     bool getDrModelCaption(QString postfix, QString &caption) {
-        qDebug() << "Function :"<< __PRETTY_FUNCTION__ << "postfix:" << postfix;
+        qDebug() << "postfix:" << postfix;
         auto drModelId = getDrModelId();
         if (drModelId.find(postfix) == drModelId.cend()) {
             return false;
@@ -41,14 +41,14 @@ namespace utils {
     }
 
     QString getLangDir() {
-        qDebug() << "Function :"<< __PRETTY_FUNCTION__;
+        qDebug();
         QString r = ":/translate/" LANGUAGE_DIR_NAME;
-        return QFile::exists(r) ? r : QString();
+        return QFile::exists(r) ? r : QString{};
     }
 
     QString getVersionString() {
         Q_STATIC_ASSERT(NDR_MINOR_VERSION < 100);
-        return QString(NDR_MAJOR_VERSION + "." + NDR_MINOR_VERSION);
+        return QString{"%1.%2"}.arg(NDR_MAJOR_VERSION).arg(NDR_MINOR_VERSION);
     }
 
     QStringList getLangFileNameTable() {
@@ -69,13 +69,14 @@ namespace utils {
     }
 
     bool getLanguageName(QString fileName, QString &langName) {
-        QMap<QString, QString> table {
+        qDebug();
+        static QMap<QString, QString> table {
             {"en_US", "English"},
             {"ja_JP", "日本語"},
             {"ko_KR", "한국의"},
             {"zh_CN", "简体中文"}
         };
-        qDebug() << "Function :"<< __PRETTY_FUNCTION__;
+
         if (table.find(fileName) == table.cend()) {
             return false;
         }
@@ -153,7 +154,6 @@ namespace utils {
         styleSheet.replace("$[SKIN_PATH]", "/usr/share/ndr-client/skin");
     #endif
         qDebug() << styleSheet;
-        // a->setStyleSheet(styleSheet);
         a->setStyleSheet(styleSheet);
     }
 }

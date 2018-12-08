@@ -12,8 +12,6 @@ LoginDialog::LoginDialog(QWidget *parent)
     setWindowFlags(flags);
     ui->setupUi(this);
 
-    auto pppoe = utils::resourceManager.getPPPoE();
-
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();
     // pal.setColor(QPalette::Button,QColor(255,0,0));
