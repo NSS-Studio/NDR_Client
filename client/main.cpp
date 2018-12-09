@@ -16,6 +16,7 @@
 #include <QQuickItem>
 #include <QQmlEngine>
 #include <QQmlComponent>
+#include "newforms/qmlaboutdialog.hpp"
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
@@ -77,5 +78,6 @@ int main(int argc, char *argv[]) {
 
     ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
+    QMLAboutDialog qmlAboutDialog;
     return ndrApp.NdrApplication::exec();
 }

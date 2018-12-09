@@ -21,6 +21,7 @@ else:CONFIG(release, debug|release):{
 }
 include(pppoe/pppoe.pri)
 include(forms/forms.pri)
+include(newforms/newforms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
