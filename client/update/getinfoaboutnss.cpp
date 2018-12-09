@@ -4,10 +4,11 @@
 #include <QDomDocument>
 #include <QVector>
 #include <QDesktopServices>
-#include <utils.hpp>
+#include "utils.hpp"
+#include <utility>
 
 GetInfoAboutNSS::GetInfoAboutNSS(QString address, QObject *parent)
-    : QObject(parent), address{address}
+    : QObject(parent), address{std::move(address)}
 {
     qDebug() << "GetInfoAboutNSS()" << endl;
     this->sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
@@ -133,38 +134,38 @@ void GetInfoAboutNSS::readyOpen()
 {
     //! 弹网页逻辑
     //! needShow 决定是否显示打开网页logical
-    qDebug() << "readyOpen()" << endl;
+    qDebug() << "readyOpen()";
     if (needShow)
         openWeb();
 }
 
 void GetInfoAboutNSS::openWeb()
 {
-    qDebug() << "openWeb()" << endl;
+    qDebug() << "openWeb()";
     QDateTime currentTime = QDateTime::currentDateTime();
     QVector<QUrl> openUrl;
     QString format{"yyyy-MM-dd hh:mm:ss:zzz"};
-    for(int i = 0; i < messageList.size(); ++i)
+    for(auto const& message: messageList)
     {
-        QDateTime start = QDateTime::fromString(messageList[i].stratTime, format);
-        QDateTime end = QDateTime::fromString(messageList[i].endTime, format);
+        QDateTime start = QDateTime::fromString(message.stratTime, format);
+        QDateTime end = QDateTime::fromString(message.endTime, format);
         if(start <= currentTime && currentTime <= end)
-            openUrl.push_back(QUrl{messageList[i].url});
+            openUrl.push_back(QUrl{message.url});
     }
 
-    for (auto i : openUrl)
-        QDesktopServices::openUrl(i);
+    for (auto url : openUrl)
+        QDesktopServices::openUrl(url);
 
-    openUrl.erase(openUrl.begin(), openUrl.end());
-    messageList.erase(messageList.begin(), messageList.end());
+    openUrl.clear();
+    messageList.clear();
 
-    qDebug() << "emit endGetInfo" << endl;
+    qDebug() << "emit endGetInfo";
     emit endGetInfo();
 }
 
 GetInfoAboutNSS::~GetInfoAboutNSS()
 {
-    qDebug() << "delete GetInfoAboutNSS" << endl;
+    qDebug() << "delete GetInfoAboutNSS";
     if (tmp)
         delete tmp;
     if (reply)

@@ -22,7 +22,7 @@ class SettingsDialog final: public QDialog
     Q_OBJECT
 public:
     explicit SettingsDialog(QWidget *parent = nullptr);
-    ~SettingsDialog();
+    ~SettingsDialog() = default;
     bool getFormData(SettingsSet *settings);
     bool chkWeb();
 

@@ -33,7 +33,7 @@ namespace utils {
     QVariant getDrModelCaption(QString const& postfix) {
         qDebug() << "postfix:" << postfix;
         auto drModelId = getDrModelId();
-        if (drModelId.find(postfix) == drModelId.cend()) {
+        if (drModelId.find(postfix) == drModelId.end()) {
             return QVariant{};
         }
         return QVariant{postfix};
@@ -76,7 +76,7 @@ namespace utils {
             {"zh_CN", "简体中文"}
         };
 
-        if (table.find(fileName) == table.cend()) {
+        if (table.find(fileName) == table.end()) {
             return QVariant{};
         }
         return QVariant{table[fileName]};
@@ -126,8 +126,7 @@ namespace utils {
 
     void initFont(QString const& fontFile) {
         int fontId = QFontDatabase::addApplicationFont(fontFile);
-
-        qDebug("font id:%d\n", fontId);
+        qDebug() << QString("font id:%1\n").arg(fontId);
         if (fontId >= 0) {
             QString msyh = QFontDatabase::applicationFontFamilies(fontId).at(0);
             QFont font(msyh, 10);
@@ -136,7 +135,7 @@ namespace utils {
         }
     }
 
-    void initStyleSheet(NdrApplication *a, QString const& sheetFile) {
+    void initStyleSheet(NdrApplication *app, QString const& sheetFile) {
         // QString sheetName = "default";
         QFile file(sheetFile);
         file.open(QFile::ReadOnly);
@@ -152,7 +151,7 @@ namespace utils {
         styleSheet.replace("$[SKIN_PATH]", "/usr/share/ndr-client/skin");
     #endif
         qDebug() << styleSheet;
-        a->setStyleSheet(styleSheet);
+        app->setStyleSheet(styleSheet);
     }
 }
 

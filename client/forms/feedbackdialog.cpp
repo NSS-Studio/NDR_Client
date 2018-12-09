@@ -219,10 +219,9 @@ void FeedbackDialog::postFinished()
     this->ui->txtContactValue->clear();
     QMessageBox::information(this,tr("反馈成功"),tr("感谢您反馈，我们会考虑并尽力采纳您的意见"));
     return;
-    failed:
+failed:
     QMessageBox::information(this,tr("反馈失败"),errorMessage);
     qDebug() << "postFinished() exit";
-	//QDomDocument doc;
 }
 
 void FeedbackDialog::setLoginData(QString account,QString combo)

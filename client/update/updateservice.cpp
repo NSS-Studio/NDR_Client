@@ -175,7 +175,7 @@ void UpdateService::downloadLatestPackage() {
 
 bool UpdateService::downloadToFile(QString urlStr, QString filename,
                                    QString &errorMsg) {
-  qDebug("function: downloadToFile()");
+  qDebug();
 
 #ifdef Q_OS_LINUX
   QSettings package_config("/etc/ndr-package.cfg", QSettings::IniFormat);
@@ -255,9 +255,8 @@ bool UpdateService::downloadToFile(QString urlStr, QString filename,
 
 void UpdateService::readyRead() {
   char buffer[1024 * 4];
-  int realRead;
   while (reply->bytesAvailable()) {
-    realRead = reply->read(buffer, sizeof(buffer));
+    qint64 realRead = reply->read(buffer, sizeof(buffer));
     out->writeRawData(buffer, realRead);
   }
 }
@@ -334,11 +333,9 @@ bool UpdateService::openPackage(QString &errMsg) {
   int status = system(command);
   if (status) {
     if (status == -1) {
-      // perror(command);
-      int e = errno;
-      const char *err_msg = strerror(e);
-      errMsg = QString::fromUtf8(err_msg);
-      qWarning("%s", err_msg);
+      const char *errorMessage = strerror(errno);
+      errMsg = QString::fromUtf8(errorMessage);
+      qWarning() << errorMessage;
       return false;
     }
     errMsg = tr("命令 %1 以状态 %2 退出")

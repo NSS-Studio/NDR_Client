@@ -4,7 +4,7 @@
 
 NoticeDialog::NoticeDialog(QWidget *parent) :
     QDialog(parent),
-    ui{new Ui::NoticeDialog}, isDown{false}
+    ui{new Ui::NoticeDialog}
 {
     this->setWindowOpacity(0.8);
     this->setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint|Qt::Tool);
@@ -12,13 +12,13 @@ NoticeDialog::NoticeDialog(QWidget *parent) :
     setFixedSize(this->width(), this->height());
 }
 
-void NoticeDialog::showMessage(QString msg)
+void NoticeDialog::showMessage(QString const& msg)
 {
     qDebug() << "message thread: " << QThread::currentThread() << endl;
     //first set text, then show
     this->ui->label->setText(msg);
     //change to half model dialog
-    if(this->isVisible()==false)
+    if(this->isVisible())
     {
         QSize desktop_size = qApp->desktop()->size();
         move((desktop_size.width() - this->width()) / 2,

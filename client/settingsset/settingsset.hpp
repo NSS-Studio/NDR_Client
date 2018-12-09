@@ -13,7 +13,7 @@
 class SettingsSet final
 {
 public:
-    SettingsSet(QString filename);
+    explicit SettingsSet(QString fileName);
     QString hotkey;
     QString language;
     bool autoRasdial;
@@ -26,7 +26,7 @@ public:
     bool readAll();
     void writeAll();
 private:
-    QString filename;
+    QString fileName;
 };
 
 #endif // SETTINGSSET_H

@@ -13,10 +13,6 @@ LinuxBaseDsl::LinuxBaseDsl()
                 );
 }
 
-LinuxBaseDsl::~LinuxBaseDsl() {
-
-}
-
 bool LinuxBaseDsl::dial(const QString &username,
                         const QString &password,
                         const QString &device_name,

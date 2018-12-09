@@ -14,7 +14,7 @@ class NoticeDialog final : public QDialog {
 public:
   explicit NoticeDialog(QWidget *parent = nullptr);
   ~NoticeDialog() = default;
-  void showMessage(QString msg);
+  void showMessage(QString const& msg);
 
 protected:
   void mouseMoveEvent(QMouseEvent *e);
@@ -22,8 +22,8 @@ protected:
   void mouseReleaseEvent(QMouseEvent *e);
 private:
   QSharedPointer<Ui::NoticeDialog> ui;
-  int x, y;
-  bool isDown;
+  int x{}, y{};
+  bool isDown{false};
 };
 
 #endif // NOTICEDIALOG_H

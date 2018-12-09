@@ -10,7 +10,7 @@ class WindowsBaseDsl final: public BaseDsl
     Q_OBJECT
 public:
     WindowsBaseDsl();
-    ~WindowsBaseDsl();
+    ~WindowsBaseDsl() override = default;
     bool dial(const QString &username, const QString &password,const QString &device_name, QString &errorMessage);
     void hangUp();
     bool isDisconnected();

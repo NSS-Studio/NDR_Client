@@ -11,8 +11,8 @@ class LocalStorage final : public QObject
 {
     Q_OBJECT
 public:
-    explicit LocalStorage(QString filename,QObject *parent = nullptr);
-    ~LocalStorage();
+    explicit LocalStorage(QString const& fileName,QObject *parent = nullptr);
+    ~LocalStorage() = default;
     
     bool open();
     void close();
@@ -42,7 +42,7 @@ public:
 private:
     QSharedPointer<QSqlDatabase> db;
     QSharedPointer<QSqlQuery> query;
-    int sum = 0;    
+    int sum{};
 };
 
 #endif // LOCALSTORAGE_H

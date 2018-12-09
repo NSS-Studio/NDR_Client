@@ -10,12 +10,15 @@ class MacOsBaseDsl final: public BaseDsl
 {
     Q_OBJECT
 public:
-    MacOsBaseDsl();
-    ~MacOsBaseDsl();
-    bool dial(const QString &username, const QString &password,const QString &device_name, QString &errorMessage);
-    void hangUp();
-    bool isDisconnected();
-    QStringList getAvailableInterfaces();
+    MacOsBaseDsl() = default;
+    ~MacOsBaseDsl() override = default;
+    bool dial(QString const &username,
+              QString const &password,
+              QString const &device_name,
+              QString &errorMessage) override;
+    void hangUp() override;
+    bool isDisconnected() override;
+    QStringList getAvailableInterfaces() override;
 private:
     SCNetworkConnectionRef connection = nullptr;
     SCNetworkServiceRef ppp_service = nullptr;

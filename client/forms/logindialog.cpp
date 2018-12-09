@@ -23,10 +23,10 @@ LoginDialog::LoginDialog(QWidget *parent)
     QWidget::setTabOrder(ui->cmbAccount, ui->editPassword);
 
 #ifndef Q_OS_MAC
-    int edit_height = ui->cmbAccount->height();
-    qDebug("edit_height = %d", edit_height);
-    ui->editPassword->setMaximumHeight(edit_height);
-    ui->btnDelUserInfo->setMaximumHeight(edit_height);
+    int editHeight = ui->cmbAccount->height();
+    qDebug() << "edit_height = " << editHeight;
+    ui->editPassword->setMaximumHeight(editHeight);
+    ui->btnDelUserInfo->setMaximumHeight(editHeight);
 #endif
     // this->ui->chkAutoLogin->setEnabled(false);
 
@@ -38,7 +38,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     for(auto const& postfit :postfitList) {
         qDebug() << postfit;
         auto caption = utils::getDrModelCaption(postfit);
-        this->ui->cmbModel->addItem(caption.value<QString>());
+        this->ui->cmbModel->addItem(caption.toString());
     }
 
     auto completer = new QCompleter(this);
@@ -229,7 +229,7 @@ void LoginDialog::on_chkSavePasswd_clicked(bool checked) {
 }
 
 void LoginDialog::handle_model_change(int index) {
-    qDebug("slot: handle_model_change(%d)", index);
+    qDebug() << QString("slot: handle_model_change(%1)").arg(index);
     if (index < 0)
         ui->cmbModel->setCurrentIndex(0);
 }
@@ -240,7 +240,7 @@ void LoginDialog::set_interface_list(QStringList const &list) {
 }
 
 void LoginDialog::closeEvent(QCloseEvent *e) {
-    qDebug() << "Function: " << __PRETTY_FUNCTION__ << " : arg pointer -> " << e;
+    qDebug() << "Parameter pointer -> " << e;
     qApp->exit();
     e->accept();
 }

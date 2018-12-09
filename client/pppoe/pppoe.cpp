@@ -13,12 +13,6 @@ QString PPPoE::lastError()
     return this->errorMessage;
 }
 
-PPPoE::~PPPoE()
-{
-    
-}
-
-
 void PPPoE::run() {
 	//qDebug() << "PPPoE::run: device_name:" << device_name;
     //reconnect failed at here; windows bug?? when reconnect three times it will success
@@ -29,7 +23,7 @@ void PPPoE::run() {
     //else
     //    ret = basedsl -> dial(username, password, device_name, errorMessage);
 
-    bool ret = basedsl->dial(username, password, deviceName, errorMessage);
+    bool ret = basedsl->dial(userName, password, deviceName, errorMessage);
     qDebug() << "failed: " << errorMessage;
     if(ret){
         if(isRedial)
@@ -38,7 +32,7 @@ void PPPoE::run() {
             emit dialFinished(true);
         dialSucceed = true;
         while (1){
-            if(stop_now){
+            if(stopNow){
                 //Log::write("disconnect naturally\n");
                 //Log::write(QString::number(ret)+ " " + QString::number(stop_now)+"\n");
                 basedsl->hangUp();
@@ -87,21 +81,24 @@ QString PPPoE::getIpAddress() {
 
 QString PPPoE::getUserName()
 {
-    return this->username;
+    return this->userName;
 }
 
-bool PPPoE::dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &device_name)
+bool PPPoE::dialRAS(QString const& entryName,
+                    QString const& userName,
+                    QString const& password,
+                    QString const& deviceName)
 {
-    qDebug() << "PPPoE::dialRAS" << "device_name" << device_name;
+    qDebug() << "PPPoE::dialRAS" << "device_name" << deviceName;
     if(this->isRunning())
         return false;
     this->entryName = entryName;
-    this->username = username;
+    this->userName = userName;
     this->password = password;
-    this->deviceName = device_name;
+    this->deviceName = deviceName;
     this->isRedial = false;
-    this->stop_now = false;
-    qDebug() << "username" << username;
+    this->stopNow = false;
+    qDebug() << "userName" << userName;
     qDebug() << "password" << password;
     this->start();
     return true;
@@ -111,7 +108,7 @@ bool PPPoE::redialRAS()
     if(this->isRunning())
         return false;
     isRedial = true;
-    this->stop_now = false;
+    this->stopNow = false;
     //this->dialRAS(this->entryName,this->username,this->password);
     this->start();
     return true;
@@ -119,7 +116,7 @@ bool PPPoE::redialRAS()
 
 void PPPoE::hangUp()
 {
-    stop_now = true;
+    stopNow = true;
 }
 
 bool PPPoE::preparePhoneBook()

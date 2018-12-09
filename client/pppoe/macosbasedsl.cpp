@@ -1,20 +1,15 @@
 #include <macosbasedsl.hpp>
 #include <utils.hpp>
 #include <QHostAddress>
-MacOsBaseDsl::MacOsBaseDsl()
-{
-
-}
-
-MacOsBaseDsl::~MacOsBaseDsl() {
-
-}
 
 static void setErrorMessage(QString& errorMessage, QString const& message) {
     errorMessage = QString("%1: %2").arg(message).arg(SCErrorString(SCError()));
 }
 
-bool MacOsBaseDsl::dial(const QString &username, const QString &password,const QString &device_name, QString &errorMessage) {
+bool MacOsBaseDsl::dial(QString const& username,
+                        QString const& password,
+                        QString const& device_name,
+                        QString &errorMessage) {
 
     if (ppp_service) {
         CFRelease(ppp_service);

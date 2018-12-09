@@ -7,10 +7,6 @@ WindowsBaseDsl::WindowsBaseDsl()
 
 }
 
-WindowsBaseDsl::~WindowsBaseDsl() {
-
-}
-
 bool WindowsBaseDsl::dial(QString const &username,
           QString const &password,
           QString const &device_name,

@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     QStringList interfaces = pppoe->getAvailableInterfaces();
     if (interfaces.count() == 0) {
         QMessageBox::critical(this, tr("NDR"), tr("No Interface Available"));
-        QApplication::instance()->exit(1);
+        qApp->exit(1);
         loginDialog->close();
         close();
         exit(1);
@@ -75,9 +75,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::tryLogin() {
-    QString username, password, deviceName, errorMessage;
-    QString realUsername;
-    QString postfix;
+    QString username, password, deviceName, errorMessage, realUsername, postfix;
     onStopLogining();
     auto loginDialog = utils::resourceManager.getLoginDialog();
     loginDialog->getFormData(username, password, postfix, deviceName);
@@ -85,7 +83,7 @@ void MainWindow::tryLogin() {
 
     auto modelCaption = utils::getDrModelCaption(postfix);
     if (modelCaption.isValid())
-        this->ui->lblType->setText(modelCaption.value<QString>());
+        this->ui->lblType->setText(modelCaption.toString());
     else
         this->ui->lblType->setText(tr("未知"));
     qDebug() << "PPPoE Account: " << username + postfix;
@@ -284,7 +282,6 @@ void MainWindow::on_actionShowLoginDialog_triggered() {
 }
 
 void MainWindow::on_actionLogoff_triggered() {
-    qDebug("slot: on_actionLogoff_triggered()");
     qDebug() << "mainwindow thread: " << QThread::currentThread() << endl;
     noticeDialog->showMessage(tr("正在尝试注销"));
 
@@ -359,9 +356,9 @@ void MainWindow::hangedUp(bool natural) {
     }
 
     if (natural) {
-        if (this->app_exiting)
+        if (this->app_exiting) {
             qApp->exit(0);
-        else {
+        } else {
             noticeDialog->hide();
             onStartLogining();
         }

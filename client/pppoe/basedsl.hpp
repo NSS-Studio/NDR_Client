@@ -5,7 +5,7 @@ class BaseDsl : public QObject {
     Q_OBJECT
 public:
     explicit BaseDsl(QObject *parent = nullptr);
-    virtual ~BaseDsl();
+    virtual ~BaseDsl() = default;
 
     /**
      * @brief dial 开始PPPOE拨号

@@ -20,14 +20,14 @@ class LinuxBaseDsl final: public BaseDsl
     Q_OBJECT
 public:
     LinuxBaseDsl();
-    ~LinuxBaseDsl();
+    ~LinuxBaseDsl() override = default;
     bool dial(const QString &username,
               const QString &password,
               const QString &device_name,
-              QString &errorMessage);
-    void hangUp();
-    bool isDisconnected();
-    QStringList getAvailableInterfaces();
+              QString &errorMessage) override;
+    void hangUp() override;
+    bool isDisconnected() override;
+    QStringList getAvailableInterfaces() override;
 
 private:
     QSharedPointer<QDBusInterface> networkmanager;

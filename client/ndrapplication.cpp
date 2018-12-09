@@ -1,10 +1,11 @@
 #include "ndrapplication.hpp"
-#include <utils.hpp>
+#include "utils.hpp"
 #include <QMessageBox>
 #include <QTimer>
+#include <utility>
 NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
     :QApplication{argc, argv},
-      appName{appName}
+      appName{std::move(appName)}
 {
 
     localServer.reset(new QTcpServer{});
@@ -14,7 +15,7 @@ NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
     if (!localListenningState) {
         QMessageBox::information(nullptr, QObject::tr("提示"), QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
         qDebug() << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
-        QTimer::singleShot(0, qApp, SLOT(quit()));
+        QTimer::singleShot(0, this, &NdrApplication::quit);
 
     } else {
         qDebug() << "Create localTcpServer successful";
@@ -34,8 +35,4 @@ NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
         utils::resourceManager.InitResourceManager();
         qDebug() << "Init configure successful";
     }
-}
-
-NdrApplication::~NdrApplication() {
-
 }

@@ -34,9 +34,6 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
 #endif
 }
 
-SettingsDialog::~SettingsDialog() {
-}
-
 void SettingsDialog::on_buttonBox_accepted()
 {
 	//config->setValue("Locale", ui->cmbLanguage->itemData(ui->cmbLanguage->currentIndex()));
@@ -71,7 +68,7 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
         for (auto const& fileName: langFileList) {
             auto langName = utils::getLanguageName(fileName);
             if (langName.isNull()) continue;
-            ui->cmbLanguage->addItem(langName.value<QString>(), fileName);
+            ui->cmbLanguage->addItem(langName.toString(), fileName);
             if(fileName == savedLang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
         }
     }

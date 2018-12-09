@@ -1,5 +1,6 @@
 #include "popupinfomationdialog.h"
 #include <utils.hpp>
+#include <QScreen>
 PopUpInfomationDialog::PopUpInfomationDialog()
     :QObject{nullptr}
 {
@@ -8,11 +9,12 @@ PopUpInfomationDialog::PopUpInfomationDialog()
     popUp = new QDialog{nullptr, Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint};
     popUp->setWindowTitle(tr("通知"));
     popUp->setFixedSize(364, 228);
-    popUp->move(QApplication::desktop()->availableGeometry().width() - popUp->width(),
-                QApplication::desktop()->availableGeometry().height() - popUp->height() - 40);
+    auto firstScreen = QGuiApplication::screens().first();
+    popUp->move(firstScreen->availableGeometry().width() - popUp->width(),
+                firstScreen->availableGeometry().height() - popUp->height() - 40);
 
-    qDebug() << QApplication::desktop()->availableGeometry().width() << " "
-             << QApplication::desktop()->availableGeometry().height() << endl;
+    qDebug() << firstScreen->availableGeometry().width() << " "
+             << firstScreen->availableGeometry().height();
     mainLay = new QVBoxLayout();
     hbAuth = new QHBoxLayout();
     hbTitle = new QHBoxLayout();

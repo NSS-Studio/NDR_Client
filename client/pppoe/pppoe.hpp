@@ -1,19 +1,22 @@
 #ifndef PPPOE_HPP
 #define PPPOE_HPP
 #include <QtCore>
-#include <basedsl.hpp>
 #include <QVariant>
 #include <QSharedPointer>
+#include "basedsl.hpp"
 
 class PPPoE final : public QThread
 {
 	Q_OBJECT
 public:
     explicit PPPoE(QObject *parent = nullptr);
-	~PPPoE();
-	void run();
+    ~PPPoE() override = default;
+    void run() override;
 	void kill();
-    bool dialRAS(const QString &entryName, const QString &username, const QString &password, const QString &deviceName);
+    bool dialRAS(const QString &entryName,
+                 const QString &userName,
+                 const QString &password,
+                 const QString &deviceName);
 	bool redialRAS();
 	void hangUp();
     bool isDisconnect();
@@ -28,12 +31,12 @@ private:
     void setDeviceName(QString const& deviceName);
     QSharedPointer<BaseDsl> basedsl;
 	QString entryName;
-	QString username;
+    QString userName;
 	QString password;
     QString deviceName;
 	QString errorMessage;
 	bool preparePhoneBook();
-    bool stop_now = false;
+    bool stopNow = false;
     bool isRedial = false;
 	bool isDisconnectNaturally;
 	bool dialSucceed;
