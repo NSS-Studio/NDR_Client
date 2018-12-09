@@ -7,6 +7,7 @@ SettingsDialog::SettingsDialog( QWidget *parent) :
 {
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     ui->setupUi(this);
+    setFixedSize(this->width(), this->height());
 
     //this->ui->checkBox_2->setEnabled(false);
 	ui->cmbLanguage->setItemData(1, "zh_CN");
@@ -45,16 +46,11 @@ void SettingsDialog::on_buttonBox_accepted()
 void SettingsDialog::on_SettingsDialog_finished(int /*result*/)
 {
     qDebug() <<  "function: SD finished";
-//  死循环
-//  this->reject();
 }
 
 bool SettingsDialog::getFormData(SettingsSet *settings)
 {
-    //settings.autoRasdial = this->ui->chk;
     this->ui->chkAutoRedial->setChecked(settings->autoRasdial);
-//    this->ui->cmbHotKey->setEditText(settings->hotkey);
-//    qDebug() << "hotkey" << settings->hotkey;
     this->ui->cmbHotKey->hide();
     this->ui->label->hide();
     this->ui->label_5->hide();
@@ -66,25 +62,22 @@ bool SettingsDialog::getFormData(SettingsSet *settings)
     this->ui->chkWebEnable->setChecked(settings->webUpEnable);
     this->ui->chkAutoClose->setChecked(settings->autoClose);
 
-	QString saved_lang = settings->language;
-	if(saved_lang.isEmpty()) ui->cmbLanguage->setCurrentIndex(0);	// Auto
-	else if(saved_lang == "zh_CN") ui->cmbLanguage->setCurrentIndex(1);
-    QStringList lang_file_list = utils::getLangFileNameTable();
-	//ui->cmbLanguage->addItems(lang_file_list);
+    QString savedLang = settings->language;
+    if(savedLang.isEmpty()) ui->cmbLanguage->setCurrentIndex(0);	// Auto
+    else if(savedLang == "zh_CN") ui->cmbLanguage->setCurrentIndex(1);
+    QStringList langFileList = utils::getLangFileNameTable();
 
     if (ui->cmbLanguage->count() != 5){
-        QString file_name;
-        foreach(file_name, lang_file_list) {
-            QString lang_name;
-            if(!utils::getLanguageName(file_name, lang_name)) continue;
-            ui->cmbLanguage->addItem(lang_name, file_name);
-            if(file_name == saved_lang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
+        for (auto const& fileName: langFileList) {
+            auto langName = utils::getLanguageName(fileName);
+            if (langName.isNull()) continue;
+            ui->cmbLanguage->addItem(langName.value<QString>(), fileName);
+            if(fileName == savedLang) ui->cmbLanguage->setCurrentIndex(ui->cmbLanguage->count() - 1);
         }
     }
 
     if(this->exec()==QDialog::Accepted){
         settings->autoRasdial = this->ui->chkAutoRedial->isChecked();
-//        settings->hotkey = this->ui->cmbHotKey->currentText().trimmed();
         settings->quitWhileCloseWindow = this->ui->chkQuitWhileClose->isChecked();
         settings->autoStartup = this->ui->checkBox_2->isChecked();
         settings->autoMinimize = this->ui->chkAutoMinimize->isChecked();

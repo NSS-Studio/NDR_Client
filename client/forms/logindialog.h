@@ -26,7 +26,7 @@ class LoginDialog final: public QDialog
     
 public:
     explicit LoginDialog(QWidget *parent = nullptr);
-	~LoginDialog();
+    ~LoginDialog() = default;
 	void getFormData(QString &username, QString &password, QString &type, QString &device_name, bool *autoLogin=0, bool *savePassword=0);
 	//bool show(QString &username,QString password, int &type);
 	void show();

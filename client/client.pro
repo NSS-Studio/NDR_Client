@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT  += core network widgets xml quick svg
-TARGET = ndr-client #目标文件
+TARGET = ndr-client
 TEMPLATE = app
 CONFIG += c++14 warn_on exceptions
 

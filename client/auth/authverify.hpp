@@ -12,7 +12,7 @@ class AuthVerify : public QThread
 {
 public:
     AuthVerify();
-    ~AuthVerify() Q_DECL_OVERRIDE;
+    ~AuthVerify() Q_DECL_OVERRIDE = default;
 
     void authStop();
 

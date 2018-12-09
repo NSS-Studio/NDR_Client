@@ -5,9 +5,9 @@ HangupDialog::HangupDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HangupDialog)
 {
-    setWindowFlags(Qt::WindowTitleHint 
-                   | Qt::CustomizeWindowHint);
+    setWindowFlags(Qt::WindowTitleHint | Qt::CustomizeWindowHint);
     ui->setupUi(this);
+    setFixedSize(this->width(), this->height());
 #ifdef Q_OS_LINUX
 	//ui->btnDelay->setR
 	//ui->btnDelay->setFixedWidth(80);
@@ -29,7 +29,7 @@ void HangupDialog::closeEvent(QCloseEvent *event)
 
 bool HangupDialog::event(QEvent *e)
 {
-    if(e->type() == QEvent::KeyPress && ((QKeyEvent*)e)->key() == Qt::Key_Escape)
+    if(e->type() == QEvent::KeyPress && (dynamic_cast<QKeyEvent*>(e))->key() == Qt::Key_Escape)
     {
         return true;
     }

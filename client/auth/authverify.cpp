@@ -13,10 +13,6 @@ void AuthVerify::authStop() {
     requestInterruption();
 }
 
-AuthVerify::~AuthVerify() {
-
-}
-
 void AuthVerify::authStart() {
     this->start();
 }

@@ -1,13 +1,15 @@
 #include "feedbackdialog.h"
 #include "ui_feedbackdialog.h"
 #include <QDesktopWidget>
-#include <utils.hpp>
+#include "utils.hpp"
+#include <utility>
 FeedbackDialog::FeedbackDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::FeedbackDialog)
+    QDialog{parent},
+    ui{new Ui::FeedbackDialog}
 {
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     ui->setupUi(this);
+    setFixedSize(this->width(), this->height());
     ui->sldScore->setSliderPosition(3);
     ui->chkToScore->setChecked(false);
     ui->sldScore->setEnabled(false);
@@ -15,9 +17,6 @@ FeedbackDialog::FeedbackDialog(QWidget *parent) :
 
     sslConf.setPeerVerifyMode(QSslSocket::VerifyNone);
     sslConf.setProtocol(QSsl::TlsV1_2);
-}
-
-FeedbackDialog::~FeedbackDialog() {
 }
 
 void FeedbackDialog::on_sldScore_sliderMoved(int position)
@@ -228,8 +227,8 @@ void FeedbackDialog::postFinished()
 
 void FeedbackDialog::setLoginData(QString account,QString combo)
 {
-    this->account = account;
-    this->combo = combo;
+    this->account = std::move(account);
+    this->combo = std::move(combo);
 }
 
 void FeedbackDialog::show()

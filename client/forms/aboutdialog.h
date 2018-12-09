@@ -13,7 +13,7 @@ class AboutDialog final: public QDialog
     Q_OBJECT
 public:
     explicit AboutDialog(QWidget *parent = nullptr);
-    ~AboutDialog();
+    ~AboutDialog() = default;
 private slots:
     void on_AboutDialog_finished(int /*result*/);
     void on_pushButton_clicked();

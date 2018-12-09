@@ -4,22 +4,14 @@
 
 NoticeDialog::NoticeDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::NoticeDialog)
+    ui{new Ui::NoticeDialog}, isDown{false}
 {
-    /*
-    QPalette pal = palette(); 
-    pal.setColor(QPalette::Background, QColor(0x00,0xff,0x00,0x00)); 
-    setPalette(pal);
-    */
     this->setWindowOpacity(0.8);
-    this->setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint|Qt::Tool);  
+    this->setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint|Qt::Tool);
     ui->setupUi(this);
-    isDown=false;
-
+    setFixedSize(this->width(), this->height());
 }
 
-NoticeDialog::~NoticeDialog() {
-}
 void NoticeDialog::showMessage(QString msg)
 {
     qDebug() << "message thread: " << QThread::currentThread() << endl;

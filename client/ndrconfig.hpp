@@ -58,7 +58,7 @@
 #endif
 
 /** 编译时间*/
-#define COMPL_DATATIME __DATE__ " " __TIME__
+#define COMPILE_DATA_TIME (__DATE__ " " __TIME__)
 
 /** 网卡适配器名称*/
 #define NDR_PHONEBOOK_NAME "NDR"

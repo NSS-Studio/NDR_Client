@@ -18,7 +18,7 @@ class FeedbackDialog final: public QDialog
 	Q_OBJECT
 public:
     explicit FeedbackDialog(QWidget *parent = nullptr);
-	~FeedbackDialog();
+    ~FeedbackDialog() = default;
 	void setLoginData(QString account,QString combo);
 	void show();
 private slots:
@@ -31,7 +31,7 @@ private:
     QSslConfiguration sslConf;
 	QNetworkAccessManager nam;
 	QNetworkRequest request;
-	QNetworkReply *reply;
+    QNetworkReply *reply{};
 	QString account;
 	QString combo;
 };

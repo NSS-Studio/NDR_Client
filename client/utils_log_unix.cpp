@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <cstdio>
 #include <qapplication.h>
 
 #define RED   "\x1B[31m"

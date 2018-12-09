@@ -2,7 +2,7 @@
 #include <utils.hpp>
 #include <QMessageBox>
 #include <QTimer>
-NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
+NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
     :QApplication{argc, argv},
       appName{appName}
 {
@@ -11,7 +11,7 @@ NdrApplication::NdrApplication(QString const& appName, int &argc, char **argv)
 
     auto localListenningState = localServer->listen(QHostAddress::Any, LOCAL_SERVER_PORT);
 
-    if (localListenningState == false) {
+    if (!localListenningState) {
         QMessageBox::information(nullptr, QObject::tr("提示"), QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
         qDebug() << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
         QTimer::singleShot(0, qApp, SLOT(quit()));

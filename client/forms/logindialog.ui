@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>250</height>
+    <height>269</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,12 +20,6 @@
    <size>
     <width>300</width>
     <height>250</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1800</width>
-    <height>1500</height>
    </size>
   </property>
   <property name="font">
@@ -76,9 +70,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>132</y>
+        <y>150</y>
         <width>171</width>
-        <height>33</height>
+        <height>31</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -112,7 +106,7 @@
         <x>9</x>
         <y>9</y>
         <width>281</width>
-        <height>91</height>
+        <height>104</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -314,7 +308,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>98</y>
+        <y>110</y>
         <width>280</width>
         <height>16</height>
        </rect>
@@ -327,7 +321,7 @@
       <property name="geometry">
        <rect>
         <x>9</x>
-        <y>113</y>
+        <y>120</y>
         <width>186</width>
         <height>28</height>
        </rect>
@@ -362,9 +356,9 @@
       <property name="geometry">
        <rect>
         <x>190</x>
-        <y>110</y>
+        <y>120</y>
         <width>101</width>
-        <height>51</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="sizePolicy">

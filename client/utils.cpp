@@ -30,14 +30,13 @@ namespace utils {
         return getDrModelId()[postfix];
     }
 
-    bool getDrModelCaption(QString postfix, QString &caption) {
+    QVariant getDrModelCaption(QString const& postfix) {
         qDebug() << "postfix:" << postfix;
         auto drModelId = getDrModelId();
         if (drModelId.find(postfix) == drModelId.cend()) {
-            return false;
+            return QVariant{};
         }
-        caption = postfix;
-        return true;
+        return QVariant{postfix};
     }
 
     QString getLangDir() {
@@ -68,7 +67,7 @@ namespace utils {
         return filelist;
     }
 
-    bool getLanguageName(QString fileName, QString &langName) {
+    QVariant getLanguageName(QString const& fileName) {
         qDebug();
         static QMap<QString, QString> table {
             {"en_US", "English"},
@@ -78,10 +77,9 @@ namespace utils {
         };
 
         if (table.find(fileName) == table.cend()) {
-            return false;
+            return QVariant{};
         }
-        langName = table[fileName];
-        return true;
+        return QVariant{table[fileName]};
     }
 
 
@@ -126,7 +124,7 @@ namespace utils {
         qApp->installTranslator(&qt_tr);
     }
 
-    void initFont(QString fontFile) {
+    void initFont(QString const& fontFile) {
         int fontId = QFontDatabase::addApplicationFont(fontFile);
 
         qDebug("font id:%d\n", fontId);
@@ -138,7 +136,7 @@ namespace utils {
         }
     }
 
-    void initStyleSheet(NdrApplication *a, QString sheetFile) {
+    void initStyleSheet(NdrApplication *a, QString const& sheetFile) {
         // QString sheetName = "default";
         QFile file(sheetFile);
         file.open(QFile::ReadOnly);

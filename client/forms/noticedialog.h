@@ -2,30 +2,28 @@
 #define NOTICEDIALOG_H
 
 #include <QDialog>
-#include <QtGui>
-#include <QThread>
 #include <QSharedPointer>
+#include <QThread>
+#include <QtGui>
 namespace Ui {
 class NoticeDialog;
 }
 
-class NoticeDialog final : public QDialog
-{
-    Q_OBJECT
-    
+class NoticeDialog final : public QDialog {
+  Q_OBJECT
 public:
-    explicit NoticeDialog(QWidget *parent = nullptr);
-    ~NoticeDialog();
-    void showMessage(QString msg);
+  explicit NoticeDialog(QWidget *parent = nullptr);
+  ~NoticeDialog() = default;
+  void showMessage(QString msg);
+
 protected:
-    void mouseMoveEvent ( QMouseEvent  * e );
-    void mousePressEvent ( QMouseEvent  * e );
-    void mouseReleaseEvent ( QMouseEvent  * e );
-    //void mouseDoubleClickEvent( QMouseEvent  * e );
+  void mouseMoveEvent(QMouseEvent *e);
+  void mousePressEvent(QMouseEvent *e);
+  void mouseReleaseEvent(QMouseEvent *e);
 private:
-    QSharedPointer<Ui::NoticeDialog> ui;
-    int x,y;
-    bool isDown;
+  QSharedPointer<Ui::NoticeDialog> ui;
+  int x, y;
+  bool isDown;
 };
 
 #endif // NOTICEDIALOG_H

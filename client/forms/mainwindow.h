@@ -48,8 +48,8 @@ private slots:
     void onStopWorking();
     void onStartLogining();
     void onStopLogining();
-    void checkFinished(bool error, int major, int minor, QString errMsg);
-    void downloadFinished(bool error, QString errMsg);
+    void checkFinished(bool error, int major, int minor, QString const& errMsg);
+    void downloadFinished(bool error, QString const& errMsg);
     void loginWindowClosed();
     void getMessageFromNSS();
 
@@ -61,15 +61,15 @@ private:
     QSharedPointer<NoticeDialog> noticeDialog;
     QSharedPointer<SettingsDialog>settingsDialog;
     QSharedPointer<FeedbackDialog> feedbackDialog;
-    QMenu *myMenu;
+    QMenu *myMenu{};
 
-    State state;
+    State state{};
     bool app_exiting; //退出标记
     bool isMainWindowMinimized;
-    int connTime;
-    int allTime;
+    int connTime{};
+    int allTime{};
     QString username;
-    int timerId;
+    int timerId{};
 
     QSharedPointer<UpdateService> updateServer;
     void timerEvent(QTimerEvent *);

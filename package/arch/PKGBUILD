@@ -1,0 +1,44 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+Maintainer: Rabenda <rabenda.cn@gmail.com>
+pkgname=ndr-client
+pkgver=$version
+pkgrel=1
+epoch=
+pkgdesc="A PPPoE client for Dalian Neusoft University Information"
+arch=(x86_64)
+url=""
+license=('LGPL')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=()
+noextract=()
+md5sums=()
+validpgpkeys=()
+
+prepare() {
+}
+
+build() {
+}
+
+check() {
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}

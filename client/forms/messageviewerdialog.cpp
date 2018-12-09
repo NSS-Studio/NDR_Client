@@ -7,7 +7,5 @@ MessageViewerDialog::MessageViewerDialog(QWidget *parent) :
 {
     setWindowFlags(Qt::Dialog|Qt::WindowCloseButtonHint);
     ui->setupUi(this);
-}
-
-MessageViewerDialog::~MessageViewerDialog() {
+    setFixedSize(this->width(), this->height());
 }

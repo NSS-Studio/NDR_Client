@@ -7,7 +7,7 @@ class ResourceManager;
 class NdrApplication: public QApplication
 {
 public:
-    NdrApplication(QString const& appName, int &argc, char **argv);
+    NdrApplication(QString appName, int &argc, char **argv);
     ~NdrApplication();
 private:
     QScopedPointer<QTcpServer> localServer;

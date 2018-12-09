@@ -165,8 +165,8 @@ void GetInfoAboutNSS::openWeb()
 GetInfoAboutNSS::~GetInfoAboutNSS()
 {
     qDebug() << "delete GetInfoAboutNSS" << endl;
-    if (tmp != nullptr)
+    if (tmp)
         delete tmp;
-    if (reply != nullptr)
-        delete reply;
+    if (reply)
+        reply->deleteLater();
 }

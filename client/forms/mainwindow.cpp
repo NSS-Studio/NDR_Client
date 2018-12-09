@@ -11,9 +11,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
       ui{new Ui::MainWindow} {
-
     this->setWindowFlags(this->windowFlags() | Qt::WindowMaximizeButtonHint);
     ui->setupUi(this);
+    setFixedSize(this->width(), this->height());
 
     auto pppoe = utils::resourceManager.getPPPoE();
     auto loginDialog = utils::resourceManager.getLoginDialog();
@@ -83,14 +83,13 @@ void MainWindow::tryLogin() {
     loginDialog->getFormData(username, password, postfix, deviceName);
     this->ui->lblAccount->setText(username);
 
-    QString model_caption;
-    if (utils::getDrModelCaption(postfix, model_caption))
-        this->ui->lblType->setText(model_caption);
+    auto modelCaption = utils::getDrModelCaption(postfix);
+    if (modelCaption.isValid())
+        this->ui->lblType->setText(modelCaption.value<QString>());
     else
         this->ui->lblType->setText(tr("未知"));
     qDebug() << "PPPoE Account: " << username + postfix;
     realUsername = "\r\n" + username + postfix;
-    //    realUsername=username;
     noticeDialog->showMessage(tr("正在拨号. . ."));
     auto pppoe = utils::resourceManager.getPPPoE();
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, password, deviceName);
@@ -259,7 +258,6 @@ void MainWindow::on_actionQuit_triggered() {
     if (state == State::Working) {
         app_exiting = true;
         this->ui->actionLogoff->trigger();
-        return;
     } else {
         qApp->exit(0);
     }
@@ -484,7 +482,7 @@ void MainWindow::onStopLogining() {
 }
 
 void MainWindow::checkFinished(bool error, int major, int minor,
-                               QString errMsg) {
+                               QString const& errMsg) {
     if (error && state == State::Working) {
         this->ui->actionLogoff->trigger();
         QMessageBox::critical(nullptr, tr("警告"),
@@ -501,7 +499,7 @@ void MainWindow::checkFinished(bool error, int major, int minor,
     }
 }
 
-void MainWindow::downloadFinished(bool error, QString errMsg) {
+void MainWindow::downloadFinished(bool error, QString const& errMsg) {
     qDebug() << "downloadFinished() enter";
     auto loginDialog = utils::resourceManager.getLoginDialog();
     if (error) {
@@ -512,8 +510,6 @@ void MainWindow::downloadFinished(bool error, QString errMsg) {
                                   tr("检查到新版本，但无法下载更新包") + "\n" +
                                       errMsg);
         }
-
-        return;
     } else {
         HangupDialog hangupDialog;
         QString delayButtonText;

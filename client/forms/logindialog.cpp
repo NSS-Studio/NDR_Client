@@ -11,6 +11,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     flags |= Qt::WindowMinimizeButtonHint | Qt::WindowCloseButtonHint;
     setWindowFlags(flags);
     ui->setupUi(this);
+    setFixedSize(this->width(), this->height());
 
     // not useful ↓↓↓↓
     // QPalette pal = ui->btnWinsockReset->palette();
@@ -36,12 +37,11 @@ LoginDialog::LoginDialog(QWidget *parent)
 
     for(auto const& postfit :postfitList) {
         qDebug() << postfit;
-        QString caption;
-        utils::getDrModelCaption(postfit, caption);
-        this->ui->cmbModel->addItem(caption);
+        auto caption = utils::getDrModelCaption(postfit);
+        this->ui->cmbModel->addItem(caption.value<QString>());
     }
 
-    QCompleter *completer = new QCompleter(this);
+    auto completer = new QCompleter(this);
     completer->setCompletionMode(QCompleter::PopupCompletion);
     ui->cmbAccount->setCompleter(completer);
     this->setWindowTitle("[" + utils::getVersionString() + "] " +
@@ -58,8 +58,6 @@ this->move((desktop_width-this->width())/2,(desktop_height-this->height())/2-200
     ui->btnWinsockReset->setEnabled(false);
 #endif
 }
-
-LoginDialog::~LoginDialog() { }
 
 void LoginDialog::getFormData(QString &username, QString &password,
                               QString &model, QString &device_name,
@@ -226,7 +224,7 @@ void LoginDialog::on_chkAutoLogin_clicked(bool checked) {
 }
 
 void LoginDialog::on_chkSavePasswd_clicked(bool checked) {
-    if (checked == false)
+    if (!checked)
         this->ui->chkAutoLogin->setChecked(false);
 }
 

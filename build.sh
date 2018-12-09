@@ -1,26 +1,32 @@
 #!/bin/sh
-# macosx && linux_deb
+# macosx && linux_deb && arch pkg.tar.xz
 
 version="0.80"
 
-if [ $# = 1 -a $1 = "clean" ]; then
+clean(){
     rm -rf ./build/
-    rm -f ./NDR_Client.dmg
+    rm -f ./NDR_Client.dmg ~/Desktop/ndr_${version}_macosx.dmg
     rm -f ./debian/opt/ndr/bin/ndr-client
     rm -rf ./debian/opt/ndr/lib
     rm -rf ./debian/opt/ndr/lib/platforms
-    printf "clean done!\n"
+    rm -rf ./debian/opt/ndr/bin/plugins
+    printf "Clean Done!\n"
+}
+
+if [ $# = 1 -a $1 = "clean" ]; then
+    clean
     exit 0
 fi
 
 if [ $# != 3 ]; then
     printf "parameter invaild\n"
+# Please Add Usage():
     exit 1
 fi
 
 if [ $1 = "macosx" ]; then
     platform="macx-clang"
-elif [ $1 = "debian" ]; then
+elif [ $1 = "debian" -o $1 = "arch" ]; then
     platform="linux-g++"
 else
     printf "platdorm invaild\n"
@@ -37,14 +43,8 @@ fi
 QT=$3
 QMAKE=$QT/bin/qmake
 
-if [ $1 = "macosx" ]; then
-    rm -f ./NDR_Client.dmg
-elif [ $1 = "debian" ]; then
-    rm -f ./debian/opt/ndr/bin/ndr-client
-    rm -rf ./debian/opt/ndr/bin/lib
-    rm -rf ./debian/opt/ndr/bin/plugins
-    # sudo apt install -y build-essential network-manager-dev libgl1-mesa-dev
-fi
+clean # clean
+# sudo apt install -y build-essential network-manager-dev libgl1-mesa-dev
 
 rm -rf ./build/
 cd client/ts-file/
@@ -57,7 +57,7 @@ cd ../../
 mkdir build
 cd build
 
-$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode CONFIG+=$2
+$QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode PREFIX=/opt/ndr/
 make
 
 cd ..
