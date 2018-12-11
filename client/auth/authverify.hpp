@@ -1,29 +1,28 @@
 #ifndef AUTHVERIFY_HPP
 #define AUTHVERIFY_HPP
 
-#include <QThread>
+#include <QJsonDocument>
 #include <QMutex>
 #include <QMutexLocker>
-#include <QVariantMap>
-#include <QJsonDocument>
 #include <QSharedPointer>
+#include <QThread>
 #include <QUdpSocket>
-class AuthVerify : public QThread
-{
+#include <QVariantMap>
+class AuthVerify final : public QThread {
 public:
-    AuthVerify();
-    ~AuthVerify() Q_DECL_OVERRIDE = default;
+  AuthVerify();
+  ~AuthVerify() override = default;
 
-    void authStop();
+  void authStop();
 
-    virtual void run() Q_DECL_OVERRIDE;
+  virtual void run() override;
 
 public slots:
-    void authStart();
+  void authStart();
 
 private:
-    QVariantMap authInfomation;
-    QSharedPointer<QUdpSocket> clientSocket;
+  QVariantMap authInfomation;
+  QSharedPointer<QUdpSocket> clientSocket;
 };
 
 #endif // AUTHVERIFY_HPP

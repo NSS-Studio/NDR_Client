@@ -3,10 +3,10 @@
 #if defined(Q_OS_MAC)
 #include <macosbasedsl.hpp>
 using PlatformBaseDsl = MacOsBaseDsl;
-#elif defined (Q_OS_LINUX)
+#elif defined(Q_OS_LINUX)
 #include <linuxbasedsl.hpp>
 using PlatformBaseDsl = LinuxBaseDsl;
-#elif defined (Q_OS_WIN32)
+#elif defined(Q_OS_WIN32)
 #include <windowsbasedsl.hpp>
 using PlatformBaseDsl = WindowsBaseDsl;
 #else
@@ -14,10 +14,6 @@ using PlatformBaseDsl = WindowsBaseDsl;
 #endif
 
 namespace BaseDslFactory {
-    static QSharedPointer<BaseDsl> platformBaseDsl{new PlatformBaseDsl{}};
-    QSharedPointer<BaseDsl> getCurrentPlatformBaseDsl() {
-        return platformBaseDsl;
-    }
-}
-
-
+static QSharedPointer<BaseDsl> platformBaseDsl{new PlatformBaseDsl{}};
+QSharedPointer<BaseDsl> getCurrentPlatformBaseDsl() { return platformBaseDsl; }
+} // namespace BaseDslFactory

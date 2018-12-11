@@ -77,7 +77,7 @@
 
 /** NDR通知弹窗地址*/
 #define NDR_POPUP_URL                                                          \
-    QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
+  QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
 
 /** NDR主页*/
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
