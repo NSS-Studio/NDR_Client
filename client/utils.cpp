@@ -133,7 +133,7 @@ void initStyleSheet(NdrApplication *app, QString const &sheetFile) {
   file.open(QFile::ReadOnly);
   QString styleSheet = QLatin1String(file.readAll());
 #if defined Q_OS_WIN || defined Q_OS_MAC
-  QString appath = a->applicationDirPath();
+  QString appath = app->applicationDirPath();
 #ifdef Q_OS_WIN
   styleSheet.replace("$[SKIN_PATH]", appath + "/skin");
 #else

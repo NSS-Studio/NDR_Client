@@ -19,7 +19,6 @@
 namespace utils {
 extern QString appHome; //家目录
 extern QString tempDir; //临时文件夹
-extern QString networkInterfaceCardName;
 extern QSharedPointer<SettingsSet> settings;
 extern QTranslator ndr_tr, qt_tr;
 extern ResourceManager resourceManager;
