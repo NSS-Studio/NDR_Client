@@ -73,7 +73,8 @@ QString PPPoE::getIpAddress() {
             qDebug() << addressEntries.size();
             auto address = addressEntries.front();
             qDebug() << address.ip();
-            return address.ip().toString();
+            auto ipv4Address = address.ip().toIPv4Address();
+            return QHostAddress{ipv4Address}.toString();
         }
     }
     return {};
