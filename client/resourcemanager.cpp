@@ -1,56 +1,53 @@
 #include "resourcemanager.hpp"
-#include <utils.hpp>
-#include <pppoe.hpp>
-#include <mainwindow.h>
-#include <logindialog.h>
-#include <localstorage.hpp>
+#include "aboutdialog.hpp"
+#include "popupinfomationdialog.hpp"
 #include <QMutexLocker>
-#include "popupinfomationdialog.h"
-#include "aboutdialog.h"
+#include <localstorage.hpp>
+#include <logindialog.hpp>
+#include <mainwindow.hpp>
+#include <pppoe.hpp>
+#include <utils.hpp>
 
 ResourceManager::~ResourceManager() {
-    if (initState == InitState::DONE) {
-        pppoe->deleteLater();
-        mainWindow->deleteLater();
-        profile->deleteLater();
-        loginDialog->deleteLater();
-        aboutDialog->deleteLater();
-        popUpInfomationDialog->deleteLater();
-        initState = InitState::UNDONE;
-    }
+  if (initState == InitState::DONE) {
+    pppoe->deleteLater();
+    mainWindow->deleteLater();
+    profile->deleteLater();
+    loginDialog->deleteLater();
+    aboutDialog->deleteLater();
+    popUpInfomationDialog->deleteLater();
+    initState = InitState::UNDONE;
+  }
 }
 
-void ResourceManager::InitResourceManager() noexcept{
-    QMutexLocker locker{&mutex};
-    aboutDialog = new AboutDialog{};
-    pppoe = new PPPoE{};
-    profile = new LocalStorage{utils::appHome + "/config.db"};
-    loginDialog = new LoginDialog{};
-    mainWindow = new MainWindow{};
-    popUpInfomationDialog = new PopUpInfomationDialog{};
-    initState = InitState::DONE;
+void ResourceManager::InitResourceManager() noexcept {
+  QMutexLocker locker{&mutex};
+  aboutDialog = new AboutDialog{};
+  pppoe = new PPPoE{};
+  profile = new LocalStorage{utils::appHome + "/config.db"};
+  loginDialog = new LoginDialog{};
+  mainWindow = new MainWindow{};
+  popUpInfomationDialog = new PopUpInfomationDialog{};
+  initState = InitState::DONE;
 #ifdef QT_DEBUG
-    mainWindow->show();
+  mainWindow->show();
 #endif
-    loginDialog->show();
+  loginDialog->show();
 }
 
-PPPoE* ResourceManager::getPPPoE() const noexcept{
-    return pppoe;
+PPPoE *ResourceManager::getPPPoE() const noexcept { return pppoe; }
+
+LoginDialog *ResourceManager::getLoginDialog() const noexcept {
+  return loginDialog;
 }
 
-LoginDialog* ResourceManager::getLoginDialog() const noexcept{
-    return loginDialog;
+PopUpInfomationDialog *ResourceManager::getPopUpInfomationDialog() const
+    noexcept {
+  return popUpInfomationDialog;
 }
 
-PopUpInfomationDialog* ResourceManager::getPopUpInfomationDialog() const noexcept{
-    return popUpInfomationDialog;
+AboutDialog *ResourceManager::getAboutDialog() const noexcept {
+  return aboutDialog;
 }
 
-AboutDialog* ResourceManager::getAboutDialog() const noexcept{
-    return aboutDialog;
-}
-
-LocalStorage* ResourceManager::getProfile() const noexcept{
-    return profile;
-}
+LocalStorage *ResourceManager::getProfile() const noexcept { return profile; }

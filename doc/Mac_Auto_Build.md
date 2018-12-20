@@ -1,6 +1,6 @@
 ## 依赖
 ```
-Qt 5.9.5 or later
+Qt 5.11.2 or later
 Nodejs 8
 appdmg
 ```
@@ -8,12 +8,15 @@ appdmg
 ## 安装
 
 nodejs
+
 https://nodejs.org/en/download/
 
 qt
+
 https://www.qt.io/download/
 
 appdmg
+
 https://github.com/LinusU/node-appdmg
 
 ```

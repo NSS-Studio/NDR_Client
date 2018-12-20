@@ -1,15 +1,16 @@
 QT += widgets gui xml core
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
-HEADERS +=      $$PWD/aboutdialog.h \
-                $$PWD/mainwindow.h \
-                $$PWD/logindialog.h \
-                $$PWD/noticedialog.h \
-                $$PWD/settingsdialog.h \
-                $$PWD/messageviewerdialog.h \
-                $$PWD/hangupdialog.h \
-                $$PWD/feedbackdialog.h \
-                $$PWD/popupinfomationdialog.h
+HEADERS +=      \
+    $$PWD/aboutdialog.hpp \
+    $$PWD/feedbackdialog.hpp \
+    $$PWD/hangupdialog.hpp \
+    $$PWD/logindialog.hpp \
+    $$PWD/mainwindow.hpp \
+    $$PWD/messageviewerdialog.hpp \
+    $$PWD/noticedialog.hpp \
+    $$PWD/popupinfomationdialog.hpp \
+    $$PWD/settingsdialog.hpp
 
 SOURCES +=      $$PWD/aboutdialog.cpp \
                 $$PWD/mainwindow.cpp \

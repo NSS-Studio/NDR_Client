@@ -1,9 +1,10 @@
 INCLUDEPATH +=  $$PWD
 DEPENDPATH +=   $$PWD
 
-HEADERS +=      $$PWD/updateservice.h \
-                $$PWD/httpgeteventloop.h \
-                $$PWD/getinfoaboutnss.h
+HEADERS +=      \
+    $$PWD/getinfoaboutnss.hpp \
+    $$PWD/httpgeteventloop.hpp \
+    $$PWD/updateservice.hpp
 
 
 SOURCES +=      $$PWD/updateservice.cpp \

@@ -3,6 +3,8 @@
 
 version="0.80"
 
+buildRootDir=`pwd`
+
 clean(){
     rm -rf ./build/
     rm -f ./NDR_Client.dmg ~/Desktop/ndr_${version}_macosx.dmg
@@ -10,6 +12,7 @@ clean(){
     rm -rf ./debian/opt/ndr/lib
     rm -rf ./debian/opt/ndr/lib/platforms
     rm -rf ./debian/opt/ndr/bin/plugins
+    rm -rf ./package/arch/debian
     printf "Clean Done!\n"
 }
 
@@ -67,8 +70,9 @@ if [ $1 = "macosx" ]; then
     appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "new dmg in desktop\n"
     exit 0
-elif [ $1 = "debian" ]; then
-    linuxdeployqt-continuous-x86_64.AppImage ./build/client/ndr-client # -no-plugins
+elif [ $1 = "debian" -o $1 = "arch" ]; then
+    chmod +x linuxdeployqt-continuous-x86_64.AppImage
+    ./linuxdeployqt-continuous-x86_64.AppImage ./build/client/ndr-client # -no-plugins
     mkdir -p ./debian/opt/ndr/bin/
     cp -f	./build/client/ndr-client	./debian/opt/ndr/bin/ndr-client
     cp -f	./build/client/qt.conf	./debian/opt/ndr/bin/qt.conf
@@ -76,8 +80,16 @@ elif [ $1 = "debian" ]; then
     cp -rf	./build/client/plugins	./debian/opt/ndr/bin/plugins
     cp -rf  ./build/client/doc ./debian/opt/ndr/bin/doc
     printf "deployqt done!\n"
-    dpkg -b debian ndr_${version}_amd64.deb
-    mv ndr_${version}_amd64.deb ~/Desktop/ndr_${version}_amd64.deb
-    printf "create deb in desktop\n"
-    exit 0
+    if [ $1 = "debian" ]; then
+        dpkg -b debian ndr_${version}_amd64.deb
+        mv ndr_${version}_amd64.deb ~/Desktop/ndr_${version}_amd64.deb
+        printf "create deb in desktop\n"
+        exit 0
+    elif [ $1 = "arch" ]; then
+        cp -rf debian $buildRootDir/package/arch/debian
+        cd $buildRootDir/package/arch
+        makepkg -s
+        printf "create arch pkg.tar.xz in desktop\n"
+        exit 0
+    fi
 fi

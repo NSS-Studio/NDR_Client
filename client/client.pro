@@ -72,7 +72,7 @@ win32 {
                 $$PWD/utils_log_win.cpp
 
     HEADERS += \
-                $$PWD/utils_netfix.h
+                $$PWD/utils_netfix.hpp
 }
 
 CODEFORTR = UTF-8

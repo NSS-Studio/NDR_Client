@@ -1,4 +1,4 @@
-#include "updateservice.h"
+#include "updateservice.hpp"
 #include <utils.hpp>
 UpdateService::UpdateService(const QString &serverAddr,
                              const QString &tempDirectory, QObject *parent)
