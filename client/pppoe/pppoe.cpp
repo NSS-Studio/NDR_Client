@@ -58,23 +58,6 @@ void PPPoE::run() {
 
 QString PPPoE::getIpAddress() {
   auto interfaceList = QNetworkInterface::allInterfaces();
-
-<<<<<<< HEAD
-    for (auto const &interface: interfaceList) {
-        if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
-            if (interface.flags().testFlag(QNetworkInterface::IsPointToPoint)
-                && interface.flags().testFlag(QNetworkInterface::IsRunning))
-            qDebug() << interface.name();
-            qDebug() << interface.type();
-            qDebug() << interface.hardwareAddress();
-            auto addressEntries = interface.addressEntries();
-            qDebug() << addressEntries.size();
-            auto address = addressEntries.front();
-            qDebug() << address.ip();
-            auto ipv4Address = address.ip().toIPv4Address();
-            return QHostAddress{ipv4Address}.toString();
-        }
-=======
   for (auto const &interface : interfaceList) {
     if (interface.type() == QNetworkInterface::InterfaceType::Ppp) {
       if (interface.flags().testFlag(QNetworkInterface::IsPointToPoint) &&
@@ -86,8 +69,8 @@ QString PPPoE::getIpAddress() {
       qDebug() << addressEntries.size();
       auto address = addressEntries.front();
       qDebug() << address.ip();
-      return address.ip().toString();
->>>>>>> 84f480745fc12a6fa2ebf43b47bc0646daea3516
+      auto ipv4Address = address.ip().toIPv4Address();
+      return QHostAddress{ipv4Address}.toString();
     }
   }
   return {};
