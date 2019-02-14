@@ -17,6 +17,7 @@
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickView>
+#include <iostream>
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
@@ -79,5 +80,8 @@ int main(int argc, char *argv[]) {
   ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
   QMLAboutDialog qmlAboutDialog;
+QObject::connect((qmlAboutDialog.getView()).engine(), SIGNAL(quit()), &ndrApp, SLOT(quit())); // bind a signal to close
+
+
   return ndrApp.NdrApplication::exec();
 }

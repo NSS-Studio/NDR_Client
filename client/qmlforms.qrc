@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/qmlforms">
         <file>test.qml</file>
+        <file>mainWIndows.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qmlforms/image.png</file>

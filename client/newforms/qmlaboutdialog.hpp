@@ -8,7 +8,9 @@
 class QMLAboutDialog : public QObject {
   Q_OBJECT
 public:
+
   explicit QMLAboutDialog(QObject *parent = nullptr);
+  QQuickView& getView ();
 
 signals:
 
