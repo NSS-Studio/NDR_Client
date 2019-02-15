@@ -2,28 +2,43 @@ import QtQuick 2.9
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
-
-import "./"
+import QtQuick.Controls.Material 2.3
 
 ApplicationWindow {
     id: root
     objectName: "roott"
     width: 500
     height: 370
+    x: (Screen.desktopAvailableWidth - width) / 2
+    y: (Screen.desktopAvailableHeight - height) / 2
     visible: true
+
+    Material.theme: Material.Dark
+    Material.accent: Material.Purple
+
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    property int xmouse: 0
+    property int ymouse: 0
 
+
+    style: ApplicationWindowStyle{
+        background: Rectangle {
+            anchors.fill: parent
+            radius: 100
+            Image {
+                anchors.fill: parent
+                source: "qrc:/qmlforms/image 2.1.png"
+            }
+        }
+    }
 
     Image {
-        id: backgrand
-        x: 0
-        y: 0
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         source: "qrc:/qmlforms/image 2.1.png"
     }
+
     Image {
         id: close
         x: parent.width - 25
@@ -49,56 +64,25 @@ ApplicationWindow {
         width: 185
         height: 50
         color: "#ffffff"
-
         text: "NDR 东软校园网络认证 ver0.76"
         font.bold: true
     }
 
     MouseArea{
         id: rootMouseArea
-        anchors.fill: parent
-        property int rootx
-        property int rooty
-        property int mousex
-        property int mousey
-        property bool flag: false
-        anchors.rightMargin: 0
-        anchors.bottomMargin: 0
-        anchors.leftMargin: 0
-        anchors.topMargin: 0
-        hoverEnabled: true
-        onPressed: {
+        x: 0
+        y: 0
+        height: 50
+        width: parent.width
 
-            rootx = root.x
-            rooty = root.y
-            mousex = mouseX
-            mousey = mouseY
-            if(mouseY <= 50){
-                flag = true
-            }
-            else{
-                flag = false
-            }
+        onPressed: {
+            xmouse = mouseX
+            ymouse = mouseY
         }
 
         onPositionChanged: {
-            var x = mouseX
-            var y = mouseY
-            if (x >= (parent.width - 25) && x <= (parent.width - 12) && y >= 11 && y <= 24)
-                console.log ("reset close image")
-            else if (x >= (parent.width - 45) && x <= (parent.width - 32) && y >= 11 && y <= 24)
-                // reset minmax image
-                console.log ("reset minmax image")
-            if (mouse.buttons === 1) {
-                if(mouseY <= 50 && flag){
-                    root.x = root.x + (mouseX - mousex)
-                    root.y = root.y + (mouseY - mousey)
-                    rootx = root.x
-                    rooty = root.y
-                }
-            }
-
-
+            root.x = root.x + (mouseX - xmouse)
+            root.y = root.y + (mouseY - ymouse)
         }
 
         onClicked: {
@@ -109,11 +93,6 @@ ApplicationWindow {
             else if (x >= (parent.width - 45) && x <= (parent.width - 32) && y >= 11 && y <= 24)
                 root.visibility = Window.Minimized
         }
-
-
-
-
-
     }
 
     Rectangle {
@@ -146,6 +125,7 @@ ApplicationWindow {
             }
 
         }
+
         ComboBox {
             id: account
             x: 80
@@ -178,20 +158,20 @@ ApplicationWindow {
 
             style: CheckBoxStyle{
                 indicator: Rectangle {
-                                implicitWidth: 16
-                                implicitHeight: 16
-                                radius: 3
-                                border.color: control.activeFocus ? "darkblue" : "gray"
-                                border.width: 1
-                                Rectangle {
-                                    visible: control.checked
-                                    color: "#555"
-                                    border.color: "#333"
-                                    radius: 1
-                                    anchors.margins: 4
-                                    anchors.fill: parent
-                                }
-                        }
+                    implicitWidth: 16
+                    implicitHeight: 16
+                    radius: 3
+                    border.color: control.activeFocus ? "darkblue" : "gray"
+                    border.width: 1
+                    Rectangle {
+                        visible: control.checked
+                        color: "#555"
+                        border.color: "#333"
+                        radius: 1
+                        anchors.margins: 4
+                        anchors.fill: parent
+                    }
+                }
             }
         }
 
@@ -205,24 +185,25 @@ ApplicationWindow {
 
             style: CheckBoxStyle{
                 indicator: Rectangle {
-                                implicitWidth: 16
-                                implicitHeight: 16
-                                radius: 3
-                                border.color: control.activeFocus ? "darkblue" : "gray"
-                                border.width: 1
-                                Rectangle {
-                                    visible: control.checked
-                                    color: "#555"
-                                    border.color: "#333"
-                                    radius: 1
-                                    anchors.margins: 4
-                                    anchors.fill: parent
-                                }
+                    implicitWidth: 16
+                    implicitHeight: 16
+                    radius: 3
+                    border.color: control.activeFocus ? "darkblue" : "gray"
+                    border.width: 1
+                    Rectangle {
+                        visible: control.checked
+                        color: "#555"
+                        border.color: "#333"
+                        radius: 1
+                        anchors.margins: 4
+                        anchors.fill: parent
+                    }
                 }
             }
         }
 
         MouseArea{
+
             onClicked: {}
 
             onReleased: {}
@@ -230,34 +211,48 @@ ApplicationWindow {
             onPressed: {}
         }
 
-                Text {
-                    id: text1
-                    x: 16
-                    y: 196
-                    width: 66
-                    height: 19
-                    color: "#7c6e6e"
-                    text: qsTr("修复网络")
-                    font.pixelSize: 14
-                }
+        Text {
+            id: select
+            x: 303
+            y: 40
+            color: "#0b82f9"
+            text: qsTr("选择网卡")
+            font.pixelSize: 16
+        }
+    }
 
-                Text {
-                    id: text2
-                    x: 299
-                    y: 46
-                    color: "#0b82f9"
-                    text: qsTr("选择网卡")
-                    font.pixelSize: 16
-                }
-                Text {
-                    id: tittle1
-                    x: 299
-                    y: 196
-                    width: 185
-                    height: 50
-                    color: "#7c6e6e"
-                    text: "NDR 东软校园网络认证 ver0.76"
-                }
+    Text {
+        id: repaire
+        x: 12
+        y: 342
+        width: 66
+        height: 19
+        color: "#7c6e6e"
+        text: qsTr("修复网络")
+        font.underline: false
+        font.pixelSize: 14
+
+        MouseArea{
+            hoverEnabled: true
+
+            anchors.fill: parent
+
+            onEntered: {
+                repaire.font.underline = true
+            }
+            onExited: {
+                repaire.font.underline = false
+            }
+        }
+    }
+    Text {
+        id: tittle1
+        x: 303
+        y: 342
+        width: 185
+        height: 50
+        color: "#7c6e6e"
+        text: "NDR 东软校园网络认证 ver0.76"
     }
 
     Rectangle {
@@ -291,9 +286,5 @@ ApplicationWindow {
             }
         }
     }
-
-
-
-
 
 }
