@@ -1,9 +1,12 @@
 <RCC>
     <qresource prefix="/qmlforms">
-        <file>test.qml</file>
         <file>mainWIndows.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qmlforms/image.png</file>
+        <file>qmlforms/close.png</file>
+        <file>qmlforms/image 2.1.png</file>
+        <file>qmlforms/login_logo.png</file>
+        <file>qmlforms/minmax.png</file>
     </qresource>
 </RCC>
