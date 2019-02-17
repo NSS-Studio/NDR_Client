@@ -8,5 +8,8 @@
         <file>qmlforms/image 2.1.png</file>
         <file>qmlforms/login_logo.png</file>
         <file>qmlforms/minmax.png</file>
+        <file>qmlforms/logining_bar.png</file>
+        <file>qmlforms/logining.png</file>
+        <file>qmlforms/field.png</file>
     </qresource>
 </RCC>

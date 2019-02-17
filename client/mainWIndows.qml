@@ -22,6 +22,24 @@ ApplicationWindow {
     property int xmouse: 0
     property int ymouse: 0
 
+    function addPost (arg1, arg2){
+        mod1.append({
+                        "text": arg1.toString(),
+                        "data": arg2.toString(),
+                    })
+    }
+
+    function getVersion (msg){
+        tittle.text = "NDR 东软校园网络认证 ver"+msg.toString()
+        tittle1.text = "NDR 东软校园网络认证 ver"+msg.toString()
+    }
+
+    function def_windows() {
+        select.visible = false
+        status.x = 300
+        status.y = 45
+    }
+
 
     style: ApplicationWindowStyle{
         background: Rectangle {
@@ -35,6 +53,7 @@ ApplicationWindow {
     }
 
     Image {
+        anchors.rightMargin: 0
         anchors.fill: parent
         source: "qrc:/qmlforms/image 2.1.png"
     }
@@ -60,7 +79,7 @@ ApplicationWindow {
     Text {
         id: tittle
         x: 12
-        y: 21
+        y: 13
         width: 185
         height: 50
         color: "#ffffff"
@@ -96,12 +115,13 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: rectangle
+        id: panel1
         x: 0
         y: 150
         width: parent.width
         height: parent.height - 150
         color: "#ffffff"
+        visible: false
         border.color: "#000000"
         ComboBox {
             id: combMod
@@ -109,20 +129,13 @@ ApplicationWindow {
             y: 30
             width: 150
             height: 30
-            textRole: text
+            textRole: "text"
             editable: false
 
             model: ListModel{
                 id: mod1
-                ListElement{text: "aaa"; data: "bbb"}
-                ListElement{text: "aaaa"; data: "bbbb"}
             }
 
-            style: ComboBoxStyle {
-                background: {
-                    raise()
-                }
-            }
 
         }
 
@@ -134,6 +147,9 @@ ApplicationWindow {
             textRole: "history"
             editable: true
             width: 150
+            model: ListModel{
+                id: accountModel
+            }
 
         }
 
@@ -215,9 +231,158 @@ ApplicationWindow {
             id: select
             x: 303
             y: 40
+            visible: true
             color: "#0b82f9"
             text: qsTr("选择网卡")
             font.pixelSize: 16
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: {
+                    panel2.visible = true
+                    panel1.visible = false
+                }
+
+                onEntered: {
+                    select.font.underline = true
+                }
+                onExited: {
+                    select.font.underline = false
+                }
+            }
+        }
+
+        Text {
+            id: status
+            x: 80
+            y: 170
+            width: 126
+            height: 27
+            text: qsTr("")
+            font.pixelSize: 12
+        }
+    }
+
+    Rectangle {
+        id: panel2
+        x: 0
+        y: 150
+        width: 500
+        height: 220
+        color: "#ffffff"
+        visible: false
+
+        ComboBox{
+            x: 67
+            y: 56
+            height: 32
+            width: 193
+            textRole: "wk"
+        }
+
+    }
+
+    Rectangle {
+        id: panel3
+        x: 0
+        y: 150
+        width: 500
+        height: 221
+        color: "#ffffff"
+        visible: false
+
+        Image {
+            id: image
+            x: 161
+            y: 60
+            width: 36
+            height: 26
+            source: "qmlforms/logining.png"
+        }
+
+        Image {
+            id: image1
+            x: 86
+            y: 156
+            width: 328
+            height: 5
+            source: "qmlforms/logining_bar.png"
+        }
+
+        Text {
+            id: loging
+            x: 237
+            y: 60
+            width: 122
+            height: 28
+            text: qsTr("正在登录网络...")
+            font.pixelSize: 18
+        }
+
+        Text {
+            id: login_status
+            x: 196
+            y: 112
+            color: "#999999"
+            text: qsTr("正在尝试第一次拨号")
+            font.pixelSize: 12
+        }
+    }
+
+    Rectangle {
+        id: panel4
+        x: 0
+        y: 150
+        width: 500
+        height: 220
+        color: "#ffffff"
+
+        Image {
+            id: image2
+            x: 84
+            y: 45
+            width: 50
+            height: 50
+            source: "qmlforms/field.png"
+        }
+
+        Text {
+            id: text3
+            x: 179
+            y: 45
+            text: qsTr("拨号失败! (错误码:651)")
+            font.pixelSize: 15
+        }
+
+        Text {
+            id: error_651
+            x: 179
+            y: 84
+            width: 266
+            height: 16
+            color: "#999999"
+            text: qsTr("651：调制解调器报告了一个错误请检查网络线路是否正常并确保网线或交换机连接正常")
+            font.pixelSize: 12
+            wrapMode: Text.WrapAnywhere
+        }
+
+        Rectangle {
+            id: ok_btn
+            x: 327
+            y: 137
+            width: 90
+            radius: 15
+            height: 31
+            color: "#448aff"
+            border.color: "#448aff"
+
+            Text {
+                id: text1
+                x: 34
+                y: 8
+                text: qsTr("OK")
+                font.pixelSize: 12
+            }
         }
     }
 
@@ -277,14 +442,32 @@ ApplicationWindow {
             id: login_button_mouse
             anchors.fill: parent
             onClicked: {
-
                 login_button.color = "#448AFF"
+                if (account.editText === "" || password.text === "") {
+                    status.color = "red"
+                    status.text = "账号或密码为空!"
+                }
+                else {
+                    login_button.visible = false
+                    repaire.visible = false
+                    tittle1.visible = false
+                    panel3.visible = true
+                }
             }
             onPressed: {
                 login_button.color = "#5c7ffe"
-                // transmit login signal
+
             }
         }
     }
 
+
+
+
+
 }
+
+/*##^## Designer {
+    D{i:9;invisible:true}D{i:26;invisible:true}D{i:34;invisible:true}
+}
+ ##^##*/
