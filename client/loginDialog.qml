@@ -5,7 +5,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
 
 ApplicationWindow {
-    id: root
+    id: loginDialog
     objectName: "roott"
     width: 500
     height: 370
@@ -18,6 +18,15 @@ ApplicationWindow {
 
 
     flags: Qt.Window | Qt.FramelessWindowHint
+
+    signal login(string username,string passwd,string pack_info,string NIC_info)
+
+    Item {
+        id: signal
+
+//        signal login(String username,String passwd,String pack_info,String NIC_info)
+
+    }
 
     property int xmouse: 0
     property int ymouse: 0
@@ -100,8 +109,8 @@ ApplicationWindow {
         }
 
         onPositionChanged: {
-            root.x = root.x + (mouseX - xmouse)
-            root.y = root.y + (mouseY - ymouse)
+            loginDialog.x = loginDialog.x + (mouseX - xmouse)
+            loginDialog.y = loginDialog.y + (mouseY - ymouse)
         }
 
         onClicked: {
@@ -110,7 +119,7 @@ ApplicationWindow {
             if (x >= (parent.width - 25) && x <= (parent.width - 12) && y >= 11 && y <= 24)
                 Qt.quit()
             else if (x >= (parent.width - 45) && x <= (parent.width - 32) && y >= 11 && y <= 24)
-                root.visibility = Window.Minimized
+                loginDialog.visibility = Window.Minimized
         }
     }
 
@@ -121,7 +130,7 @@ ApplicationWindow {
         width: parent.width
         height: parent.height - 150
         color: "#ffffff"
-        visible: false
+        visible: true
         border.color: "#000000"
         ComboBox {
             id: combMod
@@ -297,7 +306,7 @@ ApplicationWindow {
             y: 60
             width: 36
             height: 26
-            source: "qmlforms/logining.png"
+            source: "qrc:/qmlforms/logining.png"
         }
 
         Image {
@@ -306,7 +315,7 @@ ApplicationWindow {
             y: 156
             width: 328
             height: 5
-            source: "qmlforms/logining_bar.png"
+            source: "qrc:/qmlforms/logining_bar.png"
         }
 
         Text {
@@ -336,14 +345,16 @@ ApplicationWindow {
         width: 500
         height: 220
         color: "#ffffff"
+        visible: false
 
         Image {
-            id: image2
+            id: error_img
             x: 84
             y: 45
             width: 50
             height: 50
-            source: "qmlforms/field.png"
+            visible: true
+            source: "qrc:/qmlforms/field.png"
         }
 
         Text {
@@ -370,18 +381,47 @@ ApplicationWindow {
             id: ok_btn
             x: 327
             y: 137
-            width: 90
+            width: 78
             radius: 15
             height: 31
-            color: "#448aff"
-            border.color: "#448aff"
+            color: "#448AFF"
 
             Text {
                 id: text1
-                x: 34
+                x: 31
                 y: 8
+                color: "#ffffff"
                 text: qsTr("OK")
                 font.pixelSize: 12
+            }
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    ok_btn.color = "#424dff"
+                }
+                onClicked: {
+                    ok_btn.color = "#448AFF"
+                }
+            }
+        }
+
+        Text {
+            id: text2
+            x: 55
+            y: 145
+            width: 66
+            height: 23
+            color: "#0b82f9"
+            text: qsTr("更多帮助")
+            font.pixelSize: 16
+            MouseArea{
+                hoverEnabled: true
+                onEntered: {
+                    text2.font.underline = true
+                }
+                onExited: {
+                    text2.font.underline = false
+                }
             }
         }
     }
@@ -451,11 +491,16 @@ ApplicationWindow {
                     login_button.visible = false
                     repaire.visible = false
                     tittle1.visible = false
+                    panel1.visible = false
+                    panel2.visible = false
+                    panel4.visible = false
                     panel3.visible = true
+                    emit: loginDialog.login("1","2","3","4")
+//                    emit: loginDialog.testSignal("12334")
                 }
             }
             onPressed: {
-                login_button.color = "#5c7ffe"
+                login_button.color = "#424dff"
 
             }
         }

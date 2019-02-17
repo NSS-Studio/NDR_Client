@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/qmlforms">
-        <file>mainWIndows.qml</file>
+        <file>loginDialog.qml</file>
+        <file>mainWindow.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qmlforms/image.png</file>
@@ -11,5 +12,10 @@
         <file>qmlforms/logining_bar.png</file>
         <file>qmlforms/logining.png</file>
         <file>qmlforms/field.png</file>
+        <file>qmlforms/check.png</file>
+        <file>qmlforms/moon.png</file>
+        <file>qmlforms/user.png</file>
+        <file>qmlforms/logo.png</file>
+        <file>qmlforms/setting.png</file>
     </qresource>
 </RCC>

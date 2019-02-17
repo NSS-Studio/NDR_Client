@@ -6,10 +6,35 @@
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   engine = new QQmlApplicationEngine();
-  comp = new QQmlComponent(engine, QUrl("qrc:/qmlforms/mainWIndows.qml"));
+  comp = new QQmlComponent(engine, QUrl("qrc:/qmlforms/loginDialog.qml"));
 
   root = static_cast<QWindow*>(comp->create());
 
+  bind_loginDialog_slot();
+
+  InitLoginDialog();
+}
+
+void QMLAboutDialog::btnLogin_clicked(const QString& username
+                                      ,const QString& passwd
+                                      ,const QString& pack_info
+                                      ,const QString& NIC_info) {
+    qDebug() << "username" << username;
+    qDebug() << "pasword" << passwd;
+    qDebug() << "pack_info" << pack_info;
+    qDebug() << "nic_info" << NIC_info;
+}
+
+void QMLAboutDialog::s(QString){
+    qDebug() << "1";
+}
+
+void QMLAboutDialog::bind_loginDialog_slot(){
+    QObject::connect(root,SIGNAL(login(QString,QString,QString,QString)),this,SLOT(btnLogin_clicked(QString,QString,QString,QString)));
+//    QObject::connect(root,SIGNAL(testSignal(QString)),this,SLOT(btnLogin_clicked(QString)));
+}
+
+void QMLAboutDialog::InitLoginDialog() {
   QStringList postfitList = utils::getDrModelPostfixTable();
 
   int32_t arg2 = 0;
@@ -37,9 +62,11 @@ QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
                             Qt::DirectConnection
                             );
 #endif
-
-
-
-
 }
 
+void QMLAboutDialog::initMainWindow () {
+    QMetaObject::invokeMethod(root,
+                              "getVersion",
+                              Qt::DirectConnection
+                              );
+}
