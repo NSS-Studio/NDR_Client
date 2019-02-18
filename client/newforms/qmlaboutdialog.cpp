@@ -8,12 +8,15 @@ QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   engineLoginDialog = new QQmlApplicationEngine();
   compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/loginDialog.qml"));
   loginDialog = static_cast<QWindow*>(compLoginDialog->create());
-  if(!loginDialog){
-      loginDialog->show();
-  }
-  else {
-      qDebug() << "loginDialog init field";
-  }
+  engineMainWindow = new QQmlApplicationEngine();
+  compMainWindow = new QQmlComponent(engineMainWindow, QUrl("qrc:/qmlforms/mainWindow.qml"));
+  mainWindow = static_cast<QWindow*>(compMainWindow->create());
+#ifndef QT_DEBUG
+  mainWindow->hide();
+#endif
+
+  qDebug() << mainWindow;
+
 
   bind_loginDialog_slot();
 
@@ -29,13 +32,10 @@ void QMLAboutDialog::btnLogin_clicked(const QString& username
     qDebug() << "pack_info" << pack_info;
     qDebug() << "nic_info" << NIC_info;
 
-    engineMainWindow = new QQmlApplicationEngine();
-    compMainWindow = new QQmlComponent(engineMainWindow, QUrl("qrc:/qmlforms/mainWindow.qml"));
-    mainWindow = static_cast<QWindow*>(compMainWindow->create());
-    if (!mainWindow)
-        mainWindow->show();
-    else
-        qDebug() << "mainwindow init field";
+    auto pppoe = utils::resourceManager.getPPPoE();
+    pppoe->dialRAS(NDR_PHONEBOOK_NAME,username,passwd,pack_info);
+
+    mainWindow->show();
     initMainWindow();
     loginDialog->hide();
 }

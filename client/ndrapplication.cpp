@@ -9,7 +9,7 @@ NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
   localServer.reset(new QTcpServer{});
 
   auto localListenningState =
-      localServer->listen(QHostAddress::Any, LOCAL_SERVER_PORT);
+      localServer->listen(QHostAddress::Any, LOCAL_SERVER_PORT); // check local port 20412
 
   if (!localListenningState) {
     QMessageBox::information(
@@ -17,7 +17,7 @@ NdrApplication::NdrApplication(QString appName, int &argc, char **argv)
         QObject::tr("打开失败\n检测到已经有一个实例正在运行。"));
     qDebug()
         << QString("local Server bind port %0 failed").arg(LOCAL_SERVER_PORT);
-    QTimer::singleShot(0, this, &NdrApplication::quit);
+    QTimer::singleShot(0, this, &NdrApplication::quit); // transmit a exit singal
 
   } else {
     qDebug() << "Create localTcpServer successful";
