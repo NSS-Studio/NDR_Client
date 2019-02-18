@@ -505,11 +505,6 @@ ApplicationWindow {
             }
         }
     }
-
-
-
-
-
 }
 
 /*##^## Designer {

@@ -17,5 +17,6 @@
         <file>qmlforms/user.png</file>
         <file>qmlforms/logo.png</file>
         <file>qmlforms/setting.png</file>
+        <file>qmlforms/return.png</file>
     </qresource>
 </RCC>

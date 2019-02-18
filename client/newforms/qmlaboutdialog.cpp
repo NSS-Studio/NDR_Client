@@ -5,10 +5,15 @@
 #include "utils.hpp"
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
-  engine = new QQmlApplicationEngine();
-  comp = new QQmlComponent(engine, QUrl("qrc:/qmlforms/loginDialog.qml"));
-
-  root = static_cast<QWindow*>(comp->create());
+  engineLoginDialog = new QQmlApplicationEngine();
+  compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/loginDialog.qml"));
+  loginDialog = static_cast<QWindow*>(compLoginDialog->create());
+  if(!loginDialog){
+      loginDialog->show();
+  }
+  else {
+      qDebug() << "loginDialog init field";
+  }
 
   bind_loginDialog_slot();
 
@@ -23,15 +28,20 @@ void QMLAboutDialog::btnLogin_clicked(const QString& username
     qDebug() << "pasword" << passwd;
     qDebug() << "pack_info" << pack_info;
     qDebug() << "nic_info" << NIC_info;
-}
 
-void QMLAboutDialog::s(QString){
-    qDebug() << "1";
+    engineMainWindow = new QQmlApplicationEngine();
+    compMainWindow = new QQmlComponent(engineMainWindow, QUrl("qrc:/qmlforms/mainWindow.qml"));
+    mainWindow = static_cast<QWindow*>(compMainWindow->create());
+    if (!mainWindow)
+        mainWindow->show();
+    else
+        qDebug() << "mainwindow init field";
+    initMainWindow();
+    loginDialog->hide();
 }
 
 void QMLAboutDialog::bind_loginDialog_slot(){
-    QObject::connect(root,SIGNAL(login(QString,QString,QString,QString)),this,SLOT(btnLogin_clicked(QString,QString,QString,QString)));
-//    QObject::connect(root,SIGNAL(testSignal(QString)),this,SLOT(btnLogin_clicked(QString)));
+    QObject::connect(loginDialog,SIGNAL(login(QString,QString,QString,QString)),this,SLOT(btnLogin_clicked(QString,QString,QString,QString)));
 }
 
 void QMLAboutDialog::InitLoginDialog() {
@@ -42,22 +52,22 @@ void QMLAboutDialog::InitLoginDialog() {
     qDebug() << postfit;
     QVariant arg1 = postfit;
     arg2 = arg2 + 1;
-    QMetaObject::invokeMethod(root,
+    QMetaObject::invokeMethod(loginDialog,
                               "addPost",
                               Qt::DirectConnection,
                               Q_ARG(QVariant, arg1),
                               Q_ARG(QVariant, QVariant(arg2))
                               );
   }
-  QVariant msg = utils::getVersionString();
-  QMetaObject::invokeMethod(root,
+  QMetaObject::invokeMethod(loginDialog,
                             "getVersion",
                             Qt::DirectConnection,
-                            Q_ARG(QVariant, msg)
+                            Q_ARG(QVariant, QVariant(utils::getVersionString()))
                             );
+  qDebug() << "add version successful";
 
 #ifdef Q_OS_WIN
-  QMetaObject::invokeMethod(root,
+  QMetaObject::invokeMethod(loginDialog,
                             "def_windows",
                             Qt::DirectConnection
                             );
@@ -65,8 +75,9 @@ void QMLAboutDialog::InitLoginDialog() {
 }
 
 void QMLAboutDialog::initMainWindow () {
-    QMetaObject::invokeMethod(root,
+    QMetaObject::invokeMethod(mainWindow,
                               "getVersion",
-                              Qt::DirectConnection
+                              Qt::DirectConnection,
+                              Q_ARG(QVariant, QVariant(utils::getVersionString()))
                               );
 }

@@ -13,7 +13,12 @@ public:
   explicit QMLAboutDialog(QObject *parent = nullptr);
 
   ~QMLAboutDialog(){
-      delete comp;
+      delete engineLoginDialog;
+      delete engineMainWindow;
+      delete compLoginDialog;
+      delete compMainWindow;
+      delete loginDialog;
+      delete mainWindow;
   }
 
 signals:
@@ -26,9 +31,9 @@ public slots:
 
 
 private:
-  QQmlApplicationEngine* engine; // save qml engine
-  QQmlComponent* comp;
-  QWindow* root; // save window pointer
+  QQmlApplicationEngine *engineLoginDialog, *engineMainWindow; // save qml engine
+  QQmlComponent *compLoginDialog, *compMainWindow;
+  QWindow *loginDialog, *mainWindow; // save window pointer
 
   void bind_loginDialog_slot();
   void InitLoginDialog();
