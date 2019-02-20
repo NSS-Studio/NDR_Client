@@ -2,6 +2,7 @@
 #include <QUrl>
 #include <QQuickView>
 #include <QQmlComponent>
+#include <pppoe.hpp>
 #include "utils.hpp"
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
