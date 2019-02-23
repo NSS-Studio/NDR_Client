@@ -18,6 +18,7 @@
 #include <QQuickItem>
 #include <QQuickView>
 #include <iostream>
+#include <QMessageBox>
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
 #include <DbgHelp.h>
@@ -45,7 +46,7 @@ LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕
   //这里弹出一个错误对话框并退出程序
   EXCEPTION_RECORD *record = pException->ExceptionRecord;
   QString errCode(QString::number(record->ExceptionCode, 16)),
-      errAdr(QString::number((uint)record->ExceptionAddress, 16)), errMod;
+      errAdr(QString::number(reinterpret_cast<intptr_t>(record->ExceptionAddress), 16)), errMod;
   QMessageBox::critical(
       NULL, "程式崩溃",
       "<FONT size=4><div><b>对于发生的错误，表示诚挚的歉意</b><br/></div>" +

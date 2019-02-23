@@ -1,5 +1,4 @@
 #include <qapplication.h>
-#include <wincon.h>
 #include <windows.h>
 
 namespace utils {

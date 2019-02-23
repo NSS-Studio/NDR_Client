@@ -76,6 +76,7 @@ void QMLAboutDialog::InitLoginDialog() {
                               );
   }
   auto pppoe = utils::resourceManager.getPPPoE();
+#ifndef Q_OS_WIN32
   QStringList interfaces = pppoe->getAvailableInterfaces();
 //  interface.clear(); // test info
   if (interfaces.count() == 1) {
@@ -98,6 +99,7 @@ void QMLAboutDialog::InitLoginDialog() {
                     );
       }
   }
+#endif
 
   QMetaObject::invokeMethod(loginDialog,
                             "getVersion",

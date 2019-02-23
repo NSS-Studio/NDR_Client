@@ -262,29 +262,27 @@ void LoginDialog::on_btnShowPassword_clicked(bool checked) {
 #ifdef Q_OS_WIN
 void LoginDialog::on_btnWinsockReset_clicked() {
   HINSTANCE re;
-
-  re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winsock reset", L"",
-                    SW_HIDE);
+  intptr_t reValue;
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C netsh winsock reset"), TEXT(""), SW_HIDE);
   // can not use static_cast
-  if ((int)re <= 32) {
-    QMessageBox::information(this, tr("失败"),
-                             tr("Winsock重置失败，错误代码 %0").arg((int)re));
+  // Because int is 4-byte HINSTANCE, is known as PVOID, is 8-byte
+  // So We should use intptr_t
+  reValue = reinterpret_cast<intptr_t>(re);
+  if (reValue <= 32) {
+    QMessageBox::information(this, tr("失败"), tr("Winsock重置失败，错误代码 %0").arg(reValue));
     return;
   }
 
-  re = ShellExecute(NULL, L"runas", L"cmd", L"/C netsh winhttp reset proxy",
-                    L"", SW_HIDE);
-  if ((int)re <= 32) {
-    QMessageBox::information(this, tr("失败"),
-                             tr("网络代理重置失败，错误代码 %0").arg((int)re));
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C netsh winhttp reset proxy"),TEXT(""), SW_HIDE);
+  reValue = reinterpret_cast<intptr_t>(re);
+  if (reValue <= 32) {
+    QMessageBox::information(this, tr("失败"), tr("网络代理重置失败，错误代码 %0").arg(reValue));
     return;
   }
 
-  re = ShellExecute(NULL, L"runas", L"cmd", L"/C ipconfig /flushdns", L"",
-                    SW_HIDE);
-  if ((int)re <= 32) {
-    QMessageBox::information(this, tr("失败"),
-                             tr("DNS重置失败，错误代码 %0").arg((int)re));
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C ipconfig /flushdns"), TEXT(""), SW_HIDE);
+  if (reValue <= 32) {
+    QMessageBox::information(this, tr("失败"), tr("DNS重置失败，错误代码 %0").arg(reValue));
     return;
   }
 

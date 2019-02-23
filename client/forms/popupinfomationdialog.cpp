@@ -1,6 +1,10 @@
 #include "popupinfomationdialog.hpp"
 #include <QScreen>
 #include <utils.hpp>
+
+#ifdef Q_OS_WIN32
+    #include <windows.h>
+#endif
 PopUpInfomationDialog::PopUpInfomationDialog() : QObject{nullptr} {
   qDebug() << "create popUpDialog" << endl;
   pageNow = 1;

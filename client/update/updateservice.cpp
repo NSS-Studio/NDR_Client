@@ -1,5 +1,9 @@
 #include "updateservice.hpp"
 #include <utils.hpp>
+
+#ifdef Q_OS_WIN32
+    #include <windows.h>
+#endif
 UpdateService::UpdateService(const QString &serverAddr,
                              const QString &tempDirectory, QObject *parent)
     : QObject(parent), tempDir{tempDirectory}, ipAddress{serverAddr},
@@ -284,17 +288,18 @@ bool UpdateService::getCurrentInstallDirectory(char *buffer) {
 bool UpdateService::openPackage(QString &errMsg) {
 #if defined(Q_OS_WIN)
   QString program = packagePath();
-  WCHAR szProgram[MAX_PATH];
+  wchar_t szProgram[MAX_PATH];
   HINSTANCE hInstance;
   program.replace("/", "\\");
   int length = program.toWCharArray(szProgram);
   szProgram[length] = 0;
 
   hInstance =
-      ShellExecuteW(NULL, L"open", szProgram, NULL, NULL, SW_SHOWNORMAL);
+      ShellExecuteW(NULL, TEXT("open"), szProgram, NULL, NULL, SW_SHOWNORMAL);
 
-  if ((DWORD)hInstance < 32) {
-    switch ((DWORD)hInstance) {
+  auto hInstanceToUInt64 = reinterpret_cast<uint64_t>(hInstance);
+  if (hInstanceToUInt64 < 32) {
+    switch (hInstanceToUInt64) {
     case ERROR_FILE_NOT_FOUND:
       errMsg = tr("艾玛，我刚刚下载完的安装包，竟然不见了！！") + "\n" +
                tr("请尝试到e.neusoft.edu.cn下载最新版安装包");
@@ -316,11 +321,13 @@ bool UpdateService::openPackage(QString &errMsg) {
       break;
     case SE_ERR_NOASSOC:
       errMsg = tr("没有关联的应用程序，启动失败");
+        break;
     default:
       errMsg = tr("打开文件时发生未知错误");
+        break;
     }
-    qDebug() << "Shell error " << (DWORD)hInstance;
-    qDebug() << "Last error" << GetLastError();
+    qDebug() << "Shell error :" << hInstanceToUInt64;
+    qDebug() << "Last error :" << GetLastError();
     running = false;
     // QMessageBox::information(NULL,tr("错误"),tr("下载失败，")+errMsg);
     return false;

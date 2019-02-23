@@ -23,25 +23,6 @@
 #include <QVBoxLayout>
 #include <QVector>
 
-#ifdef Q_OS_WIN
-#include <psapi.h>
-#include <winbase.h>
-#include <windows.h>
-#include <winuser.h>
-/*
- * useful function:
- * GetForegroundWindow
- * GetWindowRect
- *
- * need to use this struct ↓↓↓↓
- * windowinfo
- *
- * useful enum:
- * WS_EX_TOPMOST, WS_CAPTION
- *
- */
-#endif
-
 class PopUpInfomationDialog final : public QObject {
   Q_OBJECT
 public:

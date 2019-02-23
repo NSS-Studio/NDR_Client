@@ -8,13 +8,6 @@
 #include <QMessageBox>
 #include <QSharedPointer>
 
-#ifdef Q_OS_WIN
-#include <cstring>
-#include <fstream>
-#include <shellapi.h>
-#include <windows.h>
-#endif
-
 namespace Ui {
 class LoginDialog;
 }

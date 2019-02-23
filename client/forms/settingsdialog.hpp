@@ -7,10 +7,8 @@
 #include <QSettings>
 #include <QSharedPointer>
 
-#ifdef Q_OS_WIN
-#include <winbase.h>
-#include <windows.h>
-#include <winreg.h>
+#ifdef Q_OS_WIN32
+    #include <windows.h>
 #endif
 
 namespace Ui {
