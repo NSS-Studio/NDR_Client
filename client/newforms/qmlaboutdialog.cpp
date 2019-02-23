@@ -2,7 +2,9 @@
 #include <QUrl>
 #include <QQuickView>
 #include <QQmlComponent>
+#include <QMessageBox>
 #include "utils.hpp"
+#include "pppoe/pppoe.hpp"
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   engineLoginDialog = new QQmlApplicationEngine();
@@ -27,13 +29,26 @@ void QMLAboutDialog::btnLogin_clicked(const QString& username
                                       ,const QString& passwd
                                       ,const QString& pack_info
                                       ,const QString& NIC_info) {
-    qDebug() << "username" << username;
+    QString model = utils::getDrModel(pack_info);
+    auto realUsername = "\r\n" + username + model;
+
+    this->mainWindow->findChild<QObject*>("userName")->setProperty("text",username); // add username on mainWindow
+    auto modelCaption = utils::getDrModelCaption(model);
+    if (modelCaption.isValid())
+      this->mainWindow->findChild<QObject*>("net")->setProperty("text",pack_info); // add pack_info on mainWindow
+    else
+      this->mainWindow->findChild<QObject*>("net")->setProperty("text","未知");
+
+
+
+
+    qDebug() << "username" << realUsername;
     qDebug() << "pasword" << passwd;
     qDebug() << "pack_info" << pack_info;
     qDebug() << "nic_info" << NIC_info;
 
     auto pppoe = utils::resourceManager.getPPPoE();
-    pppoe->dialRAS(NDR_PHONEBOOK_NAME,username,passwd,pack_info);
+    pppoe->dialRAS(NDR_PHONEBOOK_NAME,realUsername,passwd,NIC_info);
 
     mainWindow->show();
     initMainWindow();
@@ -59,6 +74,30 @@ void QMLAboutDialog::InitLoginDialog() {
                               Q_ARG(QVariant, QVariant(arg2))
                               );
   }
+  auto pppoe = utils::resourceManager.getPPPoE();
+  QStringList interfaces = pppoe->getAvailableInterfaces();
+//  interface.clear(); // test info
+  if (interfaces.count() == 1) {
+      loginDialog->findChild<QObject*>("selectDevice")->setProperty("visible","false");
+  }
+  if (interfaces.count() == 0) {
+    auto status = loginDialog->findChild<QObject*>("status");
+    status->setProperty("color","red");
+    status->setProperty("text","无可用网卡");
+    auto login_btn = loginDialog->findChild<QObject*>("loginButton");
+    login_btn->setProperty("visible","false");
+  }
+  else {
+      for (auto interface: interfaces){
+        QMetaObject::invokeMethod(
+                                  loginDialog,
+                                  "addDevice",
+                                  Qt::DirectConnection,
+                                  Q_ARG(QVariant,QVariant(interface))
+                    );
+      }
+  }
+
   QMetaObject::invokeMethod(loginDialog,
                             "getVersion",
                             Qt::DirectConnection,

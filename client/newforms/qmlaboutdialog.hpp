@@ -38,6 +38,7 @@ private:
   void bind_loginDialog_slot();
   void InitLoginDialog();
   void initMainWindow();
+  void tryLogin(QString,QString,QString,QString,QString,QString);
 };
 
 #endif // ABOUTDIALOG_HPP

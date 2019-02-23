@@ -18,5 +18,9 @@
         <file>qmlforms/logo.png</file>
         <file>qmlforms/setting.png</file>
         <file>qmlforms/return.png</file>
+        <file>qmlforms/style/close.png</file>
+        <file>qmlforms/style/minmax.png</file>
+        <file>qmlforms/style/return.png</file>
+        <file>qmlforms/style/setting.png</file>
     </qresource>
 </RCC>

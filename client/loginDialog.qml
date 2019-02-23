@@ -24,7 +24,7 @@ ApplicationWindow {
     Item {
         id: signal
 
-//        signal login(String username,String passwd,String pack_info,String NIC_info)
+        //        signal login(String username,String passwd,String pack_info,String NIC_info)
 
     }
 
@@ -34,8 +34,12 @@ ApplicationWindow {
     function addPost (arg1, arg2){
         mod1.append({
                         "text": arg1.toString(),
-                        "data": arg2.toString(),
+                        "data": arg2.toString()
                     })
+    }
+
+    function addDevice(arg1) {
+        combDeviceMod.append({"wk":arg1})
     }
 
     function getVersion (msg){
@@ -67,22 +71,7 @@ ApplicationWindow {
         source: "qrc:/qmlforms/image 2.1.png"
     }
 
-    Image {
-        id: close
-        x: parent.width - 25
-        y: 11
-        width: 13
-        height: 13
-        source: "qrc:/qmlforms/close.png"
-    }
-    Image {
-        id: minmax
-        x: parent.width - 45
-        y: 21
-        width: 13
-        height: 2
-        source: "qrc:/qmlforms/minmax.png"
-    }
+
 
 
     Text {
@@ -95,6 +84,8 @@ ApplicationWindow {
         text: "NDR 东软校园网络认证 ver0.76"
         font.bold: true
     }
+
+
 
     MouseArea{
         id: rootMouseArea
@@ -116,10 +107,70 @@ ApplicationWindow {
         onClicked: {
             var x = mouseX
             var y = mouseY
-            if (x >= (parent.width - 25) && x <= (parent.width - 12) && y >= 11 && y <= 24)
+        }
+    }
+    Image {
+        id: image6
+        x: 475
+        y: 11
+        width: 15
+        height: 15
+        source: "qrc:/qmlforms/close.png"
+    }
+
+    Rectangle {
+        id: close
+        x: 475
+        y: 11
+        width: 15
+        height: 15
+        color: "#e13a3a"
+        opacity: 0
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                image6.source = "qrc:/qmlforms/style/close.png"
+            }
+            onExited: {
+                image6.source = "qrc:/qmlforms/close.png"
+            }
+
+            onClicked: {
                 Qt.quit()
-            else if (x >= (parent.width - 45) && x <= (parent.width - 32) && y >= 11 && y <= 24)
+            }
+        }
+    }
+
+    Image {
+        id: image5
+        x: 450
+        y: 21
+        width: 15
+        height: 3
+        source: "qrc:/qmlforms/minmax.png"
+    }
+
+    Rectangle {
+        id: minmax
+        x: 450
+        y: 11
+        width: 15
+        height: 15
+        color: "#df3333"
+        opacity: 0
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            onEntered: {
+                image5.source = "qrc:/qmlforms/style/minmax.png"
+            }
+            onExited: {
+                image5.source = "qrc:/qmlforms/minmax.png"
+            }
+            onClicked: {
                 loginDialog.visibility = Window.Minimized
+            }
         }
     }
 
@@ -238,6 +289,7 @@ ApplicationWindow {
 
         Text {
             id: select
+            objectName: "selectDevice"
             x: 303
             y: 40
             visible: true
@@ -263,6 +315,7 @@ ApplicationWindow {
 
         Text {
             id: status
+            objectName: "status"
             x: 80
             y: 170
             width: 126
@@ -282,11 +335,48 @@ ApplicationWindow {
         visible: false
 
         ComboBox{
-            x: 67
-            y: 56
+            id: combDevice
+            x: 135
+            y: 43
             height: 32
             width: 193
             textRole: "wk"
+            model: ListModel{
+                id: combDeviceMod
+                objectName: "deviceName"
+            }
+        }
+
+        Rectangle {
+            id: rectangle
+            x: 186
+            y: 124
+            width: 91
+            height: 40
+            color: "#448aff"
+            radius: 55
+
+            Text {
+                id: text4
+                x: 32
+                y: 11
+                width: 27
+                height: 18
+                color: "#ffffff"
+                text: qsTr("确定")
+                font.pixelSize: 15
+            }
+            MouseArea {
+                anchors.fill: parent
+                onPressed: {
+                    rectangle.color = "#424dff"
+                }
+                onClicked: {
+                    rectangle.color = "#448aff"
+                    panel2.visible = false
+                    panel1.visible = true
+                }
+            }
         }
 
     }
@@ -462,12 +552,14 @@ ApplicationWindow {
 
     Rectangle {
         id: login_button
+        objectName: "loginButton"
         x: 351
         y: 129
         height: 55
         color: "#448AFF"
         width: 55
         radius: 100
+        visible: true
         border.color: "#448AFF"
 
         Image {
@@ -495,8 +587,7 @@ ApplicationWindow {
                     panel2.visible = false
                     panel4.visible = false
                     panel3.visible = true
-                    emit: loginDialog.login("1","2","3","4")
-//                    emit: loginDialog.testSignal("12334")
+                    emit: loginDialog.login(account.editText,password.text,combMod.currentText,combDevice.currentText)
                 }
             }
             onPressed: {
@@ -505,9 +596,9 @@ ApplicationWindow {
             }
         }
     }
-}
 
-/*##^## Designer {
-    D{i:9;invisible:true}D{i:26;invisible:true}D{i:34;invisible:true}
+
+
+
+
 }
- ##^##*/

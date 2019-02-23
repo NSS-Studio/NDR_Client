@@ -7,6 +7,7 @@ import Qt.labs.platform 1.0
 
 ApplicationWindow {
     id: mainWindow
+    objectName: mainWindow
 
     x: (Screen.desktopAvailableWidth - width) / 2
     y: (Screen.desktopAvailableHeight - height) / 2
@@ -47,17 +48,26 @@ ApplicationWindow {
             id: image
             x: 293
             y: 22
-            width: 13
-            height: 2
+            width: 15
+            height: 3
             source: "qrc:/qmlforms/minmax.png"
+        }
+
+        Image {
+            id: image4
+            x: 270
+            y: 13
+            width: 15
+            height: 15
+            source: "qrc:/qmlforms/setting.png"
         }
 
         Image {
             id: image1
             x: 318
             y: 11
-            width: 13
-            height: 13
+            width: 15
+            height: 15
             source: "qrc:/qmlforms/close.png"
         }
 
@@ -78,28 +88,77 @@ ApplicationWindow {
             onClicked: {
                 var x = mouseX
                 var y = mouseY
-                if (x >= (parent.width - 53) && x <= (parent.width - 40) && y >= 13 && y <= 26)
-                    mainWindow.visibility = Window.Minimized
-                else if (x >= (parent.width - 40) && x <= (parent.width - 27) && y >= 13 && y <= 26)
-                    mainWindow.visibility = Window.Minimized
             }
+        }
 
-            Image {
-                id: image4
-                x: 270
-                y: 13
-                width: 13
-                height: 13
-                source: "qrc:/qmlforms/setting.png"
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        panel1.visible = false
-                        panel2.visible = true
-                    }
+        Rectangle {
+            id: minmax
+            x: 293
+            y: 11
+            width: 15
+            height: 15
+            color: "#ffffff"
+            opacity: 0
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    image.source = "qrc:/qmlforms/style/minmax.png"
+                }
+                onExited: {
+                    image.source = "qrc:/qmlforms/minmax.png"
+                }
+                onClicked: {
+                    mainWindow.visibility = Window.Minimized
                 }
             }
         }
+        Rectangle {
+            id: close
+            x: 318
+            y: 11
+            width: 15
+            height: 15
+            color: "#ffffff"
+            opacity: 0
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    image1.source = "qrc:/qmlforms/style/close.png"
+                }
+                onExited: {
+                    image1.source = "qrc:/qmlforms/close.png"
+                }
+                onClicked: {
+                    mainWindow.visibility = Window.Minimized
+                }
+            }
+        }
+        Rectangle {
+            id: setting
+            x: 270
+            y: 11
+            width: 15
+            height: 15
+            color: "#ffffff"
+            opacity: 0
+            MouseArea{
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    image4.source = "qrc:/qmlforms/style/setting.png"
+                }
+                onExited: {
+                    image4.source = "qrc:/qmlforms/setting.png"
+                }
+                onClicked: {
+                    panel1.visible = false
+                    panel2.visible = true
+                }
+            }
+        }
+
     }
 
     SystemTrayIcon {
@@ -152,46 +211,18 @@ ApplicationWindow {
 
             Text {
                 id: username
+                objectName: "userName"
                 x: 130
                 y: 40
                 width: 120
                 height: 20
                 text: qsTr("Text")
                 font.pixelSize: 14
-
-                Rectangle {
-                    id: rectangle2
-                    x: 111
-                    y: 73
-                    width: 93
-                    height: 28
-                    color: "#448aff"
-                    radius: 15
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onPressed: {
-                            rectangle2.color = "#424dff"
-                        }
-                        onClicked: {
-                            rectangle2.color = "#448aff"
-                        }
-                    }
-
-                    Text {
-                        id: text2
-                        x: 20
-                        y: 6
-                        color: "#ffffff"
-                        text: qsTr("断开网络")
-                        font.family: "Arial"
-                        font.pixelSize: 12
-                    }
-                }
             }
 
             Text {
                 id: net
+                objectName: "net"
                 x: 130
                 y: 65
                 width: 120
@@ -202,6 +233,7 @@ ApplicationWindow {
 
             Text {
                 id: ip
+                objectName: "ip"
                 x: 130
                 y: 90
                 width: 120
@@ -212,12 +244,43 @@ ApplicationWindow {
 
             Text {
                 id: time
+                objectName: "time"
                 x: 131
                 y: 115
                 width: 120
                 height: 16
                 text: qsTr("Text")
                 font.pixelSize: 12
+            }
+
+            Rectangle {
+                id: rectangle2
+                x: 241
+                y: 113
+                width: 93
+                height: 28
+                color: "#448aff"
+                radius: 15
+
+                MouseArea {
+                    anchors.fill: parent
+                    onPressed: {
+                        rectangle2.color = "#424dff"
+                    }
+                    onClicked: {
+                        rectangle2.color = "#448aff"
+                    }
+                }
+
+                Text {
+                    id: text2
+                    x: 20
+                    y: 6
+                    color: "#ffffff"
+                    text: qsTr("断开网络")
+                    font.family: "Arial"
+                    font.pixelSize: 12
+                }
             }
         }
 
@@ -258,6 +321,14 @@ ApplicationWindow {
                 source: "qrc:/qmlforms/return.png"
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: {
+                        image5.source = "qrc:/qmlforms/style/return.png"
+                    }
+                    onExited: {
+                        image5.source = "qrc:/qmlforms/return.png"
+                    }
+
                     onClicked: {
                         panel1.visible = true
                         panel2.visible = false
