@@ -5,7 +5,6 @@
 #include <QQuickItem>
 #include <QQuickView>
 #include <QQmlApplicationEngine>
-#include <QQuickStyle>
 
 class QMLAboutDialog : public QObject {
   Q_OBJECT

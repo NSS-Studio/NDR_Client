@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT  += core network widgets xml quick svg
+QT += quickcontrols2
 TARGET = ndr-client
 TEMPLATE = app
 CONFIG += c++14 warn_on exceptions

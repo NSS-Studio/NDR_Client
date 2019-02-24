@@ -4,6 +4,7 @@
 #include <QQmlComponent>
 #include <QMessageBox>
 #include <pppoe.hpp>
+#include <QQuickStyle>
 #include "utils.hpp"
 #include "pppoe/pppoe.hpp"
 
