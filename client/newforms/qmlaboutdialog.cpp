@@ -9,7 +9,11 @@
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   engineLoginDialog = new QQmlApplicationEngine();
+#ifdef Q_OS_MAC
+  compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/macLoginDialog.qml"));
+#else
   compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/loginDialog.qml"));
+#endif
   loginDialog = static_cast<QWindow*>(compLoginDialog->create());
   engineMainWindow = new QQmlApplicationEngine();
   compMainWindow = new QQmlComponent(engineMainWindow, QUrl("qrc:/qmlforms/mainWindow.qml"));
@@ -24,6 +28,8 @@ QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   bind_loginDialog_slot();
 
   InitLoginDialog();
+
+  QQuickStyle::setStyle("Material");
 }
 
 void QMLAboutDialog::btnLogin_clicked(const QString& username
@@ -80,7 +86,7 @@ void QMLAboutDialog::InitLoginDialog() {
     login_btn->setProperty("visible","false");
   }
   else {
-      for (auto interface: interfaces){
+      for (QString& interface: interfaces){
         QMetaObject::invokeMethod(
                                   loginDialog,
                                   "addDevice",

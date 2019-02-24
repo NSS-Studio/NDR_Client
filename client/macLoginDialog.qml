@@ -1,6 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
 
@@ -192,27 +191,14 @@ ApplicationWindow {
                 hide.x = hide.x + 1
                 hide.width = hide.width - 1
             }
-            if (hide.x == bar.x + bar.width){
+            if (hide.x === bar.x + bar.width){
                 hide.x = bar.x
                 hide.width = 0
             }
         }
     }
 
-
-    style: ApplicationWindowStyle{
-        background: Rectangle {
-            anchors.fill: parent
-            radius: 100
-            Image {
-                anchors.fill: parent
-                source: "qrc:/qmlforms/image 2.1.png"
-            }
-        }
-    }
-
     Image {
-        anchors.rightMargin: 0
         anchors.fill: parent
         source: "qrc:/qmlforms/image 2.1.png"
     }
@@ -316,6 +302,7 @@ ApplicationWindow {
             }
             onClicked: {
                 loginDialog.visibility = Window.Minimized
+                console.log("click minmized")
             }
         }
     }
@@ -378,23 +365,23 @@ ApplicationWindow {
             height: 27
             text: qsTr("记住密码")
 
-            style: CheckBoxStyle{
-                indicator: Rectangle {
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 3
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-                    Rectangle {
-                        visible: control.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-                }
-            }
+//            style: CheckBoxStyle{
+//                indicator: Rectangle {
+//                    implicitWidth: 16
+//                    implicitHeight: 16
+//                    radius: 3
+//                    border.color: control.activeFocus ? "darkblue" : "gray"
+//                    border.width: 1
+//                    Rectangle {
+//                        visible: control.checked
+//                        color: "#555"
+//                        border.color: "#333"
+//                        radius: 1
+//                        anchors.margins: 4
+//                        anchors.fill: parent
+//                    }
+//                }
+//            }
         }
 
         CheckBox {
@@ -405,23 +392,23 @@ ApplicationWindow {
             height: 26
             text: qsTr("自动登录")
 
-            style: CheckBoxStyle{
-                indicator: Rectangle {
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 3
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-                    Rectangle {
-                        visible: control.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-                }
-            }
+//            style: CheckBoxStyle{
+//                indicator: Rectangle {
+//                    implicitWidth: 16
+//                    implicitHeight: 16
+//                    radius: 3
+//                    border.color: control.activeFocus ? "darkblue" : "gray"
+//                    border.width: 1
+//                    Rectangle {
+//                        visible: control.checked
+//                        color: "#555"
+//                        border.color: "#333"
+//                        radius: 1
+//                        anchors.margins: 4
+//                        anchors.fill: parent
+//                    }
+//                }
+//            }
         }
 
         MouseArea{
@@ -797,9 +784,5 @@ ApplicationWindow {
             }
         }
     }
-
-
-
-
 
 }

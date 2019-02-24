@@ -2,9 +2,9 @@
     <qresource prefix="/qmlforms">
         <file>loginDialog.qml</file>
         <file>mainWindow.qml</file>
+        <file>macLoginDialog.qml</file>
     </qresource>
     <qresource prefix="/">
-        <file>qmlforms/image.png</file>
         <file>qmlforms/close.png</file>
         <file>qmlforms/image 2.1.png</file>
         <file>qmlforms/login_logo.png</file>
