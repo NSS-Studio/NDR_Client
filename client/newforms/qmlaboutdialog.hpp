@@ -39,6 +39,7 @@ private:
   void InitLoginDialog();
   void initMainWindow();
   void tryLogin(QString,QString,QString,QString,QString,QString);
+  void timeEvent();
 };
 
 #endif // ABOUTDIALOG_HPP

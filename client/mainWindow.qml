@@ -13,7 +13,7 @@ ApplicationWindow {
     y: (Screen.desktopAvailableHeight - height) / 2
     visible: true
 
-    flags: Qt.Window | Qt.FramelessWindowHint
+    flags:  Qt.FramelessWindowHint
 
     height: 500
     color: "#f7f7f7"
@@ -22,8 +22,41 @@ ApplicationWindow {
     property int xmouse: 0
     property int ymouse: 0
 
+    property int dailHour: 0
+    property int dailMin: 0
+    property int dailSec: 0
+
     function getVersion (msg) {
         title.text = "NDR 东软校园网络认证 ver"+msg.toString()
+    }
+
+    function getDailTime () {
+        var d = new Date()
+        dailHour = d.getHours()
+        dailmin = d.getMinutes()
+        dailSec = d.getSeconds()
+    }
+
+    function addTime(msg) {
+        if(msg < 10) {
+            return "0" + msg.toString()
+        }
+        else {
+            return msg.toString()
+        }
+    }
+
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            var d = new Date()
+            var hour = addTime(d.getHours() - dailHour)
+            var min = addTime(d.getMinutes() - dailMin)
+            var sec = addTime(d.getSeconds() - dailSec)
+            time.text = hour + ":" + min + ":" + sec
+        }
     }
 
     Rectangle {
@@ -153,8 +186,14 @@ ApplicationWindow {
                     image4.source = "qrc:/qmlforms/setting.png"
                 }
                 onClicked: {
-                    panel1.visible = false
-                    panel2.visible = true
+                    if (panel1.visible === true){
+                        panel1.visible = false
+                        panel2.visible = true
+                    }
+                    else {
+                        panel2.visible = false
+                        panel1.visible = true
+                    }
                 }
             }
         }
@@ -169,6 +208,17 @@ ApplicationWindow {
             window.show()
             window.raise()
             window.requestActivate()
+            if(reason.active === SystemTrayIcon.Trigger) {
+                console.log("123")
+            }
+        }
+        menu: Menu{
+            MenuItem{
+                text: "退出"
+                onTriggered: {
+                    Qt.quit()
+                }
+            }
         }
     }
 
@@ -233,7 +283,7 @@ ApplicationWindow {
 
             Text {
                 id: ip
-                objectName: "ip"
+                objectName: "ipText"
                 x: 130
                 y: 90
                 width: 120
@@ -443,8 +493,6 @@ ApplicationWindow {
             text: qsTr("随系统启动")
         }
     }
-
-
 
 
 }

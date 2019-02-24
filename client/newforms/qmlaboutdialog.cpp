@@ -33,16 +33,6 @@ void QMLAboutDialog::btnLogin_clicked(const QString& username
     QString model = utils::getDrModel(pack_info);
     auto realUsername = "\r\n" + username + model;
 
-    this->mainWindow->findChild<QObject*>("userName")->setProperty("text",username); // add username on mainWindow
-    auto modelCaption = utils::getDrModelCaption(model);
-    if (modelCaption.isValid())
-      this->mainWindow->findChild<QObject*>("net")->setProperty("text",pack_info); // add pack_info on mainWindow
-    else
-      this->mainWindow->findChild<QObject*>("net")->setProperty("text","未知");
-
-
-
-
     qDebug() << "username" << realUsername;
     qDebug() << "pasword" << passwd;
     qDebug() << "pack_info" << pack_info;
@@ -122,4 +112,28 @@ void QMLAboutDialog::initMainWindow () {
                               Qt::DirectConnection,
                               Q_ARG(QVariant, QVariant(utils::getVersionString()))
                               );
+    auto pppoe = utils::resourceManager.getPPPoE();
+
+    QString base = pppoe->getUserName();
+
+    QString username = base.mid(0,base.lastIndexOf("@"));
+    QString pack_info = base.mid(base.lastIndexOf("@")+1,base.size());
+
+    this->mainWindow->findChild<QObject*>("userName")->setProperty("text",username); // add username on mainWindow
+    auto model = utils::getDrModel(pack_info);
+    auto modelCaption = utils::getDrModelCaption(model);
+    if (modelCaption.isValid())
+      this->mainWindow->findChild<QObject*>("net")->setProperty("text",pack_info); // add pack_info on mainWindow
+    else
+      this->mainWindow->findChild<QObject*>("net")->setProperty("text","未知");
+
+    mainWindow->findChild<QObject*>("ipText")->setProperty("text",pppoe->getIpAddress());
+    QMetaObject::invokeMethod(mainWindow,
+                              "getDailTime",
+                              Qt::DirectConnection
+                );
+}
+
+void QMLAboutDialog::timeEvent() {
+
 }
