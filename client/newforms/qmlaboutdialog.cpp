@@ -9,15 +9,17 @@
 #include "pppoe/pppoe.hpp"
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
-  engineLoginDialog = new QQmlApplicationEngine();
+  QQuickStyle::setStyle("Universal");
+  engineLoginDialog = new QQmlApplicationEngine{};
+  engineMainWindow = new QQmlApplicationEngine{};
 #ifdef Q_OS_MAC
-  compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/macLoginDialog.qml"));
+  compLoginDialog = new QQmlComponent{engineLoginDialog, QUrl{"qrc:/qmlforms/macLoginDialog.qml"}};
+  compMainWindow = new QQmlComponent{engineMainWindow,QUrl{"qrc:/qmlforms/macMainWindow.qml"}};
 #else
   compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/loginDialog.qml"));
+  compMainWindow = new QQmlComponent{engineMainWindow, QUrl{"qrc:/qmlforms/mainWindow.qml"}};
 #endif
   loginDialog = static_cast<QWindow*>(compLoginDialog->create());
-  engineMainWindow = new QQmlApplicationEngine();
-  compMainWindow = new QQmlComponent(engineMainWindow, QUrl("qrc:/qmlforms/mainWindow.qml"));
   mainWindow = static_cast<QWindow*>(compMainWindow->create());
 #ifndef QT_DEBUG
   mainWindow->hide();
@@ -29,8 +31,6 @@ QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
   bind_loginDialog_slot();
 
   InitLoginDialog();
-
-  QQuickStyle::setStyle("Material");
 }
 
 void QMLAboutDialog::btnLogin_clicked(const QString& username
@@ -73,12 +73,12 @@ void QMLAboutDialog::InitLoginDialog() {
                               );
   }
   auto pppoe = utils::resourceManager.getPPPoE();
-#ifndef Q_OS_WIN32
   QStringList interfaces = pppoe->getAvailableInterfaces();
 //  interface.clear(); // test info
   if (interfaces.count() == 1) {
       loginDialog->findChild<QObject*>("selectDevice")->setProperty("visible","false");
   }
+#ifndef Q_OS_WIN32
   if (interfaces.count() == 0) {
     auto status = loginDialog->findChild<QObject*>("status");
     status->setProperty("color","red");
@@ -87,7 +87,7 @@ void QMLAboutDialog::InitLoginDialog() {
     login_btn->setProperty("visible","false");
   }
   else {
-      for (QString& interface: interfaces){
+      for (auto const &interface: interfaces){
         QMetaObject::invokeMethod(
                                   loginDialog,
                                   "addDevice",

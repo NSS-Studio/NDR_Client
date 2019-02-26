@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 1.4
+import QtQuick.Controls 2.5
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
@@ -16,7 +16,7 @@ ApplicationWindow {
     flags:  Qt.FramelessWindowHint
 
     height: 500
-    color: "#f7f7f7"
+    color: "#ffffff"
     width: 350
 
     property int xmouse: 0
@@ -44,6 +44,11 @@ ApplicationWindow {
         else {
             return msg.toString()
         }
+    }
+
+    function doMinimized() {
+        flags = Qt.Window | Qt.WindowFullscreenButtonHint | Qt.CustomizeWindowHint | Qt.WindowMinimizeButtonHint
+        visibility = Window.Minimized
     }
 
     Timer {
@@ -142,7 +147,7 @@ ApplicationWindow {
                     image.source = "qrc:/qmlforms/minmax.png"
                 }
                 onClicked: {
-                    mainWindow.visibility = Window.Minimized
+                    doMinimized()
                 }
             }
         }
@@ -164,7 +169,7 @@ ApplicationWindow {
                     image1.source = "qrc:/qmlforms/close.png"
                 }
                 onClicked: {
-                    mainWindow.visibility = Window.Minimized
+                    doMinimized()
                 }
             }
         }
@@ -418,6 +423,7 @@ ApplicationWindow {
             height: 28
             color: "#ffffff"
             border.color: "#eaebed"
+            radius: 5
 
             Text {
                 id: text4
@@ -448,6 +454,7 @@ ApplicationWindow {
             width: 92
             height: 28
             color: "#ffffff"
+            radius: 5
             Text {
                 id: text5
                 x: 10
@@ -496,6 +503,12 @@ ApplicationWindow {
 
 
 }
+
+
+
+
+
+
 
 /*##^## Designer {
     D{i:24;invisible:true}

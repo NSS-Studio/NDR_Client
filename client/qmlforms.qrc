@@ -3,6 +3,7 @@
         <file>loginDialog.qml</file>
         <file>mainWindow.qml</file>
         <file>macLoginDialog.qml</file>
+        <file>macMainWindow.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>qmlforms/close.png</file>

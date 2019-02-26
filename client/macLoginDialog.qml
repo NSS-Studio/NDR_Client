@@ -12,9 +12,6 @@ ApplicationWindow {
     y: (Screen.desktopAvailableHeight - height) / 2
     visible: true
 
-    Material.theme: Material.Dark
-    Material.accent: Material.Purple
-
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
@@ -46,6 +43,11 @@ ApplicationWindow {
         select.visible = false
         status.x = 300
         status.y = 45
+    }
+
+    function doMinimized() {
+        flags = Qt.Window | Qt.WindowFullscreenButtonHint | Qt.CustomizeWindowHint | Qt.WindowMinimizeButtonHint
+        visibility = Window.Minimized
     }
 
     Timer {
@@ -301,8 +303,7 @@ ApplicationWindow {
                 image5.source = "qrc:/qmlforms/minmax.png"
             }
             onClicked: {
-                loginDialog.visibility = Window.Minimized
-                console.log("click minmized")
+                doMinimized()
             }
         }
     }
@@ -324,6 +325,7 @@ ApplicationWindow {
             height: 30
             textRole: "text"
             editable: false
+            currentIndex: 0
 
             model: ListModel{
                 id: mod1
@@ -364,24 +366,6 @@ ApplicationWindow {
             width: 107
             height: 27
             text: qsTr("记住密码")
-
-//            style: CheckBoxStyle{
-//                indicator: Rectangle {
-//                    implicitWidth: 16
-//                    implicitHeight: 16
-//                    radius: 3
-//                    border.color: control.activeFocus ? "darkblue" : "gray"
-//                    border.width: 1
-//                    Rectangle {
-//                        visible: control.checked
-//                        color: "#555"
-//                        border.color: "#333"
-//                        radius: 1
-//                        anchors.margins: 4
-//                        anchors.fill: parent
-//                    }
-//                }
-//            }
         }
 
         CheckBox {
@@ -391,24 +375,6 @@ ApplicationWindow {
             width: 102
             height: 26
             text: qsTr("自动登录")
-
-//            style: CheckBoxStyle{
-//                indicator: Rectangle {
-//                    implicitWidth: 16
-//                    implicitHeight: 16
-//                    radius: 3
-//                    border.color: control.activeFocus ? "darkblue" : "gray"
-//                    border.width: 1
-//                    Rectangle {
-//                        visible: control.checked
-//                        color: "#555"
-//                        border.color: "#333"
-//                        radius: 1
-//                        anchors.margins: 4
-//                        anchors.fill: parent
-//                    }
-//                }
-//            }
         }
 
         MouseArea{
@@ -474,6 +440,7 @@ ApplicationWindow {
             height: 32
             width: 193
             textRole: "wk"
+            currentIndex: 0
             model: ListModel{
                 id: combDeviceMod
                 objectName: "deviceName"
