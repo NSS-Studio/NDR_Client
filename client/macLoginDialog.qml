@@ -310,6 +310,7 @@ ApplicationWindow {
 
     Rectangle {
         id: panel1
+        objectName: "panel1"
         x: 0
         y: 150
         width: parent.width
@@ -426,6 +427,7 @@ ApplicationWindow {
 
     Rectangle {
         id: panel2
+        objectName: "panel2"
         x: 0
         y: 150
         width: 500
@@ -483,6 +485,7 @@ ApplicationWindow {
 
     Rectangle {
         id: panel3
+        objectName: "panel3"
         x: 0
         y: 150
         width: 500
@@ -585,6 +588,7 @@ ApplicationWindow {
 
     Rectangle {
         id: panel4
+        objectName: "panel4"
         x: 0
         y: 150
         width: 500

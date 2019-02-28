@@ -5,6 +5,7 @@
 #include <QQuickItem>
 #include <QQuickView>
 #include <QQmlApplicationEngine>
+#include "resourcemanager.hpp"
 
 class QMLAboutDialog : public QObject {
   Q_OBJECT
@@ -29,13 +30,17 @@ public slots:
                      ,const QString& pack_info
                      ,const QString& NIC_info);
 
+    void btnStopConnect_clicked ();
+
+    void dailFinish (bool);
+
 
 private:
   QQmlApplicationEngine *engineLoginDialog, *engineMainWindow; // save qml engine
   QQmlComponent *compLoginDialog, *compMainWindow;
   QWindow *loginDialog, *mainWindow; // save window pointer
 
-  void bind_loginDialog_slot();
+  void bind_slot();
   void InitLoginDialog();
   void initMainWindow();
   void tryLogin(QString,QString,QString,QString,QString,QString);

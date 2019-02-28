@@ -11,6 +11,9 @@
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
     LocalStorage* profile = utils::resourceManager.getProfile();
     qDebug () << profile;
+    if (profile->open()) {
+        
+    }
 
 
 

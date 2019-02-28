@@ -3,7 +3,7 @@
 
 #include <QGlobalStatic>
 #if (QT_VERSION < QT_VERSION_CHECK(5, 12, 1))
-#error "Please use Qt version higher than 5.12.1 in Compiling environment"
+//#error "Please use Qt version higher than 5.12.1 in Compiling environment"
 #endif
 
 /** r-plug server address*/

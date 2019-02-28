@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
   QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
   NdrApplication ndrApp{"ndr-client-new", argc, argv};
 
-//  ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
+  ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
   QMLAboutDialog qmlAboutDialog(&ndrApp);
 

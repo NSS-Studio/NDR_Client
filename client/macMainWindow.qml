@@ -22,28 +22,23 @@ ApplicationWindow {
     property int xmouse: 0
     property int ymouse: 0
 
-    property int dailHour: 0
-    property int dailMin: 0
-    property int dailSec: 0
+    property int dailTime: 0
+
+    signal stopConnect()
 
     function getVersion (msg) {
         title.text = "NDR 东软校园网络认证 ver"+msg.toString()
     }
 
-    function getDailTime () {
-        var d = new Date()
-        dailHour = d.getHours()
-        dailmin = d.getMinutes()
-        dailSec = d.getSeconds()
-    }
-
-    function addTime(msg) {
-        if(msg < 10) {
-            return "0" + msg.toString()
-        }
-        else {
-            return msg.toString()
-        }
+    function addTime() {
+        var hour = Math.floor(dailTime / 3600)
+        var min = Math.floor((dailTime % 3600) / 60)
+        var sec = dailTime % 60
+        var sHour = hour < 10 ? ("0" + hour.toString()) : hour.toString()
+        var sMin = min < 10 ? ("0" + min.toString()) : min.toString()
+        var sSec = sec < 10 ? ("0" + sec.toString()) : sec.toString()
+        time.text = sHour + ":" + sMin + ":" + sSec
+        console.log (dailTime % 3600)
     }
 
     function doMinimized() {
@@ -52,15 +47,13 @@ ApplicationWindow {
     }
 
     Timer {
+        objectName: "startTime"
         interval: 1000
-        running: true
+        running: false
         repeat: true
         onTriggered: {
-            var d = new Date()
-            var hour = addTime(d.getHours() - dailHour)
-            var min = addTime(d.getMinutes() - dailMin)
-            var sec = addTime(d.getSeconds() - dailSec)
-            time.text = hour + ":" + min + ":" + sec
+            dailTime = dailTime + 1
+            addTime()
         }
     }
 
@@ -324,6 +317,7 @@ ApplicationWindow {
                     }
                     onClicked: {
                         rectangle2.color = "#448aff"
+                        emit: stopConnect()
                     }
                 }
 

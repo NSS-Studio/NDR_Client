@@ -1,5 +1,6 @@
 #include <qapplication.h>
 #include <windows.h>
+#include <iostream>
 
 namespace utils {
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -12,18 +13,18 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 // light red on yellow would be 12 + 14*16 = 236
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
                     const QString &msg) {
-  QByteArray localMsg = msg.toLocal8Bit();
   switch (type) {
   case QtDebugMsg:
     SetConsoleTextAttribute(hConsole, 0x0E);
-    fprintf(stderr, "Debug: %s \n", localMsg.constData());
+    std::cerr << QString{"Debug: %1"}.arg(msg).toStdString() << std::endl;
     break;
   case QtInfoMsg:
     SetConsoleTextAttribute(hConsole, 0x0F);
-    fprintf(stderr, "Info: %s \n", localMsg.constData());
+    std::cerr << QString{"Info: %1"}.arg(msg).toStdString() << std::endl;
     break;
   case QtWarningMsg:
     SetConsoleTextAttribute(hConsole, 0xE0);
+
     fprintf(stderr, "Warning: %s \n(%s:%u, %s)\n", localMsg.constData(),
             context.file, context.line, context.function);
     break;
