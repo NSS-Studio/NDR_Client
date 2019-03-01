@@ -3,16 +3,15 @@
 #include <iostream>
 
 namespace utils {
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-// https://ss64.com/nt/color.html
-// color your text in Windows console mode
-// colors are 0=black 1=blue 2=green and so on to 15=white
-// colorattribute = foreground + background * 16
-// to get red text on yellow use 4 + 14*16 = 228
-// light red on yellow would be 12 + 14*16 = 236
 void messageHandler(QtMsgType type, const QMessageLogContext &context,
                     const QString &msg) {
+  static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  // https://ss64.com/nt/color.html
+  // color your text in Windows console mode
+  // colors are 0=black 1=blue 2=green and so on to 15=white
+  // colorattribute = foreground + background * 16
+  // to get red text on yellow use 4 + 14*16 = 228
+  // light red on yellow would be 12 + 14*16 = 236
   switch (type) {
   case QtDebugMsg:
     SetConsoleTextAttribute(hConsole, 0x0E);
@@ -24,19 +23,15 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
     break;
   case QtWarningMsg:
     SetConsoleTextAttribute(hConsole, 0xE0);
-
-    fprintf(stderr, "Warning: %s \n(%s:%u, %s)\n", localMsg.constData(),
-            context.file, context.line, context.function);
+    std::cerr << QString{"Warning: %1 \n(%2:%3, %4)"}.arg(msg).arg(context.file).arg(context.line).arg(context.function).toStdString() << std::endl;
     break;
   case QtCriticalMsg:
     SetConsoleTextAttribute(hConsole, 0x0C);
-    fprintf(stderr, "Critical: %s \n(%s:%u, %s)\n", localMsg.constData(),
-            context.file, context.line, context.function);
+    std::cerr << QString{"Critical: %1 \n(%2:%3, %4)"}.arg(msg).arg(context.file).arg(context.line).arg(context.function).toStdString() << std::endl;
     break;
   case QtFatalMsg:
     SetConsoleTextAttribute(hConsole, 0xC0);
-    fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(),
-            context.file, context.line, context.function);
+    std::cerr << QString{"Fatal: %1 \n(%2:%3, %4)"}.arg(msg).arg(context.file).arg(context.line).arg(context.function).toStdString() << std::endl;
     break;
   }
 }

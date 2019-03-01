@@ -1,5 +1,4 @@
-#ifndef MACOSBASEDSL_HPP
-#define MACOSBASEDSL_HPP
+#pragma once
 #include "basedsl.hpp"
 #include <SystemConfiguration/SCSchemaDefinitions.h>
 #include <SystemConfiguration/SystemConfiguration.h>
@@ -24,4 +23,3 @@ private:
   SCNetworkInterfaceRef ppp_interface = nullptr;
 };
 
-#endif // MACOSBASEDSL_HPP

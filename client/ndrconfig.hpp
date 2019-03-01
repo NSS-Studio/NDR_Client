@@ -1,5 +1,4 @@
-#ifndef NDRCONFIG_HPP
-#define NDRCONFIG_HPP
+#pragma once
 
 #include <QGlobalStatic>
 #if (QT_VERSION < QT_VERSION_CHECK(5, 12, 1))
@@ -85,4 +84,8 @@
 /** 开启更新*/
 #define ENABLE_UPDATE true
 
-#endif // NDRCONFIG_HPP
+#ifdef Q_OS_MAC
+#define QML_PLATFROM_GET(text) #mac##text
+#else
+#define QML_PLATFROM_GET(text) #text
+#endif

@@ -1,5 +1,4 @@
-#ifndef UTILS_NETFIX_HPP
-#define UTILS_NETFIX_HPP
+#pragma once
 
 #include <QObject>
 #include <QProcess>
@@ -31,4 +30,3 @@ private:
 };
 } // namespace utils
 
-#endif // UTILS_NETFIX_HPP

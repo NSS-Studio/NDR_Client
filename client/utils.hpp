@@ -1,5 +1,4 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#pragma once
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
@@ -60,4 +59,3 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context,
 
 } // namespace utils
 
-#endif // UTILS_HPP

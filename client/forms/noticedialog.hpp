@@ -1,5 +1,4 @@
-#ifndef NOTICEDIALOG_HPP
-#define NOTICEDIALOG_HPP
+#pragma once
 
 #include <QDialog>
 #include <QSharedPointer>
@@ -26,5 +25,3 @@ private:
   int x{}, y{};
   bool isDown{false};
 };
-
-#endif // NOTICEDIALOG_HPP

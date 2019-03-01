@@ -1,5 +1,4 @@
-#ifndef HANGUPDIALOG_HPP
-#define HANGUPDIALOG_HPP
+#pragma once
 
 #include <QCloseEvent>
 #include <QDebug>
@@ -37,4 +36,3 @@ private:
   bool close_now;
 };
 
-#endif // HANGUPDIALOG_HPP

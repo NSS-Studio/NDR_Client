@@ -25,14 +25,13 @@
 #endif
 
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
-//! windows debug
+// windows debug handler
 LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕获
   /*
    ***保存数据代码***
    */
   //创建 Dump 文件
-  HANDLE hDumpFile = CreateFile(0, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
-                                FILE_ATTRIBUTE_NORMAL, NULL);
+  HANDLE hDumpFile = CreateFileW(NULL, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
   if (hDumpFile != INVALID_HANDLE_VALUE) {
     // Dump信息
     MINIDUMP_EXCEPTION_INFORMATION dumpInfo;
@@ -40,13 +39,12 @@ LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException) { //程式异常捕
     dumpInfo.ThreadId = GetCurrentThreadId();
     dumpInfo.ClientPointers = TRUE;
     //写入Dump文件内容
-    MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile,
-                      MiniDumpNormal, &dumpInfo, NULL, NULL);
+    MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &dumpInfo, NULL, NULL);
   }
   //这里弹出一个错误对话框并退出程序
   EXCEPTION_RECORD *record = pException->ExceptionRecord;
   QString errCode(QString::number(record->ExceptionCode, 16)),
-      errAdr(QString::number(reinterpret_cast<intptr_t>(record->ExceptionAddress), 16)), errMod;
+      errAdr(QString::number(reinterpret_cast<uint64_t>(record->ExceptionAddress), 16)), errMod;
   QMessageBox::critical(
       NULL, "程式崩溃",
       "<FONT size=4><div><b>对于发生的错误，表示诚挚的歉意</b><br/></div>" +
@@ -71,8 +69,7 @@ int main(int argc, char *argv[]) {
   QApplication::setStyle("cleanlooks");
 #endif
 #if defined(QT_DEBUG) && defined(Q_OS_WIN)
-  SetUnhandledExceptionFilter(
-      (LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
+  SetUnhandledExceptionFilter(static_cast<LPTOP_LEVEL_EXCEPTION_FILTER>(ApplicationCrashHandler));
 #endif
 
   QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));

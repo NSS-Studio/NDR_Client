@@ -1,5 +1,4 @@
-#ifndef MESSAGEVIEWERDIALOG_HPP
-#define MESSAGEVIEWERDIALOG_HPP
+#pragma once
 
 #include <QDialog>
 #include <QSharedPointer>
@@ -16,5 +15,3 @@ public:
 private:
   QSharedPointer<Ui::MessageViewerDialog> ui;
 };
-
-#endif // MESSAGEVIEWERDIALOG_HPP

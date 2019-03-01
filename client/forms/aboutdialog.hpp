@@ -1,5 +1,4 @@
-#ifndef ABOUTDIALOG_HPP
-#define ABOUTDIALOG_HPP
+#pragma once
 
 #include <QCloseEvent>
 #include <QDialog>
@@ -22,4 +21,3 @@ private:
   void closeEvent(QCloseEvent *event);
 };
 
-#endif // ABOUTDIALOG_HPP

@@ -1,5 +1,4 @@
-#ifndef NDRAPPLICATION_HPP
-#define NDRAPPLICATION_HPP
+#pragma once
 
 #include <QApplication>
 #include <QTcpServer>
@@ -13,5 +12,3 @@ private:
   QScopedPointer<QTcpServer> localServer;
   QString appName;
 };
-
-#endif // NDRAPPLICATION_HPP

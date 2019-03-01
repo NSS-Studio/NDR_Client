@@ -1,6 +1,4 @@
-#ifndef LOCALSTORAGE_H
-#define LOCALSTORAGE_H
-
+#pragma once
 #include "settingsset.hpp"
 #include <QObject>
 #include <QSharedPointer>
@@ -45,4 +43,3 @@ private:
   int sum{};
 };
 
-#endif // LOCALSTORAGE_H

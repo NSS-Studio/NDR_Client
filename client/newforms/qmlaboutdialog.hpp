@@ -1,11 +1,9 @@
-#ifndef ABOUTDIALOG_HPP
-#define ABOUTDIALOG_HPP
+#pragma once
 
 #include <QObject>
 #include <QQuickItem>
 #include <QQuickView>
 #include <QQmlApplicationEngine>
-#include "resourcemanager.hpp"
 
 class QMLAboutDialog : public QObject {
   Q_OBJECT
@@ -30,10 +28,6 @@ public slots:
                      ,const QString& pack_info
                      ,const QString& NIC_info);
 
-    void btnStopConnect_clicked ();
-
-    void dailFinish (bool);
-
 
 private:
   QQmlApplicationEngine *engineLoginDialog, *engineMainWindow; // save qml engine
@@ -41,10 +35,11 @@ private:
   QWindow *loginDialog, *mainWindow; // save window pointer
 
   void bind_slot();
+  void dailFinish(bool status);
+  void btnStopConnect_clicked();
+  void bind_loginDialog_slot();
   void InitLoginDialog();
   void initMainWindow();
   void tryLogin(QString,QString,QString,QString,QString,QString);
   void timeEvent();
 };
-
-#endif // ABOUTDIALOG_HPP

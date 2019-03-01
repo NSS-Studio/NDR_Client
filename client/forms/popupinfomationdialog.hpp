@@ -1,5 +1,4 @@
-#ifndef POPUPDIALOG_HPP
-#define POPUPDIALOG_HPP
+#pragma once
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -82,4 +81,3 @@ private:
 #endif
 };
 
-#endif // POPUPDIALOG_HPP

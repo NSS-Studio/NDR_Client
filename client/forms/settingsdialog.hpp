@@ -1,5 +1,4 @@
-#ifndef SETTINGSDIALOG_HPP
-#define SETTINGSDIALOG_HPP
+#pragma once
 #include "localstorage.hpp"
 #include "settingsset.hpp"
 #include <QDialog>
@@ -43,4 +42,3 @@ private:
   QSharedPointer<Ui::SettingsDialog> ui;
 };
 
-#endif // SETTINGSDIALOG_HPP

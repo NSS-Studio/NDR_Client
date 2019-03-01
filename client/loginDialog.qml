@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
+import QtGraphicalEffects 2.0
 
 ApplicationWindow {
     id: loginDialog

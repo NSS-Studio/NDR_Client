@@ -1,5 +1,4 @@
-#ifndef SETTINGSSET_H
-#define SETTINGSSET_H
+#pragma once
 #include <QSettings>
 #include <QString>
 #define KEY_HOTKEY "hotkey"
@@ -29,4 +28,3 @@ private:
   QString fileName;
 };
 
-#endif // SETTINGSSET_H

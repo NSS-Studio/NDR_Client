@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
+#pragma once
 #include <QCloseEvent>
 #include <QHBoxLayout>
 #include <QMainWindow>
@@ -87,4 +86,3 @@ signals:
   void minimumWindow();
 };
 
-#endif // MAINWINDOW_HPP

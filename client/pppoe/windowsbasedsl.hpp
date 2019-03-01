@@ -1,5 +1,4 @@
-#ifndef WINDOWSBASEDSL_HPP
-#define WINDOWSBASEDSL_HPP
+#pragma once
 #include "basedsl.hpp"
 #define RASNP_Ipv6 0x00000008
 #include <ras.h>
@@ -20,5 +19,3 @@ private:
   HRASCONN hRasConn;
   bool preparePhoneBookEntry(QString const entryName, QString &errorMessage);
 };
-
-#endif // WINDOWSBASEDSL_HPP

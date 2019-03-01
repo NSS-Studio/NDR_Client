@@ -1,5 +1,4 @@
-#ifndef LINUXBASEDSL_HPP
-#define LINUXBASEDSL_HPP
+#pragma once
 
 #include <NetworkManager/NetworkManager.h>
 #include <QHostAddress>
@@ -32,4 +31,3 @@ private:
   QDBusObjectPath activeObjectPath;
 };
 
-#endif // LINUXBASEDSL_HPP

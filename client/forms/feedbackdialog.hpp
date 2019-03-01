@@ -1,5 +1,4 @@
-#ifndef FEEDBACKDIALOG_HPP
-#define FEEDBACKDIALOG_HPP
+#pragma once
 #include <QDesktopServices>
 #include <QDialog>
 #include <QDomDocument>
@@ -36,4 +35,3 @@ private:
   QString combo;
 };
 
-#endif // FEEDBACKDIALOG_HPP

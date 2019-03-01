@@ -6,26 +6,21 @@
 #include <pppoe.hpp>
 #include <QQuickStyle>
 #include "utils.hpp"
-#include "pppoe/pppoe.hpp"
+#include "pppoe.hpp"
+#include "localstorage.hpp"
 
 QMLAboutDialog::QMLAboutDialog(QObject *parent) : QObject(parent) {
     LocalStorage* profile = utils::resourceManager.getProfile();
     qDebug () << profile;
-
-
-
-
+    if (profile->open()) {
+        
+    }
 
   QQuickStyle::setStyle("Universal");
   engineLoginDialog = new QQmlApplicationEngine{};
   engineMainWindow = new QQmlApplicationEngine{};
-#ifdef Q_OS_MAC
-  compLoginDialog = new QQmlComponent{engineLoginDialog, QUrl{"qrc:/qmlforms/macLoginDialog.qml"}};
-  compMainWindow = new QQmlComponent{engineMainWindow,QUrl{"qrc:/qmlforms/macMainWindow.qml"}};
-#else
-  compLoginDialog = new QQmlComponent(engineLoginDialog, QUrl("qrc:/qmlforms/loginDialog.qml"));
-  compMainWindow = new QQmlComponent{engineMainWindow, QUrl{"qrc:/qmlforms/mainWindow.qml"}};
-#endif
+  compLoginDialog = new QQmlComponent{engineLoginDialog, QUrl{QString{"qrc:/qmlforms/"} + QML_PLATFROM_GET(loginDialog.qml)}};
+  compMainWindow = new QQmlComponent{engineMainWindow, QUrl{QString{"qrc:/qmlforms/"} + QML_PLATFROM_GET(mainWindow.qml)}};
   loginDialog = static_cast<QWindow*>(compLoginDialog->create());
   mainWindow = static_cast<QWindow*>(compMainWindow->create());
 #ifndef QT_DEBUG

@@ -1,5 +1,4 @@
-#ifndef LOGINDIALOG_HPP
-#define LOGINDIALOG_HPP
+#pragma once
 //点击登陆，发送了一个自定义的消息，应该改为this->accept();
 //同时修改mainwindow 构造函数中的消息绑定
 #include "localstorage.hpp"
@@ -51,4 +50,3 @@ signals:
   void myaccepted();
 };
 
-#endif // LOGINDIALOG_HPP

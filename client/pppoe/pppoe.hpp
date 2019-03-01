@@ -1,5 +1,4 @@
-#ifndef PPPOE_HPP
-#define PPPOE_HPP
+#pragma once
 #include "basedsl.hpp"
 #include <QSharedPointer>
 #include <QVariant>
@@ -46,4 +45,3 @@ private slots:
   void threadFinished();
 };
 
-#endif // PPPOE_HPP

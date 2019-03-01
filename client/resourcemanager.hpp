@@ -1,5 +1,4 @@
-#ifndef RESOURCEMANAGER_HPP
-#define RESOURCEMANAGER_HPP
+#pragma once
 
 #include <QMutex>
 #include <QSharedPointer>
@@ -35,5 +34,3 @@ private:
   enum class InitState { DONE, UNDONE };
   InitState initState = InitState::UNDONE;
 };
-
-#endif // RESOURCEMANAGER_HPP

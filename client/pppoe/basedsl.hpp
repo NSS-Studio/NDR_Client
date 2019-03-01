@@ -1,5 +1,4 @@
-#ifndef BASEDSL_HPP
-#define BASEDSL_HPP
+#pragma once
 #include <QObject>
 class BaseDsl : public QObject {
   Q_OBJECT
@@ -37,5 +36,3 @@ public:
 protected:
   QString name;
 };
-
-#endif // BASEDSL_HPP

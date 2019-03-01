@@ -1,6 +1,4 @@
-#ifndef AUTHVERIFY_HPP
-#define AUTHVERIFY_HPP
-
+#pragma once
 #include <QJsonDocument>
 #include <QMutex>
 #include <QMutexLocker>
@@ -24,5 +22,3 @@ private:
   QVariantMap authInfomation;
   QSharedPointer<QUdpSocket> clientSocket;
 };
-
-#endif // AUTHVERIFY_HPP
