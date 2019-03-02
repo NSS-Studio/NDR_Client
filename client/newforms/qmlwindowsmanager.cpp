@@ -142,7 +142,7 @@ void QMLWindowsManager::InitLoginDialog() {
     qDebug() << "add version successful";
 
 #ifdef Q_OS_WIN
-    QMetaObject::invokeMethod(loginDialog, "def_windows", Qt::DirectConnection);
+    QMetaObject::invokeMethod(loginDialog.get(), "def_windows", Qt::DirectConnection);
 #endif
 
     auto profile = utils::resourceManager.getProfile();

@@ -228,7 +228,7 @@ ApplicationWindow {
         y: 33
         width: 350
         height: 467
-        color: "#ffffff"
+        color: '#FFFFFF'
         visible: true
 
         Image {
