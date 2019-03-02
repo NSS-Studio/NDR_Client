@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
 HEADERS += \
-    $$PWD/qmlaboutdialog.hpp
+    $$PWD/qmlwindowsmanager.hpp
 
 SOURCES += \
-    $$PWD/qmlaboutdialog.cpp
+    $$PWD/qmlwindowsmanager.cpp

@@ -1,0 +1,3 @@
+[submodule "client/3rd_party/gtronick-qss"]
+	path = client/3rd_party/gtronick-qss
+	url = https://github.com/GTRONICK/QSS.git

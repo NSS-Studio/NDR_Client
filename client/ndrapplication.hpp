@@ -5,10 +5,10 @@
 class ResourceManager;
 class NdrApplication : public QApplication {
 public:
-  explicit NdrApplication(QString appName, int &argc, char **argv);
-  ~NdrApplication() = default;
+    explicit NdrApplication(QString appName, int &argc, char **argv);
+    ~NdrApplication() = default;
 
 private:
-  QScopedPointer<QTcpServer> localServer;
-  QString appName;
+    QScopedPointer<QTcpServer> localServer;
+    QString appName;
 };

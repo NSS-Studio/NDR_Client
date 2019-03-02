@@ -16,6 +16,7 @@ ApplicationWindow {
     flags: Qt.Window | Qt.FramelessWindowHint
 
     signal login(string username,string passwd,string pack_info,string NIC_info)
+    signal change_account_select(string account)
 
     property int xmouse: 0
     property int ymouse: 0
@@ -48,6 +49,10 @@ ApplicationWindow {
     function doMinimized() {
         flags = Qt.Window | Qt.WindowFullscreenButtonHint | Qt.CustomizeWindowHint | Qt.WindowMinimizeButtonHint
         visibility = Window.Minimized
+    }
+
+    function addUsernameInfo (msg) {
+        accountModel.append({"history":msg.toString()})
     }
 
     Timer {
@@ -322,7 +327,7 @@ ApplicationWindow {
             id: combMod
             x: 80
             y: 30
-            width: 150
+            width: 160
             height: 30
             textRole: "text"
             editable: false
@@ -337,23 +342,28 @@ ApplicationWindow {
 
         ComboBox {
             id: account
+            objectName: "account"
             x: 80
             y: 80
             height: 30
             textRole: "history"
             editable: true
-            width: 150
+            width: 160
             model: ListModel{
                 id: accountModel
+            }
+            onActivated: {
+                emit: change_account_select(account.currentText)
             }
 
         }
 
         TextField {
             id: password
+            objectName: "password"
             x: 80
             y: 130
-            width: 150
+            width: 160
             height: 30
             echoMode: TextInput.Password
 
@@ -362,6 +372,7 @@ ApplicationWindow {
 
         CheckBox {
             id: remPassword
+            objectName: "remPassword"
             x: 299
             y: 83
             width: 107
@@ -371,6 +382,7 @@ ApplicationWindow {
 
         CheckBox {
             id: autoLogin
+            objectName: "autoLogin"
             x: 299
             y: 121
             width: 102

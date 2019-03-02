@@ -7,7 +7,7 @@ import QtGraphicalEffects 2.0
 
 ApplicationWindow {
     id: loginDialog
-    objectName: "roott"
+    objectName: "root"
     width: 500
     height: 370
     x: (Screen.desktopAvailableWidth - width) / 2
@@ -798,9 +798,4 @@ ApplicationWindow {
             }
         }
     }
-
-
-
-
-
 }

@@ -76,7 +76,7 @@
 
 /** NDR通知弹窗地址*/
 #define NDR_POPUP_URL                                                          \
-  QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
+    QString("https://%1/messages/popUp.xml").arg(QString(NDR_SERVER))
 
 /** NDR主页*/
 #define NDR_HOMESITE "https://ndr.neusoft.edu.cn"
@@ -85,7 +85,7 @@
 #define ENABLE_UPDATE true
 
 #ifdef Q_OS_MAC
-#define QML_PLATFROM_GET(text) #mac##text
+#define QML_PLATFROM_GET(text) "mac" #text
 #else
 #define QML_PLATFROM_GET(text) #text
 #endif

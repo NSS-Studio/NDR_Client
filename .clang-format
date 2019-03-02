@@ -55,10 +55,6 @@ DerivePointerAlignment: false
 DisableFormat:   false
 ExperimentalAutoDetectBinPacking: false
 FixNamespaceComments: true
-ForEachMacros:   
-  - foreach
-  - Q_FOREACH
-  - BOOST_FOREACH
 IncludeBlocks:   Preserve
 IncludeCategories: 
   - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
@@ -90,10 +86,6 @@ PenaltyBreakString: 1000
 PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
-RawStringFormats: 
-  - Delimiter:       pb
-    Language:        TextProto
-    BasedOnStyle:    google
 ReflowComments:  true
 SortIncludes:    true
 SortUsingDeclarations: true
@@ -109,7 +101,7 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard:        Cpp11
-TabWidth:        4
+TabWidth:        2
 UseTab:          Never
 ...
 
