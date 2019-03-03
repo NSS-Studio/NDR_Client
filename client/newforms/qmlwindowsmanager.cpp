@@ -10,13 +10,18 @@
 #include <pppoe.hpp>
 
 QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
-    qDebug () << "qml windows manage init";
+    qDebug() << "qml windows manage init";
     QQuickStyle::setStyle("Universal");
     engineLoginDialog = QSharedPointer<QQmlApplicationEngine>::create();
     engineMainWindow = QSharedPointer<QQmlApplicationEngine>::create();
+    //    compLoginDialog = QSharedPointer<QQmlComponent>::create(
+    //        engineLoginDialog.get(),
+    //        QUrl{QString{"qrc:/qmlforms/"} +
+    //        QML_PLATFROM_GET(loginDialog.qml)});
     compLoginDialog = QSharedPointer<QQmlComponent>::create(
         engineLoginDialog.get(),
-        QUrl{QString{"qrc:/qmlforms/"} + QML_PLATFROM_GET(loginDialog.qml)});
+        QUrl{QString{"qrc:/qmlforms/loginDialog.qml"}});
+
     compMainWindow = QSharedPointer<QQmlComponent>::create(
         engineMainWindow.get(),
         QUrl{QString{"qrc:/qmlforms/"} + QML_PLATFROM_GET(mainWindow.qml)});
@@ -68,24 +73,26 @@ void QMLWindowsManager::dailFinish(bool status) {
         this->loginDialog->hide();
         this->mainWindow->show();
         qDebug() << ("login success");
-        loginDialog->findChild<QObject *>("loginPanel")->setProperty("visible",
-                                                                 "true");
-        loginDialog->findChild<QObject *>("loginingPanel")->setProperty("visible",
-                                                                 "false");
+        loginDialog->findChild<QObject *>("loginPanel")
+            ->setProperty("visible", "true");
+        loginDialog->findChild<QObject *>("loginingPanel")
+            ->setProperty("visible", "false");
         loginDialog->findChild<QObject *>("loginButton")
             ->setProperty("visible", "true");
         initMainWindow();
         mainWindow->show();
     } else {
         qDebug() << ("login field");
-        loginDialog->findChild<QObject *>("loginPanel")->setProperty("visible",
-                                                                 "true");
-        loginDialog->findChild<QObject *>("loginingPanel")->setProperty("visible",
-                                                                 "false");
+        loginDialog->findChild<QObject *>("loginPanel")
+            ->setProperty("visible", "true");
+        loginDialog->findChild<QObject *>("loginingPanel")
+            ->setProperty("visible", "false");
         loginDialog->findChild<QObject *>("loginButton")
             ->setProperty("visible", "true");
-        loginDialog->findChild<QObject*>("repaire")->setProperty("visible","true");
-        loginDialog->findChild<QObject*>("tittle1")->setProperty("visible","true");
+        loginDialog->findChild<QObject *>("repaire")->setProperty("visible",
+                                                                  "true");
+        loginDialog->findChild<QObject *>("tittle1")->setProperty("visible",
+                                                                  "true");
     }
 }
 
@@ -101,15 +108,16 @@ void QMLWindowsManager::btnStopConnect_clicked() {
 }
 
 void QMLWindowsManager::InitLoginDialog() {
-    qDebug () << "init login dialog";
+    qDebug() << "init login dialog";
     QStringList postfitList = utils::getDrModelPostfixTable();
 
     for (auto const &postfit : postfitList) {
         qDebug() << postfit;
         QMetaObject::invokeMethod(loginDialog.get(), "addPost",
-                                  Qt::DirectConnection, Q_ARG(QVariant, QVariant{postfit}));
+                                  Qt::DirectConnection,
+                                  Q_ARG(QVariant, QVariant{postfit}));
     }
-    qDebug () << "add post successful";
+    qDebug() << "add post successful";
     auto pppoe = utils::resourceManager.getPPPoE();
     QStringList interfaces = pppoe->getAvailableInterfaces();
     //  interface.clear(); // test info
@@ -139,7 +147,8 @@ void QMLWindowsManager::InitLoginDialog() {
     qDebug() << "add version successful";
 
 #ifdef Q_OS_WIN
-    QMetaObject::invokeMethod(loginDialog.get(), "def_windows", Qt::DirectConnection);
+    QMetaObject::invokeMethod(loginDialog.get(), "def_windows",
+                              Qt::DirectConnection);
 #endif
 
     auto profile = utils::resourceManager.getProfile();
@@ -151,6 +160,12 @@ void QMLWindowsManager::InitLoginDialog() {
                                       Qt::DirectConnection,
                                       Q_ARG(QVariant, QVariant{tmp}));
         }
+        qDebug() << engineLoginDialog.get();
+        qDebug() << compLoginDialog.get();
+        qDebug() << loginDialog.get();
+        qDebug() << loginDialog->findChild<QObject *>("account");
+        loginDialog->findChild<QObject *>("account")->setProperty(
+            "currentIndex", "0");
     }
 }
 

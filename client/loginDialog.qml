@@ -1,26 +1,22 @@
 import QtQuick 2.9
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
-import QtGraphicalEffects 2.0
 
 ApplicationWindow {
     id: loginDialog
-    objectName: "root"
+    objectName: "roott"
     width: 500
     height: 370
     x: (Screen.desktopAvailableWidth - width) / 2
     y: (Screen.desktopAvailableHeight - height) / 2
     visible: true
 
-    Material.theme: Material.Dark
-    Material.accent: Material.Purple
-
 
     flags: Qt.Window | Qt.FramelessWindowHint
 
     signal login(string username,string passwd,string pack_info,string NIC_info)
+    signal change_account_select(string account)
 
     property int xmouse: 0
     property int ymouse: 0
@@ -51,7 +47,6 @@ ApplicationWindow {
 
     function addUsernameInfo (msg) {
         accountModel.append({"history":msg.toString()})
-        account.currentIndex = 0
     }
 
     Timer {
@@ -197,27 +192,14 @@ ApplicationWindow {
                 hide.x = hide.x + 1
                 hide.width = hide.width - 1
             }
-            if (hide.x == bar.x + bar.width){
+            if (hide.x === bar.x + bar.width){
                 hide.x = bar.x
                 hide.width = 0
             }
         }
     }
 
-
-    style: ApplicationWindowStyle{
-        background: Rectangle {
-            anchors.fill: parent
-            radius: 100
-            Image {
-                anchors.fill: parent
-                source: "qrc:/qmlforms/image 2.1.png"
-            }
-        }
-    }
-
     Image {
-        anchors.rightMargin: 0
         anchors.fill: parent
         source: "qrc:/qmlforms/image 2.1.png"
     }
@@ -320,13 +302,14 @@ ApplicationWindow {
                 image5.source = "qrc:/qmlforms/minmax.png"
             }
             onClicked: {
-                loginDialog.visibility = Window.Minimized
+                visibility = Window.Minimized
             }
         }
     }
 
     Rectangle {
         id: loginPanel
+        objectName: "panel1"
         x: 0
         y: 150
         width: parent.width
@@ -338,10 +321,11 @@ ApplicationWindow {
             id: combMod
             x: 80
             y: 30
-            width: 150
+            width: 160
             height: 30
             textRole: "text"
             editable: false
+            currentIndex: 0
 
             model: ListModel{
                 id: mod1
@@ -352,15 +336,18 @@ ApplicationWindow {
 
         ComboBox {
             id: account
-            objectName: "combAccount"
+            objectName: "account"
             x: 80
             y: 80
             height: 30
             textRole: "history"
             editable: true
-            width: 150
+            width: 160
             model: ListModel{
                 id: accountModel
+            }
+            onActivated: {
+                emit: change_account_select(account.currentText)
             }
 
         }
@@ -370,7 +357,7 @@ ApplicationWindow {
             objectName: "password"
             x: 80
             y: 130
-            width: 150
+            width: 160
             height: 30
             echoMode: TextInput.Password
 
@@ -379,56 +366,22 @@ ApplicationWindow {
 
         CheckBox {
             id: remPassword
+            objectName: "remPassword"
             x: 299
             y: 83
             width: 107
             height: 27
             text: qsTr("记住密码")
-
-            style: CheckBoxStyle{
-                indicator: Rectangle {
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 3
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-                    Rectangle {
-                        visible: control.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-                }
-            }
         }
 
         CheckBox {
             id: autoLogin
+            objectName: "autoLogin"
             x: 299
             y: 121
             width: 102
             height: 26
             text: qsTr("自动登录")
-
-            style: CheckBoxStyle{
-                indicator: Rectangle {
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 3
-                    border.color: control.activeFocus ? "darkblue" : "gray"
-                    border.width: 1
-                    Rectangle {
-                        visible: control.checked
-                        color: "#555"
-                        border.color: "#333"
-                        radius: 1
-                        anchors.margins: 4
-                        anchors.fill: parent
-                    }
-                }
-            }
         }
 
         MouseArea{
@@ -480,6 +433,7 @@ ApplicationWindow {
 
     Rectangle {
         id: selectDevicePanel
+        objectName: "panel2"
         x: 0
         y: 150
         width: 500
@@ -494,6 +448,7 @@ ApplicationWindow {
             height: 32
             width: 193
             textRole: "wk"
+            currentIndex: 0
             model: ListModel{
                 id: combDeviceMod
                 objectName: "deviceName"
@@ -536,6 +491,7 @@ ApplicationWindow {
 
     Rectangle {
         id: loginingPanel
+        objectName: "panel3"
         x: 0
         y: 150
         width: 500
@@ -638,6 +594,7 @@ ApplicationWindow {
 
     Rectangle {
         id: errorPanel
+        objectName: "panel4"
         x: 0
         y: 150
         width: 500
@@ -726,7 +683,6 @@ ApplicationWindow {
 
     Text {
         id: repaire
-        objectName: "repaire"
         x: 12
         y: 342
         width: 66
@@ -751,7 +707,6 @@ ApplicationWindow {
     }
     Text {
         id: tittle1
-        objectName: "tittle1"
         x: 303
         y: 342
         width: 185
@@ -806,4 +761,5 @@ ApplicationWindow {
             }
         }
     }
+
 }

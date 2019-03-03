@@ -26,7 +26,7 @@ ApplicationWindow {
 
     function addPost (postfit){
         mod1.append({
-                        "text": arg1.toString()
+                        "text": postfit.toString()
                     })
     }
 
