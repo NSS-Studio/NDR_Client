@@ -28,10 +28,9 @@ ApplicationWindow {
     property int currBig: 0
     property int flag: 0
 
-    function addPost (arg1, arg2){
+    function addPost (postfit){
         mod1.append({
-                        "text": arg1.toString(),
-                        "data": arg2.toString()
+                        "text": postfit.toString()
                     })
     }
 
@@ -48,6 +47,11 @@ ApplicationWindow {
         select.visible = false
         status.x = 300
         status.y = 45
+    }
+
+    function addUsernameInfo (msg) {
+        accountModel.append({"history":msg.toString()})
+        account.currentIndex = 0
     }
 
     Timer {
@@ -322,7 +326,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel1
+        id: loginPanel
         x: 0
         y: 150
         width: parent.width
@@ -348,6 +352,7 @@ ApplicationWindow {
 
         ComboBox {
             id: account
+            objectName: "combAccount"
             x: 80
             y: 80
             height: 30
@@ -362,6 +367,7 @@ ApplicationWindow {
 
         TextField {
             id: password
+            objectName: "password"
             x: 80
             y: 130
             width: 150
@@ -447,8 +453,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    panel2.visible = true
-                    panel1.visible = false
+                    selectDevicePanel.visible = true
+                    loginPanel.visible = false
                 }
 
                 onEntered: {
@@ -473,7 +479,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel2
+        id: selectDevicePanel
         x: 0
         y: 150
         width: 500
@@ -520,8 +526,8 @@ ApplicationWindow {
                 }
                 onClicked: {
                     rectangle.color = "#448aff"
-                    panel2.visible = false
-                    panel1.visible = true
+                    selectDevicePanel.visible = false
+                    loginPanel.visible = true
                 }
             }
         }
@@ -529,7 +535,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel3
+        id: loginingPanel
         x: 0
         y: 150
         width: 500
@@ -631,7 +637,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel4
+        id: errorPanel
         x: 0
         y: 150
         width: 500
@@ -720,6 +726,7 @@ ApplicationWindow {
 
     Text {
         id: repaire
+        objectName: "repaire"
         x: 12
         y: 342
         width: 66
@@ -744,6 +751,7 @@ ApplicationWindow {
     }
     Text {
         id: tittle1
+        objectName: "tittle1"
         x: 303
         y: 342
         width: 185
@@ -785,10 +793,10 @@ ApplicationWindow {
                     login_button.visible = false
                     repaire.visible = false
                     tittle1.visible = false
-                    panel1.visible = false
-                    panel2.visible = false
-                    panel4.visible = false
-                    panel3.visible = true
+                    loginPanel.visible = false
+                    selectDevicePanel.visible = false
+                    errorPanel.visible = false
+                    loginingPanel.visible = true
                     emit: loginDialog.login(account.editText,password.text,combMod.currentText,combDevice.currentText)
                 }
             }

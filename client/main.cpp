@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
 
     ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
+    qDebug () << "stat load qml";
     QMLWindowsManager qmlAboutDialog(&ndrApp);
 
     return ndrApp.NdrApplication::exec();

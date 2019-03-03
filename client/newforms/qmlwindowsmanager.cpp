@@ -10,6 +10,7 @@
 #include <pppoe.hpp>
 
 QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
+    qDebug () << "qml windows manage init";
     QQuickStyle::setStyle("Universal");
     engineLoginDialog = QSharedPointer<QQmlApplicationEngine>::create();
     engineMainWindow = QSharedPointer<QQmlApplicationEngine>::create();
@@ -24,7 +25,7 @@ QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
 #ifndef QT_DEBUG
     mainWindow->hide();
 #endif
-    qDebug() << mainWindow;
+    qDebug() << loginDialog;
 
     bind_slot();
 
@@ -41,15 +42,11 @@ void QMLWindowsManager::btnLogin_clicked(const QString &username,
     qDebug() << "username" << realUsername;
     qDebug() << "pasword" << passwd;
     qDebug() << "pack_info" << pack_info;
-    qDebug() << "nic_info" << NIC_info;
+    qDebug() << "nic_info" << NIC_info; // device name
 
     auto pppoe = utils::resourceManager.getPPPoE();
     pppoe->dialRAS(NDR_PHONEBOOK_NAME, realUsername, passwd, NIC_info);
     pppoe->start();
-
-    //    mainWindow->show();
-    //    initMainWindow();
-    //    loginDialog->hide();
 }
 
 void QMLWindowsManager::bind_slot() {
@@ -71,9 +68,9 @@ void QMLWindowsManager::dailFinish(bool status) {
         this->loginDialog->hide();
         this->mainWindow->show();
         qDebug() << ("login success");
-        loginDialog->findChild<QObject *>("panel1")->setProperty("visible",
+        loginDialog->findChild<QObject *>("loginPanel")->setProperty("visible",
                                                                  "true");
-        loginDialog->findChild<QObject *>("panel3")->setProperty("visible",
+        loginDialog->findChild<QObject *>("loginingPanel")->setProperty("visible",
                                                                  "false");
         loginDialog->findChild<QObject *>("loginButton")
             ->setProperty("visible", "true");
@@ -81,12 +78,14 @@ void QMLWindowsManager::dailFinish(bool status) {
         mainWindow->show();
     } else {
         qDebug() << ("login field");
-        loginDialog->findChild<QObject *>("panel1")->setProperty("visible",
+        loginDialog->findChild<QObject *>("loginPanel")->setProperty("visible",
                                                                  "true");
-        loginDialog->findChild<QObject *>("panel3")->setProperty("visible",
+        loginDialog->findChild<QObject *>("loginingPanel")->setProperty("visible",
                                                                  "false");
         loginDialog->findChild<QObject *>("loginButton")
             ->setProperty("visible", "true");
+        loginDialog->findChild<QObject*>("repaire")->setProperty("visible","true");
+        loginDialog->findChild<QObject*>("tittle1")->setProperty("visible","true");
     }
 }
 
@@ -97,22 +96,20 @@ void QMLWindowsManager::btnStopConnect_clicked() {
     mainWindow->findChild<QObject *>("startTime")
         ->setProperty("running", "false");
 #ifndef QT_DEBUG
-    mainWindow.hide()
+    mainWindow->hide();
 #endif
 }
 
 void QMLWindowsManager::InitLoginDialog() {
+    qDebug () << "init login dialog";
     QStringList postfitList = utils::getDrModelPostfixTable();
 
-    int32_t arg2 = 0;
     for (auto const &postfit : postfitList) {
         qDebug() << postfit;
-        QVariant arg1 = postfit;
-        arg2 = arg2 + 1;
         QMetaObject::invokeMethod(loginDialog.get(), "addPost",
-                                  Qt::DirectConnection, Q_ARG(QVariant, arg1),
-                                  Q_ARG(QVariant, QVariant(arg2)));
+                                  Qt::DirectConnection, Q_ARG(QVariant, QVariant{postfit}));
     }
+    qDebug () << "add post successful";
     auto pppoe = utils::resourceManager.getPPPoE();
     QStringList interfaces = pppoe->getAvailableInterfaces();
     //  interface.clear(); // test info
@@ -154,8 +151,6 @@ void QMLWindowsManager::InitLoginDialog() {
                                       Qt::DirectConnection,
                                       Q_ARG(QVariant, QVariant{tmp}));
         }
-        loginDialog->findChild<QObject *>("account")->setProperty(
-            "currentIndex", 0);
     }
 }
 

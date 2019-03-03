@@ -58,7 +58,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: rectangle
+        id: bar
         x: 0
         y: 0
         width: parent.width
@@ -184,13 +184,13 @@ ApplicationWindow {
                     image4.source = "qrc:/qmlforms/setting.png"
                 }
                 onClicked: {
-                    if (panel1.visible === true){
-                        panel1.visible = false
-                        panel2.visible = true
+                    if (mainPanel.visible === true){
+                        mainPanel.visible = false
+                        settingPanel.visible = true
                     }
                     else {
-                        panel2.visible = false
-                        panel1.visible = true
+                        settingPanel.visible = false
+                        mainPanel.visible = true
                     }
                 }
             }
@@ -223,7 +223,7 @@ ApplicationWindow {
 
 
     Rectangle {
-        id: panel1
+        id: mainPanel
         x: 0
         y: 33
         width: 350
@@ -345,7 +345,7 @@ ApplicationWindow {
 
 
     Rectangle {
-        id: panel2
+        id: settingPanel
         x: 0
         y: 35
         width: 350
@@ -379,8 +379,8 @@ ApplicationWindow {
                     }
 
                     onClicked: {
-                        panel1.visible = true
-                        panel2.visible = false
+                        mainPanel.visible = true
+                        settingPanel.visible = false
                     }
                 }
             }

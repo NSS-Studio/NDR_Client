@@ -24,10 +24,9 @@ ApplicationWindow {
     property int currBig: 0
     property int flag: 0
 
-    function addPost (arg1, arg2){
+    function addPost (postfit){
         mod1.append({
-                        "text": arg1.toString(),
-                        "data": arg2.toString()
+                        "text": arg1.toString()
                     })
     }
 
@@ -314,7 +313,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel1
+        id: loginPanel
         objectName: "panel1"
         x: 0
         y: 150
@@ -412,8 +411,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    panel2.visible = true
-                    panel1.visible = false
+                    selectDevicePanel.visible = true
+                    loginPanel.visible = false
                 }
 
                 onEntered: {
@@ -438,7 +437,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel2
+        id: selectDevicePanel
         objectName: "panel2"
         x: 0
         y: 150
@@ -487,8 +486,8 @@ ApplicationWindow {
                 }
                 onClicked: {
                     rectangle.color = "#448aff"
-                    panel2.visible = false
-                    panel1.visible = true
+                    selectDevicePanel.visible = false
+                    loginPanel.visible = true
                 }
             }
         }
@@ -496,7 +495,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel3
+        id: loginingPanel
         objectName: "panel3"
         x: 0
         y: 150
@@ -599,7 +598,7 @@ ApplicationWindow {
     }
 
     Rectangle {
-        id: panel4
+        id: errorPanel
         objectName: "panel4"
         x: 0
         y: 150
@@ -754,10 +753,10 @@ ApplicationWindow {
                     login_button.visible = false
                     repaire.visible = false
                     tittle1.visible = false
-                    panel1.visible = false
-                    panel2.visible = false
-                    panel4.visible = false
-                    panel3.visible = true
+                    loginPanel.visible = false
+                    selectDevicePanel.visible = false
+                    errorPanel.visible = false
+                    loginingPanel.visible = true
                     emit: loginDialog.login(account.editText,password.text,combMod.currentText,combDevice.currentText)
                 }
             }
