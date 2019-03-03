@@ -25,8 +25,8 @@ void ResourceManager::InitResourceManager() noexcept {
   aboutDialog = new AboutDialog{};
   pppoe = new PPPoE{};
   profile = new LocalStorage{utils::appHome + "/config.db"};
-//  loginDialog = new LoginDialog{}; // close old ui
-//  mainWindow = new MainWindow{};
+  loginDialog = new LoginDialog{}; // close old ui
+  mainWindow = new MainWindow{};
   popUpInfomationDialog = new PopUpInfomationDialog{};
   initState = InitState::DONE;
 #ifdef QT_DEBUG

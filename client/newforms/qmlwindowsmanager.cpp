@@ -14,13 +14,10 @@ QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
     QQuickStyle::setStyle("Universal");
     engineLoginDialog = QSharedPointer<QQmlApplicationEngine>::create();
     engineMainWindow = QSharedPointer<QQmlApplicationEngine>::create();
-    //    compLoginDialog = QSharedPointer<QQmlComponent>::create(
-    //        engineLoginDialog.get(),
-    //        QUrl{QString{"qrc:/qmlforms/"} +
-    //        QML_PLATFROM_GET(loginDialog.qml)});
     compLoginDialog = QSharedPointer<QQmlComponent>::create(
         engineLoginDialog.get(),
-        QUrl{QString{"qrc:/qmlforms/loginDialog.qml"}});
+        QUrl{QString{"qrc:/qmlforms/"} +
+        QML_PLATFROM_GET(loginDialog.qml)});
 
     compMainWindow = QSharedPointer<QQmlComponent>::create(
         engineMainWindow.get(),

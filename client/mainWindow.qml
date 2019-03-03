@@ -21,8 +21,9 @@ ApplicationWindow {
 
     property int xmouse: 0
     property int ymouse: 0
-
     property int dailTime: 0
+
+    signal stopConnect()
 
     function getVersion (msg) {
         title.text = "NDR 东软校园网络认证 ver"+msg.toString()
@@ -317,6 +318,7 @@ ApplicationWindow {
                     }
                     onClicked: {
                         rectangle2.color = "#448aff"
+                        emit: stopConnect()
                     }
                 }
 

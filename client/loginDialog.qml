@@ -309,7 +309,7 @@ ApplicationWindow {
 
     Rectangle {
         id: loginPanel
-        objectName: "panel1"
+        objectName: "loginPanel"
         x: 0
         y: 150
         width: parent.width
@@ -433,7 +433,7 @@ ApplicationWindow {
 
     Rectangle {
         id: selectDevicePanel
-        objectName: "panel2"
+        objectName: "selectDevicePanel"
         x: 0
         y: 150
         width: 500
@@ -491,7 +491,7 @@ ApplicationWindow {
 
     Rectangle {
         id: loginingPanel
-        objectName: "panel3"
+        objectName: "loginingPanel"
         x: 0
         y: 150
         width: 500
@@ -594,7 +594,7 @@ ApplicationWindow {
 
     Rectangle {
         id: errorPanel
-        objectName: "panel4"
+        objectName: "errorPanel"
         x: 0
         y: 150
         width: 500
