@@ -1,6 +1,8 @@
 #include "qmlwindowsmanager.hpp"
 #include "localstorage.hpp"
 #include "pppoe.hpp"
+#include "setconfig.hpp"
+
 #include "utils.hpp"
 #include <QMessageBox>
 #include <QQmlComponent>
@@ -8,31 +10,36 @@
 #include <QQuickView>
 #include <QUrl>
 #include <pppoe.hpp>
-
 QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
     qDebug() << "qml windows manage init";
     QQuickStyle::setStyle("Universal");
-    engineLoginDialog = QSharedPointer<QQmlApplicationEngine>::create();
-    engineMainWindow = QSharedPointer<QQmlApplicationEngine>::create();
-    compLoginDialog = QSharedPointer<QQmlComponent>::create(
-        engineLoginDialog.get(),
-        QUrl{QString{"qrc:/qmlforms/"} +
-        QML_PLATFROM_GET(loginDialog.qml)});
+    //    engineLoginDialog = QSharedPointer<QQmlApplicationEngine>::create();
+    //    engineMainWindow = QSharedPointer<QQmlApplicationEngine>::create();
+    //    compLoginDialog = QSharedPointer<QQmlComponent>::create(
+    //        engineLoginDialog.get(),
+    //        QUrl{QString{"qrc:/qmlforms/"} +
+    //             QML_PLATFROM_GET(loginDialog.qml)});
 
-    compMainWindow = QSharedPointer<QQmlComponent>::create(
-        engineMainWindow.get(),
-        QUrl{QString{"qrc:/qmlforms/"} + QML_PLATFROM_GET(mainWindow.qml)});
-    loginDialog.reset(static_cast<QWindow *>(compLoginDialog->create()));
-    mainWindow.reset(static_cast<QWindow *>(compMainWindow->create()));
-#ifndef QT_DEBUG
-    mainWindow->hide();
-#endif
-    qDebug() << loginDialog;
-
-    bind_slot();
-
-    InitLoginDialog();
+    //    compMainWindow = QSharedPointer<QQmlComponent>::create(
+    //        engineMainWindow.get(),
+    //        QUrl{QString{"qrc:/qmlforms/"} +
+    //        QML_PLATFROM_GET(mainWindow.qml)});
+    //    loginDialog.reset(static_cast<QWindow *>(compLoginDialog->create()));
+    //    mainWindow.reset(static_cast<QWindow *>(compMainWindow->create()));
+    this->engineManagerDialog = QSharedPointer<QQmlApplicationEngine>::create();
+    this->compManagerDialog = QSharedPointer<QQmlComponent>::create(
+        this->engineManagerDialog.get(),
+        QUrl{QString{"qrc:/dialog//"} + QML_PLATFROM_GET(ManagerDialog.qml)});
+    this->managerWindows.reset(
+        static_cast<QWindow *>(this->compManagerDialog->create()));
+    this->managerWindows->show();
+    setConfig::setUsername(const_cast<QWindow *>(this->managerWindows.get()));
+    setConfig::setPackInfo(const_cast<QWindow *>(this->managerWindows.get()));
+    setConfig::setDevice(const_cast<QWindow *>(this->managerWindows.get()));
+    setConfig::setTittle(const_cast<QWindow *>(this->managerWindows.get()));
 }
+
+const QWindow *QMLWindowsManager::getWindow() { return managerWindows.get(); }
 
 void QMLWindowsManager::btnLogin_clicked(const QString &username,
                                          const QString &passwd,
@@ -51,17 +58,18 @@ void QMLWindowsManager::btnLogin_clicked(const QString &username,
     pppoe->start();
 }
 
-void QMLWindowsManager::bind_slot() {
-    QObject::connect(mainWindow.get(), SIGNAL(stopConnect()), this,
-                     SLOT(btnStopConnect_clicked()));
-    QObject::connect(
-        loginDialog.get(), SIGNAL(login(QString, QString, QString, QString)),
-        this, SLOT(btnLogin_clicked(QString, QString, QString, QString)));
-    QObject::connect(utils::resourceManager.getPPPoE(), &PPPoE::dialFinished,
-                     this, &QMLWindowsManager::dailFinish);
-    QObject::connect(loginDialog.get(), SIGNAL(change_account_select(QString)),
-                     this, SLOT(get_password(QString)));
-}
+// void QMLWindowsManager::bind_slot() {
+//    QObject::connect(mainWindow.get(), SIGNAL(stopConnect()), this,
+//                     SLOT(btnStopConnect_clicked()));
+//    QObject::connect(
+//        loginDialog.get(), SIGNAL(login(QString, QString, QString, QString)),
+//        this, SLOT(btnLogin_clicked(QString, QString, QString, QString)));
+//    QObject::connect(utils::resourceManager.getPPPoE(), &PPPoE::dialFinished,
+//                     this, &QMLWindowsManager::dailFinish);
+//    QObject::connect(loginDialog.get(),
+//    SIGNAL(change_account_select(QString)),
+//                     this, SLOT(get_password(QString)));
+//}
 
 void QMLWindowsManager::get_password(QString account) {}
 
@@ -106,64 +114,15 @@ void QMLWindowsManager::btnStopConnect_clicked() {
 
 void QMLWindowsManager::InitLoginDialog() {
     qDebug() << "init login dialog";
-    QStringList postfitList = utils::getDrModelPostfixTable();
 
-    for (auto const &postfit : postfitList) {
-        qDebug() << postfit;
-        QMetaObject::invokeMethod(loginDialog.get(), "addPost",
-                                  Qt::DirectConnection,
-                                  Q_ARG(QVariant, QVariant{postfit}));
-    }
     qDebug() << "add post successful";
-    auto pppoe = utils::resourceManager.getPPPoE();
-    QStringList interfaces = pppoe->getAvailableInterfaces();
-    //  interface.clear(); // test info
-    if (interfaces.count() == 1) {
-        loginDialog->findChild<QObject *>("selectDevice")
-            ->setProperty("visible", "false");
-    }
-#ifndef Q_OS_WIN32
-    if (interfaces.count() == 0) {
-        auto status = loginDialog->findChild<QObject *>("status");
-        status->setProperty("color", "red");
-        status->setProperty("text", "无可用网卡");
-        auto login_btn = loginDialog->findChild<QObject *>("loginButton");
-        login_btn->setProperty("visible", "false");
-    } else {
-        for (auto const &interface : interfaces) {
-            QMetaObject::invokeMethod(loginDialog.get(), "addDevice",
-                                      Qt::DirectConnection,
-                                      Q_ARG(QVariant, QVariant(interface)));
-        }
-    }
-#endif
 
-    QMetaObject::invokeMethod(
-        loginDialog.get(), "getVersion", Qt::DirectConnection,
-        Q_ARG(QVariant, QVariant(utils::getVersionString())));
     qDebug() << "add version successful";
 
 #ifdef Q_OS_WIN
     QMetaObject::invokeMethod(loginDialog.get(), "def_windows",
                               Qt::DirectConnection);
 #endif
-
-    auto profile = utils::resourceManager.getProfile();
-    if (profile->open()) {
-        auto vec = profile->getUserNameList();
-        for (const auto &tmp : vec) {
-            qDebug() << tmp;
-            QMetaObject::invokeMethod(loginDialog.get(), "addUsernameInfo",
-                                      Qt::DirectConnection,
-                                      Q_ARG(QVariant, QVariant{tmp}));
-        }
-        qDebug() << engineLoginDialog.get();
-        qDebug() << compLoginDialog.get();
-        qDebug() << loginDialog.get();
-        qDebug() << loginDialog->findChild<QObject *>("account");
-        loginDialog->findChild<QObject *>("account")->setProperty(
-            "currentIndex", "0");
-    }
 }
 
 void QMLWindowsManager::initMainWindow() {

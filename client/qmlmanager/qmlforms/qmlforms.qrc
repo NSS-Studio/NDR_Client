@@ -1,0 +1,67 @@
+<RCC>
+    <qresource prefix="/">
+        <file>dialog/mac_dialog/labs/BlurImg.qml</file>
+        <file>dialog/mac_dialog/labs/Close.qml</file>
+        <file>dialog/mac_dialog/labs/LoginBackground.qml</file>
+        <file>dialog/mac_dialog/labs/LoginTittle.qml</file>
+        <file>dialog/mac_dialog/labs/MacmainWindow.qml</file>
+        <file>dialog/mac_dialog/ManagerDialog.qml</file>
+        <file>dialog/win_linux_dialog/labs/loginDialog.qml</file>
+        <file>dialog/win_linux_dialog/labs/mainWindow.qml</file>
+        <file>mac_forms/change_forms/close.png</file>
+        <file>mac_forms/change_forms/minmax.png</file>
+        <file>mac_forms/change_forms/return.png</file>
+        <file>mac_forms/change_forms/setting.png</file>
+        <file>mac_forms/check.png</file>
+        <file>mac_forms/close.png</file>
+        <file>mac_forms/field.png</file>
+        <file>mac_forms/image 2.1.png</file>
+        <file>mac_forms/login_logo.png</file>
+        <file>mac_forms/logining.png</file>
+        <file>mac_forms/logining_bar.png</file>
+        <file>mac_forms/logo.png</file>
+        <file>mac_forms/minmax.png</file>
+        <file>mac_forms/moon.png</file>
+        <file>mac_forms/return.png</file>
+        <file>mac_forms/setting.png</file>
+        <file>mac_forms/user.png</file>
+        <file>win_linux_forms/change_forms/close.png</file>
+        <file>win_linux_forms/change_forms/minmax.png</file>
+        <file>win_linux_forms/change_forms/return.png</file>
+        <file>win_linux_forms/change_forms/setting.png</file>
+        <file>win_linux_forms/check.png</file>
+        <file>win_linux_forms/close.png</file>
+        <file>win_linux_forms/field.png</file>
+        <file>win_linux_forms/image 2.1.png</file>
+        <file>win_linux_forms/login_logo.png</file>
+        <file>win_linux_forms/logining.png</file>
+        <file>win_linux_forms/logining_bar.png</file>
+        <file>win_linux_forms/logo.png</file>
+        <file>win_linux_forms/minmax.png</file>
+        <file>win_linux_forms/moon.png</file>
+        <file>win_linux_forms/return.png</file>
+        <file>win_linux_forms/setting.png</file>
+        <file>win_linux_forms/user.png</file>
+        <file>qmlforms.qrc</file>
+        <file>dialog/mac_dialog/labs/MiniMax.qml</file>
+        <file>dialog/mac_dialog/labs/Combobox.qml</file>
+        <file>dialog/mac_dialog/labs/LoginLoginPanel.qml</file>
+        <file>mac_forms/BlurImg.png</file>
+        <file>dialog/mac_dialog/labs/LoginPassWord.qml</file>
+        <file>dialog/mac_dialog/labs/LoginCheckbox.qml</file>
+        <file>dialog/mac_dialog/labs/SelectDevice.qml</file>
+        <file>dialog/mac_dialog/labs/LoginDialogRepaireNet.qml</file>
+        <file>dialog/mac_dialog/labs/LoginStatus.qml</file>
+        <file>dialog/mac_dialog/labs/LoginBtn.qml</file>
+        <file>dialog/mac_dialog/labs/LoginSelectDevicePanel.qml</file>
+        <file>dialog/mac_dialog/labs/LoginSelectDeviceOk.qml</file>
+        <file>dialog/mac_dialog/labs/DeviceCombobox.qml</file>
+        <file>dialog/mac_dialog/labs/LoginIngPanel.qml</file>
+        <file>dialog/mac_dialog/labs/LoginErrorPanel.qml</file>
+        <file>dialog/mac_dialog/labs/MainWindowBar.qml</file>
+        <file>dialog/mac_dialog/labs/Setting.qml</file>
+        <file>dialog/mac_dialog/labs/Icon.qml</file>
+        <file>dialog/mac_dialog/labs/MainWindowSettingPanel.qml</file>
+        <file>dialog/mac_dialog/labs/MainwindowMainPanel.qml</file>
+    </qresource>
+</RCC>

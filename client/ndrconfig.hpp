@@ -85,7 +85,7 @@
 #define ENABLE_UPDATE true
 
 #ifdef Q_OS_MAC
-#define QML_PLATFROM_GET(text) "mac" #text
+#define QML_PLATFROM_GET(text) "mac_dialog/" #text
 #else
 #define QML_PLATFROM_GET(text) #text
 #endif

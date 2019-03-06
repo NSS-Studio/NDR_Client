@@ -21,7 +21,7 @@ else:CONFIG(release, debug|release):{
 }
 include(pppoe/pppoe.pri)
 include(forms/forms.pri)
-include(newforms/newforms.pri)
+include(qmlmanager/newforms.pri)
 include(update/update.pri)
 include(localstorage/localstorage.pri)
 include(settingsset/settingsset.pri)
@@ -42,8 +42,7 @@ HEADERS  += ndrapplication.hpp \
             ndrconfig.hpp \
             resourcemanager.hpp
 
-RESOURCES += client.qrc \
-             qmlforms.qrc
+RESOURCES += client.qrc
 
 macx {
 	TARGET = "NDR Client"

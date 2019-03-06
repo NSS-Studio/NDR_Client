@@ -11,7 +11,7 @@
 #include <resourcemanager.hpp>
 #include <utils.hpp>
 
-#include "newforms/qmlwindowsmanager.hpp"
+#include "qmlmanager/qmlwindowsmanager.hpp"
 #include <QMessageBox>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 
     ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
-    qDebug () << "stat load qml";
+    qDebug() << "stat load qml";
     QMLWindowsManager qmlAboutDialog(&ndrApp);
 
     return ndrApp.NdrApplication::exec();

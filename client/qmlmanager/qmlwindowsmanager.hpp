@@ -2,8 +2,13 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QQuickItem>
 #include <QQuickView>
+
+namespace new_UI {
+class QMLWindowsManager;
+};
 
 class QMLWindowsManager final : public QObject {
     Q_OBJECT
@@ -11,6 +16,8 @@ public:
     explicit QMLWindowsManager(QObject *parent = nullptr);
 
     ~QMLWindowsManager() = default;
+
+    const QWindow *getWindow();
 
 signals:
 
@@ -23,6 +30,10 @@ private:
         engineMainWindow; // save qml engine
     QSharedPointer<QQmlComponent> compLoginDialog, compMainWindow;
     QSharedPointer<QWindow> loginDialog, mainWindow; // save window pointer
+
+    QSharedPointer<QQmlApplicationEngine> engineManagerDialog;
+    QSharedPointer<QQmlComponent> compManagerDialog;
+    QSharedPointer<QWindow> managerWindows;
 
     void bind_slot();
     void dailFinish(bool status);
