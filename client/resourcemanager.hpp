@@ -2,6 +2,7 @@
 
 #include <QMutex>
 #include <QSharedPointer>
+#include <QWindow>
 
 class PPPoE;
 class MainWindow;
@@ -22,6 +23,8 @@ public:
     PopUpInfomationDialog *getPopUpInfomationDialog() const noexcept;
     AboutDialog *getAboutDialog() const noexcept;
     LocalStorage *getProfile() const noexcept;
+    QWindow *getWindow() const noexcept;
+    void setWindow(const QWindow *) noexcept;
 
 private:
     PPPoE *pppoe = nullptr;
@@ -33,4 +36,5 @@ private:
     QMutex mutex;
     enum class InitState { DONE, UNDONE };
     InitState initState = InitState::UNDONE;
+    QWindow *window;
 };

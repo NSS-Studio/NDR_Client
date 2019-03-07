@@ -12,4 +12,6 @@ public:
     static bool setPackInfo(QWindow *);
     static bool setDevice(QWindow *);
     static bool setTittle(QWindow *);
+    static bool setLastLogin(QWindow *);
+    static bool setLoginInfo(QWindow *);
 };

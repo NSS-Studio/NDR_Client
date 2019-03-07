@@ -4,7 +4,6 @@
         <file>dialog/mac_dialog/labs/Close.qml</file>
         <file>dialog/mac_dialog/labs/LoginBackground.qml</file>
         <file>dialog/mac_dialog/labs/LoginTittle.qml</file>
-        <file>dialog/mac_dialog/labs/MacmainWindow.qml</file>
         <file>dialog/mac_dialog/ManagerDialog.qml</file>
         <file>dialog/win_linux_dialog/labs/loginDialog.qml</file>
         <file>dialog/win_linux_dialog/labs/mainWindow.qml</file>

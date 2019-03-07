@@ -2,6 +2,7 @@
 #include "localstorage.hpp"
 #include "pppoe.hpp"
 #include "utils.hpp"
+#include <QMessageBox>
 #include <QMetaObject>
 
 bool setConfig::setUsername(QWindow *window) {
@@ -13,10 +14,11 @@ bool setConfig::setUsername(QWindow *window) {
                                       Qt::DirectConnection,
                                       Q_ARG(QVariant, QVariant{tmp}));
         }
-        return true;
     } else {
         return false;
     }
+    profile->close();
+    return true;
 }
 
 bool setConfig::setPackInfo(QWindow *window) {
@@ -37,6 +39,7 @@ bool setConfig::setDevice(QWindow *window) {
         QMetaObject::invokeMethod(window, "addDevice", Qt::DirectConnection,
                                   Q_ARG(QVariant, QVariant{interface}));
     }
+    return true;
 }
 
 bool setConfig::setTittle(QWindow *window) {
@@ -44,4 +47,38 @@ bool setConfig::setTittle(QWindow *window) {
         window, "setVersion", Qt::DirectConnection,
         Q_ARG(QVariant, QVariant{QString{"NDR东软网络客户端"} +
                                  utils::getVersionString()}));
+    return true;
+}
+
+bool setConfig::setLastLogin(QWindow *window) {
+    auto profile = utils::resourceManager.getProfile();
+    if (profile->open()) {
+        QString user = {};
+        profile->getLastLoginUser(user);
+        QMetaObject::invokeMethod(window, "setLastLoginUser",
+                                  Qt::DirectConnection,
+                                  Q_ARG(QVariant, QVariant{user}));
+
+    } else {
+        return false;
+    }
+    profile->close();
+    return true;
+}
+
+bool setConfig::setLoginInfo(QWindow *window) {
+    auto profile = utils::resourceManager.getProfile();
+    if (profile->open()) {
+        QString user, password, manner;
+        profile->getLastLoginUser(user);
+        profile->getLoginInfo(user, password, manner);
+        QMetaObject::invokeMethod(window, "addLoginInfo", Qt::DirectConnection,
+                                  Q_ARG(QVariant, QVariant{password}),
+                                  Q_ARG(QVariant, QVariant{manner}));
+
+    } else {
+        return false;
+    }
+    profile->close();
+    return true;
 }
