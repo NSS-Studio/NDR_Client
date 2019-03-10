@@ -23,14 +23,29 @@ QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
     this->managerWindows->show();
     this->slot = QSharedPointer<Slots>::create();
     utils::resourceManager.setWindow(managerWindows.get());
-    setConfig::setUsername(const_cast<QWindow *>(this->managerWindows.get()));
-    setConfig::setPackInfo(const_cast<QWindow *>(this->managerWindows.get()));
-    setConfig::setDevice(const_cast<QWindow *>(this->managerWindows.get()));
-    setConfig::setTittle(const_cast<QWindow *>(this->managerWindows.get()));
-    setConfig::setLastLogin(const_cast<QWindow *>(this->managerWindows.get()));
-    setConfig::setLoginInfo(const_cast<QWindow *>(this->managerWindows.get()));
-
+    setConfig::setUsername(this->managerWindows.get());
+    setConfig::setPackInfo(this->managerWindows.get());
+    setConfig::setDevice(this->managerWindows.get());
+    setConfig::setTittle(this->managerWindows.get());
+    setConfig::setLastLogin(this->managerWindows.get());
+    setConfig::setLoginInfo(this->managerWindows.get());
     this->bind_slot();
+    auto profile = utils::resourceManager.getProfile();
+    QString autoLogin = QString{""};
+    if (profile->open()) {
+        if (profile->getAutoLoginUser(autoLogin)) {
+            if (autoLogin != "") {
+                QString password, device, manner;
+                profile->getDeviceName(device);
+                profile->getLoginInfo(autoLogin, password, manner);
+                this->slot.get()->start(autoLogin, password, manner, device,
+                                        QString{"f"}, QString{"f"});
+                qDebug() << "autologin" + autoLogin;
+            }
+            qDebug() << "login: empty";
+        }
+        profile->close();
+    }
 }
 
 void QMLWindowsManager::bind_slot() {
@@ -40,6 +55,13 @@ void QMLWindowsManager::bind_slot() {
         this->slot.get(),
         SLOT(start(QString, QString, QString, QString, QString, QString)));
     auto pppoe = utils::resourceManager.getPPPoE();
-    connect(pppoe, &PPPoE::dialFinished, this->slot.get(), &Slots::dailFnish,
-            Qt::QueuedConnection);
+    QObject::connect(pppoe, &PPPoE::dialFinished, this->slot.get(),
+                     &Slots::dailFinish, Qt::QueuedConnection);
+    QObject::connect(this->managerWindows.get(), SIGNAL(stopConnection()),
+                     this->slot.get(), SLOT(stopConnect()));
+    QObject::connect(this->managerWindows.get(),
+                     SIGNAL(change_account_select(QString)), this->slot.get(),
+                     SLOT(changtAccount(QString)));
+    QObject::connect(this->managerWindows.get(), SIGNAL(clear()),
+                     this->slot.get(), SLOT(clearConfig()));
 }

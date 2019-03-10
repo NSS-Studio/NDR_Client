@@ -3,7 +3,6 @@ import QtQuick 2.0
 Rectangle {
     signal stopConnect()
     Image {
-        id: image3
         x: 40
         y: 40
         width: 50
@@ -69,6 +68,10 @@ Rectangle {
             onPressed: {
                 rectangle2.color = "#424dff"
             }
+            onExited: {
+                rectangle2.color = "#448aff"
+            }
+
             onClicked: {
                 rectangle2.color = "#448aff"
                 emit: stopConnect()

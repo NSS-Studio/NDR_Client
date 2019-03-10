@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 
 Rectangle {
+    color: "#F8F9FB"
 
     Rectangle {
         id: settingBar
@@ -34,14 +35,13 @@ Rectangle {
     }
 
     Rectangle {
-        id: rectangle4
         x: 30
         y: 260
         width: 92
         height: 28
         color: "#ffffff"
-        border.color: "#eaebed"
-        radius: 5
+//        border.color: "#eaebed"
+//        radius: 5
 
         Text {
             id: text4
@@ -72,7 +72,7 @@ Rectangle {
         width: 92
         height: 28
         color: "#ffffff"
-        radius: 5
+//        radius: 5
         Text {
             id: text5
             x: 10

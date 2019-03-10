@@ -8,6 +8,7 @@ Item {
     height: parent.width - 150
 
     signal okBtnClicked()
+    signal clearAllConfig()
 
     Rectangle {
         anchors.fill: parent
@@ -80,6 +81,9 @@ Item {
                 }
                 onExited: {
                     clear.font.underline = false
+                }
+                onClicked: {
+                    emit: clearAllConfig()
                 }
             }
         }

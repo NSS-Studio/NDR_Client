@@ -17,8 +17,8 @@ ApplicationWindow {
 
     signal login(string username,string passwd,string pack_info,string NIC_info,string remeber,string autologin)
     signal change_account_select(string account)
-
     signal stopConnection()
+    signal clear()
 
     property int xmouse: 0
     property int ymouse: 0
@@ -29,6 +29,7 @@ ApplicationWindow {
     property string pack: ""
     property string dev: ""
     property string rempass: ""
+    property string autologin: ""
 
     function addPackInfo (profix) {
         for (var i = 0;i < loginPanelChild.children.length;i++) {
@@ -83,6 +84,9 @@ ApplicationWindow {
                 if (loginPanelChild.children[i].children[j].objectName === "password") {
                     loginPanelChild.children[i].children[j].text = password.toString()
                 }
+                if (password !== "" && loginPanelChild.children[i].children[j].objectName === "rember"){
+                    loginPanelChild.children[i].children[j].checkState = Qt.Checked
+                }
             }
         }
     }
@@ -98,8 +102,13 @@ ApplicationWindow {
                 mainWindowPanel.children[i].text = pack
             }
         }
+//        mainWindowPanel.visible = true
         startTime.running = true
+//        tim_loginDialog_to_mainDialog.running = true
+
         tim_loginDialog_to_mainDialog.running = true
+        mainWindow.visible = true
+        mainWindow.opacity = 0
     }
     function setDailTime (time){
         for (var i = 0;i < mainWindowPanel.children.length;++i){
@@ -167,6 +176,20 @@ ApplicationWindow {
         }
     }
     Timer {
+        id: tim_loginin_to_login
+        running: false
+        repeat: true
+        interval: 1
+
+        onTriggered: {
+            loginPanel.x = loginPanel.x + 2
+            loginingPanel.x = loginingPanel.x + 2
+            if (loginPanel.x === 0){
+                tim_loginin_to_login.running = false
+            }
+        }
+    }
+    Timer {
         id: tim_logining_to_error
         running: false
         repeat: true
@@ -205,11 +228,12 @@ ApplicationWindow {
             managerDialog.x = managerDialog.x + 2
             managerDialog.height = managerDialog.height + 4
             managerDialog.y = managerDialog.y - 2
-            mainWindow.opacity = mainWindow.opacity + 0.03
+            mainWindow.opacity = mainWindow.opacity + 0.03 // error???
             loginDialog.opacity = loginDialog.opacity - 0.03
             if(managerDialog.width === 348){
                 tim_loginDialog_to_mainDialog.running = false
                 loginDialog.visible = false
+                tim_loginin_to_login.running = true
             }
         }
     }
@@ -225,7 +249,7 @@ ApplicationWindow {
             managerDialog.y = managerDialog.y + 2
             mainWindow.opacity = mainWindow.opacity - 0.03
             loginDialog.opacity = loginDialog.opacity + 0.03
-            if(managerDialog.width === 348){
+            if(managerDialog.width === 500){
                 tim_mainDialog_to_loginDialog.running = false
                 mainWindow.visible = false
             }
@@ -279,21 +303,41 @@ ApplicationWindow {
                     selectDevicePanel.visible = true
                     tim_login_to_select.running = true
                 }
+                onAccountChange: {
+                    emit: change_account_select(account)
+                }
             }
             MyStyle.LoginBtn {
+                id: btn_login
                 x: 360
-                y: 122
+                y: 110
                 onClick: {
                     for (var i = 0;i < loginPanelChild.children.length;i++) {
                         for (var j = 0;j < loginPanelChild.children[i].children.length;j++){
                             if (loginPanelChild.children[i].children[j].objectName === "account"){
-                                user = loginPanelChild.children[i].children[j].currentText
+                                user = loginPanelChild.children[i].children[j].editText
                             }
                             else if (loginPanelChild.children[i].children[j].objectName === "password"){
                                 pass = loginPanelChild.children[i].children[j].text
                             }
                             else if (loginPanelChild.children[i].children[j].objectName === "pack_info"){
                                 pack = loginPanelChild.children[i].children[j].currentText
+                            }
+                            else if (loginPanelChild.children[i].children[j].objectName === "rember"){
+                                if (loginPanelChild.children[i].children[j].checkState === Qt.Checked){
+                                    rempass = "t"
+                                }
+                                else if (loginPanelChild.children[i].children[j].checkState === Qt.Unchecked){
+                                    rempass = "f"
+                                }
+                            }
+                            else if (loginPanelChild.children[i].children[j].objectName === "autologin"){
+                                if (loginPanelChild.children[i].children[j].checkState === Qt.Checked){
+                                    autologin = "t"
+                                }
+                                else if (loginPanelChild.children[i].children[j].checkState === Qt.Unchecked){
+                                    autologin = "f"
+                                }
                             }
                         }
                     }
@@ -304,7 +348,6 @@ ApplicationWindow {
                             }
                         }
                     }
-                    console.log(user+pass+pack+dev)
                     if (user === "" || pass === ""){
                         for (var iii = 0;iii < loginPanelChild.children.length;iii++) {
                             for (var jjj = 0;jjj < loginPanelChild.children[iii].children.length;jjj++){
@@ -325,16 +368,26 @@ ApplicationWindow {
                                 }
                             }
                         }
-                        emit: login(user,pass,pack,dev,"t","f")
+                        emit: login(user,pass,pack,dev,rempass,autologin)
+
                         loginingPanel.visible = true
                         loginingPanel.x = 500
                         tim_login_to_logining.running = true
                         dailTime = 0
-
-
                     }
                 }
             }
+//            DropShadow {
+//                    id: btn_login_shadow
+//                    anchors.fill: btn_login
+//                    horizontalOffset: 3
+//                    verticalOffset: 3
+//                    spread: 0.1
+//                    radius: 8.0
+//                    samples: 17
+//                    color: "#80000000"
+//                    source: btn_login
+//           }
         }
 
         Item {
@@ -349,6 +402,9 @@ ApplicationWindow {
                 y: 150
                 onOkBtnClicked: {
                     tim_select_to_login.running = true
+                }
+                onClearAllConfig: {
+                    emit: clear()
                 }
             }
         }
@@ -386,7 +442,6 @@ ApplicationWindow {
         id: mainWindow
         anchors.fill: parent
         visible: false
-        opacity: 1
         MyStyle.MainWindowBar{
             x:0;y:0
         }
@@ -394,12 +449,13 @@ ApplicationWindow {
         MyStyle.MainwindowMainPanel{
             id: mainWindowPanel
             y: 35
-            visible: true
             height: parent.height - 35
             width: parent.width
             onStopConnect: {
                 dailTime = 0
                 startTime.running = false
+                loginDialog.opacity = 0
+                loginDialog.visible = true
                 tim_mainDialog_to_loginDialog.running = true
                 emit: stopConnection()
             }

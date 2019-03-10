@@ -2,17 +2,23 @@
 #include "localstorage.hpp"
 #include "pppoe.hpp"
 #include "qmlwindowsmanager.hpp"
+#include "setconfig.hpp"
 #include "utils.hpp"
 
 void Slots::start(QString username, QString passwd, QString pack_info,
                   QString NIC_info, QString remPass, QString autoLogin) {
-    qDebug() << "start pppoe";
+    this->username = username;
+    this->password = passwd;
+    this->manner = pack_info;
+    this->devicename = NIC_info;
     auto profile = utils::resourceManager.getProfile();
     if (profile->open()) {
-        auto password = remPass == "t" ? passwd : QString{""};
-        profile->setLoginInfo(username, password, pack_info);
+        if (remPass == "t") {
+            rember = true;
+        }
+
         if (autoLogin == "t") {
-            profile->setAutoLoginUser(username);
+            autoLogin = true;
         }
         profile->close();
     }
@@ -23,7 +29,19 @@ void Slots::start(QString username, QString passwd, QString pack_info,
     pppoe->start();
 }
 
-void Slots::dailFnish(const bool &finish) {
+void Slots::dailFinish(const bool &finish) {
+    auto profile = utils::resourceManager.getProfile();
+    if (profile->open()) {
+        if (rember) {
+            profile->setLoginInfo(username, password, devicename);
+        } else {
+            profile->setLoginInfo(username, QString{""}, devicename);
+        }
+        if (autoLogin) {
+            profile->setAutoLoginUser(username);
+        }
+        profile->close();
+    }
     if (finish == true) {
         auto pppoe = utils::resourceManager.getPPPoE();
         QMetaObject::invokeMethod(
@@ -44,6 +62,41 @@ void Slots::dailFnish(const bool &finish) {
 }
 
 void Slots::stopConnect() {
+    qDebug() << "stop";
     auto pppoe = utils::resourceManager.getPPPoE();
     pppoe->hangUp();
+}
+
+void Slots::changtAccount(QString account) {
+    auto window = utils::resourceManager.getWindow();
+    setConfig::setLoginInfo(window, account);
+}
+
+void Slots::clearConfig() {
+    QDir home = utils::appHome;
+    DeleteDirectory(QDir::homePath() + "/.nssdr");
+    setConfig::setLoginInfo(utils::resourceManager.getWindow(), QString{""},
+                            true);
+}
+
+bool Slots::DeleteDirectory(const QString &path) {
+    if (path.isEmpty()) {
+        return false;
+    }
+
+    QDir dir(path);
+    if (!dir.exists()) {
+        return true;
+    }
+
+    dir.setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
+    QFileInfoList fileList = dir.entryInfoList();
+    foreach (QFileInfo fi, fileList) {
+        if (fi.isFile()) {
+            fi.dir().remove(fi.fileName());
+        } else {
+            DeleteDirectory(fi.absoluteFilePath());
+        }
+    }
+    return dir.rmpath(dir.absolutePath());
 }

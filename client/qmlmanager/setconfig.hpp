@@ -13,5 +13,5 @@ public:
     static bool setDevice(QWindow *);
     static bool setTittle(QWindow *);
     static bool setLastLogin(QWindow *);
-    static bool setLoginInfo(QWindow *);
+    static bool setLoginInfo(QWindow *, QString = nullptr, bool status = false);
 };

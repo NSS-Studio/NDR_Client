@@ -6,6 +6,7 @@ SystemTrayIcon {
     iconSource: "qrc:/qmlforms/logo.png"
 
     signal showWindowClick()
+    signal aboutClick()
 
     onActivated: {
         window.show()
@@ -20,6 +21,12 @@ SystemTrayIcon {
             text: "显示窗口"
             onTriggered: {
                 emit: showWindowClick()
+            }
+        }
+        MenuItem{
+            text: "关于"
+            onTriggered: {
+                emit: aboutClick()
             }
         }
 

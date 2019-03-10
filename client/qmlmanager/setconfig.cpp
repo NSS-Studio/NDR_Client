@@ -66,19 +66,30 @@ bool setConfig::setLastLogin(QWindow *window) {
     return true;
 }
 
-bool setConfig::setLoginInfo(QWindow *window) {
-    auto profile = utils::resourceManager.getProfile();
-    if (profile->open()) {
-        QString user, password, manner;
-        profile->getLastLoginUser(user);
-        profile->getLoginInfo(user, password, manner);
+bool setConfig::setLoginInfo(QWindow *window, QString username, bool status) {
+    if (status) {
         QMetaObject::invokeMethod(window, "addLoginInfo", Qt::DirectConnection,
-                                  Q_ARG(QVariant, QVariant{password}),
-                                  Q_ARG(QVariant, QVariant{manner}));
-
+                                  Q_ARG(QVariant, QVariant{QString{""}}),
+                                  Q_ARG(QVariant, QVariant{QString{""}}));
     } else {
-        return false;
+        auto profile = utils::resourceManager.getProfile();
+        if (profile->open()) {
+            QString user, password, manner;
+            if (username == "") {
+                profile->getLastLoginUser(user);
+            } else {
+                user = username;
+            }
+            profile->getLoginInfo(user, password, manner);
+            QMetaObject::invokeMethod(window, "addLoginInfo",
+                                      Qt::DirectConnection,
+                                      Q_ARG(QVariant, QVariant{password}),
+                                      Q_ARG(QVariant, QVariant{manner}));
+
+        } else {
+            return false;
+        }
+        profile->close();
+        return true;
     }
-    profile->close();
-    return true;
 }
