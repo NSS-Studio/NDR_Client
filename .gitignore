@@ -8,3 +8,4 @@ ndr-client.pro.user*
 *~
 build/
 /client/lang/ndr*
+compile_commands.json
