@@ -26,7 +26,7 @@ Item {
             y: 80
             editable: true
             onActivated: {
-                emit: accountChange(account)
+                emit: accountChange(account.editText)
             }
         }
         MyStyle.LoginPassWord {
@@ -40,10 +40,12 @@ Item {
             id: remberPass
             x: 300
             y: 80
+            checkState: Qt.Unchecked
             text: qsTr("记住密码")
         }
         MyStyle.LoginCheckbox {
-            id: rautoLogin
+            id: autoLogin
+            objectName: "autologin"
             x: 300
             y: 120
             text: qsTr("自动登录")

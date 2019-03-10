@@ -8,6 +8,7 @@ Item {
     height: parent.width - 150
 
     signal okBtnClicked()
+    signal clearAllConfig()
 
     Rectangle {
         anchors.fill: parent
@@ -20,10 +21,10 @@ Item {
         Text {
             x: 90
             y: 75
-            height: 30
-            width: 70
+            height: 22
+            width: 64
             text: qsTr("拨号网卡")
-            font.pointSize: 16
+            font.pointSize: 12
         }
         MyStyle.DeviceCombobox {
             objectName: "device_name"
@@ -38,18 +39,19 @@ Item {
             height: 30
             Image {
                 id: return_img
-                y: 3
+                x: 0
+                y: 0
                 width: 20
                 height: 20
                 source: "qrc:/mac_forms/change_forms/return.png"
             }
             Text{
                 x: 30
-                y: 0
+                y: 2
                 width: 20
                 height: 20
                 text: qsTr("返回")
-                font.pointSize: 18
+                font.pointSize: 14
             }
             MouseArea{
                 anchors.fill: parent
@@ -62,7 +64,7 @@ Item {
             x: 65
             y: 140
             text: "开机自动启动"
-            font.pointSize: 15
+            font.pointSize: 12
         }
         Text {
             id: clear
@@ -71,7 +73,7 @@ Item {
             height: 40
             color: "#4879f7"
             text: "清空所有配置"
-            font.pointSize: 15
+            font.pointSize: 12
             MouseArea{
                 anchors.fill: parent
                 hoverEnabled: true
@@ -80,6 +82,9 @@ Item {
                 }
                 onExited: {
                     clear.font.underline = false
+                }
+                onClicked: {
+                    emit: clearAllConfig()
                 }
             }
         }
