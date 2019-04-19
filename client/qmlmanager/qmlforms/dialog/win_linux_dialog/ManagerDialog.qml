@@ -15,6 +15,10 @@ ApplicationWindow {
     visible: true
     flags: Qt.Window | Qt.FramelessWindowHint
 
+    ShaderEffect{
+
+    }
+
     signal login(string username,string passwd,string pack_info,string NIC_info,string remeber,string autologin)
     signal change_account_select(string account)
     signal stopConnection()
@@ -102,13 +106,18 @@ ApplicationWindow {
                 mainWindowPanel.children[i].text = pack
             }
         }
-//        mainWindowPanel.visible = true
-        startTime.running = true
+        managerDialog.width = 350
+        managerDialog.height = 500
+        loginDialog.visible = false
+        mainWindow.opacity = 1
+        mainWindowPanel.visible = true
+
+//        startTime.running = true
 //        tim_loginDialog_to_mainDialog.running = true
 
-        tim_loginDialog_to_mainDialog.running = true
-        mainWindow.visible = true
-        mainWindow.opacity = 0
+//        tim_loginDialog_to_mainDialog.running = true
+//        mainWindow.visible = true
+//        mainWindow.opacity = 0
     }
     function setDailTime (time){
         for (var i = 0;i < mainWindowPanel.children.length;++i){
@@ -140,29 +149,29 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginPanel.x = loginPanel.x - 2
-            selectDevicePanel.x = selectDevicePanel.x - 2
+            loginPanel.x = loginPanel.x - 5
+            selectDevicePanel.x = selectDevicePanel.x - 5
             if (selectDevicePanel.x === 0){
                 tim_login_to_select.running = false
             }
         }
     }
-    NumberAnimation {
-           id: animation
-           target: rectangle1
-           property: "x"
-           from: 50
-           to: 450
-           duration: 1000
-       }
+//    NumberAnimation {
+//           id: animation
+//           target: rectangle1
+//           property: "x"
+//           from: 50
+//           to: 450
+//           duration: 1000
+//       }
 
-       XAnimator {
-           id: animator
-           target: rectangle2
-           from: 50
-           to: 450
-           duration: 1000
-       }
+//       XAnimator {
+//           id: animator
+//           target: rectangle2
+//           from: 50
+//           to: 450
+//           duration: 1000
+//       }
     Timer {
         id: tim_select_to_login
         running: false
@@ -170,8 +179,8 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginPanel.x = loginPanel.x + 2
-            selectDevicePanel.x = selectDevicePanel.x + 2
+            loginPanel.x = loginPanel.x + 5
+            selectDevicePanel.x = selectDevicePanel.x + 5
             if (loginPanel.x === 0){
                 tim_select_to_login.running = false
             }
@@ -184,8 +193,8 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginPanel.x = loginPanel.x - 2
-            loginingPanel.x = loginingPanel.x - 2
+            loginPanel.x = loginPanel.x - 5
+            loginingPanel.x = loginingPanel.x - 5
             if (loginingPanel.x === 0){
                 tim_login_to_logining.running = false
             }
@@ -198,8 +207,8 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginPanel.x = loginPanel.x + 2
-            loginingPanel.x = loginingPanel.x + 2
+            loginPanel.x = loginPanel.x + 5
+            loginingPanel.x = loginingPanel.x + 5
             if (loginPanel.x === 0){
                 tim_loginin_to_login.running = false
             }
@@ -212,8 +221,8 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginingPanel.x = loginingPanel.x - 2
-            errorPanel.x = errorPanel.x - 2
+            loginingPanel.x = loginingPanel.x - 5
+            errorPanel.x = errorPanel.x - 5
             if (errorPanel.x === 0){
                 tim_logining_to_error.running = false
             }
@@ -226,51 +235,55 @@ ApplicationWindow {
         interval: 1
 
         onTriggered: {
-            loginPanel.x = loginPanel.x + 2
-            errorPanel.x = errorPanel.x + 2
+            loginPanel.x = loginPanel.x + 5
+            errorPanel.x = errorPanel.x + 5
             if (loginPanel.x === 0){
                 tim_error_to_login.running = false
             }
         }
     }
 
-    Timer {
-        id: tim_loginDialog_to_mainDialog
-        running: false
-        repeat: true
-        interval: 1
-        onTriggered: {
-            managerDialog.width = managerDialog.width - 4
-            managerDialog.x = managerDialog.x + 2
-            managerDialog.height = managerDialog.height + 4
-            managerDialog.y = managerDialog.y - 2
-            mainWindow.opacity = mainWindow.opacity + 0.03 // error???
-            loginDialog.opacity = loginDialog.opacity - 0.03
-            if(managerDialog.width === 348){
-                tim_loginDialog_to_mainDialog.running = false
-                loginDialog.visible = false
-                tim_loginin_to_login.running = true
-            }
-        }
-    }
-    Timer {
-        id: tim_mainDialog_to_loginDialog
-        running: false
-        repeat: true
-        interval: 1
-        onTriggered: {
-            managerDialog.width = managerDialog.width + 4
-            managerDialog.x = managerDialog.x - 2
-            managerDialog.height = managerDialog.height - 4
-            managerDialog.y = managerDialog.y + 2
-            mainWindow.opacity = mainWindow.opacity - 0.03
-            loginDialog.opacity = loginDialog.opacity + 0.03
-            if(managerDialog.width === 500){
-                tim_mainDialog_to_loginDialog.running = false
-                mainWindow.visible = false
-            }
-        }
-    }
+    // wait repaire
+//    Timer {
+//        id: tim_loginDialog_to_mainDialog
+//        running: false
+//        repeat: true
+//        interval: 1
+//        onTriggered: {
+//            managerDialog.width = managerDialog.width - 32
+//            managerDialog.x = managerDialog.x + 16
+//            managerDialog.height = managerDialog.height + 32
+//            managerDialog.y = managerDialog.y - 16
+//            mainWindow.opacity = mainWindow.opacity + 0.25
+//            loginDialog.opacity = loginDialog.opacity - 0.25
+
+//            if(managerDialog.width - 360 < 0){
+//                tim_loginDialog_to_mainDialog.running = false
+//                loginDialog.visible = false
+//                tim_loginin_to_login.running = true
+////                loginDialog.opcity = 0.0
+////                mainWindow.opacity = 0.99
+//            }
+//        }
+//    }
+//    Timer {
+//        id: tim_mainDialog_to_loginDialog
+//        running: false
+//        repeat: true
+//        interval: 1
+//        onTriggered: {
+//            managerDialog.width = managerDialog.width + 32
+//            managerDialog.x = managerDialog.x - 16
+//            managerDialog.height = managerDialog.height - 32
+//            managerDialog.y = managerDialog.y + 16
+//            mainWindow.opacity = mainWindow.opacity - 0.25
+//            loginDialog.opacity = loginDialog.opacity + 0.25
+//            if(managerDialog.width >= 500){
+//                tim_mainDialog_to_loginDialog.running = false
+//                mainWindow.visible = false
+//            }
+//        }
+//    }
 
     Timer {
         function addTime() {

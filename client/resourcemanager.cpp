@@ -23,12 +23,12 @@ ResourceManager::~ResourceManager() {
 
 void ResourceManager::InitResourceManager() noexcept {
     QMutexLocker locker{&mutex};
-    aboutDialog = new AboutDialog{};
+//    aboutDialog = new AboutDialog{};
     pppoe = new PPPoE{};
     profile = new LocalStorage{utils::appHome + "/config.db"};
-    loginDialog = new LoginDialog{}; // close old ui
-    mainWindow = new MainWindow{};
-    popUpInfomationDialog = new PopUpInfomationDialog{};
+//    loginDialog = new LoginDialog{}; // close old ui
+//    mainWindow = new MainWindow{};
+//    popUpInfomationDialog = new PopUpInfomationDialog{};
     initState = InitState::DONE;
 #ifdef QT_DEBUG
 //  mainWindow->show();

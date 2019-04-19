@@ -78,12 +78,15 @@ int main(int argc, char *argv[]) {
 #endif
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
+    qDebug () << "start";
     NdrApplication ndrApp{"ndr-client-new", argc, argv};
+
+
 
     ndrApp.NdrApplication::setQuitOnLastWindowClosed(false);
 
     qDebug() << "stat load qml";
-    QMLWindowsManager qmlAboutDialog(&ndrApp);
+    QMLWindowsManager qmlAboutDialog{&ndrApp};
 
     return ndrApp.NdrApplication::exec();
 }

@@ -12,6 +12,8 @@
 #include <QUrl>
 #include <pppoe.hpp>
 QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
+//    QQuickWindow::setSceneGraphBackend(QSGRendererInterface::Direct3D12);
+//    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     qDebug() << "qml windows manage init";
     QQuickStyle::setStyle("Universal");
     this->engineManagerDialog = QSharedPointer<QQmlApplicationEngine>::create();
@@ -46,6 +48,8 @@ QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
         }
         profile->close();
     }
+
+
 }
 
 void QMLWindowsManager::bind_slot() {
