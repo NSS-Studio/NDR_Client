@@ -90,6 +90,6 @@ bool setConfig::setLoginInfo(QWindow *window, QString username, bool status) {
             return false;
         }
         profile->close();
-        return true;
     }
+    return true;
 }
