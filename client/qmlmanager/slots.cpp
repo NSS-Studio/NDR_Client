@@ -16,7 +16,6 @@ void Slots::start(QString username, QString passwd, QString pack_info,
         if (remPass == "t") {
             rember = true;
         }
-
         if (autoLogin == "t") {
             autoLogin = true;
         }

@@ -85,5 +85,6 @@
         <file>win_linux_forms/setting.png</file>
         <file>win_linux_forms/user.png</file>
         <file>qmlforms.qrc</file>
+        <file>win_linux_forms/icon.png</file>
     </qresource>
 </RCC>

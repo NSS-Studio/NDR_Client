@@ -14,10 +14,10 @@
 #define NDR_SERVER "172.24.10.13"
 
 /** NDR major version*/
-#define NDR_MAJOR_VERSION 0
+#define NDR_MAJOR_VERSION 1
 
 /** NDR minor version*/
-#define NDR_MINOR_VERSION 80
+#define NDR_MINOR_VERSION 00
 
 /** NDR version */
 #define NDR_VERSION (NDR_MAJOR_VERSION * 100 + NDR_MINOR_VERSION)

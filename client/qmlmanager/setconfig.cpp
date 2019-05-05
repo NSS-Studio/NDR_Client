@@ -43,10 +43,14 @@ bool setConfig::setDevice(QWindow *window) {
 }
 
 bool setConfig::setTittle(QWindow *window) {
-    QMetaObject::invokeMethod(
-        window, "setVersion", Qt::DirectConnection,
-        Q_ARG(QVariant, QVariant{QString{"NDR东软网络客户端"} +
-                                 utils::getVersionString()}));
+//    QMetaObject::invokeMethod(
+//        window, "setVersion", Qt::DirectConnection,
+//        Q_ARG(QVariant, QVariant{QString{"NDR东软网络客户端"} +
+//                                 utils::getVersionString()}));
+        QMetaObject::invokeMethod(
+            window, "setVersion", Qt::DirectConnection,
+            Q_ARG(QVariant, QVariant{QString{"N-Client Alpha 0.1"}}));
+
     return true;
 }
 

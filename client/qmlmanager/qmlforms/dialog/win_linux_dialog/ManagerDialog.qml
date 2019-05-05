@@ -3,6 +3,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls.Material 2.3
 import QtGraphicalEffects 1.0
+import Qt.labs.platform 1.0
 
 import "./labs/" as MyStyle
 
@@ -14,10 +15,6 @@ ApplicationWindow {
     y: (Screen.desktopAvailableHeight - height) / 2
     visible: true
     flags: Qt.Window | Qt.FramelessWindowHint
-
-    ShaderEffect{
-
-    }
 
     signal login(string username,string passwd,string pack_info,string NIC_info,string remeber,string autologin)
     signal change_account_select(string account)
@@ -63,6 +60,7 @@ ApplicationWindow {
             }
         }
     }
+
     function addUsernameInfo(username){
         for (var i = 0;i < loginPanelChild.children.length;i++) {
             for (var j = 0;j < loginPanelChild.children[i].children.length;j++){
@@ -106,18 +104,17 @@ ApplicationWindow {
                 mainWindowPanel.children[i].text = pack
             }
         }
-        managerDialog.width = 350
-        managerDialog.height = 500
-        loginDialog.visible = false
-        mainWindow.opacity = 1
-        mainWindowPanel.visible = true
+//        managerDialog.width = 350
+//        managerDialog.height = 500
+//        loginDialog.visible = false
+//        mainWindow.opacity = 1
+//        mainWindowPanel.visible = true
 
-//        startTime.running = true
-//        tim_loginDialog_to_mainDialog.running = true
+        startTime.running = true
+        tim_loginDialog_to_mainDialog.running = true
 
-//        tim_loginDialog_to_mainDialog.running = true
-//        mainWindow.visible = true
-//        mainWindow.opacity = 0
+        mainWindow.visible = true
+        mainWindow.opacity = 0
     }
     function setDailTime (time){
         for (var i = 0;i < mainWindowPanel.children.length;++i){
@@ -128,6 +125,8 @@ ApplicationWindow {
     }
 
     function dailField(errorInfo){
+
+
         for (var i = 0;i < errorPanelChild.children.length;++i){
             if (errorPanelChild.children[i].objectName === "errorDescribe"){
                 errorPanelChild.children[i].text = errorInfo.toString()
@@ -141,6 +140,7 @@ ApplicationWindow {
 //    FontLoader {
 //        source: "qrc:/SourceHanSans-Bold.ttf"
 //    }
+
 
     Timer {
         id: tim_login_to_select
@@ -244,46 +244,46 @@ ApplicationWindow {
     }
 
     // wait repaire
-//    Timer {
-//        id: tim_loginDialog_to_mainDialog
-//        running: false
-//        repeat: true
-//        interval: 1
-//        onTriggered: {
-//            managerDialog.width = managerDialog.width - 32
-//            managerDialog.x = managerDialog.x + 16
-//            managerDialog.height = managerDialog.height + 32
-//            managerDialog.y = managerDialog.y - 16
-//            mainWindow.opacity = mainWindow.opacity + 0.25
-//            loginDialog.opacity = loginDialog.opacity - 0.25
+    Timer {
+        id: tim_loginDialog_to_mainDialog
+        running: false
+        repeat: true
+        interval: 1
+        onTriggered: {
+            managerDialog.width = managerDialog.width - 32
+            managerDialog.x = managerDialog.x + 16
+            managerDialog.height = managerDialog.height + 32
+            managerDialog.y = managerDialog.y - 16
+            mainWindow.opacity = mainWindow.opacity + 1
+            loginDialog.opacity = loginDialog.opacity - 0.25
 
-//            if(managerDialog.width - 360 < 0){
-//                tim_loginDialog_to_mainDialog.running = false
-//                loginDialog.visible = false
-//                tim_loginin_to_login.running = true
-////                loginDialog.opcity = 0.0
-////                mainWindow.opacity = 0.99
-//            }
-//        }
-//    }
-//    Timer {
-//        id: tim_mainDialog_to_loginDialog
-//        running: false
-//        repeat: true
-//        interval: 1
-//        onTriggered: {
-//            managerDialog.width = managerDialog.width + 32
-//            managerDialog.x = managerDialog.x - 16
-//            managerDialog.height = managerDialog.height - 32
-//            managerDialog.y = managerDialog.y + 16
-//            mainWindow.opacity = mainWindow.opacity - 0.25
-//            loginDialog.opacity = loginDialog.opacity + 0.25
-//            if(managerDialog.width >= 500){
-//                tim_mainDialog_to_loginDialog.running = false
-//                mainWindow.visible = false
-//            }
-//        }
-//    }
+            if(managerDialog.width - 380 < 0){
+                tim_loginDialog_to_mainDialog.running = false
+                loginDialog.visible = false
+                tim_loginin_to_login.running = true
+//                loginDialog.opcity = 0.0
+//                mainWindow.opacity = 0.99
+            }
+        }
+    }
+    Timer {
+        id: tim_mainDialog_to_loginDialog
+        running: false
+        repeat: true
+        interval: 1
+        onTriggered: {
+            managerDialog.width = managerDialog.width + 32
+            managerDialog.x = managerDialog.x - 16
+            managerDialog.height = managerDialog.height - 32
+            managerDialog.y = managerDialog.y + 16
+            mainWindow.opacity = mainWindow.opacity - 0.25
+            loginDialog.opacity = loginDialog.opacity + 0.25
+            if(managerDialog.width >= 500){
+                tim_mainDialog_to_loginDialog.running = false
+                mainWindow.visible = false
+            }
+        }
+    }
 
     Timer {
         function addTime() {
@@ -463,7 +463,6 @@ ApplicationWindow {
         MyStyle.MainWindowBar{
             x:0;y:0
         }
-        MyStyle.Icon {}
         MyStyle.MainwindowMainPanel{
             id: mainWindowPanel
             y: 35
@@ -473,6 +472,8 @@ ApplicationWindow {
                 dailTime = 0
                 startTime.running = false
                 loginDialog.opacity = 0
+                loginPanel.x = 0
+                loginingPanel = 500
                 loginDialog.visible = true
                 tim_mainDialog_to_loginDialog.running = true
                 emit: stopConnection()
@@ -491,14 +492,18 @@ ApplicationWindow {
         x: managerDialog.width - 20;
         y: 10;
         onMouseClicked: {
-            Qt.quit();
+            if (dailTime !== 0){
+                managerDialog.visible = false
+            }
+            else {
+                Qt.quit()
+            }
         }
     }
     MyStyle.MiniMax{
         x: managerDialog.width - 43;
         y: 10;
         onMouseClicked: {
-            flags = Qt.Window | Qt.WindowFullscreenButtonHint | Qt.CustomizeWindowHint | Qt.WindowMinimizeButtonHint
             visibility = Window.Minimized
         }
     }
@@ -520,7 +525,7 @@ ApplicationWindow {
                 }
             }
             else {
-                mainWindowSettingPanel.visible = mainWindowSettingPanel.visible == true ? false : true
+                mainWindowSettingPanel.visible = mainWindowSettingPanel.visible === true ? false : true
                 mainWindowPanel.visible = mainWindowPanel.visible == false ? true : false
             }
         }
@@ -539,6 +544,11 @@ ApplicationWindow {
         onPositionChanged: {
             managerDialog.x = managerDialog.x + (mouseX - xmouse)
             managerDialog.y = managerDialog.y + (mouseY - ymouse)
+        }
+    }
+    MyStyle.Icon{
+        onShowWindowClick: {
+            managerDialog.visible = true
         }
     }
 }

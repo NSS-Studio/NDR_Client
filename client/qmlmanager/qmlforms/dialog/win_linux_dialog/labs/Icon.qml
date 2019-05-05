@@ -3,18 +3,13 @@ import Qt.labs.platform 1.0
 
 SystemTrayIcon {
     visible: true
-    iconSource: "qrc:/qmlforms/logo.png"
+    iconSource: "qrc:/win_linux_forms/icon.png"
 
     signal showWindowClick()
     signal aboutClick()
 
     onActivated: {
-        window.show()
-        window.raise()
-        window.requestActivate()
-        if(reason.active === SystemTrayIcon.Trigger) {
-            console.log("123")
-        }
+        emit: showWindowClick()
     }
     menu: Menu{
         MenuItem{
