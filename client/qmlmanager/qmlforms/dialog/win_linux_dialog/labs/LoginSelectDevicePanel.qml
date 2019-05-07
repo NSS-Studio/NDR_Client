@@ -18,20 +18,20 @@ Item {
         anchors.leftMargin: 0
         anchors.topMargin: 0
         opacity: 0.6
-        Text {
-            x: 90
-            y: 75
-            height: 22
-            width: 64
-            text: qsTr("拨号网卡")
-            font.pointSize: 12
-        }
-        MyStyle.DeviceCombobox {
-            objectName: "device_name"
-            id: device_name
-            x: 166
-            y: 67
-        }
+//        Text {
+//            x: 90
+//            y: 75
+//            height: 22
+//            width: 64
+//            text: qsTr("拨号网卡")
+//            font.pointSize: 12
+//        }
+//        MyStyle.DeviceCombobox {
+//            objectName: "device_name"
+//            id: device_name
+//            x: 166
+//            y: 67
+//        }
         Item {
             x: 30
             y: 30
@@ -51,7 +51,7 @@ Item {
                 width: 20
                 height: 20
                 text: qsTr("返回")
-                font.pointSize: 14
+                font.pointSize: 10
             }
             MouseArea{
                 anchors.fill: parent
@@ -64,7 +64,7 @@ Item {
             x: 65
             y: 140
             text: "开机自动启动"
-            font.pointSize: 12
+            font.pointSize: 10
         }
         Text {
             id: clear
@@ -73,7 +73,7 @@ Item {
             height: 40
             color: "#4879f7"
             text: "清空所有配置"
-            font.pointSize: 12
+            font.pointSize: 10
             MouseArea{
                 anchors.fill: parent
                 hoverEnabled: true

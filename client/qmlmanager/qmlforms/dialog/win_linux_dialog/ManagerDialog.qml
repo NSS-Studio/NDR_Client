@@ -18,8 +18,9 @@ ApplicationWindow {
 
     signal login(string username,string passwd,string pack_info,string NIC_info,string remeber,string autologin)
     signal change_account_select(string account)
-    signal stopConnection()
+    signal stopConnection(int flag)
     signal clear()
+    signal resetWinsock()
 
     property int xmouse: 0
     property int ymouse: 0
@@ -89,6 +90,10 @@ ApplicationWindow {
                 if (password !== "" && loginPanelChild.children[i].children[j].objectName === "rember"){
                     loginPanelChild.children[i].children[j].checkState = Qt.Checked
                 }
+                if (loginPanelChild.children[i].children[j].objectName === "pack_info") {
+                    loginPanelChild.children[i].children[j].currentIndex
+                            = loginPanelChild.children[i].children[j].find(manner.toString())
+                }
             }
         }
     }
@@ -110,6 +115,10 @@ ApplicationWindow {
 //        mainWindow.opacity = 1
 //        mainWindowPanel.visible = true
 
+        loginingPanel.x = 500
+        loginPanel.x = 0
+        tim_login_to_logining.running = false
+
         startTime.running = true
         tim_loginDialog_to_mainDialog.running = true
 
@@ -125,21 +134,23 @@ ApplicationWindow {
     }
 
     function dailField(errorInfo){
-
-
         for (var i = 0;i < errorPanelChild.children.length;++i){
             if (errorPanelChild.children[i].objectName === "errorDescribe"){
                 errorPanelChild.children[i].text = errorInfo.toString()
             }
         }
+
+        loginingPanel.x = 0
+        loginPanel.x = -500
+        tim_login_to_logining.running = false
+
         errorPanel.visible = true
         errorPanel.x = 500
+        loginingPanel.x =
         tim_logining_to_error.running = true
     }
 
-//    FontLoader {
-//        source: "qrc:/SourceHanSans-Bold.ttf"
-//    }
+    FontLoader { id: fixedFont; source: "qrc:/font/SourceHanSansSC-Normal.ttf" }
 
 
     Timer {
@@ -200,20 +211,7 @@ ApplicationWindow {
             }
         }
     }
-    Timer {
-        id: tim_loginin_to_login
-        running: false
-        repeat: true
-        interval: 1
 
-        onTriggered: {
-            loginPanel.x = loginPanel.x + 5
-            loginingPanel.x = loginingPanel.x + 5
-            if (loginPanel.x === 0){
-                tim_loginin_to_login.running = false
-            }
-        }
-    }
     Timer {
         id: tim_logining_to_error
         running: false
@@ -233,7 +231,6 @@ ApplicationWindow {
         running: false
         repeat: true
         interval: 1
-
         onTriggered: {
             loginPanel.x = loginPanel.x + 5
             errorPanel.x = errorPanel.x + 5
@@ -335,6 +332,9 @@ ApplicationWindow {
                 onAccountChange: {
                     emit: change_account_select(account)
                 }
+                onRepaireClicked: {
+                    emit: resetWinsock()
+                }
             }
             MyStyle.LoginBtn {
                 id: btn_login
@@ -398,6 +398,7 @@ ApplicationWindow {
                             }
                         }
                         emit: login(user,pass,pack,dev,rempass,autologin)
+//                        console.log(user+pass+pack+dev+rempass+autologin)
 
                         loginingPanel.visible = true
                         loginingPanel.x = 500
@@ -451,6 +452,8 @@ ApplicationWindow {
                 y: 150
                 onOkClicked: {
                     errorPanel.visible = true
+                    loginPanel.x = -500
+                    loginPanel.visible = true
                     tim_error_to_login.running = true
                 }
             }
@@ -476,7 +479,7 @@ ApplicationWindow {
                 loginingPanel = 500
                 loginDialog.visible = true
                 tim_mainDialog_to_loginDialog.running = true
-                emit: stopConnection()
+                emit: stopConnection(0)
             }
         }
 
@@ -540,7 +543,6 @@ ApplicationWindow {
             xmouse = mouseX
             ymouse = mouseY
         }
-
         onPositionChanged: {
             managerDialog.x = managerDialog.x + (mouseX - xmouse)
             managerDialog.y = managerDialog.y + (mouseY - ymouse)
@@ -549,6 +551,9 @@ ApplicationWindow {
     MyStyle.Icon{
         onShowWindowClick: {
             managerDialog.visible = true
+        }
+        onExitClick: {
+            emit: stopConnection(1)
         }
     }
 }

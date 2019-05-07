@@ -7,10 +7,8 @@ SystemTrayIcon {
 
     signal showWindowClick()
     signal aboutClick()
+    signal exitClick()
 
-    onActivated: {
-        emit: showWindowClick()
-    }
     menu: Menu{
         MenuItem{
             text: "显示窗口"
@@ -28,7 +26,7 @@ SystemTrayIcon {
         MenuItem{
             text: "退出"
             onTriggered: {
-                Qt.quit()
+                emit: exitClick()
             }
         }
     }
