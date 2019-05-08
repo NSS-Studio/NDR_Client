@@ -6,7 +6,7 @@ Item {
     property int flag: 0
     signal click()
     Image {
-        objectName: setting_img
+        objectName: "setting_img"
         id: setting_img
         anchors.fill: parent
         source: "qrc:/mac_forms/setting.png"
