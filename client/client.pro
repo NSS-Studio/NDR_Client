@@ -40,6 +40,7 @@ unix:!macx{
 
 win32 {
     QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x0601 # Windows 7
+    LIBS += -lDbghelp
     RC_FILE +=  $$PWD/appicon_win/appicon.rc    \
                 $$PWD/appicon_win/ndr.rc
 
