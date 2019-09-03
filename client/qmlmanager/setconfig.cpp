@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QMetaObject>
 
+#include <iostream>
+
 bool setConfig::setUsername(QWindow *window) {
     auto profile = utils::resourceManager.getProfile();
     if (profile->open()) {
@@ -43,10 +45,14 @@ bool setConfig::setDevice(QWindow *window) {
 }
 
 bool setConfig::setTittle(QWindow *window) {
-    QMetaObject::invokeMethod(
-        window, "setVersion", Qt::DirectConnection,
-        Q_ARG(QVariant, QVariant{QString{"NDR东软网络客户端"} +
-                                 utils::getVersionString()}));
+//    QMetaObject::invokeMethod(
+//        window, "setVersion", Qt::DirectConnection,
+//        Q_ARG(QVariant, QVariant{QString{"NDR东软网络客户端"} +
+//                                 utils::getVersionString()}));
+        QMetaObject::invokeMethod(
+            window, "setVersion", Qt::DirectConnection,
+            Q_ARG(QVariant, QVariant{QString{"N-Client Alpha 0.1"}}));
+
     return true;
 }
 
@@ -58,7 +64,6 @@ bool setConfig::setLastLogin(QWindow *window) {
         QMetaObject::invokeMethod(window, "setLastLoginUser",
                                   Qt::DirectConnection,
                                   Q_ARG(QVariant, QVariant{user}));
-
     } else {
         return false;
     }
@@ -81,6 +86,8 @@ bool setConfig::setLoginInfo(QWindow *window, QString username, bool status) {
                 user = username;
             }
             profile->getLoginInfo(user, password, manner);
+
+            std::cout << user.toStdString() + password.toStdString() + manner.toStdString()<<std::endl;
             QMetaObject::invokeMethod(window, "addLoginInfo",
                                       Qt::DirectConnection,
                                       Q_ARG(QVariant, QVariant{password}),

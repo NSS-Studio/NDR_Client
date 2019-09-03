@@ -27,5 +27,6 @@
     <qresource prefix="/">
         <file>font/ztgj.ttf</file>
         <file>style/default.qss</file>
+        <file>font/SourceHanSansSC-Normal.ttf</file>
     </qresource>
 </RCC>

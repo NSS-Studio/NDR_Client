@@ -39,7 +39,7 @@ Rectangle {
         y: 260
         width: 92
         height: 28
-        color: "#ffffff"
+        color: "#FFFFFF"
 //        border.color: "#eaebed"
 //        radius: 5
 

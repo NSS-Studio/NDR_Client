@@ -18,6 +18,7 @@ public:
     ~QMLWindowsManager() = default;
 
 private:
+
     QSharedPointer<QQmlApplicationEngine> engineManagerDialog;
     QSharedPointer<QQmlComponent> compManagerDialog;
     QSharedPointer<QWindow> managerWindows;

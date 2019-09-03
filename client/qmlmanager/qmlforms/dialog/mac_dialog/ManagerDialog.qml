@@ -102,11 +102,11 @@ ApplicationWindow {
                 mainWindowPanel.children[i].text = pack
             }
         }
-//        mainWindowPanel.visible = true
         startTime.running = true
-//        tim_loginDialog_to_mainDialog.running = true
 
-        tim_loginDialog_to_mainDialog.running = true
+//        tim_loginDialog_to_mainDialog.running = true
+        loginPanel.x = 0
+        loginingPanel.x = 500
         mainWindow.visible = true
         mainWindow.opacity = 0
     }
@@ -172,6 +172,7 @@ ApplicationWindow {
             loginingPanel.x = loginingPanel.x - 2
             if (loginingPanel.x === 0){
                 tim_login_to_logining.running = false
+                emit: login(user,pass,pack,dev,rempass,autologin)
             }
         }
     }
@@ -368,8 +369,6 @@ ApplicationWindow {
                                 }
                             }
                         }
-                        emit: login(user,pass,pack,dev,rempass,autologin)
-
                         loginingPanel.visible = true
                         loginingPanel.x = 500
                         tim_login_to_logining.running = true

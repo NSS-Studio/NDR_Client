@@ -8,6 +8,7 @@ Item {
 
     signal accountChange(string account)
     signal selectDeviceClicked()
+    signal repaireClicked()
 
     Rectangle {
         anchors.fill: parent
@@ -75,6 +76,9 @@ Item {
         MyStyle.LoginDialogRepaireNet{
             x: 20
             y: 195
+            onClick: {
+                emit: repaireClicked()
+            }
         }
     }
 }

@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
     qDebug () << "start";
-    NdrApplication ndrApp{"ndr-client-new", argc, argv};
+    NdrApplication ndrApp{"N-Client", argc, argv};
 
 
 

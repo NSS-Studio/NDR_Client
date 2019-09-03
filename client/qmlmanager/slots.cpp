@@ -1,3 +1,5 @@
+#include <QMessageBox>
+
 #include "slots.hpp"
 #include "localstorage.hpp"
 #include "pppoe.hpp"
@@ -18,7 +20,8 @@ void Slots::start(QString username, QString passwd, QString pack_info,
         }
 
         if (autoLogin == "t") {
-            autoLogin = true;
+            this->autoLogin = true;
+            rember = true;
         }
         profile->close();
     }
@@ -33,9 +36,9 @@ void Slots::dailFinish(const bool &finish) {
     auto profile = utils::resourceManager.getProfile();
     if (profile->open()) {
         if (rember) {
-            profile->setLoginInfo(username, password, devicename);
+            profile->setLoginInfo(username, password, manner);
         } else {
-            profile->setLoginInfo(username, QString{""}, devicename);
+            profile->setLoginInfo(username, QString{""}, manner);
         }
         if (autoLogin) {
             profile->setAutoLoginUser(username);
@@ -44,6 +47,7 @@ void Slots::dailFinish(const bool &finish) {
     }
     if (finish == true) {
         auto pppoe = utils::resourceManager.getPPPoE();
+
         QMetaObject::invokeMethod(
             const_cast<QWindow *>(utils::resourceManager.getWindow()),
             "dailSeccess", Qt::DirectConnection,
@@ -61,10 +65,19 @@ void Slots::dailFinish(const bool &finish) {
     }
 }
 
-void Slots::stopConnect() {
+void Slots::stopConnect(int flag) {
     qDebug() << "stop";
-    auto pppoe = utils::resourceManager.getPPPoE();
-    pppoe->hangUp();
+    if (flag == 1){
+        auto pppoe = utils::resourceManager.getPPPoE();
+        pppoe->hangUp();
+        Sleep(800);
+        QApplication::exit();
+    }
+    else {
+        auto pppoe = utils::resourceManager.getPPPoE();
+        pppoe->hangUp();
+    }
+
 }
 
 void Slots::changtAccount(QString account) {
@@ -100,3 +113,36 @@ bool Slots::DeleteDirectory(const QString &path) {
     }
     return dir.rmpath(dir.absolutePath());
 }
+
+
+#ifdef Q_OS_WIN
+void Slots::resetWinsock() {
+  HINSTANCE re;
+  intptr_t reValue;
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C netsh winsock reset"), TEXT(""), SW_HIDE);
+  // can not use static_cast
+  // Because int is 4-byte HINSTANCE, is known as PVOID, is 8-byte
+  // So We should use intptr_t
+  reValue = reinterpret_cast<intptr_t>(re);
+  if (reValue <= 32) {
+    QMessageBox::information(NULL, tr("失败"), tr("Winsock重置失败，错误代码 %0").arg(reValue));
+    return;
+  }
+
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C netsh winhttp reset proxy"),TEXT(""), SW_HIDE);
+  reValue = reinterpret_cast<intptr_t>(re);
+  if (reValue <= 32) {
+    QMessageBox::information(NULL, tr("失败"), tr("网络代理重置失败，错误代码 %0").arg(reValue));
+    return;
+  }
+
+  re = ShellExecute(NULL, TEXT("runas"), TEXT("cmd"), TEXT("/C ipconfig /flushdns"), TEXT(""), SW_HIDE);
+  if (reValue <= 32) {
+    QMessageBox::information(NULL, tr("失败"), tr("DNS重置失败，错误代码 %0").arg(reValue));
+    return;
+  }
+
+  QMessageBox::information(NULL, tr("成功"), tr("网络重置成功"));
+}
+
+#endif

@@ -3,19 +3,12 @@ import Qt.labs.platform 1.0
 
 SystemTrayIcon {
     visible: true
-    iconSource: "qrc:/qmlforms/logo.png"
+    iconSource: "qrc:/win_linux_forms/icon.png"
 
     signal showWindowClick()
     signal aboutClick()
+    signal exitClick()
 
-    onActivated: {
-        window.show()
-        window.raise()
-        window.requestActivate()
-        if(reason.active === SystemTrayIcon.Trigger) {
-            console.log("123")
-        }
-    }
     menu: Menu{
         MenuItem{
             text: "显示窗口"
@@ -33,7 +26,7 @@ SystemTrayIcon {
         MenuItem{
             text: "退出"
             onTriggered: {
-                Qt.quit()
+                emit: exitClick()
             }
         }
     }

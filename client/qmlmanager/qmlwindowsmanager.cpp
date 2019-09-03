@@ -41,15 +41,13 @@ QMLWindowsManager::QMLWindowsManager(QObject *parent) : QObject(parent) {
                 profile->getDeviceName(device);
                 profile->getLoginInfo(autoLogin, password, manner);
                 this->slot.get()->start(autoLogin, password, manner, device,
-                                        QString{"f"}, QString{"f"});
+                                        QString{"t"}, QString{"t"});
                 qDebug() << "autologin" + autoLogin;
             }
             qDebug() << "login: empty";
         }
         profile->close();
     }
-
-
 }
 
 void QMLWindowsManager::bind_slot() {
@@ -61,11 +59,13 @@ void QMLWindowsManager::bind_slot() {
     auto pppoe = utils::resourceManager.getPPPoE();
     QObject::connect(pppoe, &PPPoE::dialFinished, this->slot.get(),
                      &Slots::dailFinish, Qt::QueuedConnection);
-    QObject::connect(this->managerWindows.get(), SIGNAL(stopConnection()),
-                     this->slot.get(), SLOT(stopConnect()));
+    QObject::connect(this->managerWindows.get(), SIGNAL(stopConnection(int)),
+                     this->slot.get(), SLOT(stopConnect(int)));
     QObject::connect(this->managerWindows.get(),
                      SIGNAL(change_account_select(QString)), this->slot.get(),
                      SLOT(changtAccount(QString)));
     QObject::connect(this->managerWindows.get(), SIGNAL(clear()),
                      this->slot.get(), SLOT(clearConfig()));
+    QObject::connect(this->managerWindows.get(), SIGNAL(resetWinsock()),
+                     this->slot.get(), SLOT(resetWinsock()));
 }
