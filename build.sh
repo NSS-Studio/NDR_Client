@@ -65,7 +65,7 @@ make
 
 cd ..
 if [ $1 = "macosx" ]; then
-    $QT/bin/macdeployqt ./build/client/NDR\ Client.app/
+    $QT/bin/macdeployqt ./build/client/NDR\ Client.app/ -qmldir=.
     printf "deployqt done!\n"
     appdmg ./client/icons/package.json ~/Desktop/ndr_${version}_macosx.dmg
     printf "new dmg in desktop\n"
