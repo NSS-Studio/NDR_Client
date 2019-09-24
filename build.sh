@@ -61,7 +61,7 @@ mkdir build
 cd build
 
 $QMAKE ../ndr-client.pro -spec $platform CONFIG+=$configBuildMode PREFIX=/opt/ndr/
-make
+make -j1
 
 cd ..
 if [ $1 = "macosx" ]; then

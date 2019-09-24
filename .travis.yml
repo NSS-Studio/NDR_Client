@@ -2,18 +2,107 @@ language: cpp
 sudo: required
 matrix:
   include:
-    # works on macOS with clang
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode10.3
       compiler: clang
-      env: MATRIX_EVAL="CC=clang && CXX=clang++"
+      env: 
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - QT="/usr/local/opt/qt/"
+        - BUILD_OS="macosx"
+      cache:
+        bundler: true
+        directories:
+            - /usr/local/Cellar/qt/
+            - /usr/local/opt/qt/
 
-install:
+    - os: osx
+      osx_image: xcode11
+      compiler: clang
+      env: 
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - QT="/usr/local/opt/qt/"
+        - BUILD_OS="macosx"
+      cache:
+        bundler: true
+        directories:
+            - /usr/local/Cellar/qt/
+            - /usr/local/opt/qt/
+
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      env: 
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+        - QTPPA="ppa:beineri/opt-qt-5.12.3-xenial"
+        - TOOCHAINS="ppa:ubuntu-toolchain-r/test"
+        - QT="/opt/qt512"
+        - BUILD_OS="debian"
+      cache:
+        bundler: true
+        apt: true
+        directories:
+            - /opt/qt*/
+
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env: 
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+        - QTPPA="ppa:beineri/opt-qt-5.12.3-bionic"
+        - TOOCHAINS="ppa:ubuntu-toolchain-r/test"
+        - QT="/opt/qt512"
+        - BUILD_OS="debian"
+      cache:
+        bundler: true
+        apt: true
+        directories:
+            - /opt/qt*/
+
+group: deprecated-2019Q1
+
+before_install:
+  - |
+    if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+      sudo add-apt-repository ${QTPPA} -y
+      sudo add-apt-repository ${TOOCHAINS} -y
+      sudo apt-get update -qq
+      sudo apt-get install -y libglew-dev libglfw3-dev build-essential network-manager-dev libgl1-mesa-dev
+      sudo apt-get install -y gcc-9 g++-9
+      sudo apt-get install -y qt512-meta-full
+    fi
   - |
     if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
       brew update
       brew install qt node
+      brew link qt --force
       npm install -g appdmg
     fi
+
+before_script:
+    - |
+      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        source ${QT}/bin/qt512-env.sh
+        export CPLUS_INCLUDE_PATH="/usr/include/NetworkManager"
+        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+      fi
+    - |
+      if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 
+        export PATH=${QT}/bin:${PATH}
+      fi
+
 script:
-  - sh ./build.sh macosx release /usr/local/opt/qt
+  - eval "${MATRIX_EVAL}"
+  - mkdir build && cd build
+  - qmake .. && make
+  # - sh ./build.sh $BUILD_OS release $QT
+
+deploy:              # 部署
+  provider: releases # 部署到 GitHub Release，除此之外，Travis CI 还支持发布到 fir.im、AWS、Google App Engine 等
+  api_key: $GITHUB_OAUTH_TOKEN # 填写 GitHub 的 token （Settings -> Personal access tokens -> Generate new token）
+  file: bin/${releaseName}   # 部署文件路径
+  skip_cleanup: true     # 设置为 true 以跳过清理,不然 apk 文件就会被清理
+  on:     # 发布时机           
+    tags: true       # tags 设置为 true 表示只有在有 tag 的情况下才部署
+
+notifications:
+    email: false
