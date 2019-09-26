@@ -57,6 +57,8 @@ matrix:
         apt: true
         directories:
             - /opt/qt*/
+    
+    - os: windows
 
 group: deprecated-2019Q1
 
@@ -77,6 +79,12 @@ before_install:
       brew link qt --force
       npm install -g appdmg
     fi
+  - |
+    if [[ ${TRAVIS_OS_NAME} == "windows" ]]; then
+      curl -vLO http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
+      "./qt-unified-windows-x86-online.exe --verbose --script ci/qt-installer-windows.qs"
+      ls -la C:/Qt/5.13.0/MinGW73_32/bin/qtenv2.bat
+    fi
 
 before_script:
     - |
@@ -91,16 +99,24 @@ before_script:
       fi
 
 script:
-  - eval "${MATRIX_EVAL}"
-  - sh ./build.sh $BUILD_OS release $QT
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+      cmd.exe /C 'cd && "C:/Qt/5.13.0/MinGW73_32/bin/qtenv2.bat" && 
+      cd "C:\Users\travis\build\NSS-Studio/NDR_Client" && 
+      cd && qmake NDR_Client.pro && mingw32-make'
+    else
+      eval "${MATRIX_EVAL}"
+      mkdir build && cd build
+      qmake .. && make
+    fi
 
-deploy:              # 部署
-  provider: releases # 部署到 GitHub Release，除此之外，Travis CI 还支持发布到 fir.im、AWS、Google App Engine 等
-  api_key: $GITHUB_OAUTH_TOKEN # 填写 GitHub 的 token （Settings -> Personal access tokens -> Generate new token）
-  file: bin/${releaseName}   # 部署文件路径
-  skip_cleanup: true     # 设置为 true 以跳过清理,不然 apk 文件就会被清理
-  on:     # 发布时机           
-    tags: true       # tags 设置为 true 表示只有在有 tag 的情况下才部署
+# deploy:              # 部署
+#   provider: releases # 部署到 GitHub Release，除此之外，Travis CI 还支持发布到 fir.im、AWS、Google App Engine 等
+#   api_key: $GITHUB_OAUTH_TOKEN # 填写 GitHub 的 token （Settings -> Personal access tokens -> Generate new token）
+#   file: bin/${releaseName}   # 部署文件路径
+#   skip_cleanup: true     # 设置为 true 以跳过清理,不然 apk 文件就会被清理
+#   on:     # 发布时机           
+#     tags: true       # tags 设置为 true 表示只有在有 tag 的情况下才部署
 
 notifications:
     email: false

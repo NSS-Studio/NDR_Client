@@ -4,4 +4,4 @@
 
 | Platform | Build Status |
 | --- | --- |
-| ![macOS/Ubuntu Status](https://img.shields.io/badge/macOS%2FUbuntu-CI--test-green) | [![Build Status](https://travis-ci.org/NSS-Studio/NDR_Client.svg?branch=master)](https://travis-ci.org/NSS-Studio/NDR_Client) |
+| ![macOS/Ubuntu/Windows Status](https://img.shields.io/badge/macOS%2FUbuntu-CI--test-green) | [![Build Status](https://travis-ci.org/NSS-Studio/NDR_Client.svg?branch=master)](https://travis-ci.org/NSS-Studio/NDR_Client) |
