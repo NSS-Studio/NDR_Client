@@ -92,9 +92,7 @@ before_script:
 
 script:
   - eval "${MATRIX_EVAL}"
-  - mkdir build && cd build
-  - qmake .. && make
-  # - sh ./build.sh $BUILD_OS release $QT
+  - sh ./build.sh $BUILD_OS release $QT
 
 deploy:              # 部署
   provider: releases # 部署到 GitHub Release，除此之外，Travis CI 还支持发布到 fir.im、AWS、Google App Engine 等
