@@ -3,19 +3,6 @@ sudo: required
 matrix:
   include:
     - os: osx
-      osx_image: xcode9.4
-      compiler: clang
-      env: 
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - QT="/usr/local/opt/qt/"
-        - BUILD_OS="macosx"
-      cache:
-        bundler: true
-        directories:
-            - /usr/local/Cellar/qt/
-            - /usr/local/opt/qt/
-
-    - os: osx
       osx_image: xcode10.3
       compiler: clang
       env: 
@@ -41,9 +28,48 @@ matrix:
             - /usr/local/Cellar/qt/
             - /usr/local/opt/qt/
 
+    - os: linux
+      dist: xenial
+      compiler: gcc
+      env: 
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+        - QTPPA="ppa:beineri/opt-qt-5.12.3-xenial"
+        - TOOCHAINS="ppa:ubuntu-toolchain-r/test"
+        - QT="/opt/qt512"
+        - BUILD_OS="debian"
+      cache:
+        bundler: true
+        apt: true
+        directories:
+            - /opt/qt*/
+
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      env: 
+        - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+        - QTPPA="ppa:beineri/opt-qt-5.12.3-bionic"
+        - TOOCHAINS="ppa:ubuntu-toolchain-r/test"
+        - QT="/opt/qt512"
+        - BUILD_OS="debian"
+      cache:
+        bundler: true
+        apt: true
+        directories:
+            - /opt/qt*/
+
 group: deprecated-2019Q1
 
 before_install:
+  - |
+    if [[ ${TRAVIS_OS_NAME} == "linux" ]]; then
+      sudo add-apt-repository ${QTPPA} -y
+      sudo add-apt-repository ${TOOCHAINS} -y
+      sudo apt-get update -qq
+      sudo apt-get install -y libglew-dev libglfw3-dev build-essential network-manager-dev libgl1-mesa-dev
+      sudo apt-get install -y gcc-9 g++-9
+      sudo apt-get install -y qt512-meta-full
+    fi
   - |
     if [[ ${TRAVIS_OS_NAME} == "osx" ]]; then
       brew update
@@ -54,13 +80,21 @@ before_install:
 
 before_script:
     - |
+      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        source ${QT}/bin/qt512-env.sh
+        export CPLUS_INCLUDE_PATH="/usr/include/NetworkManager"
+        wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+      fi
+    - |
       if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then 
         export PATH=${QT}/bin:${PATH}
       fi
 
 script:
   - eval "${MATRIX_EVAL}"
-  - sh ./build.sh $BUILD_OS release $QT
+  - mkdir build && cd build
+  - qmake .. && make
+  # - sh ./build.sh $BUILD_OS release $QT
 
 deploy:              # 部署
   provider: releases # 部署到 GitHub Release，除此之外，Travis CI 还支持发布到 fir.im、AWS、Google App Engine 等

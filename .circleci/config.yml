@@ -1,0 +1,24 @@
+version: 2.1
+  jobs:
+    build:
+      machine:
+        image: ubuntu-1604:201903-01 
+        steps:
+          - checkout
+          - run: sudo add-apt-repository ppa:beineri/opt-qt-5.12.3-xenial -y
+          - run: sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          - run: sudo apt-get update -y -qq
+          - run: sudo apt install -y -qq libglew-dev libglfw3-dev build-essential network-manager-dev libgl1-mesa-dev
+          - run: sudo apt install -y -qq gcc-9 g++-9 qt512-meta-full
+          - run: sudo add-apt-repository ppa:beineri/opt-qt-5.12.3-xenial -y
+          - run: MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
+          - run: eval "${MATRIX_EVAL}"
+          - run: source /opt/qt512/bin/qt512-env.sh
+          - run: export CPLUS_INCLUDE_PATH="/usr/include/NetworkManager"
+          - run: wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+          - run: sh ./build.sh debian release /opt/qt512
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
