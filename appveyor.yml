@@ -1,12 +1,15 @@
 version: build{build}
 
+# https://www.appveyor.com/docs/windows-images-software/
+image: Visual Studio 2019
+
 environment:
   QT5: C:\Qt\5.13.1\mingw73_64
 
 install:
   - set QTDIR=C:\Qt\5.13.1\mingw73_64
   - set PATH=%QTDIR%\bin;C:\Qt\5.13.1\Tools\mingw730_64\bin;%PATH%
-  
+
 build_script:
   - qmake ndr-client.pro
   - mingw32-make
