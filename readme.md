@@ -4,4 +4,5 @@
 
 | Platform | Build Status |
 | --- | --- |
-| ![macOS/Ubuntu/Windows Status](https://img.shields.io/badge/macOS%2FUbuntu-CI--test-green) | [![Build Status](https://travis-ci.org/NSS-Studio/NDR_Client.svg?branch=master)](https://travis-ci.org/NSS-Studio/NDR_Client) |
+| ![macOS/Ubuntu Status](https://img.shields.io/badge/macOS%2FUbuntu-CI--test-green) | [![Build Status](https://travis-ci.org/NSS-Studio/NDR_Client.svg?branch=master)](https://travis-ci.org/NSS-Studio/NDR_Client) |
+| ![Windows Status](https://img.shields.io/badge/Windows-CI--test-green) | [![Build status](https://ci.appveyor.com/api/projects/status/m7lsimic9mn2a1b2/branch/master?svg=true)](https://ci.appveyor.com/project/Rabenda/ndr-client/branch/master) |
