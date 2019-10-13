@@ -2,7 +2,7 @@ version: build{build}
 
 install:
   - set QTDIR=C:\Qt\5.13.1\mingw73_64
-  - set PATH=$PATH;%QTDIR%\bin;
+  - set PATH=%QTDIR%\bin;
 build_script:
-  - qmake ndr-client.pro
-  - mingw32-make
+  - qmake.exe ndr-client.pro
+  - mingw32-make.exe
