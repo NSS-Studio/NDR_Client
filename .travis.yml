@@ -101,9 +101,9 @@ before_script:
 script:
   - |
     if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
-      cmd.exe /C 'cd && "C:/Qt/5.13.0/MinGW73_32/bin/qtenv2.bat" && 
+      cmd.exe /C 'cd && "C:/Qt/5.12.3/MinGW73_32/bin/qtenv2.bat" && 
       cd "C:\Users\travis\build\NSS-Studio/NDR_Client" && 
-      cd && qmake NDR_Client.pro && mingw32-make'
+      cd && qmake.exe NDR_Client.pro && mingw32-make.exe'
     else
       eval "${MATRIX_EVAL}"
       mkdir build && cd build

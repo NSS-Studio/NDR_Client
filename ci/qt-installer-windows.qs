@@ -10,10 +10,10 @@
 // .\qt-unified-windows-x86-3.0.4-online.exe --verbose --script tools\qt-installer-windows.qs
 
 // Look for Name elements in
-// https://download.qt.io/online/qtsdkrepository/windows_x86/desktop/qt5_5130/Updates.xml
+// https://download.qt.io/online/qtsdkrepository/windows_x86/desktop/qt5_5123/Updates.xml
 // Unfortunately it is not possible to disable deps like qt.tools.qtcreator
 var INSTALL_COMPONENTS = [
-    qt.qt5.5130.win32_mingw73
+    qt.qt5.5123.win32_mingw73
 ];
 
 function Controller() {
