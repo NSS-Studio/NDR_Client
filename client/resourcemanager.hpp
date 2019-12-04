@@ -5,7 +5,6 @@
 #include <QWindow>
 
 class PPPoE;
-class MainWindow;
 class LoginDialog;
 class LocalStorage;
 class PopUpInfomationDialog;
@@ -28,7 +27,6 @@ public:
 
 private:
     PPPoE *pppoe = nullptr;
-    MainWindow *mainWindow = nullptr;
     LocalStorage *profile = nullptr;
     LoginDialog *loginDialog = nullptr;
     AboutDialog *aboutDialog = nullptr;
