@@ -1,7 +1,7 @@
 #!/bin/sh
 # macosx && linux_deb && arch pkg.tar.xz
 
-version="0.80"
+version="1.00"
 
 buildRootDir=`pwd`
 
